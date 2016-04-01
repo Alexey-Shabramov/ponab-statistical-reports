@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:component-scan base-package="com.uz.laboratory.statistical"/>
+
+    <context:annotation-config/>
+
+    <!-- Services beans -->
+    <beans:bean id="springFXMLLoader" class="com.uz.laboratory.statistical.service.SpringFXMLLoader"/>
+
+    <!-- Dozer mapper for DTO's -->
+    <beans:bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>dozer/dozer-mapping.xml</value>
+            </list>
+        </property>
+    </beans:bean>
+</beans:beans>
