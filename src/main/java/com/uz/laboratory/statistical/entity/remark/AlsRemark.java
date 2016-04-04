@@ -3,13 +3,37 @@ package com.uz.laboratory.statistical.entity.remark;
 
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "als_remark")
+@DynamicUpdate(value = true)
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "id")),
+        @AttributeOverride(name = "inspectionTrip", column = @Column(name = "id_inspection")),
+        @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
+})
 public class AlsRemark extends AbstractRemark {
+    @Column(name = "even")
     private boolean even;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_stage")
     private Stage stage;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_station")
     private Station station;
+
+    @Column(name = "note")
     private String note;
+
+    @Column(name = "track_circuit_name")
     private String trackCircuitName;
+
+    @Column(name = "remark_type")
     private boolean remarkType;
 
     public Stage getStage() {

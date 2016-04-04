@@ -2,28 +2,36 @@ package com.uz.laboratory.statistical.entity.remark;
 
 
 import com.uz.laboratory.statistical.entity.Identifier;
-import com.uz.laboratory.statistical.entity.trip.Inspection;
+import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 
+import javax.persistence.*;
 import java.util.Date;
 
 
+@MappedSuperclass
 public abstract class AbstractRemark extends Identifier {
-    private Inspection inspectionTrip;
-    private Date remarkDate;
 
-    public Inspection getInspectionTrip() {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_inspection")
+    private InspectionTrip inspectionTrip;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date")
+    private Date creationDate;
+
+    public InspectionTrip getInspectionTrip() {
         return inspectionTrip;
     }
 
-    public void setInspectionTrip(Inspection inspectionTrip) {
+    public void setInspectionTrip(InspectionTrip inspectionTrip) {
         this.inspectionTrip = inspectionTrip;
     }
 
-    public Date getRemarkDate() {
-        return remarkDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setRemarkDate(Date remarkDate) {
-        this.remarkDate = remarkDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

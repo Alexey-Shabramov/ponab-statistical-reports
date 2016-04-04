@@ -13,15 +13,10 @@
 
     <context:annotation-config/>
 
-    <!-- Services beans -->
+    <!-- FXML's starting-loader bean -->
     <beans:bean id="springFXMLLoader" class="com.uz.laboratory.statistical.service.SpringFXMLLoader"/>
 
-    <!-- Dozer mapper for DTO's -->
-    <beans:bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
-        <property name="mappingFiles">
-            <list>
-                <value>dozer/dozer-mapping.xml</value>
-            </list>
-        </property>
-    </beans:bean>
+    <import resource="database.xml"/>
+    <import resource="spring-beans.xml"/>
+
 </beans:beans>

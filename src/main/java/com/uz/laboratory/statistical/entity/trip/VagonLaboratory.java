@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.entity.location;
+package com.uz.laboratory.statistical.entity.trip;
 
 
 import com.uz.laboratory.statistical.entity.Identifier;
@@ -10,10 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "station")
+@Table(name = "vagon_laboratory")
 @DynamicUpdate(value = true)
 @AttributeOverride(name = "id", column = @Column(name = "id"))
-public class Station extends Identifier {
+public class VagonLaboratory extends Identifier {
     @Column(name = "name")
     private String name;
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	         http://www.springframework.org/schema/tx
+             http://www.springframework.org/schema/tx/spring-tx.xsd
+	         http://www.springframework.org/schema/jdbc
+	         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <jdbc:embedded-database id="dataSource" type="HSQL">
+        <jdbc:script location="classpath*:database/database_schema.sql"/>
+    </jdbc:embedded-database>
+
+    <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="configLocation" value="hibernate/hibernate.cfg.xml"/>
+        <beans:property name="annotatedClasses">
+            <beans:list>
+                <beans:value>com.uz.laboratory.statistical.entity.location.CommunicationDistance</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.location.Sector</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.location.Stage</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.location.Station</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.ponab.PonabSystem</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.remark.AlsRemark</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.remark.PonabRemark</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.trip.InspectionTrip</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.trip.PlannedTrip</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.trip.VagonLaboratory</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+</beans:beans>

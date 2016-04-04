@@ -2,11 +2,20 @@ package com.uz.laboratory.statistical.entity.location;
 
 
 import com.uz.laboratory.statistical.entity.Identifier;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "sector")
+@DynamicUpdate(value = true)
+@AttributeOverride(name = "id", column = @Column(name = "id"))
 public class Sector extends Identifier {
-    private String sectorTitle;
+    @Column(name = "title")
+    private String title;
+
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Stage> stageList;
 
     public List<Stage> getStageList() {
@@ -17,11 +26,11 @@ public class Sector extends Identifier {
         this.stageList = stageList;
     }
 
-    public String getSectorTitle() {
-        return sectorTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSectorTitle(String sectorTitle) {
-        this.sectorTitle = sectorTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

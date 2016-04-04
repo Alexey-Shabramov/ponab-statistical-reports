@@ -3,10 +3,27 @@ package com.uz.laboratory.statistical.entity.remark;
 
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ponab_remark")
+@DynamicUpdate(value = true)
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "id")),
+        @AttributeOverride(name = "inspectionTrip", column = @Column(name = "id_inspection")),
+        @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
+})
 public class PonabRemark extends AbstractRemark {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_ponab_system")
     private PonabSystem ponabSystem;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_stage")
     private Stage stage;
+
     private String location;
     private boolean even;
     private String note;
