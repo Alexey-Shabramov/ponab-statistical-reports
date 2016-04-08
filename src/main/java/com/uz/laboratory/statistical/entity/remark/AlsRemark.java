@@ -1,8 +1,7 @@
 package com.uz.laboratory.statistical.entity.remark;
 
 
-import com.uz.laboratory.statistical.entity.location.Stage;
-import com.uz.laboratory.statistical.entity.location.Station;
+import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -16,40 +15,23 @@ import javax.persistence.*;
         @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
 })
 public class AlsRemark extends AbstractRemark {
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_track_circuit")
+    private TrackCircuit trackCircuitName;
+
     @Column(name = "even")
     private boolean even;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_stage")
-    private Stage stage;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_station")
-    private Station station;
 
     @Column(name = "note")
     private String note;
 
-    @Column(name = "track_circuit_name")
-    private String trackCircuitName;
-
-    @Column(name = "remark_type")
-    private boolean remarkType;
-
-    public Stage getStage() {
-        return stage;
+    public TrackCircuit getTrackCircuitName() {
+        return trackCircuitName;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Station getStation() {
-        return station;
-    }
-
-    public void setStation(Station station) {
-        this.station = station;
+    public void setTrackCircuitName(TrackCircuit trackCircuitName) {
+        this.trackCircuitName = trackCircuitName;
     }
 
     public boolean isEven() {
@@ -66,21 +48,5 @@ public class AlsRemark extends AbstractRemark {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public String getTrackCircuitName() {
-        return trackCircuitName;
-    }
-
-    public void setTrackCircuitName(String trackCircuitName) {
-        this.trackCircuitName = trackCircuitName;
-    }
-
-    public boolean isRemarkType() {
-        return remarkType;
-    }
-
-    public void setRemarkType(boolean remarkType) {
-        this.remarkType = remarkType;
     }
 }

@@ -24,4 +24,12 @@ public class Station extends Identifier {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id='" + getId() + '\'' +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

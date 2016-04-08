@@ -12,7 +12,7 @@ import java.util.Date;
 public abstract class AbstractRemark extends Identifier {
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_inspection")
+    @JoinColumn(name = "id_inspection_trip")
     private InspectionTrip inspectionTrip;
 
     @Temporal(TemporalType.TIMESTAMP)

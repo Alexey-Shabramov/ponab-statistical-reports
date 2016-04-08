@@ -16,16 +16,21 @@ import javax.persistence.*;
         @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
 })
 public class PonabRemark extends AbstractRemark {
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ponab_system")
     private PonabSystem ponabSystem;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stage")
     private Stage stage;
 
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "even")
     private boolean even;
+
+    @Column(name = "note")
     private String note;
 
     public Stage getStage() {

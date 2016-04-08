@@ -4,7 +4,7 @@ public class Constants {
     /**
      * FXML path's
      */
-    public static final String FXML_PATH = "/fxml/sample.fxml";
+    public static final String FXML_PATH = "/fxml/mainAnchor.fxml";
 
 
     /**

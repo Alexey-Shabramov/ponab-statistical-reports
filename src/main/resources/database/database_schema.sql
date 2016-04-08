@@ -1,3 +1,4 @@
+DROP DATABASE `ponab_statistical_reports`;
 CREATE DATABASE IF NOT EXISTS `ponab_statistical_reports`;
 USE `ponab_statistical_reports`;
 
@@ -64,12 +65,30 @@ CREATE TABLE IF NOT EXISTS `vagon_laboratory` (
   AUTO_INCREMENT = 10
   DEFAULT CHARSET = utf8;
 
+CREATE TABLE IF NOT EXISTS `track_circuit` (
+  `id`                        BIGINT(21)   NOT NULL AUTO_INCREMENT,
+  `id_sector`                 BIGINT(21)   NOT NULL,
+  `id_stage`                  BIGINT(21)            DEFAULT NULL,
+  `id_station`                BIGINT(21)            DEFAULT NULL,
+  `id_communication_distance` BIGINT(21)            DEFAULT NULL,
+  `picket`                    DOUBLE       NOT NULL,
+  `name`                      VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_sector`) REFERENCES `sector` (`id`),
+  FOREIGN KEY (`id_station`) REFERENCES `station` (`id`),
+  FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`),
+  FOREIGN KEY (`id_communication_distance`) REFERENCES `communication_distance` (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 10
+  DEFAULT CHARSET = utf8;
+
 CREATE TABLE IF NOT EXISTS `planned_trip` (
   `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
   `id_sector`           BIGINT(21) NOT NULL,
   `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date`          TIMESTAMP  NOT NULL,
-  `end_date`            TIMESTAMP           DEFAULT NULL,
+  `begin_date` TIMESTAMP,
+  `end_date`   TIMESTAMP,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -80,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `inspection_trip` (
   `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
   `id_sector`           BIGINT(21) NOT NULL,
   `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date`          TIMESTAMP  NOT NULL,
-  `end_date`            TIMESTAMP           DEFAULT NULL,
+  `begin_date` TIMESTAMP,
+  `end_date`   TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_sector`) REFERENCES `sector` (`id`),
   FOREIGN KEY (`id_vagon_laboratory`) REFERENCES `vagon_laboratory` (`id`)
@@ -100,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `ponab_remark` (
   `note`            VARCHAR(200) NOT NULL,
   `creation_date`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_inspection`) REFERENCES `inspection` (`id`),
+  FOREIGN KEY (`id_inspection`) REFERENCES `inspection_trip` (`id`),
   FOREIGN KEY (`id_ponab_system`) REFERENCES `ponab_system` (`id`),
   FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`)
 )
@@ -109,19 +128,15 @@ CREATE TABLE IF NOT EXISTS `ponab_remark` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE IF NOT EXISTS `als_remark` (
-  `id`                    BIGINT(21)   NOT NULL AUTO_INCREMENT,
-  `id_inspection`         BIGINT(21)   NOT NULL,
-  `id_stage`              BIGINT(21)   NULL,
-  `id_station`            BIGINT(21)   NULL,
-  `note`                  VARCHAR(200)          DEFAULT NULL,
-  `tracking_circuit_name` VARCHAR(200) NOT NULL,
-  `remark_type`           TINYINT(1)   NOT NULL,
-  `even`                  TINYINT(1)   NOT NULL,
-  `creation_date`         TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id`               BIGINT(21) NOT NULL AUTO_INCREMENT,
+  `id_inspection`    BIGINT(21) NOT NULL,
+  `id_track_circuit` BIGINT(21) NULL,
+  `note`             VARCHAR(200)        DEFAULT NULL,
+  `even`             TINYINT(1) NOT NULL,
+  `creation_date`    TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_inspection`) REFERENCES `inspection` (`id`),
-  FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`),
-  FOREIGN KEY (`id_station`) REFERENCES `station` (`id`)
+  FOREIGN KEY (`id_inspection`) REFERENCES `inspection_trip` (`id`),
+  FOREIGN KEY (`id_track_circuit`) REFERENCES `track_circuit` (`id`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 10

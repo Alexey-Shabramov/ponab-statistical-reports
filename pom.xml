@@ -18,6 +18,7 @@
         <cglib.version>3.2.1</cglib.version>
         <log4j.version>1.2.17</log4j.version>
         <slfj-log4j.version>1.7.12</slfj-log4j.version>
+        <commons.dbcp2.version>2.1.1</commons.dbcp2.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,11 @@
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${commons.dbcp2.version}</version>
         </dependency>
     </dependencies>
 

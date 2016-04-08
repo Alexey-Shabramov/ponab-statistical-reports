@@ -11,9 +11,16 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <jdbc:embedded-database id="dataSource" type="HSQL">
+    <beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <beans:property name="url" value="jdbc:hsqldb:file:D:/database/ponab_statistical_reports"/>
+        <beans:property name="username" value="sa"/>
+        <beans:property name="password" value=""/>
+    </beans:bean>
+
+    <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath*:database/database_schema.sql"/>
-    </jdbc:embedded-database>
+    </jdbc:initialize-database>
 
     <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <beans:property name="dataSource" ref="dataSource"/>
@@ -25,6 +32,7 @@
                 <beans:value>com.uz.laboratory.statistical.entity.location.Stage</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.location.Station</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.ponab.PonabSystem</beans:value>
+                <beans:value>com.uz.laboratory.statistical.entity.als.TrackCircuit</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.remark.AlsRemark</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.remark.PonabRemark</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.trip.InspectionTrip</beans:value>

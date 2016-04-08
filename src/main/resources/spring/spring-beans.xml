@@ -4,6 +4,7 @@
              xmlns="http://www.springframework.org/schema/beans"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
     <!-- Dozer mapper for DTO's -->
     <beans:bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
         <property name="mappingFiles">
@@ -13,14 +14,86 @@
         </property>
     </beans:bean>
 
+    <!-- Dao beans definitions -->
     <beans:bean id="communicationDistanceDao"
                 class="com.uz.laboratory.statistical.dao.location.locationImpl.CommunicationDistanceDaoImpl">
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
 
-    <beans:bean id="clientService"
+    <beans:bean id="sectorDao" class="com.uz.laboratory.statistical.dao.location.locationImpl.SectorDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="stageDao" class="com.uz.laboratory.statistical.dao.location.locationImpl.StageDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="stationDao" class="com.uz.laboratory.statistical.dao.location.locationImpl.StationDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="ponabSystemDao" class="com.uz.laboratory.statistical.dao.ponab.ponabImpl.PonabSystemDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="alsRemarkDao" class="com.uz.laboratory.statistical.dao.remark.remarkImpl.AlsRemarkDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="ponabRemarkDao" class="com.uz.laboratory.statistical.dao.remark.remarkImpl.PonabRemarkDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="inspectionTripDao" class="com.uz.laboratory.statistical.dao.trip.tripImpl.InspectionTripDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="plannedTripDao" class="com.uz.laboratory.statistical.dao.trip.tripImpl.PlannedTripDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <!-- Service beans definitions -->
+    <beans:bean id="communicationDistanceService"
                 class="com.uz.laboratory.statistical.service.location.locationImpl.CommunicationDistanceServiceImpl">
         <beans:property name="dao" ref="communicationDistanceDao"/>
     </beans:bean>
 
+    <beans:bean id="clientService"
+                class="com.uz.laboratory.statistical.service.location.locationImpl.SectorServiceImpl">
+        <beans:property name="dao" ref="sectorDao"/>
+    </beans:bean>
+
+    <beans:bean id="stageService" class="com.uz.laboratory.statistical.service.location.locationImpl.StageServiceImpl">
+        <beans:property name="dao" ref="stageDao"/>
+    </beans:bean>
+
+    <beans:bean id="stationService"
+                class="com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl">
+        <beans:property name="dao" ref="stationDao"/>
+    </beans:bean>
+
+    <beans:bean id="ponabSystemService"
+                class="com.uz.laboratory.statistical.service.ponab.ponabImpl.PonabSystemServiceImpl">
+        <beans:property name="dao" ref="ponabSystemDao"/>
+    </beans:bean>
+
+    <beans:bean id="alsRemarkService"
+                class="com.uz.laboratory.statistical.service.remark.remarkImpl.AlsRemarkServiceImpl">
+        <beans:property name="dao" ref="alsRemarkDao"/>
+    </beans:bean>
+
+    <beans:bean id="ponabRemarkService"
+                class="com.uz.laboratory.statistical.service.remark.remarkImpl.PonabRemarkServiceImpl">
+        <beans:property name="dao" ref="ponabRemarkDao"/>
+    </beans:bean>
+
+    <beans:bean id="inspectionTripService"
+                class="com.uz.laboratory.statistical.service.trip.tripImpl.InspectionTripServiceImpl">
+        <beans:property name="dao" ref="inspectionTripDao"/>
+    </beans:bean>
+
+    <beans:bean id="plannedTripService"
+                class="com.uz.laboratory.statistical.service.trip.tripImpl.PlannedTripServiceImpl">
+        <beans:property name="dao" ref="plannedTripDao"/>
+    </beans:bean>
 </beans:beans>

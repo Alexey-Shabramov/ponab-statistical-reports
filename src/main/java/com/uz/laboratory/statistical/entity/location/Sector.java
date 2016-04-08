@@ -15,7 +15,8 @@ public class Sector extends Identifier {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_stage")
     private List<Stage> stageList;
 
     public List<Stage> getStageList() {
@@ -32,5 +33,14 @@ public class Sector extends Identifier {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Sector{" +
+                "id='" + getId() + '\'' +
+                "title='" + title + '\'' +
+                ", stageList=" + stageList +
+                '}';
     }
 }
