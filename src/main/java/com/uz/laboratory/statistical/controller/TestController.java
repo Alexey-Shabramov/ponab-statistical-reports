@@ -4,10 +4,12 @@ import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
+import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl;
+import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import javafx.fxml.Initializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,9 @@ public class TestController implements Initializable {
     @Autowired
     private SectorService sectorService;
 
+    @Autowired
+    private VagonLaboratoryService vagonLaboratoryService;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Station station = new Station();
@@ -47,7 +52,7 @@ public class TestController implements Initializable {
         System.out.println("Станция 2 равна: " + station1.toString());
 
         Stage stage = new Stage();
-        stage.setName(station.getName() + "-" + station1);
+        stage.setName(station.getName() + "-" + station1.getName());
         stage.setFirstStation(station);
         stage.setSecondStation(station1);
 
@@ -71,5 +76,9 @@ public class TestController implements Initializable {
 
         sectorService.save(sector);
         System.out.println(sector.toString());
+
+        VagonLaboratory vagonLaboratory = new VagonLaboratory();
+        vagonLaboratory.setName("Южная дорога");
+        vagonLaboratoryService.save(vagonLaboratory);
     }
 }

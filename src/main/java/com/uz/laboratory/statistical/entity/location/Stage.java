@@ -29,12 +29,6 @@ public class Stage extends Identifier {
     public Stage() {
     }
 
-    public Stage(String name, Station firstStation, Station secondStation) {
-        this.name = name;
-        this.firstStation = firstStation;
-        this.secondStation = secondStation;
-    }
-
     public List<CommunicationDistance> getCommunicationDistanceList() {
         return communicationDistanceList;
     }

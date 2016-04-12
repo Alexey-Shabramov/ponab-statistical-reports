@@ -52,6 +52,10 @@
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
 
+    <beans:bean id="vagonLaboratoryDao" class="com.uz.laboratory.statistical.dao.trip.tripImpl.VagonLaboratoryDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
     <!-- Service beans definitions -->
     <beans:bean id="communicationDistanceService"
                 class="com.uz.laboratory.statistical.service.location.locationImpl.CommunicationDistanceServiceImpl">
@@ -95,5 +99,10 @@
     <beans:bean id="plannedTripService"
                 class="com.uz.laboratory.statistical.service.trip.tripImpl.PlannedTripServiceImpl">
         <beans:property name="dao" ref="plannedTripDao"/>
+    </beans:bean>
+
+    <beans:bean id="vagonLaboratoryService"
+                class="com.uz.laboratory.statistical.service.trip.tripImpl.VagonLaboratoryServiceImpl">
+        <beans:property name="dao" ref="vagonLaboratoryDao"/>
     </beans:bean>
 </beans:beans>

@@ -6,7 +6,6 @@ public class Constants {
      */
     public static final String FXML_PATH = "/fxml/mainAnchor.fxml";
 
-
     /**
      * Title names
      */
@@ -34,4 +33,12 @@ public class Constants {
     public static final String PONAB = "ПОНАБ";
     public static final String DISK = "ДИСК-Б";
     public static final String KTSM = "КТСМ-02";
+
+    /**
+     * Validatorы errorы messages
+     */
+    public static final String SECTOR_IS_NOT_CHOSEN = "Проверяемый участок не выбран.";
+    public static final String DATE_FORMAT = "dd.MM.YYYY";
+    public static final String YEAR_VALUES_IS_NOT_SET = "Значение года не установлено. Проверьте Ваши данные.";
+    public static final String MONTH_VALUES_IS_NOT_SET = "Значение месяца не установлено.";
 }
