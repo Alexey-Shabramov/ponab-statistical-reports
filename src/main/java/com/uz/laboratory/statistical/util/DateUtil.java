@@ -5,7 +5,6 @@ import org.eclipse.collections.impl.list.Interval;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.Calendar;
 import java.util.List;
 
@@ -20,9 +19,5 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, 1);
         return Interval.oneTo(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-    }
-
-    private int getMonthNumber(String monthName) {
-        return Month.valueOf(monthName.toUpperCase()).getValue();
     }
 }

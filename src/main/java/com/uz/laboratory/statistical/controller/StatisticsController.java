@@ -16,7 +16,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.collections.impl.list.Interval;
@@ -34,16 +37,10 @@ import java.util.ResourceBundle;
 @Controller
 public class StatisticsController implements Initializable {
     @FXML
-    public TableView statisticsTableView;
-
-    @FXML
     public ComboBox<Stage> stageComboBox;
 
     @FXML
     public ComboBox<VagonLaboratory> vagonLaboratoryComboBox;
-
-    @FXML
-    public Button search;
 
     @FXML
     public ComboBox<Sector> sectorComboBox;
@@ -55,15 +52,6 @@ public class StatisticsController implements Initializable {
     public ComboBox<DirectionsOfMovement> directionOfMovementComboBox;
 
     @FXML
-    public TextField dateTextField;
-
-    @FXML
-    public Button cleanTableView;
-
-    @FXML
-    public Button printAllTableViewDataFromExcel;
-
-    @FXML
     public ComboBox<Integer> dayComboBox;
 
     @FXML
@@ -71,6 +59,18 @@ public class StatisticsController implements Initializable {
 
     @FXML
     public ComboBox<Integer> yearsComboBox;
+
+    @FXML
+    public TableView statisticsTableView;
+
+    @FXML
+    public Button search;
+
+    @FXML
+    public Button cleanTableView;
+
+    @FXML
+    public Button printAllTableViewDataFromExcel;
 
     @Autowired
     private SectorService sectorService;
@@ -82,6 +82,7 @@ public class StatisticsController implements Initializable {
 
     private boolean cleaningValue = false;
 
+    private boolean resetCleaningValue = false;
 
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
@@ -124,13 +125,10 @@ public class StatisticsController implements Initializable {
         stageComboBox.setConverter(stageConverter);
         sectorComboBox.setConverter(sectorConverter);
         vagonLaboratoryComboBox.setConverter(vagonLaboratoryConverter);
-
         directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         deviceTypeComboBox.getItems().setAll(Systems.values());
-
         vagonLaboratoryComboBox.setItems(FXCollections.observableArrayList(vagonLaboratoryService.listAll()));
         sectorComboBox.setItems(FXCollections.observableArrayList(sectorService.listAll()));
-
         yearsComboBox.setItems(FXCollections.observableArrayList(Interval.fromTo(2013, 2045)));
     }
 
@@ -140,11 +138,15 @@ public class StatisticsController implements Initializable {
         statisticsFilter.setSector(sectorComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setStage(stageComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
+        statisticsFilter.setDeviceType(deviceTypeComboBox.getSelectionModel().getSelectedIndex());
+        statisticsFilter.setDayNumber(dayComboBox.getSelectionModel().getSelectedItem());
+        statisticsFilter.setMonth(monthComboBox.getSelectionModel().getSelectedItem());
+        statisticsFilter.setYearNumber(yearsComboBox.getSelectionModel().getSelectedItem());
         if (directionOfMovementComboBox.getSelectionModel().getSelectedItem() != null) {
             statisticsFilter.setDirectionOfMovement(directionOfMovementComboBox.getSelectionModel().getSelectedItem().toString());
         }
-        if (deviceTypeComboBox.getSelectionModel().getSelectedItem() != null) {
-            statisticsFilter.setDeviceType(deviceTypeComboBox.getSelectionModel().getSelectedItem().toString());
+        if (directionOfMovementComboBox.getSelectionModel().getSelectedItem() != null) {
+            statisticsFilter.setDirectionOfMovement(directionOfMovementComboBox.getSelectionModel().getSelectedItem().toString());
         }
     }
 
@@ -165,41 +167,64 @@ public class StatisticsController implements Initializable {
 
     @FXML
     public void monthSelectedAction(ActionEvent actionEvent) {
-        System.out.println("Месяц выбран!");
-        dayComboBox.getItems().clear();
-        if (yearsComboBox.getSelectionModel().getSelectedItem() == null
-                || !StringUtils.isNotEmpty(yearsComboBox.getSelectionModel().getSelectedItem().toString())) {
-            errorList.add(Constants.YEAR_VALUES_IS_NOT_SET);
-        }
-        if (cleaningValue) {
-            if (monthComboBox.getSelectionModel().getSelectedItem() == null
-                    || !StringUtils.isNotEmpty(monthComboBox.getSelectionModel().getSelectedItem())) {
-                errorList.add(Constants.MONTH_VALUES_IS_NOT_SET);
-                cleaningValue = false;
-            }
-        }
-        if (!errorList.isEmpty()) {
-            createAlert(AlertGuiUtil.prepareAlertMessage(errorList));
-            errorList.clear();
+        if (resetCleaningValue) {
+            /**
+             * Skips the validations for cleaning comboboxes
+             */
         } else {
-            try {
-                dayComboBox.setItems(FXCollections.observableArrayList(DateUtil.getDayListByMonthYear(yearsComboBox.getSelectionModel().getSelectedItem(), DateUtil.getMonthNumberByTitle(monthComboBox.getSelectionModel().getSelectedItem()))));
-            } catch (ParseException e) {
-                e.printStackTrace();
+            dayComboBox.getItems().clear();
+            if (yearsComboBox.getSelectionModel().getSelectedItem() == null
+                    || !StringUtils.isNotEmpty(yearsComboBox.getSelectionModel().getSelectedItem().toString())) {
+                errorList.add(Constants.YEAR_VALUES_IS_NOT_SET);
+            }
+            if (cleaningValue) {
+                if (monthComboBox.getSelectionModel().getSelectedItem() == null
+                        || !StringUtils.isNotEmpty(monthComboBox.getSelectionModel().getSelectedItem())) {
+                    errorList.add(Constants.MONTH_VALUES_IS_NOT_SET);
+                    cleaningValue = false;
+                }
+            }
+
+            if (!errorList.isEmpty()) {
+                createAlert(AlertGuiUtil.prepareAlertMessage(errorList));
+                errorList.clear();
+            } else {
+                try {
+                    if (monthComboBox.getSelectionModel().getSelectedItem() != null
+                            && yearsComboBox.getSelectionModel().getSelectedItem() != null) {
+                        dayComboBox.setItems(FXCollections.observableArrayList(DateUtil.getDayListByMonthYear(yearsComboBox.getSelectionModel().getSelectedItem(), DateUtil.getMonthNumberByTitle(monthComboBox.getSelectionModel().getSelectedItem()))));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     @FXML
     public void yearSelectedAction(ActionEvent actionEvent) {
-        System.out.println("Год выбран!");
-        monthComboBox.getItems().clear();
-        if (yearsComboBox.getSelectionModel().getSelectedItem() == null
-                || !StringUtils.isNotEmpty(yearsComboBox.getSelectionModel().getSelectedItem().toString())) {
-            createAlert(Constants.YEAR_VALUES_IS_NOT_SET);
+        if (resetCleaningValue) {
+            /**
+             * Skips the validations for cleaning comboboxes
+             */
         } else {
-            monthComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(new DateFormatSymbols().getMonths())));
+            monthComboBox.getItems().clear();
+            if (yearsComboBox.getSelectionModel().getSelectedItem() == null
+                    || !StringUtils.isNotEmpty(yearsComboBox.getSelectionModel().getSelectedItem().toString())) {
+                createAlert(Constants.YEAR_VALUES_IS_NOT_SET);
+            } else {
+                monthComboBox.setItems(FXCollections.observableArrayList(Arrays.asList(new DateFormatSymbols().getMonths())));
+            }
         }
+    }
+
+    @FXML
+    public void cleanDateComboBoxes(ActionEvent actionEvent) {
+        resetCleaningValue = true;
+        yearsComboBox.setValue(null);
+        dayComboBox.setValue(null);
+        monthComboBox.setValue(null);
+        resetCleaningValue = false;
     }
 
     private void createAlert(String error) {

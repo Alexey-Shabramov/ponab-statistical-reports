@@ -5,15 +5,15 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 
-import java.util.Date;
-
 public class StatisticsFilter {
     private Sector sector;
     private Stage stage;
-    private String deviceType;
+    private int deviceType;
     private VagonLaboratory vagonLaboratory;
     private String directionOfMovement;
-    private Date date;
+    private Integer dayNumber;
+    private Integer yearNumber;
+    private String month;
 
     public Sector getSector() {
         return sector;
@@ -31,11 +31,11 @@ public class StatisticsFilter {
         this.stage = stage;
     }
 
-    public String getDeviceType() {
+    public int getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(String deviceType) {
+    public void setDeviceType(int deviceType) {
         this.deviceType = deviceType;
     }
 
@@ -55,12 +55,28 @@ public class StatisticsFilter {
         this.directionOfMovement = directionOfMovement;
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getDayNumber() {
+        return dayNumber;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDayNumber(Integer dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+
+    public Integer getYearNumber() {
+        return yearNumber;
+    }
+
+    public void setYearNumber(Integer yearNumber) {
+        this.yearNumber = yearNumber;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     @Override
@@ -68,10 +84,12 @@ public class StatisticsFilter {
         return "StatisticsFilter{" +
                 "sector=" + sector +
                 ", stage=" + stage +
-                ", deviceType='" + deviceType + '\'' +
+                ", deviceType=" + deviceType +
                 ", vagonLaboratory=" + vagonLaboratory +
                 ", directionOfMovement='" + directionOfMovement + '\'' +
-                ", date=" + date +
+                ", dayNumber=" + dayNumber +
+                ", yearNumber=" + yearNumber +
+                ", month='" + month + '\'' +
                 '}';
     }
 }
