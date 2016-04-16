@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "id")),
         @AttributeOverride(name = "inspectionTrip", column = @Column(name = "id_inspection")),
+        @AttributeOverride(name = "repeatable", column = @Column(name = "repeatable")),
         @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
 })
 public class AlsRemark extends AbstractRemark {

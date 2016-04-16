@@ -19,6 +19,17 @@ public abstract class AbstractRemark extends Identifier {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    @Column(name = "repeatable")
+    private boolean repeatable = false;
+
+    public boolean isRepeatable() {
+        return repeatable;
+    }
+
+    public void setRepeatable(boolean repeatable) {
+        this.repeatable = repeatable;
+    }
+
     public InspectionTrip getInspectionTrip() {
         return inspectionTrip;
     }

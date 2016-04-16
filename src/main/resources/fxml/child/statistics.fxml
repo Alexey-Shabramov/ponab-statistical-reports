@@ -9,12 +9,13 @@
     <children>
         <TableView fx:id="statisticsTableView" layoutX="2.0" layoutY="188.0" prefHeight="301.0" prefWidth="912.0">
             <columns>
-                <TableColumn prefWidth="131.0" text="Объект"/>
-                <TableColumn minWidth="0.0" prefWidth="167.0" text="Замечание"/>
-                <TableColumn prefWidth="282.0" text="Перегон"/>
-                <TableColumn prefWidth="72.0" text="Дата"/>
-                <TableColumn prefWidth="199.0" text="Вагон-лаборатория"/>
-                <TableColumn prefWidth="68.0" text="Повторы"/>
+                <TableColumn fx:id="objectColumn" prefWidth="131.0" text="Объект"/>
+                <TableColumn fx:id="noteColumn" minWidth="0.0" prefWidth="167.0" text="Замечание"/>
+                <TableColumn fx:id="stageColumn" prefWidth="282.0" text="Перегон"/>
+                <TableColumn fx:id="dateColumn" prefWidth="72.0" text="Дата"/>
+                <TableColumn fx:id="vagonColumn" prefWidth="133.0" text="Вагон-лаборатория"/>
+                <TableColumn fx:id="repeatColumn" prefWidth="125.0" text="Повторы"/>
+                <TableColumn fx:id="remarkIdColumn" minWidth="9.0" prefWidth="15.0" text="Id" visible="false"/>
             </columns>
         </TableView>
         <ComboBox fx:id="stageComboBox" layoutX="307.0" layoutY="32.0" prefHeight="25.0" prefWidth="255.0"/>

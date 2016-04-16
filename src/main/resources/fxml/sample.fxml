@@ -1,5 +1,0 @@
-<?import javafx.scene.layout.GridPane?>
-<GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.uz.laboratory.statistical.controller.TestController" alignment="center" hgap="10"
-          vgap="10">
-</GridPane>

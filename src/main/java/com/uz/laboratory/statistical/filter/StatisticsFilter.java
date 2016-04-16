@@ -10,10 +10,16 @@ public class StatisticsFilter {
     private Stage stage;
     private int deviceType;
     private VagonLaboratory vagonLaboratory;
-    private String directionOfMovement;
-    private Integer dayNumber;
-    private Integer yearNumber;
-    private String month;
+    private Boolean directionOfMovement;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Sector getSector() {
         return sector;
@@ -47,36 +53,12 @@ public class StatisticsFilter {
         this.vagonLaboratory = vagonLaboratory;
     }
 
-    public String getDirectionOfMovement() {
+    public Boolean getDirectionOfMovement() {
         return directionOfMovement;
     }
 
-    public void setDirectionOfMovement(String directionOfMovement) {
+    public void setDirectionOfMovement(Boolean directionOfMovement) {
         this.directionOfMovement = directionOfMovement;
-    }
-
-    public Integer getDayNumber() {
-        return dayNumber;
-    }
-
-    public void setDayNumber(Integer dayNumber) {
-        this.dayNumber = dayNumber;
-    }
-
-    public Integer getYearNumber() {
-        return yearNumber;
-    }
-
-    public void setYearNumber(Integer yearNumber) {
-        this.yearNumber = yearNumber;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
     }
 
     @Override
@@ -86,10 +68,8 @@ public class StatisticsFilter {
                 ", stage=" + stage +
                 ", deviceType=" + deviceType +
                 ", vagonLaboratory=" + vagonLaboratory +
-                ", directionOfMovement='" + directionOfMovement + '\'' +
-                ", dayNumber=" + dayNumber +
-                ", yearNumber=" + yearNumber +
-                ", month='" + month + '\'' +
+                ", directionOfMovement=" + directionOfMovement +
+                ", date='" + date + '\'' +
                 '}';
     }
 }

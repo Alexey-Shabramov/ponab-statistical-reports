@@ -1,14 +1,19 @@
 package com.uz.laboratory.statistical.controller;
 
+import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
+import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
+import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl;
+import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import javafx.fxml.Initializable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,6 +42,12 @@ public class TestController implements Initializable {
 
     @Autowired
     private VagonLaboratoryService vagonLaboratoryService;
+
+    @Autowired
+    private InspectionTripService inspectionTripService;
+
+    @Autowired
+    private TrackCircuitService trackCircuitService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,5 +92,21 @@ public class TestController implements Initializable {
         VagonLaboratory vagonLaboratory = new VagonLaboratory();
         vagonLaboratory.setName("Южная дорога");
         vagonLaboratoryService.save(vagonLaboratory);
+        InspectionTrip inspectionTrip = new InspectionTrip();
+        inspectionTrip.setVagonLaboratory(vagonLaboratory);
+        inspectionTrip.setTripSector(sector);
+        inspectionTrip.setBeginDate(new Date());
+        inspectionTripService.save(inspectionTrip);
+
+        TrackCircuit trackCircuit = new TrackCircuit();
+        trackCircuit.setCommunicationDistance(communicationDistance);
+        trackCircuit.setName("Сп.3");
+        trackCircuit.setStage(stage);
+
+        AlsRemark alsRemark = new AlsRemark();
+        alsRemark.setEven(true);
+        alsRemark.setNote("Штата там не работает!");
+        alsRemark.setTrackCircuitName(trackCircuit);
+
     }
 }

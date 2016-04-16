@@ -41,4 +41,18 @@ public class Constants {
     public static final String DATE_FORMAT = "dd.MM.YYYY";
     public static final String YEAR_VALUES_IS_NOT_SET = "Значение года не установлено. Проверьте Ваши данные.";
     public static final String MONTH_VALUES_IS_NOT_SET = "Значение месяца не установлено.";
+
+    /**
+     * Statistical part - Tableview columns names
+     */
+    public static final String FIRST_COLUMN = "Объект";
+
+    /**
+     * Alert titles and basic messages
+     */
+    public static final String ERROR_TITLE = "ПРОИЗОШЛА ОШИБКА!";
+    public static final String ERROR_HEADER = "Данное сообщение появляеться при наличии неточностей во введенной информации.";
+
+    public static final String REMARK_REPEATABLE_TRUE = "+";
+    public static final String REMARK_REPEATABLE_FALSE = "-";
 }

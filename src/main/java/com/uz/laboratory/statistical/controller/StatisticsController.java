@@ -4,22 +4,25 @@ package com.uz.laboratory.statistical.controller;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.Systems;
+import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
+import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.StatisticsFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
+import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
+import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.DateUtil;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.collections.impl.list.Interval;
@@ -36,39 +39,45 @@ import java.util.ResourceBundle;
 
 @Controller
 public class StatisticsController implements Initializable {
+    private final static int dataSize = 10_023;
+    private final static int rowsPerPage = 20;
     @FXML
     public ComboBox<Stage> stageComboBox;
-
     @FXML
     public ComboBox<VagonLaboratory> vagonLaboratoryComboBox;
-
     @FXML
     public ComboBox<Sector> sectorComboBox;
-
     @FXML
     public ComboBox<Systems> deviceTypeComboBox;
-
     @FXML
     public ComboBox<DirectionsOfMovement> directionOfMovementComboBox;
-
     @FXML
     public ComboBox<Integer> dayComboBox;
-
     @FXML
     public ComboBox<String> monthComboBox;
-
     @FXML
     public ComboBox<Integer> yearsComboBox;
-
     @FXML
-    public TableView statisticsTableView;
-
+    public TableView<StatisticsRemarkTableDto> statisticsTableView;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> objectColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> noteColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> stageColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> dateColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> vagonColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, String> repeatColumn;
+    @FXML
+    public TableColumn<StatisticsRemarkTableDto, Integer> remarkIdColumn;
+    public ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     @FXML
     public Button search;
-
     @FXML
     public Button cleanTableView;
-
     @FXML
     public Button printAllTableViewDataFromExcel;
 
@@ -78,10 +87,14 @@ public class StatisticsController implements Initializable {
     @Autowired
     private VagonLaboratoryService vagonLaboratoryService;
 
+    @Autowired
+    private PonabRemarkService ponabRemarkService;
+
+    @Autowired
+    private AlsRemarkService alsRemarkService;
+
     private List<String> errorList = new ArrayList<>();
-
     private boolean cleaningValue = false;
-
     private boolean resetCleaningValue = false;
 
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
@@ -95,7 +108,6 @@ public class StatisticsController implements Initializable {
             return null;
         }
     };
-
     private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
         @Override
         public String toString(Sector object) {
@@ -107,7 +119,6 @@ public class StatisticsController implements Initializable {
             return null;
         }
     };
-
     private StringConverter<VagonLaboratory> vagonLaboratoryConverter = new StringConverter<VagonLaboratory>() {
         @Override
         public String toString(VagonLaboratory object) {
@@ -139,15 +150,28 @@ public class StatisticsController implements Initializable {
         statisticsFilter.setStage(stageComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setDeviceType(deviceTypeComboBox.getSelectionModel().getSelectedIndex());
-        statisticsFilter.setDayNumber(dayComboBox.getSelectionModel().getSelectedItem());
-        statisticsFilter.setMonth(monthComboBox.getSelectionModel().getSelectedItem());
-        statisticsFilter.setYearNumber(yearsComboBox.getSelectionModel().getSelectedItem());
-        if (directionOfMovementComboBox.getSelectionModel().getSelectedItem() != null) {
-            statisticsFilter.setDirectionOfMovement(directionOfMovementComboBox.getSelectionModel().getSelectedItem().toString());
+        try {
+            statisticsFilter.setDate(DateUtil.dateBuilder(
+                    yearsComboBox.getSelectionModel().getSelectedItem(),
+                    monthComboBox.getSelectionModel().getSelectedItem(),
+                    dayComboBox.getSelectionModel().getSelectedItem()));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        if (directionOfMovementComboBox.getSelectionModel().getSelectedItem() != null) {
-            statisticsFilter.setDirectionOfMovement(directionOfMovementComboBox.getSelectionModel().getSelectedItem().toString());
+        if (Integer.valueOf(directionOfMovementComboBox.getSelectionModel().getSelectedIndex()) != null) {
+            if (directionOfMovementComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                statisticsFilter.setDirectionOfMovement(true);
+            } else if (directionOfMovementComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                statisticsFilter.setDirectionOfMovement(false);
+            }
         }
+        if (statisticsFilter.getDeviceType() == 0) {
+            List<AlsRemark> alsRemarksList = alsRemarkService.getRemarkListByFilter(statisticsFilter);
+
+        } else if (statisticsFilter.getDeviceType() == 1) {
+            List<PonabRemark> ponabRemarkList = ponabRemarkService.getRemarkListByFilter(statisticsFilter);
+        }
+        System.out.println(statisticsFilter.toString());
     }
 
     @FXML
@@ -227,10 +251,16 @@ public class StatisticsController implements Initializable {
         resetCleaningValue = false;
     }
 
+    private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {
+        for (TableColumn<T, ?> col : tableView.getColumns())
+            if (col.getText().equals(name)) return col;
+        return null;
+    }
+
     private void createAlert(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("ПРОИЗОШЛА ОШИБКА!");
-        alert.setHeaderText("Данное сообщение появляеться при наличии неточностей во введенной информации.");
+        alert.setTitle(Constants.ERROR_TITLE);
+        alert.setHeaderText(Constants.ERROR_HEADER);
         alert.setContentText(error);
         alert.showAndWait();
         alert = null;
