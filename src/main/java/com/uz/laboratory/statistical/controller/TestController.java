@@ -13,6 +13,7 @@ import com.uz.laboratory.statistical.service.location.CommunicationDistanceServi
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl;
+import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import javafx.fxml.Initializable;
@@ -49,6 +50,9 @@ public class TestController implements Initializable {
     @Autowired
     private TrackCircuitService trackCircuitService;
 
+    @Autowired
+    private AlsRemarkService alsRemarkService;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Station station = new Station();
@@ -75,7 +79,7 @@ public class TestController implements Initializable {
         ArrayList arrayList = new ArrayList();
         arrayList.add(communicationDistance);
 
-        stage.setCommunicationDistanceList(arrayList);
+        stage.setDistanceList(arrayList);
 
         stageService.save(stage);
         System.out.println(stage.toString());
@@ -102,11 +106,15 @@ public class TestController implements Initializable {
         trackCircuit.setCommunicationDistance(communicationDistance);
         trackCircuit.setName("Сп.3");
         trackCircuit.setStage(stage);
+        trackCircuitService.save(trackCircuit);
 
         AlsRemark alsRemark = new AlsRemark();
         alsRemark.setEven(true);
         alsRemark.setNote("Штата там не работает!");
-        alsRemark.setTrackCircuitName(trackCircuit);
-
+        alsRemark.setTrack_circuit_name(trackCircuit);
+        alsRemark.setInspectionTrip(inspectionTrip);
+        alsRemark.setCreationDate(new Date());
+        alsRemark.setRepeatable(false);
+        alsRemarkService.save(alsRemark);
     }
 }

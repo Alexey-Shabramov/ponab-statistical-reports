@@ -1,4 +1,3 @@
-DROP DATABASE `ponab_statistical_reports`;
 CREATE DATABASE IF NOT EXISTS `ponab_statistical_reports`;
 USE `ponab_statistical_reports`;
 
@@ -90,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `planned_trip` (
   `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
   `id_sector`           BIGINT(21) NOT NULL,
   `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date` TIMESTAMP,
-  `end_date`   TIMESTAMP,
+  `begin_date`          TIMESTAMP,
+  `end_date`            TIMESTAMP,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -102,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `inspection_trip` (
   `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
   `id_sector`           BIGINT(21) NOT NULL,
   `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date` TIMESTAMP,
-  `end_date`   TIMESTAMP,
+  `begin_date`          TIMESTAMP,
+  `end_date`            TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_sector`) REFERENCES `sector` (`id`),
   FOREIGN KEY (`id_vagon_laboratory`) REFERENCES `vagon_laboratory` (`id`)
@@ -122,8 +121,7 @@ CREATE TABLE IF NOT EXISTS `ponab_remark` (
   `creation_date`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_inspection`) REFERENCES `inspection_trip` (`id`),
-  FOREIGN KEY (`id_ponab_system`) REFERENCES `ponab_system` (`id`),
-  FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`)
+  FOREIGN KEY (`id_ponab_system`) REFERENCES `ponab_system` (`id`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 10

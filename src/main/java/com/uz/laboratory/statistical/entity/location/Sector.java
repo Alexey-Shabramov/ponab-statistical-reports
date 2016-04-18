@@ -40,7 +40,7 @@ public class Sector extends Identifier {
         return "Sector{" +
                 "id='" + getId() + '\'' +
                 "title='" + title + '\'' +
-                ", stageList=" + stageList +
+                ", stages=" + stageList +
                 '}';
     }
 }

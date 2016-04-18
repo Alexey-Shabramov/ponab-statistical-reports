@@ -19,26 +19,28 @@ public class AlsRemarkDaoImpl extends GenericDaoImpl<AlsRemark> implements AlsRe
 
     @Override
     public List getRemarkListByFilter(StatisticsFilter statisticsFilter) {
-        Criteria criteria = getSession().createCriteria(getEntityClass(), "alsRemark");
+        Criteria criteria = getSession().createCriteria(getEntityClass(), "remark");
+        criteria.createAlias("remark.inspectionTrip", "inspection")
+                .createAlias("inspection.vagonLaboratory", "vagon")
+                .createAlias("inspection.tripSector", "sector")
+                .createAlias("sector.stageList", "stage");
         if (statisticsFilter.getSector() != null) {
-            criteria.createAlias("alsRemark.inspectionTrip.tripSector", "sector")
-                    .add(Restrictions.eq("sector.id", statisticsFilter.getSector().getId()));
+            criteria.add(Restrictions.eq("sector.id", statisticsFilter.getSector().getId()));
         }
         if (statisticsFilter.getStage() != null) {
-            criteria.createAlias("sector.stageList", "stage")
-                    .add(Restrictions.eq("stage.id", statisticsFilter.getStage().getId()));
+            criteria.add(Restrictions.eq("stage.id", statisticsFilter.getStage().getId()));
         }
         if (statisticsFilter.getVagonLaboratory() != null) {
-            criteria.createAlias("alsRemark.inspectionTrip.vagonLaboratory", "vagon")
-                    .add(Restrictions.eq("vagon.id", statisticsFilter.getStage().getId()));
+            criteria.add(Restrictions.eq("vagon.id", statisticsFilter.getVagonLaboratory().getId()));
         }
         if (statisticsFilter.getDirectionOfMovement() != null) {
-            criteria.createAlias("alsRemark.even", "directionOfMovement")
-                    .add(Restrictions.eq("directionOfMovement", statisticsFilter.getDirectionOfMovement()));
+            criteria.add(Restrictions.eq("remark.even", statisticsFilter.getDirectionOfMovement()));
+        }
+        if (statisticsFilter.getVagonLaboratory() != null) {
+            criteria.add(Restrictions.eq("vagon.id", statisticsFilter.getVagonLaboratory().getId()));
         }
         if (StringUtils.isNotBlank(statisticsFilter.getDate())) {
-            criteria.createAlias("alsRemark.inspectionTrip.beginDate", "date")
-                    .add(Restrictions.like("date", statisticsFilter.getDate()));
+            criteria.add(Restrictions.like("inspection.beginDate", statisticsFilter.getDate() + "%"));
         }
         return criteria.list();
     }

@@ -12,6 +12,6 @@ import java.util.List;
 public class PonabRemarkServiceImpl extends GenericServiceImpl<PonabRemark, PonabRemarkDaoImpl> implements PonabRemarkService {
     @Override
     public List<PonabRemark> getRemarkListByFilter(StatisticsFilter statisticsFilter) {
-        return null;
+        return dao.getRemarkListByFilter(statisticsFilter);
     }
 }

@@ -1,11 +1,10 @@
 package com.uz.laboratory.statistical.dto;
 
 
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class StatisticsRemarkTableDto {
-    private final SimpleLongProperty remarkId;
+    private final SimpleStringProperty remarkId;
     private final SimpleStringProperty objectColumn;
     private final SimpleStringProperty noteColumn;
     private final SimpleStringProperty stageColumn;
@@ -14,7 +13,7 @@ public class StatisticsRemarkTableDto {
     private final SimpleStringProperty repeatColumn;
 
     public StatisticsRemarkTableDto(Long remarkId, String objectColumn, String noteColumn, String stageColumn, String dateColumn, String vagonColumn, String repeatColumn) {
-        this.remarkId = new SimpleLongProperty(remarkId);
+        this.remarkId = new SimpleStringProperty(remarkId.toString());
         this.objectColumn = new SimpleStringProperty(objectColumn);
         this.noteColumn = new SimpleStringProperty(noteColumn);
         this.stageColumn = new SimpleStringProperty(stageColumn);
@@ -23,15 +22,15 @@ public class StatisticsRemarkTableDto {
         this.repeatColumn = new SimpleStringProperty(repeatColumn);
     }
 
-    public long getRemarkId() {
+    public String getRemarkId() {
         return remarkId.get();
     }
 
-    public void setRemarkId(long remarkId) {
+    public void setRemarkId(String remarkId) {
         this.remarkId.set(remarkId);
     }
 
-    public SimpleLongProperty remarkIdProperty() {
+    public SimpleStringProperty remarkIdProperty() {
         return remarkId;
     }
 

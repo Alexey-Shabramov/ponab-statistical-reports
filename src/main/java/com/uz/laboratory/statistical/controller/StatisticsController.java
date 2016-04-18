@@ -7,8 +7,6 @@ import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
-import com.uz.laboratory.statistical.entity.remark.AlsRemark;
-import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.StatisticsFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
@@ -17,12 +15,15 @@ import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.DateUtil;
+import com.uz.laboratory.statistical.util.TableDtoConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.collections.impl.list.Interval;
@@ -39,8 +40,7 @@ import java.util.ResourceBundle;
 
 @Controller
 public class StatisticsController implements Initializable {
-    private final static int dataSize = 10_023;
-    private final static int rowsPerPage = 20;
+    private final static int rowsPerPage = 9;
     @FXML
     public ComboBox<Stage> stageComboBox;
     @FXML
@@ -72,14 +72,19 @@ public class StatisticsController implements Initializable {
     @FXML
     public TableColumn<StatisticsRemarkTableDto, String> repeatColumn;
     @FXML
-    public TableColumn<StatisticsRemarkTableDto, Integer> remarkIdColumn;
+    public TableColumn<StatisticsRemarkTableDto, String> remarkIdColumn;
     public ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
+    @FXML
+    public Pagination statisticsTableViewPagination;
+
     @FXML
     public Button search;
     @FXML
     public Button cleanTableView;
     @FXML
     public Button printAllTableViewDataFromExcel;
+    @FXML
+    public Button cleanDateComboBoxes;
 
     @Autowired
     private SectorService sectorService;
@@ -133,6 +138,8 @@ public class StatisticsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initColumnsForTableView();
+        statisticsTableViewPagination.setPageFactory(this::initializePage);
         stageComboBox.setConverter(stageConverter);
         sectorComboBox.setConverter(sectorConverter);
         vagonLaboratoryComboBox.setConverter(vagonLaboratoryConverter);
@@ -166,12 +173,14 @@ public class StatisticsController implements Initializable {
             }
         }
         if (statisticsFilter.getDeviceType() == 0) {
-            List<AlsRemark> alsRemarksList = alsRemarkService.getRemarkListByFilter(statisticsFilter);
-
+            statisticsTableData.removeAll(statisticsTableData);
+            statisticsTableData.setAll(TableDtoConverter.convertAlsRemarkListToDto(alsRemarkService.getRemarkListByFilter(statisticsFilter)));
+            statisticsTableViewPagination.setPageFactory(this::createPage);
         } else if (statisticsFilter.getDeviceType() == 1) {
-            List<PonabRemark> ponabRemarkList = ponabRemarkService.getRemarkListByFilter(statisticsFilter);
+            statisticsTableData.removeAll(statisticsTableData);
+            statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
+            statisticsTableViewPagination.setPageFactory(this::createPage);
         }
-        System.out.println(statisticsFilter.toString());
     }
 
     @FXML
@@ -249,6 +258,27 @@ public class StatisticsController implements Initializable {
         dayComboBox.setValue(null);
         monthComboBox.setValue(null);
         resetCleaningValue = false;
+    }
+
+    private void initColumnsForTableView() {
+        objectColumn.setCellValueFactory(param -> param.getValue().objectColumnProperty());
+        noteColumn.setCellValueFactory(param -> param.getValue().noteColumnProperty());
+        stageColumn.setCellValueFactory(param -> param.getValue().stageColumnProperty());
+        dateColumn.setCellValueFactory(param -> param.getValue().dateColumnProperty());
+        vagonColumn.setCellValueFactory(param -> param.getValue().vagonColumnProperty());
+        repeatColumn.setCellValueFactory(param -> param.getValue().repeatColumnProperty());
+        remarkIdColumn.setCellValueFactory(param -> param.getValue().remarkIdProperty());
+    }
+
+    private Node initializePage(int pageIndex) {
+        return new BorderPane(statisticsTableView);
+    }
+
+    private Node createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, statisticsTableData.size());
+        statisticsTableView.setItems(FXCollections.observableArrayList(statisticsTableData.subList(fromIndex, toIndex)));
+        return new BorderPane(statisticsTableView);
     }
 
     private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {

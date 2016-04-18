@@ -18,11 +18,11 @@ public abstract class AbstractTrip extends Identifier {
     private VagonLaboratory vagonLaboratory;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "begin_date")
+    @Column(name = "begin_date", nullable = true)
     private Date beginDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = true)
     private Date endDate;
 
     public Sector getTripSector() {
@@ -31,6 +31,14 @@ public abstract class AbstractTrip extends Identifier {
 
     public void setTripSector(Sector tripSector) {
         this.tripSector = tripSector;
+    }
+
+    public VagonLaboratory getVagonLaboratory() {
+        return vagonLaboratory;
+    }
+
+    public void setVagonLaboratory(VagonLaboratory vagonLaboratory) {
+        this.vagonLaboratory = vagonLaboratory;
     }
 
     public Date getBeginDate() {
@@ -49,11 +57,4 @@ public abstract class AbstractTrip extends Identifier {
         this.endDate = endDate;
     }
 
-    public VagonLaboratory getVagonLaboratory() {
-        return vagonLaboratory;
-    }
-
-    public void setVagonLaboratory(VagonLaboratory vagonLaboratory) {
-        this.vagonLaboratory = vagonLaboratory;
-    }
 }

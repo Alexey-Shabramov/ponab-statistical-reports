@@ -24,17 +24,9 @@ public class Stage extends Identifier {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_communication_distance")
-    private List<CommunicationDistance> communicationDistanceList;
+    private List<CommunicationDistance> distanceList;
 
     public Stage() {
-    }
-
-    public List<CommunicationDistance> getCommunicationDistanceList() {
-        return communicationDistanceList;
-    }
-
-    public void setCommunicationDistanceList(List<CommunicationDistance> communicationDistanceList) {
-        this.communicationDistanceList = communicationDistanceList;
     }
 
     public String getName() {
@@ -61,14 +53,22 @@ public class Stage extends Identifier {
         this.secondStation = secondStation;
     }
 
+    public List<CommunicationDistance> getDistanceList() {
+        return distanceList;
+    }
+
+    public void setDistanceList(List<CommunicationDistance> distanceList) {
+        this.distanceList = distanceList;
+    }
+
     @Override
     public String toString() {
         return "Stage{" +
                 "id='" + getId() + '\'' +
                 "name='" + name + '\'' +
-                ", firstStation=" + firstStation +
-                ", secondStation=" + secondStation +
-                ", communicationDistanceList=" + communicationDistanceList +
+                ", first_station=" + firstStation +
+                ", second_station=" + secondStation +
+                ", distances_list=" + distanceList +
                 '}';
     }
 }

@@ -15,9 +15,9 @@ public class TableDtoConverter {
         for (AlsRemark remark : abstractRemarks) {
             data.add(new StatisticsRemarkTableDto(
                     remark.getId(),
-                    remark.getTrackCircuitName().getName(),
+                    remark.getTrack_circuit_name().getName(),
                     remark.getNote(),
-                    remark.getTrackCircuitName().getStation() != null ? remark.getTrackCircuitName().getStation().getName() : remark.getTrackCircuitName().getStage().getName(),
+                    remark.getTrack_circuit_name().getStation() != null ? remark.getTrack_circuit_name().getStation().getName() : remark.getTrack_circuit_name().getStage().getName(),
                     remark.getCreationDate().toString(),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
