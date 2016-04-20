@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.util;
+package com.uz.laboratory.statistical.util.fx;
 
 import java.util.List;
 

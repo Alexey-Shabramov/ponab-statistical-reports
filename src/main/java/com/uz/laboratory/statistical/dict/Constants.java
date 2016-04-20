@@ -4,7 +4,12 @@ public class Constants {
     /**
      * FXML path's
      */
-    public static final String FXML_PATH = "/fxml/mainAnchor.fxml";
+    public static final String MAIN_FXML_PATH = "/fxml/mainAnchor.fxml";
+    public static final String REMARK_EDIT_MODAL = "/fxml/modal/edit/remarkEditModal.fxml";
+    public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/inspectionTripModal.fxml";
+    public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponabDeviceModal.fxml";
+    public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/alsDeviceModal.fxml";
+    public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/plannedTripModal.fxml";
 
     /**
      * Title names

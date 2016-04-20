@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.util;
+package com.uz.laboratory.statistical.util.fx;
 
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;

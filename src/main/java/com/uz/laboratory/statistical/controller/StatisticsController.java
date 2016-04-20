@@ -7,22 +7,29 @@ import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.remark.AbstractRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.StatisticsFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
-import com.uz.laboratory.statistical.util.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.DateUtil;
-import com.uz.laboratory.statistical.util.TableDtoConverter;
+import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ModalUtil;
+import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +48,7 @@ import java.util.ResourceBundle;
 @Controller
 public class StatisticsController implements Initializable {
     private final static int rowsPerPage = 9;
+    final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public ComboBox<Stage> stageComboBox;
     @FXML
@@ -76,7 +84,6 @@ public class StatisticsController implements Initializable {
     public ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     @FXML
     public Pagination statisticsTableViewPagination;
-
     @FXML
     public Button search;
     @FXML
@@ -85,23 +92,22 @@ public class StatisticsController implements Initializable {
     public Button printAllTableViewDataFromExcel;
     @FXML
     public Button cleanDateComboBoxes;
-
+    private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
+    private Long selectectedEntityId;
+    private AbstractRemark abstractRemark;
     @Autowired
     private SectorService sectorService;
-
     @Autowired
     private VagonLaboratoryService vagonLaboratoryService;
-
     @Autowired
     private PonabRemarkService ponabRemarkService;
-
     @Autowired
     private AlsRemarkService alsRemarkService;
 
     private List<String> errorList = new ArrayList<>();
+
     private boolean cleaningValue = false;
     private boolean resetCleaningValue = false;
-
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
         public String toString(Stage object) {
@@ -136,6 +142,18 @@ public class StatisticsController implements Initializable {
         }
     };
 
+    public int getTableViewSelectedIndex() {
+        return tableViewSelectedIndex.get();
+    }
+
+    public void setTableViewSelectedIndex(int tableViewSelectedIndex) {
+        this.tableViewSelectedIndex.set(tableViewSelectedIndex);
+    }
+
+    public IntegerProperty tableViewSelectedIndexProperty() {
+        return tableViewSelectedIndex;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initColumnsForTableView();
@@ -148,6 +166,52 @@ public class StatisticsController implements Initializable {
         vagonLaboratoryComboBox.setItems(FXCollections.observableArrayList(vagonLaboratoryService.listAll()));
         sectorComboBox.setItems(FXCollections.observableArrayList(sectorService.listAll()));
         yearsComboBox.setItems(FXCollections.observableArrayList(Interval.fromTo(2013, 2045)));
+
+        statisticsTableView.setEditable(true);
+        statisticsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        statisticsTableView.setContextMenu(contextMenu);
+        statisticsTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (statisticsTableView.getSelectionModel().getSelectedItem() != null
+                        && mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                    contextMenu.show(statisticsTableView, mouseEvent.getScreenX(), mouseEvent.getScreenY());
+                    setTableViewSelectedIndex(statisticsTableView.getSelectionModel().getSelectedIndex());
+                    selectectedEntityId = Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId());
+                }
+            }
+        });
+
+        /**
+         * Popup menu definitions
+         */
+        MenuItem view = new MenuItem("Просмотр");
+        MenuItem edit = new MenuItem("Редактировать");
+        MenuItem safetySpace = new MenuItem("");
+        MenuItem delete = new MenuItem("Удалить");
+        contextMenu.getItems().addAll(view, edit, safetySpace, delete);
+
+        edit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ModalUtil.createRemarkModal();
+            }
+        });
+
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                    alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+                    statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
+                    statisticsTableView.getSelectionModel().clearSelection();
+                } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                    ponabRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+                    statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
+                    statisticsTableView.getSelectionModel().clearSelection();
+                }
+            }
+        });
     }
 
     @FXML
@@ -173,11 +237,11 @@ public class StatisticsController implements Initializable {
             }
         }
         if (statisticsFilter.getDeviceType() == 0) {
-            statisticsTableData.removeAll(statisticsTableData);
+            statisticsTableData.clear();
             statisticsTableData.setAll(TableDtoConverter.convertAlsRemarkListToDto(alsRemarkService.getRemarkListByFilter(statisticsFilter)));
             statisticsTableViewPagination.setPageFactory(this::createPage);
         } else if (statisticsFilter.getDeviceType() == 1) {
-            statisticsTableData.removeAll(statisticsTableData);
+            statisticsTableData.clear();
             statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
             statisticsTableViewPagination.setPageFactory(this::createPage);
         }

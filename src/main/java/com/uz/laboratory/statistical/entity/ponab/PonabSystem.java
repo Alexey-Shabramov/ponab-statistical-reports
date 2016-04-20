@@ -11,7 +11,7 @@ import javax.persistence.*;
 @DynamicUpdate(value = true)
 @AttributeOverride(name = "id", column = @Column(name = "id"))
 public class PonabSystem extends Identifier {
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stage")
     private Stage stage;
 
