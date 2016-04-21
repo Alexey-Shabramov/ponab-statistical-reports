@@ -1,7 +1,9 @@
 package com.uz.laboratory.statistical.util.fx;
 
 import com.uz.laboratory.statistical.dict.Constants;
+import com.uz.laboratory.statistical.dto.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 
@@ -36,6 +38,23 @@ public class TableDtoConverter {
                     remark.getCreationDate().toString(),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
+        }
+        return data;
+    }
+
+    public static List<PonabDevicesTableDto> convertPonabDeviceListToDto(List<PonabSystem> ponabSystemList) {
+        List<PonabDevicesTableDto> data = new ArrayList<>();
+        for (PonabSystem system : ponabSystemList) {
+            data.add(new PonabDevicesTableDto(
+                            system.getId(),
+                            system.getSector().getTitle(),
+                            system.getStage().getName(),
+                            system.getTitle(),
+                            system.getOption(),
+                            system.isSpeachInformer() ? Constants.SPEACH_INFORMATOR_TRUE : Constants.SPEACH_INFORMATOR_FALSE,
+                            system.isEvenDirectionOfMovement() ? Constants.EVEN : Constants.UNEVEN
+                    )
+            );
         }
         return data;
     }

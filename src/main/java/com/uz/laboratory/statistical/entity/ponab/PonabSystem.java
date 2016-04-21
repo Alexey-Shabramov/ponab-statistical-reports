@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.entity.ponab;
 
 import com.uz.laboratory.statistical.entity.Identifier;
+import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -11,6 +12,10 @@ import javax.persistence.*;
 @DynamicUpdate(value = true)
 @AttributeOverride(name = "id", column = @Column(name = "id"))
 public class PonabSystem extends Identifier {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sector")
+    private Sector sector;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stage")
     private Stage stage;
@@ -23,6 +28,36 @@ public class PonabSystem extends Identifier {
 
     @Column(name = "location")
     private String location;
+
+    @Column(name = "speach_informer")
+    private boolean speachInformer;
+
+    @Column(name = "even_direction")
+    private boolean evenDirectionOfMovement;
+
+    public boolean isEvenDirectionOfMovement() {
+        return evenDirectionOfMovement;
+    }
+
+    public void setEvenDirectionOfMovement(boolean evenDirectionOfMovement) {
+        this.evenDirectionOfMovement = evenDirectionOfMovement;
+    }
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
+
+    public boolean isSpeachInformer() {
+        return speachInformer;
+    }
+
+    public void setSpeachInformer(boolean speachInformer) {
+        this.speachInformer = speachInformer;
+    }
 
     public String getLocation() {
         return location;

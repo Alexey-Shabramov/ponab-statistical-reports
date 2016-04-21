@@ -40,7 +40,7 @@ public class AlsRemarkDaoImpl extends GenericDaoImpl<AlsRemark> implements AlsRe
             criteria.add(Restrictions.eq("vagon.id", statisticsFilter.getVagonLaboratory().getId()));
         }
         if (StringUtils.isNotBlank(statisticsFilter.getDate())) {
-            criteria.add(Restrictions.like("inspection.beginDate", "%" + statisticsFilter.getDate() + "%"));
+            criteria.add(Restrictions.sqlRestriction("{remark}.creationDate like '" + statisticsFilter.getDate() + "%'"));
         }
         return criteria.list();
     }

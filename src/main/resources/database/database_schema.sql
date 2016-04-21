@@ -46,12 +46,16 @@ CREATE TABLE IF NOT EXISTS `sector` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE IF NOT EXISTS `ponab_system` (
-  `id`       BIGINT(21)   NOT NULL AUTO_INCREMENT,
-  `id_stage` BIGINT(21)   NOT NULL,
-  `location` VARCHAR(200) NOT NULL,
-  `title`    VARCHAR(200) NOT NULL,
-  `option`   VARCHAR(200) NOT NULL,
+  `id`              BIGINT(21)   NOT NULL AUTO_INCREMENT,
+  `id_sector`       BIGINT(21)   NOT NULL,
+  `id_stage`        BIGINT(21)   NOT NULL,
+  `location`        VARCHAR(200) NOT NULL,
+  `title`           VARCHAR(200) NOT NULL,
+  `speach_informer` TINYINT(1)   NOT NULL,
+  `even_direction`  TINYINT(1)   NOT NULL,
+  `option`          VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_sector`) REFERENCES `sector` (`id`),
   FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`)
 )
   ENGINE = InnoDB

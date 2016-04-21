@@ -5,6 +5,7 @@ import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
+import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
@@ -13,6 +14,7 @@ import com.uz.laboratory.statistical.service.location.CommunicationDistanceServi
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl;
+import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
@@ -52,6 +54,9 @@ public class TestController implements Initializable {
 
     @Autowired
     private AlsRemarkService alsRemarkService;
+
+    @Autowired
+    private PonabSystemService ponabSystemService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,5 +121,15 @@ public class TestController implements Initializable {
         alsRemark.setCreationDate(new Date());
         alsRemark.setRepeatable(false);
         alsRemarkService.save(alsRemark);
+
+        PonabSystem ponabSystem = new PonabSystem();
+        ponabSystem.setOption("160");
+        ponabSystem.setSector(sector);
+        ponabSystem.setStage(stage);
+        ponabSystem.setEvenDirectionOfMovement(true);
+        ponabSystem.setLocation("51км + 200м");
+        ponabSystem.setSpeachInformer(true);
+        ponabSystem.setTitle("АСДК-Б");
+        ponabSystemService.save(ponabSystem);
     }
 }

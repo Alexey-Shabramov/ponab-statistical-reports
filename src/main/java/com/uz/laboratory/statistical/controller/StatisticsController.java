@@ -84,6 +84,7 @@ public class StatisticsController implements Initializable {
     public ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     @FXML
     public Pagination statisticsTableViewPagination;
+
     @FXML
     public Button search;
     @FXML
@@ -92,9 +93,11 @@ public class StatisticsController implements Initializable {
     public Button printAllTableViewDataFromExcel;
     @FXML
     public Button cleanDateComboBoxes;
+
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
     private AbstractRemark abstractRemark;
+
     @Autowired
     private SectorService sectorService;
     @Autowired
@@ -142,10 +145,6 @@ public class StatisticsController implements Initializable {
         }
     };
 
-    public int getTableViewSelectedIndex() {
-        return tableViewSelectedIndex.get();
-    }
-
     public void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
     }
@@ -185,10 +184,10 @@ public class StatisticsController implements Initializable {
         /**
          * Popup menu definitions
          */
-        MenuItem view = new MenuItem("Просмотр");
-        MenuItem edit = new MenuItem("Редактировать");
+        MenuItem view = new MenuItem(Constants.VIEW_INFO);
+        MenuItem edit = new MenuItem(Constants.EDIT_INFO);
         MenuItem safetySpace = new MenuItem("");
-        MenuItem delete = new MenuItem("Удалить");
+        MenuItem delete = new MenuItem(Constants.DELETE_INFO);
         contextMenu.getItems().addAll(view, edit, safetySpace, delete);
 
         edit.setOnAction(new EventHandler<ActionEvent>() {

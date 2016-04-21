@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class AlsDeviceController implements Initializable {
+public class AlsDevicecController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

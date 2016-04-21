@@ -60,4 +60,14 @@ public class Constants {
 
     public static final String REMARK_REPEATABLE_TRUE = "+";
     public static final String REMARK_REPEATABLE_FALSE = "-";
+    public static final String SPEACH_INFORMATOR_TRUE = "+";
+
+    public static final String SPEACH_INFORMATOR_FALSE = "-";
+
+    /**
+     * Popup menu liks data
+     */
+    public static final String VIEW_INFO = "Просмотр";
+    public static final String EDIT_INFO = "Редактировать";
+    public static final String DELETE_INFO = "Удалить";
 }
