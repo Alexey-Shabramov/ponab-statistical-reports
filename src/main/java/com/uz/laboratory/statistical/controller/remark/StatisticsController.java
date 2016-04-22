@@ -1,13 +1,13 @@
-package com.uz.laboratory.statistical.controller;
+package com.uz.laboratory.statistical.controller.remark;
 
 
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.Systems;
+import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
-import com.uz.laboratory.statistical.entity.remark.AbstractRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.StatisticsFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
@@ -65,6 +65,7 @@ public class StatisticsController implements Initializable {
     public ComboBox<String> monthComboBox;
     @FXML
     public ComboBox<Integer> yearsComboBox;
+
     @FXML
     public TableView<StatisticsRemarkTableDto> statisticsTableView;
     @FXML
@@ -81,10 +82,8 @@ public class StatisticsController implements Initializable {
     public TableColumn<StatisticsRemarkTableDto, String> repeatColumn;
     @FXML
     public TableColumn<StatisticsRemarkTableDto, String> remarkIdColumn;
-    public ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     @FXML
     public Pagination statisticsTableViewPagination;
-
     @FXML
     public Button search;
     @FXML
@@ -93,10 +92,13 @@ public class StatisticsController implements Initializable {
     public Button printAllTableViewDataFromExcel;
     @FXML
     public Button cleanDateComboBoxes;
-
+    @FXML
+    public Button deleteConfirmButton;
+    @FXML
+    public Button resetDeletionButton;
+    private ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
-    private AbstractRemark abstractRemark;
 
     @Autowired
     private SectorService sectorService;
@@ -106,6 +108,10 @@ public class StatisticsController implements Initializable {
     private PonabRemarkService ponabRemarkService;
     @Autowired
     private AlsRemarkService alsRemarkService;
+    @Autowired
+    private DeleteEntityDto deleteEntityDto;
+    @Autowired
+    private ModalUtil modalUtil;
 
     private List<String> errorList = new ArrayList<>();
 
@@ -145,18 +151,17 @@ public class StatisticsController implements Initializable {
         }
     };
 
-    public void setTableViewSelectedIndex(int tableViewSelectedIndex) {
-        this.tableViewSelectedIndex.set(tableViewSelectedIndex);
+    public StatisticsController() {
     }
 
-    public IntegerProperty tableViewSelectedIndexProperty() {
-        return tableViewSelectedIndex;
+    public void setTableViewSelectedIndex(int tableViewSelectedIndex) {
+        this.tableViewSelectedIndex.set(tableViewSelectedIndex);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initColumnsForTableView();
-        statisticsTableViewPagination.setPageFactory(this::initializePage);
+        statisticsTableViewPagination.setPageFactory(this::createPage);
         stageComboBox.setConverter(stageConverter);
         sectorComboBox.setConverter(sectorConverter);
         vagonLaboratoryComboBox.setConverter(vagonLaboratoryConverter);
@@ -178,7 +183,7 @@ public class StatisticsController implements Initializable {
                     setTableViewSelectedIndex(statisticsTableView.getSelectionModel().getSelectedIndex());
                     selectectedEntityId = Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId());
                 }
-            }
+                }
         });
 
         /**
@@ -189,25 +194,26 @@ public class StatisticsController implements Initializable {
         MenuItem safetySpace = new MenuItem("");
         MenuItem delete = new MenuItem(Constants.DELETE_INFO);
         contextMenu.getItems().addAll(view, edit, safetySpace, delete);
-
+        StatisticsController statisticsController = this;
+        view.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                modalUtil.createViewRemarkModal();
+                }
+        });
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ModalUtil.createRemarkModal();
+                modalUtil.createEditRemarkModal();
             }
         });
-
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                    alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
-                    statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
-                    statisticsTableView.getSelectionModel().clearSelection();
-                } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                    ponabRemarkService.delete(alsRemarkService.get(selectectedEntityId));
-                    statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
-                    statisticsTableView.getSelectionModel().clearSelection();
+                modalUtil.createRemarkDeletionConfirmModal();
+                if (deleteEntityDto.getDeleteValidationValue()) {
+                    deleteConfirm();
+                    deleteEntityDto.setDeleteValidationValue(false);
                 }
             }
         });
@@ -243,6 +249,11 @@ public class StatisticsController implements Initializable {
             statisticsTableData.clear();
             statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
             statisticsTableViewPagination.setPageFactory(this::createPage);
+        }
+        if (statisticsTableData.size() <= 9) {
+            statisticsTableViewPagination.setPageCount(1);
+        } else {
+            statisticsTableViewPagination.setPageCount((int) Math.ceil((double) statisticsTableData.size() / rowsPerPage));
         }
     }
 
@@ -323,6 +334,24 @@ public class StatisticsController implements Initializable {
         resetCleaningValue = false;
     }
 
+    public void resetDeletionButtonListener() {
+
+    }
+
+    public void deleteConfirm() {
+        if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+            alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+            statisticsTableData.remove(tableViewSelectedIndex.get());
+            statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
+            statisticsTableView.getSelectionModel().clearSelection();
+        } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+            ponabRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+            statisticsTableData.remove(tableViewSelectedIndex.get());
+            statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
+            statisticsTableView.getSelectionModel().clearSelection();
+        }
+    }
+
     private void initColumnsForTableView() {
         objectColumn.setCellValueFactory(param -> param.getValue().objectColumnProperty());
         noteColumn.setCellValueFactory(param -> param.getValue().noteColumnProperty());
@@ -340,8 +369,14 @@ public class StatisticsController implements Initializable {
     private Node createPage(int pageIndex) {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, statisticsTableData.size());
+        System.out.println("From index = " + fromIndex);
+        System.out.println("To index = " + toIndex);
         statisticsTableView.setItems(FXCollections.observableArrayList(statisticsTableData.subList(fromIndex, toIndex)));
         return new BorderPane(statisticsTableView);
+    }
+
+    private void updateTable() {
+        statisticsTableViewPagination.setPageFactory(this::createPage);
     }
 
     private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {

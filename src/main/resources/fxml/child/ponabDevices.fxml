@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
       xmlns="http://javafx.com/javafx/8"
-      fx:controller="com.uz.laboratory.statistical.controller.PonabDevicesController">
+      fx:controller="com.uz.laboratory.statistical.controller.ponab.PonabDevicesController">
     <Pagination fx:id="ponabDevicesTablePagination" layoutX="2.0" layoutY="188.0" prefHeight="301.0" prefWidth="912.0">
         <fx:define>
             <TableView fx:id="ponabDevicesTableView" layoutX="2.0" layoutY="188.0" prefHeight="301.0" prefWidth="912.0">

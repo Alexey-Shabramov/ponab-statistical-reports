@@ -122,6 +122,33 @@ public class TestController implements Initializable {
         alsRemark.setRepeatable(false);
         alsRemarkService.save(alsRemark);
 
+        AlsRemark baba = new AlsRemark();
+        baba.setEven(true);
+        baba.setNote("Штата там не работает!");
+        baba.setTrack_circuit_name(trackCircuit);
+        baba.setInspectionTrip(inspectionTrip);
+        baba.setCreationDate(new Date());
+        baba.setRepeatable(false);
+        alsRemarkService.save(baba);
+
+        AlsRemark dozer = new AlsRemark();
+        dozer.setEven(true);
+        dozer.setNote("Штата там не работает!");
+        dozer.setTrack_circuit_name(trackCircuit);
+        dozer.setInspectionTrip(inspectionTrip);
+        dozer.setCreationDate(new Date());
+        dozer.setRepeatable(false);
+        alsRemarkService.save(dozer);
+
+        AlsRemark gopneg = new AlsRemark();
+        gopneg.setEven(true);
+        gopneg.setNote("Штата там не работает!");
+        gopneg.setTrack_circuit_name(trackCircuit);
+        gopneg.setInspectionTrip(inspectionTrip);
+        gopneg.setCreationDate(new Date());
+        gopneg.setRepeatable(false);
+        alsRemarkService.save(gopneg);
+
         PonabSystem ponabSystem = new PonabSystem();
         ponabSystem.setOption("160");
         ponabSystem.setSector(sector);

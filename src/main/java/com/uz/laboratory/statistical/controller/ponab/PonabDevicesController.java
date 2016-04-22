@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.controller;
+package com.uz.laboratory.statistical.controller.ponab;
 
 
 import com.uz.laboratory.statistical.dict.*;
@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -36,6 +37,7 @@ import java.util.ResourceBundle;
 @Controller
 public class PonabDevicesController implements Initializable {
     private final static int rowsPerPage = 9;
+    private static FXMLLoader fxmlLoader = new FXMLLoader();
     final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public TableView<PonabDevicesTableDto> ponabDevicesTableView;
@@ -144,10 +146,11 @@ public class PonabDevicesController implements Initializable {
         MenuItem safetySpace = new MenuItem("");
         MenuItem delete = new MenuItem(Constants.DELETE_INFO);
         contextMenu.getItems().addAll(view, edit, safetySpace, delete);
+
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ModalUtil.createPonabDeviceModal();
+                ModalUtil.createPonabDeviceEditModal(fxmlLoader);
             }
         });
 
@@ -155,6 +158,7 @@ public class PonabDevicesController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
+                ponabDevicesTableData.remove(tableViewSelectedIndex.get());
                 ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
                 ponabDevicesTableView.getSelectionModel().clearSelection();
             }
@@ -228,5 +232,13 @@ public class PonabDevicesController implements Initializable {
         ponabSystemComboBox.setValue(null);
         optionComboBox.setValue(null);
         speachInformerComboBox.setValue(null);
+    }
+
+    @FXML
+    public void deleteConfirmButtonListener(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void resetDeletionButtonListener(ActionEvent actionEvent) {
     }
 }

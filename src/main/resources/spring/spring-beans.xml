@@ -5,6 +5,9 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
+    <!-- FXML's starting-loader bean -->
+    <beans:bean id="springFXMLLoader" class="com.uz.laboratory.statistical.service.SpringFXMLLoader"/>
+
     <!-- Dozer mapper for DTO's -->
     <beans:bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
         <property name="mappingFiles">
@@ -114,4 +117,7 @@
                 class="com.uz.laboratory.statistical.service.als.alsImpl.TrackCircuitServiceImpl">
         <beans:property name="dao" ref="trackCircuitDao"/>
     </beans:bean>
+
+    <beans:bean id="deleteEntityDto" class="com.uz.laboratory.statistical.dto.DeleteEntityDto"/>
+    <beans:bean id="modalUtil" class="com.uz.laboratory.statistical.util.fx.ModalUtil"/>
 </beans:beans>

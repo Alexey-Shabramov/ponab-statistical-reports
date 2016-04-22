@@ -13,10 +13,6 @@
 
     <context:annotation-config/>
 
-    <!-- FXML's starting-loader bean -->
-    <beans:bean id="springFXMLLoader" class="com.uz.laboratory.statistical.service.SpringFXMLLoader"/>
-
     <import resource="database.xml"/>
     <import resource="spring-beans.xml"/>
-
 </beans:beans>
