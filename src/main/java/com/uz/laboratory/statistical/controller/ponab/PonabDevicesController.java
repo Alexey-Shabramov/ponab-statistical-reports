@@ -41,7 +41,6 @@ public class PonabDevicesController implements Initializable {
     final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public TableView<PonabDevicesTableDto> ponabDevicesTableView;
-    public ObservableList<PonabDevicesTableDto> ponabDevicesTableData = FXCollections.observableArrayList();
     @FXML
     public Button allComboBoxesResetButton;
     @FXML
@@ -74,6 +73,7 @@ public class PonabDevicesController implements Initializable {
     public ComboBox<PonabOptions> optionComboBox;
     @FXML
     public ComboBox<SpeachInformer> speachInformerComboBox;
+    private ObservableList<PonabDevicesTableDto> ponabDevicesTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
     @Autowired
@@ -150,7 +150,7 @@ public class PonabDevicesController implements Initializable {
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ModalUtil.createPonabDeviceEditModal(fxmlLoader);
+                ModalUtil.createPonabDeviceEditModal();
             }
         });
 

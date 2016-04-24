@@ -2,6 +2,8 @@ package com.uz.laboratory.statistical.dao.ponab.ponabImpl;
 
 import com.uz.laboratory.statistical.dao.daoImpl.GenericDaoImpl;
 import com.uz.laboratory.statistical.dao.ponab.PonabSystemDao;
+import com.uz.laboratory.statistical.entity.location.Sector;
+import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
 import org.hibernate.Criteria;
@@ -42,5 +44,21 @@ public class PonabSystemDaoImpl extends GenericDaoImpl<PonabSystem> implements P
             criteria.add(Restrictions.eq("system.speachInformer", ponabDevicesFilter.getSpeachInformer()));
         }
         return criteria.list();
+    }
+
+    @Override
+    public List getPonabSystemsByStage(Stage stage) {
+        return getSession().createCriteria(getEntityClass(), "system")
+                .createAlias("system.stage", "stage")
+                .add(Restrictions.eq("stage.id", stage.getId()))
+                .list();
+    }
+
+    @Override
+    public List getPonabSystemsBySector(Sector sector) {
+        return getSession().createCriteria(getEntityClass(), "system")
+                .createAlias("system.sector", "sector")
+                .add(Restrictions.eq("sector.id", sector.getId()))
+                .list();
     }
 }

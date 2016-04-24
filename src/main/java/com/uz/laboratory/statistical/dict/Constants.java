@@ -6,11 +6,11 @@ public class Constants {
      * FXML path's
      */
     public static final String MAIN_FXML_PATH = "/fxml/mainAnchor.fxml";
-    public static final String REMARK_EDIT_MODAL = "/fxml/modal/edit/remarkEditModal.fxml";
-    public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/inspectionTripEditModal.fxml";
-    public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponabDeviceEditModal.fxml";
-    public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/alsDeviceEditModal.fxml";
-    public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/plannedTripEditModal.fxml";
+    public static final String PONAB_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/ponabRemarkEditModal.fxml";
+    public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/shedule/inspectionTripEditModal.fxml";
+    public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponab/ponabDeviceEditModal.fxml";
+    public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
+    public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/shedule/plannedTripEditModal.fxml";
 
     public static final String VALIDATE_ALS_DELETION_MODAL = "/fxml/modal/delete/validateAlsDeviceDeletion.fxml";
     public static final String VALIDATE_PONAB_DELETION_MODAL = "/fxml/modal/delete/validatePonabDeviceDeletion.fxml";
@@ -24,6 +24,8 @@ public class Constants {
      * Title names
      */
     public static final String MAIN_TITLE = "Статистическая отчетность по вагон-лаборатории ЮЖД";
+    public static final String REMARK_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
+    public static final String REMARK_DELETION_MODAL_TITLE = "Удаление замечания";
 
     /**
      * Vagon-laboratories names
@@ -79,4 +81,10 @@ public class Constants {
     public static final String VIEW_INFO = "Просмотр";
     public static final String EDIT_INFO = "Редактировать";
     public static final String DELETE_INFO = "Удалить";
+    public static final String EDIT_PONAB_REMARK_NULL_STAGE = "Вы не установили значение перегона для данного замечания.";
+    public static final String EDIT_PONAB_REMARK_NULL_SECTOR = "Вы не установили значение участка для данного замечания.";
+    public static final String EDIT_PONAB_REPEAT_NULL = "Не выбран тип замечания (повторный или нет).";
+    public static final String EDIT_PONAB_INSPECTION_NULL = "Не установлена проверочная поездка.";
+    public static final String EDIT_PONAB_REMARK_FORMATION_DATE_NULL = "Не установлена дата оформления замечания.";
+    public static final String EDIT_PONAB_SYSTEM_IS_NOT_SET = "Не выбрана система к данному замечанию.";
 }

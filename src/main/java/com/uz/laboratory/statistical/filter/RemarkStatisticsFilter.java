@@ -1,23 +1,35 @@
 package com.uz.laboratory.statistical.filter;
 
 
+import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 
-public class StatisticsFilter {
+import java.util.Date;
+
+public class RemarkStatisticsFilter {
     private Sector sector;
     private Stage stage;
     private int deviceType;
     private VagonLaboratory vagonLaboratory;
     private Boolean directionOfMovement;
-    private String date;
+    private Date date;
+    private CommunicationDistance communicationDistance;
 
-    public String getDate() {
+    public CommunicationDistance getCommunicationDistance() {
+        return communicationDistance;
+    }
+
+    public void setCommunicationDistance(CommunicationDistance communicationDistance) {
+        this.communicationDistance = communicationDistance;
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

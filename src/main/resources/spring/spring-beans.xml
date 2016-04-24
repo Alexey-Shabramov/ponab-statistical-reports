@@ -119,5 +119,8 @@
     </beans:bean>
 
     <beans:bean id="deleteEntityDto" class="com.uz.laboratory.statistical.dto.DeleteEntityDto"/>
+
+    <beans:bean id="ponabEditEntityDto" class="com.uz.laboratory.statistical.dto.PonabRemarkEditEntityDto"/>
+
     <beans:bean id="modalUtil" class="com.uz.laboratory.statistical.util.fx.ModalUtil"/>
 </beans:beans>

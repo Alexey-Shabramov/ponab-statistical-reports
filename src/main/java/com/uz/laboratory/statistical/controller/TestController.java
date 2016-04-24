@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
+import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
@@ -16,6 +17,7 @@ import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.locationImpl.StationServiceImpl;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
+import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import javafx.fxml.Initializable;
@@ -57,6 +59,9 @@ public class TestController implements Initializable {
 
     @Autowired
     private PonabSystemService ponabSystemService;
+
+    @Autowired
+    private PonabRemarkService ponabRemarkService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,33 +127,6 @@ public class TestController implements Initializable {
         alsRemark.setRepeatable(false);
         alsRemarkService.save(alsRemark);
 
-        AlsRemark baba = new AlsRemark();
-        baba.setEven(true);
-        baba.setNote("Штата там не работает!");
-        baba.setTrack_circuit_name(trackCircuit);
-        baba.setInspectionTrip(inspectionTrip);
-        baba.setCreationDate(new Date());
-        baba.setRepeatable(false);
-        alsRemarkService.save(baba);
-
-        AlsRemark dozer = new AlsRemark();
-        dozer.setEven(true);
-        dozer.setNote("Штата там не работает!");
-        dozer.setTrack_circuit_name(trackCircuit);
-        dozer.setInspectionTrip(inspectionTrip);
-        dozer.setCreationDate(new Date());
-        dozer.setRepeatable(false);
-        alsRemarkService.save(dozer);
-
-        AlsRemark gopneg = new AlsRemark();
-        gopneg.setEven(true);
-        gopneg.setNote("Штата там не работает!");
-        gopneg.setTrack_circuit_name(trackCircuit);
-        gopneg.setInspectionTrip(inspectionTrip);
-        gopneg.setCreationDate(new Date());
-        gopneg.setRepeatable(false);
-        alsRemarkService.save(gopneg);
-
         PonabSystem ponabSystem = new PonabSystem();
         ponabSystem.setOption("160");
         ponabSystem.setSector(sector);
@@ -158,5 +136,13 @@ public class TestController implements Initializable {
         ponabSystem.setSpeachInformer(true);
         ponabSystem.setTitle("АСДК-Б");
         ponabSystemService.save(ponabSystem);
+
+        PonabRemark ponabRemark = new PonabRemark();
+        ponabRemark.setInspectionTrip(inspectionTrip);
+        ponabRemark.setNote("Заниженный уровень с правой стороны.");
+        ponabRemark.setEven(false);
+        ponabRemark.setCreationDate(new Date());
+        ponabRemark.setPonabSystem(ponabSystem);
+        ponabRemarkService.save(ponabRemark);
     }
 }

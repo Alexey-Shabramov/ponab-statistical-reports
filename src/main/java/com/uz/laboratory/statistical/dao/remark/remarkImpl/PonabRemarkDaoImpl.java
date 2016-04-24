@@ -3,8 +3,7 @@ package com.uz.laboratory.statistical.dao.remark.remarkImpl;
 import com.uz.laboratory.statistical.dao.daoImpl.GenericDaoImpl;
 import com.uz.laboratory.statistical.dao.remark.PonabRemarkDao;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
-import com.uz.laboratory.statistical.filter.StatisticsFilter;
-import org.apache.commons.lang3.StringUtils;
+import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -18,29 +17,29 @@ public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements P
     }
 
     @Override
-    public List<PonabRemark> getRemarkListByFilter(StatisticsFilter statisticsFilter) {
+    public List<PonabRemark> getRemarkListByFilter(RemarkStatisticsFilter remarkStatisticsFilter) {
         Criteria criteria = getSession().createCriteria(getEntityClass(), "remark");
         criteria.createAlias("remark.inspectionTrip", "inspection")
                 .createAlias("inspection.vagonLaboratory", "vagon")
                 .createAlias("inspection.tripSector", "sector")
                 .createAlias("sector.stageList", "stage");
-        if (statisticsFilter.getSector() != null) {
-            criteria.add(Restrictions.eq("sector.id", statisticsFilter.getSector().getId()));
+        if (remarkStatisticsFilter.getSector() != null) {
+            criteria.add(Restrictions.eq("sector.id", remarkStatisticsFilter.getSector().getId()));
         }
-        if (statisticsFilter.getStage() != null) {
-            criteria.add(Restrictions.eq("stage.id", statisticsFilter.getStage().getId()));
+        if (remarkStatisticsFilter.getStage() != null) {
+            criteria.add(Restrictions.eq("stage.id", remarkStatisticsFilter.getStage().getId()));
         }
-        if (statisticsFilter.getVagonLaboratory() != null) {
-            criteria.add(Restrictions.eq("vagon.id", statisticsFilter.getVagonLaboratory().getId()));
+        if (remarkStatisticsFilter.getVagonLaboratory() != null) {
+            criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
-        if (statisticsFilter.getDirectionOfMovement() != null) {
-            criteria.add(Restrictions.eq("remark.even", statisticsFilter.getDirectionOfMovement()));
+        if (remarkStatisticsFilter.getDirectionOfMovement() != null) {
+            criteria.add(Restrictions.eq("remark.even", remarkStatisticsFilter.getDirectionOfMovement()));
         }
-        if (statisticsFilter.getVagonLaboratory() != null) {
-            criteria.add(Restrictions.eq("vagon.id", statisticsFilter.getVagonLaboratory().getId()));
+        if (remarkStatisticsFilter.getVagonLaboratory() != null) {
+            criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
-        if (StringUtils.isNotBlank(statisticsFilter.getDate())) {
-            criteria.add(Restrictions.like("inspection.beginDate", statisticsFilter.getDate() + "%"));
+        if (remarkStatisticsFilter.getDate() != null) {
+            criteria.add(Restrictions.like("inspection.beginDate", remarkStatisticsFilter.getDate() + "%"));
         }
         return criteria.list();
     }

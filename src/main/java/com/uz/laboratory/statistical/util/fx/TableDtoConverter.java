@@ -58,4 +58,15 @@ public class TableDtoConverter {
         }
         return data;
     }
+
+    public static StatisticsRemarkTableDto convertEditedPonabRemarkToTableDto(StatisticsRemarkTableDto statisticsRemarkTableDto, PonabRemark ponabRemark) {
+        statisticsRemarkTableDto.setRemarkId(ponabRemark.getId().toString());
+        statisticsRemarkTableDto.setObjectColumn(ponabRemark.getPonabSystem().getTitle());
+        statisticsRemarkTableDto.setNoteColumn(ponabRemark.getNote());
+        statisticsRemarkTableDto.setStageColumn(ponabRemark.getPonabSystem().getStage().getName());
+        statisticsRemarkTableDto.setDateColumn(ponabRemark.getCreationDate().toString());
+        statisticsRemarkTableDto.setVagonColumn(ponabRemark.getInspectionTrip().getVagonLaboratory().getName());
+        statisticsRemarkTableDto.setRepeatColumn(ponabRemark.isRepeatable() ? "+" : "-");
+        return statisticsRemarkTableDto;
+    }
 }

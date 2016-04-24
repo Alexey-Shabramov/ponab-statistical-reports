@@ -12,18 +12,19 @@ import org.springframework.stereotype.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 @Controller
-public class RemarkModalController implements Initializable {
+public class PonabRemarkDeletionController implements Initializable {
     @FXML
     public Button deleteConfirmButton;
     @FXML
     public Button resetDeletionButton;
+
     @Autowired
     private DeleteEntityDto deleteEntityDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     @FXML

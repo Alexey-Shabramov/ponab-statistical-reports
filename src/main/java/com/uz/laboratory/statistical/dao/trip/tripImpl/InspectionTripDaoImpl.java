@@ -2,8 +2,9 @@ package com.uz.laboratory.statistical.dao.trip.tripImpl;
 
 import com.uz.laboratory.statistical.dao.daoImpl.GenericDaoImpl;
 import com.uz.laboratory.statistical.dao.trip.InspectionTripDao;
+import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
-import com.uz.laboratory.statistical.filter.StatisticsFilter;
+import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -17,20 +18,28 @@ public class InspectionTripDaoImpl extends GenericDaoImpl<InspectionTrip> implem
     }
 
     @Override
-    public List<InspectionTrip> getInspectionTripByFilter(StatisticsFilter statisticsFilter) {
+    public List getInspectionTripByFilter(RemarkStatisticsFilter remarkStatisticsFilter) {
         Criteria criteria = getSession().createCriteria(getEntityClass(), "inspection");
-        if (statisticsFilter.getSector() != null) {
+        if (remarkStatisticsFilter.getSector() != null) {
             criteria.createAlias("inspection.sector", "sector")
-                    .add(Restrictions.eq("sector.id", statisticsFilter.getSector().getId()));
+                    .add(Restrictions.eq("sector.id", remarkStatisticsFilter.getSector().getId()));
         }
-        if (statisticsFilter.getStage() != null) {
+        if (remarkStatisticsFilter.getStage() != null) {
             criteria.createAlias("inspection.stage", "stage")
-                    .add(Restrictions.eq("stage.id", statisticsFilter.getStage().getId()));
+                    .add(Restrictions.eq("stage.id", remarkStatisticsFilter.getStage().getId()));
         }
-        if (statisticsFilter.getStage() != null) {
+        if (remarkStatisticsFilter.getStage() != null) {
             criteria.createAlias("inspection.vagonLaboratory", "vagonLaboratory")
-                    .add(Restrictions.eq("vagonLaboratory.id", statisticsFilter.getVagonLaboratory().getId()));
+                    .add(Restrictions.eq("vagonLaboratory.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
         return criteria.list();
+    }
+
+    @Override
+    public List getInspectionTripsBySector(Sector sector) {
+        return getSession().createCriteria(getEntityClass(), "trip")
+                .createAlias("trip.tripSector", "sector")
+                .add(Restrictions.eq("sector.id", sector.getId()))
+                .list();
     }
 }

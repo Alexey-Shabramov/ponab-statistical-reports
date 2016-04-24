@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="82.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.uz.laboratory.statistical.controller.remark.RemarkModalController">
+            fx:controller="com.uz.laboratory.statistical.controller.remark.PonabRemarkDeletionController">
     <Label layoutX="6.0" layoutY="7.0" text="Вы уверены в удалении этого элемента?">
         <font>
             <Font name="System Bold" size="14.0"/>

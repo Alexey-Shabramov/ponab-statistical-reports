@@ -20,10 +20,7 @@ public class ModalUtil {
     @Autowired
     private ApplicationContext context;
 
-    @Autowired
-    private SpringFXMLLoader springFXMLLoader;
-
-    public static void createInspectionEditModal(FXMLLoader fxmlLoader) {
+    public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
         inspectionModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -34,7 +31,7 @@ public class ModalUtil {
         inspectionModal.showAndWait();
     }
 
-    public static void createPlannedTripEditModal(FXMLLoader fxmlLoader) {
+    public static void createPlannedTripEditModal() {
         Stage plannedTripModal = new Stage();
         plannedTripModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -45,7 +42,7 @@ public class ModalUtil {
         plannedTripModal.showAndWait();
     }
 
-    public static void createPonabDeviceEditModal(FXMLLoader fxmlLoader) {
+    public static void createPonabDeviceEditModal() {
         Stage ponabDeviceModal = new Stage();
         ponabDeviceModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -56,7 +53,7 @@ public class ModalUtil {
         ponabDeviceModal.showAndWait();
     }
 
-    public static void createAlsDeviceEditModal(FXMLLoader fxmlLoader) {
+    public static void createAlsDeviceEditModal() {
         Stage alsDevicesModal = new Stage();
         alsDevicesModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -67,14 +64,15 @@ public class ModalUtil {
         alsDevicesModal.showAndWait();
     }
 
-    public void createEditRemarkModal() {
+    public void createPonabRemarkEditModal() {
         Stage remarkEditModal = new Stage();
         remarkEditModal.initModality(Modality.APPLICATION_MODAL);
         try {
-            remarkEditModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.REMARK_EDIT_MODAL)));
+            remarkEditModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.PONAB_REMARK_EDIT_MODAL)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        remarkEditModal.setTitle(Constants.REMARK_EDIT_MODAL_TITLE);
         remarkEditModal.showAndWait();
     }
 
@@ -97,6 +95,7 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        remarkDeletionConfirm.setTitle(Constants.REMARK_DELETION_MODAL_TITLE);
         remarkDeletionConfirm.showAndWait();
     }
 }
