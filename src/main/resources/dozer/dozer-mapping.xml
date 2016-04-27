@@ -3,5 +3,19 @@
           xmlns="http://dozer.sourceforge.net"
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <date-format>MM/dd/yyyy HH:mm</date-format>
+        <wildcard>true</wildcard>
+    </configuration>
 
+    <mapping map-id="ponabRemarkToDto">
+        <class-a>com.uz.laboratory.statistical.entity.remark.PonabRemark</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-b>
+    </mapping>
+
+    <mapping map-id="cleanRemarkDto">
+        <class-a>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-b>
+    </mapping>
 </mappings>

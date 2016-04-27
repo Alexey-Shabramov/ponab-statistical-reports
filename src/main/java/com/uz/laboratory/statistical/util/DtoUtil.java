@@ -36,4 +36,8 @@ public class DtoUtil {
             stringBuilder.setLength(0);
         }
     }
+
+    public static void cleanPonabRemarkDto() {
+
+    }
 }

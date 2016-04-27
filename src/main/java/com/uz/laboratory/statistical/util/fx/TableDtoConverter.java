@@ -1,8 +1,8 @@
 package com.uz.laboratory.statistical.util.fx;
 
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.PonabDevicesTableDto;
-import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
+import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;

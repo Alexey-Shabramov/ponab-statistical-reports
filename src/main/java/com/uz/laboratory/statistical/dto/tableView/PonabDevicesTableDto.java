@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.dto;
+package com.uz.laboratory.statistical.dto.tableView;
 
 import javafx.beans.property.SimpleStringProperty;
 

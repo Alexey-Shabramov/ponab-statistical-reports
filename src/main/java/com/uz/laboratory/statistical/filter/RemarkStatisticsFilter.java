@@ -11,7 +11,7 @@ import java.util.Date;
 public class RemarkStatisticsFilter {
     private Sector sector;
     private Stage stage;
-    private int deviceType;
+    private Integer deviceType;
     private VagonLaboratory vagonLaboratory;
     private Boolean directionOfMovement;
     private Date date;
@@ -49,11 +49,11 @@ public class RemarkStatisticsFilter {
         this.stage = stage;
     }
 
-    public int getDeviceType() {
+    public Integer getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(int deviceType) {
+    public void setDeviceType(Integer deviceType) {
         this.deviceType = deviceType;
     }
 

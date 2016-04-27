@@ -6,8 +6,9 @@ import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.RemarkRepeat;
 import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
+import com.uz.laboratory.statistical.dto.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.PonabRemarkEditEntityDto;
-import com.uz.laboratory.statistical.dto.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
@@ -18,6 +19,7 @@ import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
+import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
 import javafx.beans.property.IntegerProperty;
@@ -32,6 +34,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -94,6 +97,8 @@ public class RemarkStatisticsController implements Initializable {
     private Long selectectedEntityId;
 
     @Autowired
+    private DozerBeanMapper dozerBeanMapper;
+    @Autowired
     private SectorService sectorService;
     @Autowired
     private VagonLaboratoryService vagonLaboratoryService;
@@ -109,6 +114,8 @@ public class RemarkStatisticsController implements Initializable {
     private ModalUtil modalUtil;
     @Autowired
     private PonabRemarkEditEntityDto ponabRemarkEditEntityDto;
+    @Autowired
+    private PonabRemarkDto ponabRemarkDto;
 
     private List<String> errorList = new ArrayList<>();
 
@@ -181,6 +188,10 @@ public class RemarkStatisticsController implements Initializable {
         statisticsFilter.setStage(stageComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setDeviceType(deviceTypeComboBox.getSelectionModel().getSelectedIndex());
+        if (statisticsFilter.getDeviceType() == null
+                || statisticsFilter.getDeviceType() < 0) {
+            errorList.add(Constants.DEVICES_TYPE_IS_NOT_SET);
+        }
         if (datePicker.getValue() != null) {
             statisticsFilter.setDate(Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         }
@@ -192,17 +203,21 @@ public class RemarkStatisticsController implements Initializable {
             }
         }
 
-        statisticsTableData.clear();
-        if (statisticsFilter.getDeviceType() == 0) {
-            statisticsTableData.setAll(TableDtoConverter.convertAlsRemarkListToDto(alsRemarkService.getRemarkListByFilter(statisticsFilter)));
-        } else if (statisticsFilter.getDeviceType() == 1) {
-            statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
-        }
-        statisticsTableViewPagination.setPageFactory(this::createPage);
-        if (statisticsTableData.size() <= 9) {
-            statisticsTableViewPagination.setPageCount(1);
+        if (!errorList.isEmpty()) {
+            AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
-            statisticsTableViewPagination.setPageCount((int) Math.ceil((double) statisticsTableData.size() / rowsPerPage));
+            statisticsTableData.clear();
+            if (statisticsFilter.getDeviceType() == 0) {
+                statisticsTableData.setAll(TableDtoConverter.convertAlsRemarkListToDto(alsRemarkService.getRemarkListByFilter(statisticsFilter)));
+            } else if (statisticsFilter.getDeviceType() == 1) {
+                statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
+            }
+            statisticsTableViewPagination.setPageFactory(this::createPage);
+            if (statisticsTableData.size() <= 9) {
+                statisticsTableViewPagination.setPageCount(1);
+            } else {
+                statisticsTableViewPagination.setPageCount((int) Math.ceil((double) statisticsTableData.size() / rowsPerPage));
+            }
         }
     }
 
@@ -268,7 +283,14 @@ public class RemarkStatisticsController implements Initializable {
         MenuItem safetySpace = new MenuItem("");
         MenuItem delete = new MenuItem(Constants.DELETE_INFO);
         contextMenu.getItems().addAll(view, edit, safetySpace, delete);
-        view.setOnAction(event -> modalUtil.createViewRemarkModal());
+        view.setOnAction(event -> {
+            if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+
+            } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                dozerBeanMapper.map(ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto, Constants.PONAB_REMARK_TO_DTO);
+                modalUtil.createPonabRemarkViewModal();
+            }
+        });
         edit.setOnAction(event -> {
             if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
                 prepareAlsEditDtoEntity();

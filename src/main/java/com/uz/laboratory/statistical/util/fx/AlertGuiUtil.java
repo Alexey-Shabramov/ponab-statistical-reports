@@ -28,6 +28,5 @@ public class AlertGuiUtil {
         alert.setHeaderText(Constants.ERROR_HEADER);
         alert.setContentText(error);
         alert.showAndWait();
-        alert = null;
     }
 }

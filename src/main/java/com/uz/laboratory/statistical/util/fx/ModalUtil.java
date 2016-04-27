@@ -4,12 +4,17 @@ package com.uz.laboratory.statistical.util.fx;
 import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
+import com.uz.laboratory.statistical.dto.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -19,6 +24,10 @@ import java.io.IOException;
 public class ModalUtil {
     @Autowired
     private ApplicationContext context;
+    @Autowired
+    private DozerBeanMapper dozerBeanMapper;
+    @Autowired
+    private PonabRemarkDto ponabRemarkDto;
 
     public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
@@ -76,14 +85,25 @@ public class ModalUtil {
         remarkEditModal.showAndWait();
     }
 
-    public void createViewRemarkModal() {
+    public void createPonabRemarkViewModal() {
         Stage remarkViewModal = new Stage();
         remarkViewModal.initModality(Modality.APPLICATION_MODAL);
         try {
-            remarkViewModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.REMARK_VIEW_MODAL)));
+            remarkViewModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.PONAB_REMARK_VIEW_MODAL)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        remarkViewModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_REMARK_DTO);
+                    }
+                });
+            }
+        });
         remarkViewModal.showAndWait();
     }
 

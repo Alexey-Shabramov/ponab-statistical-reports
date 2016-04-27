@@ -2,7 +2,7 @@ package com.uz.laboratory.statistical.controller.ponab;
 
 
 import com.uz.laboratory.statistical.dict.*;
-import com.uz.laboratory.statistical.dto.PonabDevicesTableDto;
+import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
