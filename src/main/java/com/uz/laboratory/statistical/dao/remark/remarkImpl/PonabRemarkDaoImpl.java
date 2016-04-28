@@ -7,7 +7,9 @@ import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements PonabRemarkDao {
@@ -39,7 +41,9 @@ public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements P
             criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
         if (remarkStatisticsFilter.getDate() != null) {
-            criteria.add(Restrictions.like("inspection.beginDate", remarkStatisticsFilter.getDate() + "%"));
+            criteria.add(Restrictions.conjunction()
+                    .add(Restrictions.ge("inspection.beginDate", remarkStatisticsFilter.getDate()))
+                    .add(Restrictions.lt("inspection.beginDate", new Date(remarkStatisticsFilter.getDate().getTime() + TimeUnit.DAYS.toMillis(1)))));
         }
         return criteria.list();
     }

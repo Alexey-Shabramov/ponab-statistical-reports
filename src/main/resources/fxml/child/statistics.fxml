@@ -3,15 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="912.0"
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="549.0" prefWidth="912.0"
       xmlns="http://javafx.com/javafx/8"
       fx:controller="com.uz.laboratory.statistical.controller.remark.RemarkStatisticsController">
     <children>
-        <Pagination fx:id="statisticsTableViewPagination" layoutX="2.0" layoutY="188.0" prefHeight="275.0"
+        <Pagination fx:id="statisticsTableViewPagination" layoutX="1.0" layoutY="246.0" prefHeight="280.0"
                     prefWidth="912.0">
         <fx:define>
-            <TableView fx:id="statisticsTableView" layoutX="2.0" layoutY="188.0" prefHeight="301.0"
-                       prefWidth="912.0">
+            <TableView fx:id="statisticsTableView" layoutX="1.0" layoutY="246.0" prefHeight="301.0" prefWidth="912.0">
                 <placeholder>
                     <Label text="По результатам поиска ничего не найдено."/>
                 </placeholder>
@@ -50,8 +49,8 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="search" layoutX="584.0" layoutY="145.0" mnemonicParsing="false" onAction="#searchRemarksByFilter"
-                prefHeight="30.0" prefWidth="142.0" text="Поиск в базе" textAlignment="CENTER">
+        <Button fx:id="search" layoutX="363.0" layoutY="204.0" mnemonicParsing="false" onAction="#searchRemarksByFilter"
+                prefHeight="30.0" prefWidth="196.0" text="Поиск в базе замечаний" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
@@ -71,18 +70,18 @@
         </Label>
         <ComboBox fx:id="directionOfMovementComboBox" layoutX="32.0" layoutY="118.0" prefHeight="25.0"
                   prefWidth="118.0"/>
-        <Button fx:id="cleanTableView" layoutX="749.0" layoutY="144.0" mnemonicParsing="false"
-                onAction="#cleanTableViewData" prefHeight="30.0" prefWidth="150.0" text="Очистить выборку"
+        <Button fx:id="cleanTableView" layoutX="746.0" layoutY="91.0" mnemonicParsing="false"
+                onAction="#cleanChoiceComboBoxes" prefHeight="30.0" prefWidth="150.0" text="Очистить выборку"
                 textAlignment="CENTER">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Button>
-        <Button fx:id="printAllTableViewDataFromExcel" layoutX="586.0" layoutY="84.0" mnemonicParsing="false"
-                onAction="#printAllTableViewData" prefHeight="30.0" prefWidth="142.0" text="Быстрая печать"
+        <Button fx:id="printAllTableViewDataFromExcel" layoutX="574.0" layoutY="91.0" mnemonicParsing="false"
+                onAction="#printAllTableViewData" prefHeight="30.0" prefWidth="150.0" text="Быстрая печать"
                 textAlignment="CENTER">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Button>
         <Separator layoutY="68.0" prefHeight="0.0" prefWidth="912.0"/>
@@ -90,8 +89,8 @@
         <Separator layoutX="562.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="19.0"/>
         <Separator layoutX="726.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="19.0"/>
         <Separator layoutX="184.0" layoutY="69.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="6.0"/>
-        <Separator layoutX="552.0" layoutY="68.0" orientation="VERTICAL" prefHeight="127.0" prefWidth="6.0"/>
-        <Button fx:id="cleanDateComboBoxes" layoutX="243.0" layoutY="150.0" mnemonicParsing="false"
+        <Separator layoutX="552.0" layoutY="68.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="6.0"/>
+        <Button fx:id="cleanDateComboBoxes" layoutX="240.0" layoutY="150.0" mnemonicParsing="false"
                 onAction="#cleanDatePicker" prefHeight="30.0" prefWidth="90.0" text="Очистить" textAlignment="CENTER">
             <font>
                 <Font size="14.0"/>
@@ -106,13 +105,20 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="printAllTableViewDataFromExcel1" layoutX="749.0" layoutY="84.0" mnemonicParsing="false"
+        <Button fx:id="printAllTableViewDataFromExcel1" layoutX="574.0" layoutY="144.0" mnemonicParsing="false"
                 onAction="#printAllTableViewData" prefHeight="30.0" prefWidth="150.0" text="Сохранить в файл"
                 textAlignment="CENTER">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Button>
-        <Separator layoutX="553.0" layoutY="132.0" prefHeight="3.0" prefWidth="358.0"/>
+        <Separator layoutX="1.0" layoutY="188.0" prefHeight="3.0" prefWidth="912.0"/>
+        <Button fx:id="printAllTableViewDataFromExcel11" layoutX="746.0" layoutY="144.0" mnemonicParsing="false"
+                onAction="#printAllTableViewData" prefHeight="30.0" prefWidth="150.0" text="Очистить таблицу"
+                textAlignment="CENTER">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
     </children>
 </Pane>

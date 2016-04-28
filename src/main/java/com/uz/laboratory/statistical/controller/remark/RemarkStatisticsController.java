@@ -223,12 +223,9 @@ public class RemarkStatisticsController implements Initializable {
 
     @FXML
     public void currentSectorSelected(ActionEvent actionEvent) {
-        stageComboBox.setItems(FXCollections.observableArrayList(sectorComboBox.getSelectionModel().getSelectedItem().getStageList()));
-    }
-
-    @FXML
-    public void cleanTableViewData(ActionEvent actionEvent) {
-
+        if (sectorComboBox.getSelectionModel().getSelectedItem() != null) {
+            stageComboBox.setItems(FXCollections.observableArrayList(sectorComboBox.getSelectionModel().getSelectedItem().getStageList()));
+        }
     }
 
     @FXML
@@ -238,6 +235,7 @@ public class RemarkStatisticsController implements Initializable {
 
     @FXML
     public void cleanDatePicker(ActionEvent actionEvent) {
+        datePicker.setValue(null);
     }
 
     @FXML
@@ -250,6 +248,16 @@ public class RemarkStatisticsController implements Initializable {
         stageComboBox.setValue(null);
     }
 
+    @FXML
+    public void cleanChoiceComboBoxes(ActionEvent actionEvent) {
+        sectorComboBox.setValue(null);
+        stageComboBox.setValue(null);
+        vagonLaboratoryComboBox.setValue(null);
+        deviceTypeComboBox.setValue(null);
+        directionOfMovementComboBox.setValue(null);
+        communicationDistanceComboBox.setValue(null);
+        datePicker.setValue(null);
+    }
     private void initTableView() {
         statisticsTableView.setEditable(true);
         statisticsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -359,7 +367,6 @@ public class RemarkStatisticsController implements Initializable {
     }
 
     private void prepareAlsEditDtoEntity() {
-
     }
 
     private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {
