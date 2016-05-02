@@ -77,6 +77,8 @@ CREATE TABLE IF NOT EXISTS `track_circuit` (
   `id_stage`                  BIGINT(21)            DEFAULT NULL,
   `id_station`                BIGINT(21)            DEFAULT NULL,
   `id_communication_distance` BIGINT(21)            DEFAULT NULL,
+  `stational_circuit`         TINYINT(1)   NOT NULL,
+  `even`                      TINYINT(1)   NOT NULL,
   `picket`                    DOUBLE       NOT NULL,
   `name`                      VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),

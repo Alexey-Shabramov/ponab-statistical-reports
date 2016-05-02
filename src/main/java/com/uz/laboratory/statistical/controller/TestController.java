@@ -116,6 +116,8 @@ public class TestController implements Initializable {
         trackCircuit.setCommunicationDistance(communicationDistance);
         trackCircuit.setName("Сп.3");
         trackCircuit.setStage(stage);
+        trackCircuit.setEven(true);
+        trackCircuit.setStationalCircuit(false);
         trackCircuitService.save(trackCircuit);
 
         AlsRemark alsRemark = new AlsRemark();

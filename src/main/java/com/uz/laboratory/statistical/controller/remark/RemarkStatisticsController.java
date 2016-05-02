@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dict.RemarkRepeat;
 import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto;
@@ -122,6 +123,8 @@ public class RemarkStatisticsController implements Initializable {
     private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
+    @Autowired
+    private AlsRemarkDto alsRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
 
@@ -302,7 +305,8 @@ public class RemarkStatisticsController implements Initializable {
         contextMenu.getItems().addAll(view, edit, safetySpaceFirst, printTableView, saveTableView, safetySpaceSecond, delete);
         view.setOnAction(event -> {
             if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-
+                dozerBeanMapper.map(alsRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), alsRemarkDto, Constants.ALS_REMARK_TO_DTO);
+                modalUtil.createAlsRemarkViewModal();
             } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
                 dozerBeanMapper.map(ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto, Constants.PONAB_REMARK_TO_DTO);
                 modalUtil.createPonabRemarkViewModal();

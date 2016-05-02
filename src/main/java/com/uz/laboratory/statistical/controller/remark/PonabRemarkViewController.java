@@ -2,7 +2,6 @@ package com.uz.laboratory.statistical.controller.remark;
 
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
-import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,8 +22,6 @@ public class PonabRemarkViewController implements Initializable {
     @FXML
     public TreeView ponabRemarkTreeView;
 
-    @Autowired
-    private PonabRemarkService ponabRemarkService;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
     @Autowired
@@ -89,7 +86,7 @@ public class PonabRemarkViewController implements Initializable {
 
     @FXML
     public void closeButtonListener(ActionEvent actionEvent) {
-        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_REMARK_DTO);
+        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_PONAB_REMARK_DTO);
         ((javafx.stage.Stage) ponabRemarkViewCloseButton.getScene().getWindow()).close();
     }
 }

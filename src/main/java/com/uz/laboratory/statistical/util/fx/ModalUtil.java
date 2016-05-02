@@ -5,6 +5,7 @@ import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
@@ -30,6 +31,8 @@ public class ModalUtil {
     private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
+    @Autowired
+    private AlsRemarkDto alsRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
     @Autowired
@@ -105,7 +108,7 @@ public class ModalUtil {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_REMARK_DTO);
+                        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_PONAB_REMARK_DTO);
                     }
                 });
             }
@@ -174,5 +177,27 @@ public class ModalUtil {
         });
         remarkEditModal.setTitle(Constants.REMARK_ALS_EDIT_MODAL_TITLE);
         remarkEditModal.showAndWait();
+    }
+
+    public void createAlsRemarkViewModal() {
+        Stage remarkViewModal = new Stage();
+        remarkViewModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            remarkViewModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.ALS_REMARK_VIEW_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        remarkViewModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dozerBeanMapper.map(new AlsRemarkDto(), alsRemarkDto, Constants.CLEAN_ALS_REMARK_DTO);
+                    }
+                });
+            }
+        });
+        remarkViewModal.showAndWait();
     }
 }

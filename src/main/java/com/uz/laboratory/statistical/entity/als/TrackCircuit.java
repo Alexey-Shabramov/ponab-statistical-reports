@@ -22,6 +22,12 @@ public class TrackCircuit extends Identifier {
     @JoinColumn(name = "id_station")
     private Station station;
 
+    @Column(name = "stational_circuit")
+    private boolean stationalCircuit;
+
+    @Column(name = "even")
+    private boolean even;
+
     @Column(name = "picket")
     private Double picket;
 
@@ -31,6 +37,22 @@ public class TrackCircuit extends Identifier {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_communication_distance")
     private CommunicationDistance communicationDistance;
+
+    public boolean isStationalCircuit() {
+        return stationalCircuit;
+    }
+
+    public void setStationalCircuit(boolean stationalCircuit) {
+        this.stationalCircuit = stationalCircuit;
+    }
+
+    public boolean isEven() {
+        return even;
+    }
+
+    public void setEven(boolean even) {
+        this.even = even;
+    }
 
     public Double getPicket() {
         return picket;

@@ -5,7 +5,10 @@ public class Constants {
      * Dozer bean mapper mappings names
      */
     public static final String PONAB_REMARK_TO_DTO = "ponabRemarkToDto";
-    public static final String CLEAN_REMARK_DTO = "cleanRemarkDto";
+    public static final String ALS_REMARK_TO_DTO = "alsRemarkToDto";
+    public static final String CLEAN_PONAB_REMARK_DTO = "cleanPonabRemarkDto";
+    public static final String CLEAN_ALS_REMARK_DTO = "cleanAlsRemarkDto";
+
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
     /**
@@ -28,7 +31,9 @@ public class Constants {
 
     public static final String REMARK_TABLE_SAVE_MODAL = "/fxml/modal/save/saveRemarkTable.fxml";
 
-    public static final String PONAB_REMARK_VIEW_MODAL = "/fxml/modal/view/ponabRemarkViewModal.fxml";
+    public static final String PONAB_REMARK_VIEW_MODAL = "/fxml/modal/view/ponab/ponabRemarkViewModal.fxml";
+    public static final String ALS_REMARK_VIEW_MODAL = "/fxml/modal/view/als/alsRemarkViewModal.fxml";
+
 
     /**
      * FXML mainAnchor.fxml - Title names
@@ -99,19 +104,27 @@ public class Constants {
     public static final String REMARK_VIEW_SECTOR_TITLE = "Участок:";
     public static final String REMARK_VIEW_STAGE_TITLE = "Перегон:";
     public static final String REMARK_VIEW_NOTE_TITLE = "Описание замечания:";
+    public static final String REMARK_VIEW_REPEAT_TITLE = "Повторное:";
+    public static final String REMARK_VIEW_REPEAT_TRUE = "Да";
+    public static final String REMARK_VIEW_REPEAT_FALSE = "Нет";
+    public static final String REMARK_VIEW_SYSTEM_DIRECTION = "Направление движения:";
+    public static final String REMARK_VIEW_SYSTEM_DIRECTION_EVEN = "Четное";
+    public static final String REMARK_VIEW_SYSTEM_DIRECTION_UNEVEN = "Нечетное";
+
     public static final String REMARK_VIEW_SYSTEM_TITLE = "Система проверки букс:";
     public static final String REMARK_VIEW_SYSTEM_NAME = "Название системы";
     public static final String REMARK_VIEW_SYSTEM_OPTION = "Настройка";
     public static final String REMARK_VIEW_SYSTEM_INFORMER = "Речевой информатор";
     public static final String REMARK_VIEW_SYSTEM_INFORMER_TRUE = "Есть";
     public static final String REMARK_VIEW_SYSTEM_INFORMER_FALSE = "Нет";
-    public static final String REMARK_VIEW_SYSTEM_DIRECTION = "Направление движения:";
-    public static final String REMARK_VIEW_SYSTEM_DIRECTION_EVEN = "Четное";
-    public static final String REMARK_VIEW_SYSTEM_DIRECTION_UNEVEN = "Нечетное";
 
-    public static final String REMARK_VIEW_REPEAT_TITLE = "Повторное:";
-    public static final String REMARK_VIEW_REPEAT_TRUE = "Да";
-    public static final String REMARK_VIEW_REPEAT_FALSE = "Нет";
+    public static final String REMARK_VIEW_STAGE_OR_STATION_TITLE = "Перегон / Станция:";
+    public static final String REMARK_VIEW_TRACK_CIRCUIT_NAME = "Название рельсовой цепи";
+    public static final String REMARK_VIEW_ALS_TRACK_CIRCUIT_TITLE = "Рельсовая цепь:";
+    public static final String REMARK_TRACK_CIRCUIT_TYPE = "Тип рельсовой цепи";
+    public static final String STATIONAL_TRACK_CIRCUIT = "Станционная";
+    public static final String STAGE_TRACK_CIRCUIT = "Перегонная";
+
 
     /**
      * FXML - saveRemarkTable.fxml
@@ -123,4 +136,5 @@ public class Constants {
      * Apache POI - titles
      */
     public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
+
 }

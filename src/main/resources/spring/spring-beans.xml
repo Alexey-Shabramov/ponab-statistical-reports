@@ -122,6 +122,8 @@
 
     <beans:bean id="ponabRemarkDto" class="com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto"/>
 
+    <beans:bean id="alsRemarkDto" class="com.uz.laboratory.statistical.dto.als.AlsRemarkDto"/>
+
     <beans:bean id="ponabEditEntityDto" class="com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto"/>
 
     <beans:bean id="alsRemarkEditEntityDto" class="com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto"/>
