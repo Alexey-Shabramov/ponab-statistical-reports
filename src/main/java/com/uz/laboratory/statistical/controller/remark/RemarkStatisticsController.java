@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dict.RemarkRepeat;
 import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
@@ -117,6 +118,8 @@ public class RemarkStatisticsController implements Initializable {
     private ModalUtil modalUtil;
     @Autowired
     private PonabRemarkEditEntityDto ponabRemarkEditEntityDto;
+    @Autowired
+    private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
     @Autowired
@@ -308,16 +311,24 @@ public class RemarkStatisticsController implements Initializable {
         edit.setOnAction(event -> {
             if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
                 prepareAlsEditDtoEntity();
+                modalUtil.createAlsRemarkEditModal();
+                if (alsRemarkEditEntityDto.getAlsRemark() != null) {
+                    statisticsTableData.remove(alsRemarkEditEntityDto.getTableViewIndex());
+                    statisticsTableData.set(alsRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedAlsRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), alsRemarkEditEntityDto.getAlsRemark()));
+                    alsRemarkEditEntityDto.setAlsRemark(null);
+                    alsRemarkEditEntityDto.setTableViewIndex(null);
+                }
             } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
                 preparePonabEditDtoEntity();
+                modalUtil.createPonabRemarkEditModal();
+                if (ponabRemarkEditEntityDto.getPonabRemark() != null) {
+                    statisticsTableData.remove(ponabRemarkEditEntityDto.getTableViewIndex());
+                    statisticsTableData.set(ponabRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), ponabRemarkEditEntityDto.getPonabRemark()));
+                    ponabRemarkEditEntityDto.setPonabRemark(null);
+                    ponabRemarkEditEntityDto.setTableViewIndex(null);
+                }
             }
-            modalUtil.createPonabRemarkEditModal();
-            if (ponabRemarkEditEntityDto.getPonabRemark() != null) {
-                statisticsTableData.remove(ponabRemarkEditEntityDto.getTableViewIndex());
-                statisticsTableData.set(ponabRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), ponabRemarkEditEntityDto.getPonabRemark()));
-                ponabRemarkEditEntityDto.setPonabRemark(null);
-                ponabRemarkEditEntityDto.setTableViewIndex(null);
-            }
+
         });
         saveTableView.setOnAction(event -> {
             remarkTableListSaveDto.setStatisticsRemarkTableDtos(statisticsTableData);
@@ -377,6 +388,11 @@ public class RemarkStatisticsController implements Initializable {
     }
 
     private void prepareAlsEditDtoEntity() {
+        alsRemarkEditEntityDto.setTableViewIndex(statisticsTableView.getSelectionModel().getSelectedIndex());
+        alsRemarkEditEntityDto.setEditedEntityId(selectectedEntityId);
+        alsRemarkEditEntityDto.setSectorList(sectorComboBox.getItems());
+        alsRemarkEditEntityDto.setNote(statisticsTableView.getSelectionModel().getSelectedItem().getNoteColumn());
+        alsRemarkEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
     }
 
     private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {

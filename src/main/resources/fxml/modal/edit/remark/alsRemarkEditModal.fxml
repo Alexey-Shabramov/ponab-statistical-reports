@@ -5,73 +5,71 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="522.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.uz.laboratory.statistical.controller.remark.PonabRemarkEditModalController">
-    <children>
-        <ComboBox fx:id="sectorComboBox" layoutX="28.0" layoutY="45.0" onAction="#sectorOnChangeListener"
-                  prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="400.0" layoutY="49.0" text="Участок">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox fx:id="stageComboBox" layoutX="28.0" layoutY="91.0" onAction="#stageSelectionListener"
-                  prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="366.0" layoutY="94.0" text="Перегон / Станция">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox fx:id="alsSystemsComboBox" layoutX="28.0" layoutY="136.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="386.0" layoutY="139.0" text="Тип cистемы">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="137.0" layoutY="7.0" text="Изменение данных о замечании">
-            <font>
-                <Font name="System Bold" size="18.0"/>
-            </font>
-        </Label>
-        <Button layoutX="137.0" layoutY="472.0" mnemonicParsing="false" onAction="#saveRemarkButton" text="Сохранить">
-            <font>
-                <Font name="System Bold" size="14.0"/>
-            </font>
-        </Button>
-        <Button layoutX="303.0" layoutY="472.0" mnemonicParsing="false" onAction="#resetEditButton" text="Отмена">
-            <font>
-                <Font name="System Bold" size="14.0"/>
-            </font>
-        </Button>
-        <TextArea fx:id="noteTextArea" layoutX="28.0" layoutY="235.0" prefHeight="95.0" prefWidth="311.0"/>
-        <Label layoutX="391.0" layoutY="273.0" text="Замечание">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox fx:id="repeatComboBox" layoutX="28.0" layoutY="352.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="405.0" layoutY="355.0" text="Повтор">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox fx:id="inspectionComboBox" layoutX="28.0" layoutY="192.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="397.0" layoutY="195.0" text="Проверка">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Separator layoutY="78.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="124.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="172.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="226.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="338.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="391.0" prefHeight="5.0" prefWidth="539.0"/>
-        <Separator layoutY="450.0" prefHeight="5.0" prefWidth="539.0"/>
-        <DatePicker fx:id="alsRemarkDatePicker" layoutX="34.0" layoutY="410.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="375.0" layoutY="413.0" text="Дата оформления">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-    </children>
+            fx:controller="com.uz.laboratory.statistical.controller.remark.AlsRemarkEditModalController">
+    <ComboBox fx:id="sectorComboBox" layoutX="28.0" layoutY="45.0" onAction="#sectorOnChangeListener"
+              prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="400.0" layoutY="49.0" text="Участок">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <ComboBox fx:id="stageComboBox" layoutX="28.0" layoutY="91.0" onAction="#stageSelectionListener"
+              prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="366.0" layoutY="94.0" text="Перегон / Станция">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <ComboBox fx:id="alsSystemsComboBox" layoutX="28.0" layoutY="136.0" prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="386.0" layoutY="139.0" text="Тип cистемы">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <Label layoutX="137.0" layoutY="7.0" text="Изменение данных о замечании">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+    <Button layoutX="137.0" layoutY="472.0" mnemonicParsing="false" onAction="#saveRemarkButton" text="Сохранить">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+    </Button>
+    <Button layoutX="303.0" layoutY="472.0" mnemonicParsing="false" onAction="#resetEditButton" text="Отмена">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+    </Button>
+    <TextArea fx:id="noteTextArea" layoutX="28.0" layoutY="235.0" prefHeight="95.0" prefWidth="311.0"/>
+    <Label layoutX="391.0" layoutY="273.0" text="Замечание">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <ComboBox fx:id="repeatComboBox" layoutX="28.0" layoutY="352.0" prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="405.0" layoutY="355.0" text="Повтор">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <ComboBox fx:id="inspectionComboBox" layoutX="28.0" layoutY="192.0" prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="397.0" layoutY="195.0" text="Проверка">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <Separator layoutY="78.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="124.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="172.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="226.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="338.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="391.0" prefHeight="5.0" prefWidth="539.0"/>
+    <Separator layoutY="450.0" prefHeight="5.0" prefWidth="539.0"/>
+    <DatePicker fx:id="alsRemarkDatePicker" layoutX="34.0" layoutY="410.0" prefHeight="25.0" prefWidth="311.0"/>
+    <Label layoutX="375.0" layoutY="413.0" text="Дата оформления">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
 </AnchorPane>

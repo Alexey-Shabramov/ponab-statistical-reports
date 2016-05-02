@@ -71,4 +71,15 @@ public class TableDtoConverter {
         statisticsRemarkTableDto.setRepeatColumn(ponabRemark.isRepeatable() ? "+" : "-");
         return statisticsRemarkTableDto;
     }
+
+    public static StatisticsRemarkTableDto convertEditedAlsRemarkToTableDto(StatisticsRemarkTableDto statisticsRemarkTableDto, AlsRemark alsRemark) {
+        statisticsRemarkTableDto.setRemarkId(alsRemark.getId().toString());
+        statisticsRemarkTableDto.setObjectColumn(alsRemark.getTrackCircuit().getName());
+        statisticsRemarkTableDto.setNoteColumn(alsRemark.getNote());
+        statisticsRemarkTableDto.setStageColumn(alsRemark.getTrackCircuit().getStage().getName());
+        statisticsRemarkTableDto.setDateColumn(alsRemark.getCreationDate().toString());
+        statisticsRemarkTableDto.setVagonColumn(alsRemark.getInspectionTrip().getVagonLaboratory().getName());
+        statisticsRemarkTableDto.setRepeatColumn(alsRemark.isRepeatable() ? "+" : "-");
+        return statisticsRemarkTableDto;
+    }
 }

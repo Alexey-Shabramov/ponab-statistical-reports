@@ -5,6 +5,7 @@ import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import javafx.application.Platform;
@@ -31,6 +32,8 @@ public class ModalUtil {
     private PonabRemarkDto ponabRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
+    @Autowired
+    private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
 
     public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
@@ -84,7 +87,7 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkEditModal.setTitle(Constants.REMARK_EDIT_MODAL_TITLE);
+        remarkEditModal.setTitle(Constants.REMARK_PONAB_EDIT_MODAL_TITLE);
         remarkEditModal.showAndWait();
     }
 
@@ -143,5 +146,33 @@ public class ModalUtil {
         });
         remarkTableSave.setTitle(Constants.REMARK_TABLE_SAVE_MODAL_TITLE);
         remarkTableSave.showAndWait();
+    }
+
+    public void createAlsRemarkEditModal() {
+        Stage remarkEditModal = new Stage();
+        remarkEditModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            remarkEditModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.ALS_REMARK_EDIT_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        remarkEditModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        alsRemarkEditEntityDto.setAlsRemark(null);
+                        alsRemarkEditEntityDto.setTableViewIndex(null);
+                        alsRemarkEditEntityDto.setNote(null);
+                        alsRemarkEditEntityDto.setEditedEntityId(null);
+                        alsRemarkEditEntityDto.setRepeatList(null);
+                        alsRemarkEditEntityDto.setSectorList(null);
+                    }
+                });
+            }
+        });
+        remarkEditModal.setTitle(Constants.REMARK_ALS_EDIT_MODAL_TITLE);
+        remarkEditModal.showAndWait();
     }
 }

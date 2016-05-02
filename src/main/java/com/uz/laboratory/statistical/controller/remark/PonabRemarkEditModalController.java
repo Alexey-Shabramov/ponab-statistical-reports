@@ -160,22 +160,22 @@ public class PonabRemarkEditModalController implements Initializable {
     @FXML
     public void saveRemarkButton(ActionEvent actionEvent) {
         if (sectorComboBox.getSelectionModel().getSelectedItem() == null) {
-            errorList.add(Constants.EDIT_PONAB_REMARK_NULL_SECTOR);
+            errorList.add(Constants.EDIT_REMARK_NULL_SECTOR);
         }
         if (stageComboBox.getSelectionModel().getSelectedItem() == null) {
-            errorList.add(Constants.EDIT_PONAB_REMARK_NULL_STAGE);
+            errorList.add(Constants.EDIT_REMARK_NULL_STAGE);
         }
         if (repeatComboBox.getSelectionModel().getSelectedItem() == null) {
-            errorList.add(Constants.EDIT_PONAB_REPEAT_NULL);
+            errorList.add(Constants.EDIT_REPEAT_NULL);
         }
         if (ponabSystemsComboBox.getSelectionModel().getSelectedItem() == null) {
-            errorList.add(Constants.EDIT_PONAB_SYSTEM_IS_NOT_SET);
+            errorList.add(Constants.EDIT_SYSTEM_IS_NOT_SET);
         }
         if (inspectionComboBox.getSelectionModel().getSelectedItem() == null) {
-            errorList.add(Constants.EDIT_PONAB_INSPECTION_NULL);
+            errorList.add(Constants.EDIT_INSPECTION_NULL);
         }
         if (ponabRemarkDatePicker.getValue() == null) {
-            errorList.add(Constants.EDIT_PONAB_REMARK_FORMATION_DATE_NULL);
+            errorList.add(Constants.EDIT_REMARK_FORMATION_DATE_NULL);
         }
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);

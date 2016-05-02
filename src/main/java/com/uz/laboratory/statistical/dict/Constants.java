@@ -13,6 +13,8 @@ public class Constants {
      */
     public static final String MAIN_FXML_PATH = "/fxml/mainAnchor.fxml";
     public static final String PONAB_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/ponabRemarkEditModal.fxml";
+    public static final String ALS_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/alsRemarkEditModal.fxml";
+
     public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/shedule/inspectionTripEditModal.fxml";
     public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponab/ponabDeviceEditModal.fxml";
     public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
@@ -32,7 +34,9 @@ public class Constants {
      * FXML mainAnchor.fxml - Title names
      */
     public static final String MAIN_TITLE = "Статистическая отчетность по вагон-лаборатории ЮЖД";
-    public static final String REMARK_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
+    public static final String REMARK_PONAB_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
+    public static final String REMARK_ALS_EDIT_MODAL_TITLE = "Редактирование замечания АЛС";
+
     public static final String REMARK_DELETION_MODAL_TITLE = "Удаление замечания";
     public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";
     /**
@@ -78,13 +82,14 @@ public class Constants {
     /**
      * FXML - ponabDeviceEditModal.fxml alert messages
      */
-    public static final String EDIT_PONAB_REMARK_NULL_STAGE = "Вы не установили значение перегона для данного замечания.";
-    public static final String EDIT_PONAB_REMARK_NULL_SECTOR = "Вы не установили значение участка для данного замечания.";
-    public static final String EDIT_PONAB_REPEAT_NULL = "Не выбран тип замечания (повторный или нет).";
-    public static final String EDIT_PONAB_INSPECTION_NULL = "Не установлена проверочная поездка.";
-    public static final String EDIT_PONAB_REMARK_FORMATION_DATE_NULL = "Не установлена дата оформления замечания.";
-    public static final String EDIT_PONAB_SYSTEM_IS_NOT_SET = "Не выбрана система к данному замечанию.";
+    public static final String EDIT_REMARK_NULL_STAGE = "Вы не установили значение перегона для данного замечания.";
+    public static final String EDIT_REMARK_NULL_SECTOR = "Вы не установили значение участка для данного замечания.";
+    public static final String EDIT_REPEAT_NULL = "Не выбран тип замечания (повторный или нет).";
+    public static final String EDIT_INSPECTION_NULL = "Не установлена проверочная поездка.";
+    public static final String EDIT_REMARK_FORMATION_DATE_NULL = "Не установлена дата оформления замечания.";
+    public static final String EDIT_SYSTEM_IS_NOT_SET = "Не выбрана система к данному замечанию.";
     public static final String DEVICES_TYPE_IS_NOT_SET = "Тип устройств не выбран. (Для поиска - обязательно выбрать тип устройств).";
+
 
     /**
      * FXML - ponabRemarkViewModal.fxml GUI text

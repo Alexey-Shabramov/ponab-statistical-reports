@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.util;
 
 
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 
@@ -40,6 +41,18 @@ public class DtoUtil {
             stringBuilder.setLength(0);
         }
     }
+
+    public static String alsSystemConverterTitleBuilder(TrackCircuit trackCircuit) {
+        try {
+            return stringBuilder.append(trackCircuit.getName())
+                    .append(" - ")
+                    .append(trackCircuit.getPicket())
+                    .toString();
+        } finally {
+            stringBuilder.setLength(0);
+        }
+    }
+
 
     public static List<String> remarkDtoAsList(StatisticsRemarkTableDto statisticsRemarkTableDto) {
         List<String> remarkValuesList = new ArrayList<>();
