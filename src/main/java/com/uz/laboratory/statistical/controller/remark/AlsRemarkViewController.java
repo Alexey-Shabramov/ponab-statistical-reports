@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ResourceBundle;
 
 @Controller
@@ -32,7 +34,8 @@ public class AlsRemarkViewController implements Initializable {
         TreeItem<String> treeRootItem = new TreeItem<>(Constants.REMARK_VIEW_TREE_TITLE + alsRemarkDto.getId());
 
         TreeItem<String> dateRootItem = new TreeItem<>(Constants.REMARK_VIEW_DATE_TITLE);
-        TreeItem<String> dateItem = new TreeItem<>(alsRemarkDto.getCreationDate().toString());
+
+        TreeItem<String> dateItem = new TreeItem<>(alsRemarkDto.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(new DateTimeFormatterBuilder().appendPattern("dd.MM.yyyy").toFormatter()));
         dateRootItem.getChildren().addAll(dateItem);
 
         TreeItem<String> sectorRootItem = new TreeItem<>(Constants.REMARK_VIEW_SECTOR_TITLE);

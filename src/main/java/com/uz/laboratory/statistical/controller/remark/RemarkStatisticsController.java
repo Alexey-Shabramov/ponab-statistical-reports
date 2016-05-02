@@ -267,6 +267,7 @@ public class RemarkStatisticsController implements Initializable {
         directionOfMovementComboBox.setValue(null);
         communicationDistanceComboBox.setValue(null);
         datePicker.setValue(null);
+        repeatRemarkStatusComboBox.setValue(null);
     }
     private void initTableView() {
         statisticsTableView.setEditable(true);
@@ -307,45 +308,50 @@ public class RemarkStatisticsController implements Initializable {
 
         contextMenu.getItems().addAll(view, edit, safetySpaceFirst, printTableView, saveTableView, safetySpaceSecond, delete);
         view.setOnAction(event -> {
-            if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                dozerBeanMapper.map(alsRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), alsRemarkDto, Constants.ALS_REMARK_TO_DTO);
-                modalUtil.createAlsRemarkViewModal();
-            } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                dozerBeanMapper.map(ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto, Constants.PONAB_REMARK_TO_DTO);
-                modalUtil.createPonabRemarkViewModal();
+            if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
+                if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                    dozerBeanMapper.map(alsRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), alsRemarkDto, Constants.ALS_REMARK_TO_DTO);
+                    modalUtil.createAlsRemarkViewModal();
+                } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                    dozerBeanMapper.map(ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto, Constants.PONAB_REMARK_TO_DTO);
+                    modalUtil.createPonabRemarkViewModal();
+                }
             }
         });
         edit.setOnAction(event -> {
-            if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                prepareAlsEditDtoEntity();
-                modalUtil.createAlsRemarkEditModal();
-                if (alsRemarkEditEntityDto.getAlsRemark() != null) {
-                    statisticsTableData.remove(alsRemarkEditEntityDto.getTableViewIndex());
-                    statisticsTableData.set(alsRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedAlsRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), alsRemarkEditEntityDto.getAlsRemark()));
-                    alsRemarkEditEntityDto.setAlsRemark(null);
-                    alsRemarkEditEntityDto.setTableViewIndex(null);
-                }
-            } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                preparePonabEditDtoEntity();
-                modalUtil.createPonabRemarkEditModal();
-                if (ponabRemarkEditEntityDto.getPonabRemark() != null) {
-                    statisticsTableData.remove(ponabRemarkEditEntityDto.getTableViewIndex());
-                    statisticsTableData.set(ponabRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), ponabRemarkEditEntityDto.getPonabRemark()));
-                    ponabRemarkEditEntityDto.setPonabRemark(null);
-                    ponabRemarkEditEntityDto.setTableViewIndex(null);
+            if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
+                if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                    prepareAlsEditDtoEntity();
+                    modalUtil.createAlsRemarkEditModal();
+                    if (alsRemarkEditEntityDto.getAlsRemark() != null) {
+                        statisticsTableData.remove(alsRemarkEditEntityDto.getTableViewIndex());
+                        statisticsTableData.set(alsRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedAlsRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), alsRemarkEditEntityDto.getAlsRemark()));
+                        alsRemarkEditEntityDto.setAlsRemark(null);
+                        alsRemarkEditEntityDto.setTableViewIndex(null);
+                    }
+                } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                    preparePonabEditDtoEntity();
+                    modalUtil.createPonabRemarkEditModal();
+                    if (ponabRemarkEditEntityDto.getPonabRemark() != null) {
+                        statisticsTableData.remove(ponabRemarkEditEntityDto.getTableViewIndex());
+                        statisticsTableData.set(ponabRemarkEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabRemarkToTableDto(statisticsTableView.getSelectionModel().getSelectedItem(), ponabRemarkEditEntityDto.getPonabRemark()));
+                        ponabRemarkEditEntityDto.setPonabRemark(null);
+                        ponabRemarkEditEntityDto.setTableViewIndex(null);
+                    }
                 }
             }
-
         });
         saveTableView.setOnAction(event -> {
             remarkTableListSaveDto.setStatisticsRemarkTableDtos(statisticsTableData);
             modalUtil.createRemarkTableSaveModal();
         });
         delete.setOnAction(event -> {
-            modalUtil.createRemarkDeletionConfirmModal();
-            if (deleteEntityDto.getDeleteValidationValue()) {
-                deleteConfirm();
-                deleteEntityDto.setDeleteValidationValue(false);
+            if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
+                modalUtil.createRemarkDeletionConfirmModal();
+                if (deleteEntityDto.getDeleteValidationValue()) {
+                    deleteConfirm();
+                    deleteEntityDto.setDeleteValidationValue(false);
+                }
             }
         });
     }

@@ -36,6 +36,8 @@ public class SaveRemarkTableController implements Initializable {
     public Button chooseDirectoryButton;
     @FXML
     public TextField saveTableFolderPathTextField;
+    @FXML
+    public TextField newTextFileTextfield;
 
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
@@ -56,11 +58,15 @@ public class SaveRemarkTableController implements Initializable {
         } else if (Files.notExists(Paths.get(saveTableFolderPathTextField.getText()))) {
             errorList.add(Constants.REMARK_TABLE_FOLDER_NOT_EXISTS);
         }
+        if (!StringUtils.isNotBlank(newTextFileTextfield.getText())) {
+            errorList.add(Constants.TEXTFIELD_IS_EMPTY);
+        }
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
             try {
-                ReportUtil.createRemarkReport(remarkTableListSaveDto.getStatisticsRemarkTableDtos(), saveTableFolderPathTextField.getText());
+                ReportUtil.createRemarkReport(remarkTableListSaveDto.getStatisticsRemarkTableDtos(), saveTableFolderPathTextField.getText(), newTextFileTextfield.getText());
+                ((Stage) saveRemarkTableButton.getScene().getWindow()).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,7 +75,6 @@ public class SaveRemarkTableController implements Initializable {
 
     @FXML
     public void cancelSavingsButtonListener(ActionEvent actionEvent) {
-        remarkTableListSaveDto.setStatisticsRemarkTableDtos(null);
         ((Stage) cancelSavingsButton.getScene().getWindow()).close();
     }
 

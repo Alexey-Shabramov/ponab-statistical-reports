@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class ReportUtil {
-    public static void createRemarkReport(List<StatisticsRemarkTableDto> remarkTableDtoList, String savePath) throws IOException {
-        XSSFWorkbook workbook = new XSSFWorkbook(ReportUtil.class.getResourceAsStream("/excel/test.xlsx"));
+    private static StringBuilder stringBuilder = new StringBuilder();
+
+    public static void createRemarkReport(List<StatisticsRemarkTableDto> remarkTableDtoList, String savePath, String fileName) throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook(ReportUtil.class.getResourceAsStream("/excel/remarkTableGost.xlsx"));
         XSSFSheet sheet = workbook.getSheet(Constants.REMARK_REPORT_SHEET_NAME);
         for (int rowNumber = 4, remarkIndex = 0;
              rowNumber < (remarkTableDtoList.size() + 5) && remarkIndex < remarkTableDtoList.size();
@@ -24,7 +26,13 @@ public class ReportUtil {
                 row.createCell(cellNumber).setCellValue(remarkValuesList.get(cellNumber));
             }
         }
-        FileOutputStream fileOut = new FileOutputStream(savePath + "/testing.xlsx");
+
+        FileOutputStream fileOut = new FileOutputStream(stringBuilder.append(savePath)
+                .append("/")
+                .append(fileName)
+                .append(".xlsx")
+                .toString());
+        stringBuilder.setLength(0);
         workbook.write(fileOut);
         fileOut.flush();
         fileOut.close();

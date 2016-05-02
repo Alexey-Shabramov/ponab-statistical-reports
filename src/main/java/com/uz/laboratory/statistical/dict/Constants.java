@@ -136,5 +136,5 @@ public class Constants {
      * Apache POI - titles
      */
     public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
-
+    public static final String TEXTFIELD_IS_EMPTY = "Название файла пустое. Повторите ввод.";
 }
