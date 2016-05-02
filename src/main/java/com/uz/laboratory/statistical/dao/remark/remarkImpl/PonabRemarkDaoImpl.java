@@ -24,12 +24,16 @@ public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements P
         criteria.createAlias("remark.inspectionTrip", "inspection")
                 .createAlias("inspection.vagonLaboratory", "vagon")
                 .createAlias("inspection.tripSector", "sector")
-                .createAlias("sector.stageList", "stage");
+                .createAlias("sector.stageList", "stage")
+                .createAlias("stage.distanceList", "distances");
         if (remarkStatisticsFilter.getSector() != null) {
             criteria.add(Restrictions.eq("sector.id", remarkStatisticsFilter.getSector().getId()));
         }
         if (remarkStatisticsFilter.getStage() != null) {
             criteria.add(Restrictions.eq("stage.id", remarkStatisticsFilter.getStage().getId()));
+        }
+        if (remarkStatisticsFilter.getCommunicationDistance() != null) {
+            criteria.add(Restrictions.eq("distances.id", remarkStatisticsFilter.getCommunicationDistance()));
         }
         if (remarkStatisticsFilter.getVagonLaboratory() != null) {
             criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));

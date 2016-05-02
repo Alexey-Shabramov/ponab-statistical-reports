@@ -63,7 +63,7 @@ public class RemarkStatisticsController implements Initializable {
     @FXML
     public ComboBox<DirectionsOfMovement> directionOfMovementComboBox;
     @FXML
-    public ComboBox communicationDistanceComboBox;
+    public ComboBox<CommunicationDistance> communicationDistanceComboBox;
     @FXML
     public DatePicker datePicker;
     @FXML
@@ -197,6 +197,7 @@ public class RemarkStatisticsController implements Initializable {
         RemarkStatisticsFilter statisticsFilter = new RemarkStatisticsFilter();
         statisticsFilter.setSector(sectorComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setStage(stageComboBox.getSelectionModel().getSelectedItem());
+        statisticsFilter.setCommunicationDistance(communicationDistanceComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
         statisticsFilter.setDeviceType(deviceTypeComboBox.getSelectionModel().getSelectedIndex());
         if (statisticsFilter.getDeviceType() == null
