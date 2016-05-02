@@ -244,6 +244,8 @@ public class RemarkStatisticsController implements Initializable {
 
     @FXML
     public void cleanTableViewButtonListener(ActionEvent actionEvent) {
+        statisticsTableData.clear();
+        statisticsTableView.getItems().clear();
     }
 
     @FXML
