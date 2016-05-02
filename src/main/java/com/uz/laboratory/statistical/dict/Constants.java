@@ -1,12 +1,12 @@
 package com.uz.laboratory.statistical.dict;
 
 public class Constants {
-
     /**
      * Dozer bean mapper mappings names
      */
     public static final String PONAB_REMARK_TO_DTO = "ponabRemarkToDto";
     public static final String CLEAN_REMARK_DTO = "cleanRemarkDto";
+    public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
     /**
      * FXML - all fxml path's
@@ -24,6 +24,8 @@ public class Constants {
     public static final String VALIDATE_PLANNED_TRIP_MODAL = "/fxml/modal/delete/validatePlannedTripDeletion.fxml";
     public static final String VALIDATE_REMARK_DELETION_MODAL = "/fxml/modal/delete/validateRemarkDeletion.fxml";
 
+    public static final String REMARK_TABLE_SAVE_MODAL = "/fxml/modal/save/saveRemarkTable.fxml";
+
     public static final String PONAB_REMARK_VIEW_MODAL = "/fxml/modal/view/ponabRemarkViewModal.fxml";
 
     /**
@@ -32,7 +34,7 @@ public class Constants {
     public static final String MAIN_TITLE = "Статистическая отчетность по вагон-лаборатории ЮЖД";
     public static final String REMARK_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
     public static final String REMARK_DELETION_MODAL_TITLE = "Удаление замечания";
-
+    public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";
     /**
      * Directions of movement (by partly)
      */
@@ -60,9 +62,12 @@ public class Constants {
     /**
      * Popup menu liks data
      */
-    public static final String VIEW_INFO = "Просмотр";
-    public static final String EDIT_INFO = "Редактировать";
-    public static final String DELETE_INFO = "Удалить";
+    public static final String POPUP_MENU_VIEW_INFO = "Просмотр";
+    public static final String POPUP_MENU_EDIT_INFO = "Редактировать";
+    public static final String POPUP_MENU_PRINT_TABLE_VIEW = "Распечатать таблицу";
+    public static final String POPUP_MENU_SAVE_TABLE_VIEW = "Сохранить таблицу";
+    public static final String SAFETY_SPACE = "";
+    public static final String POPUP_MENU_DELETE_INFO = "Удалить";
 
     /**
      * FXML - Alert basic messages
@@ -95,7 +100,6 @@ public class Constants {
     public static final String REMARK_VIEW_SYSTEM_INFORMER = "Речевой информатор";
     public static final String REMARK_VIEW_SYSTEM_INFORMER_TRUE = "Есть";
     public static final String REMARK_VIEW_SYSTEM_INFORMER_FALSE = "Нет";
-
     public static final String REMARK_VIEW_SYSTEM_DIRECTION = "Направление движения:";
     public static final String REMARK_VIEW_SYSTEM_DIRECTION_EVEN = "Четное";
     public static final String REMARK_VIEW_SYSTEM_DIRECTION_UNEVEN = "Нечетное";
@@ -103,4 +107,15 @@ public class Constants {
     public static final String REMARK_VIEW_REPEAT_TITLE = "Повторное:";
     public static final String REMARK_VIEW_REPEAT_TRUE = "Да";
     public static final String REMARK_VIEW_REPEAT_FALSE = "Нет";
+
+    /**
+     * FXML - saveRemarkTable.fxml
+     */
+    public static final String REMARK_TABLE_SAVE_EMPTY_PATH = "Путь к файлу - пуст.";
+    public static final String REMARK_TABLE_FOLDER_NOT_EXISTS = "Папки с текущим адресом не существует.";
+
+    /**
+     * Apache POI - titles
+     */
+    public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
 }

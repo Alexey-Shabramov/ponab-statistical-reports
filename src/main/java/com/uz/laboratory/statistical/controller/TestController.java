@@ -121,7 +121,7 @@ public class TestController implements Initializable {
         AlsRemark alsRemark = new AlsRemark();
         alsRemark.setEven(true);
         alsRemark.setNote("Штата там не работает!");
-        alsRemark.setTrack_circuit_name(trackCircuit);
+        alsRemark.setTrackCircuit(trackCircuit);
         alsRemark.setInspectionTrip(inspectionTrip);
         alsRemark.setCreationDate(new Date());
         alsRemark.setRepeatable(false);

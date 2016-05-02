@@ -1,8 +1,12 @@
 package com.uz.laboratory.statistical.util;
 
 
+import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DtoUtil {
     private static StringBuilder stringBuilder = new StringBuilder();
@@ -37,7 +41,16 @@ public class DtoUtil {
         }
     }
 
-    public static void cleanPonabRemarkDto() {
-
+    public static List<String> remarkDtoAsList(StatisticsRemarkTableDto statisticsRemarkTableDto) {
+        List<String> remarkValuesList = new ArrayList<>();
+        remarkValuesList.add(statisticsRemarkTableDto.getRemarkId());
+        remarkValuesList.add(statisticsRemarkTableDto.getVagonColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getDateColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getObjectColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getSectorColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getStageColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getRepeatColumn());
+        remarkValuesList.add(statisticsRemarkTableDto.getNoteColumn());
+        return remarkValuesList;
     }
 }

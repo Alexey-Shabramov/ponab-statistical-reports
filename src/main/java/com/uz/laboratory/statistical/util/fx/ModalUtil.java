@@ -4,7 +4,8 @@ package com.uz.laboratory.statistical.util.fx;
 import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.PonabRemarkDto;
+import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -28,6 +29,8 @@ public class ModalUtil {
     private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
+    @Autowired
+    private RemarkTableListSaveDto remarkTableListSaveDto;
 
     public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
@@ -117,5 +120,28 @@ public class ModalUtil {
         }
         remarkDeletionConfirm.setTitle(Constants.REMARK_DELETION_MODAL_TITLE);
         remarkDeletionConfirm.showAndWait();
+    }
+
+    public void createRemarkTableSaveModal() {
+        Stage remarkTableSave = new Stage();
+        remarkTableSave.initModality(Modality.APPLICATION_MODAL);
+        try {
+            remarkTableSave.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.REMARK_TABLE_SAVE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        remarkTableSave.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        remarkTableListSaveDto.setStatisticsRemarkTableDtos(null);
+                    }
+                });
+            }
+        });
+        remarkTableSave.setTitle(Constants.REMARK_TABLE_SAVE_MODAL_TITLE);
+        remarkTableSave.showAndWait();
     }
 }

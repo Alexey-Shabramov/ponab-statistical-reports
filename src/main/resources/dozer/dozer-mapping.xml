@@ -11,11 +11,12 @@
 
     <mapping map-id="ponabRemarkToDto">
         <class-a>com.uz.laboratory.statistical.entity.remark.PonabRemark</class-a>
-        <class-b>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-b>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto</class-b>
     </mapping>
 
     <mapping map-id="cleanRemarkDto">
-        <class-a>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-a>
-        <class-b>com.uz.laboratory.statistical.dto.PonabRemarkDto</class-b>
+        <class-a>com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto</class-b>
     </mapping>
+
 </mappings>

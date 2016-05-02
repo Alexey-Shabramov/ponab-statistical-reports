@@ -19,7 +19,7 @@ public class AlsRemark extends AbstractRemark {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_track_circuit")
-    private TrackCircuit track_circuit_name;
+    private TrackCircuit trackCircuit;
 
     @Column(name = "even")
     private boolean even;
@@ -27,12 +27,12 @@ public class AlsRemark extends AbstractRemark {
     @Column(name = "note")
     private String note;
 
-    public TrackCircuit getTrack_circuit_name() {
-        return track_circuit_name;
+    public TrackCircuit getTrackCircuit() {
+        return trackCircuit;
     }
 
-    public void setTrack_circuit_name(TrackCircuit track_circuit_name) {
-        this.track_circuit_name = track_circuit_name;
+    public void setTrackCircuit(TrackCircuit trackCircuit) {
+        this.trackCircuit = trackCircuit;
     }
 
     public boolean isEven() {

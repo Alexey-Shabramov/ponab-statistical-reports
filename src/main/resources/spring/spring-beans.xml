@@ -120,9 +120,12 @@
 
     <beans:bean id="deleteEntityDto" class="com.uz.laboratory.statistical.dto.DeleteEntityDto"/>
 
-    <beans:bean id="ponabRemarkDto" class="com.uz.laboratory.statistical.dto.PonabRemarkDto"/>
+    <beans:bean id="ponabRemarkDto" class="com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto"/>
 
-    <beans:bean id="ponabEditEntityDto" class="com.uz.laboratory.statistical.dto.PonabRemarkEditEntityDto"/>
+    <beans:bean id="ponabEditEntityDto" class="com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto"/>
 
     <beans:bean id="modalUtil" class="com.uz.laboratory.statistical.util.fx.ModalUtil"/>
+
+    <beans:bean id="remarkTableListSaveDto" class="com.uz.laboratory.statistical.dto.RemarkTableListSaveDto"/>
+
 </beans:beans>

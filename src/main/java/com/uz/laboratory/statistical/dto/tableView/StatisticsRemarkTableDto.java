@@ -7,19 +7,33 @@ public class StatisticsRemarkTableDto {
     private final SimpleStringProperty remarkId;
     private final SimpleStringProperty objectColumn;
     private final SimpleStringProperty noteColumn;
+    private final SimpleStringProperty sectorColumn;
     private final SimpleStringProperty stageColumn;
     private final SimpleStringProperty dateColumn;
     private final SimpleStringProperty vagonColumn;
     private final SimpleStringProperty repeatColumn;
 
-    public StatisticsRemarkTableDto(Long remarkId, String objectColumn, String noteColumn, String stageColumn, String dateColumn, String vagonColumn, String repeatColumn) {
+    public StatisticsRemarkTableDto(Long remarkId, String objectColumn, String noteColumn, String sectorColumn, String stageColumn, String dateColumn, String vagonColumn, String repeatColumn) {
         this.remarkId = new SimpleStringProperty(remarkId.toString());
         this.objectColumn = new SimpleStringProperty(objectColumn);
         this.noteColumn = new SimpleStringProperty(noteColumn);
+        this.sectorColumn = new SimpleStringProperty(sectorColumn);
         this.stageColumn = new SimpleStringProperty(stageColumn);
         this.dateColumn = new SimpleStringProperty(dateColumn);
         this.vagonColumn = new SimpleStringProperty(vagonColumn);
         this.repeatColumn = new SimpleStringProperty(repeatColumn);
+    }
+
+    public String getSectorColumn() {
+        return sectorColumn.get();
+    }
+
+    public void setSectorColumn(String sectorColumn) {
+        this.sectorColumn.set(sectorColumn);
+    }
+
+    public SimpleStringProperty sectorColumnProperty() {
+        return sectorColumn;
     }
 
     public String getRemarkId() {

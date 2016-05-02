@@ -9,6 +9,7 @@ import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import java.util.Date;
 
 public class RemarkStatisticsFilter {
+    private Boolean repeatable;
     private Sector sector;
     private Stage stage;
     private Integer deviceType;
@@ -16,6 +17,14 @@ public class RemarkStatisticsFilter {
     private Boolean directionOfMovement;
     private Date date;
     private CommunicationDistance communicationDistance;
+
+    public Boolean getRepeatable() {
+        return repeatable;
+    }
+
+    public void setRepeatable(Boolean repeatable) {
+        this.repeatable = repeatable;
+    }
 
     public CommunicationDistance getCommunicationDistance() {
         return communicationDistance;

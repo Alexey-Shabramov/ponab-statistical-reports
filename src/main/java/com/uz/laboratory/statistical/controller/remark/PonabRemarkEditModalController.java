@@ -1,7 +1,7 @@
 package com.uz.laboratory.statistical.controller.remark;
 
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.PonabRemarkEditEntityDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;

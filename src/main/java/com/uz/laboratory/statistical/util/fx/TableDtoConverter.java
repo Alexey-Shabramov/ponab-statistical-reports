@@ -17,9 +17,10 @@ public class TableDtoConverter {
         for (AlsRemark remark : abstractRemarks) {
             data.add(new StatisticsRemarkTableDto(
                     remark.getId(),
-                    remark.getTrack_circuit_name().getName(),
+                    remark.getTrackCircuit().getName(),
                     remark.getNote(),
-                    remark.getTrack_circuit_name().getStation() != null ? remark.getTrack_circuit_name().getStation().getName() : remark.getTrack_circuit_name().getStage().getName(),
+                    remark.getInspectionTrip().getTripSector().getTitle(),
+                    remark.getTrackCircuit().getStation() != null ? remark.getTrackCircuit().getStation().getName() : remark.getTrackCircuit().getStage().getName(),
                     remark.getCreationDate().toString(),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
@@ -34,6 +35,7 @@ public class TableDtoConverter {
                     remark.getId(),
                     remark.getPonabSystem().getTitle(),
                     remark.getNote(),
+                    remark.getInspectionTrip().getTripSector().getTitle(),
                     remark.getPonabSystem().getStage().getName(),
                     remark.getCreationDate().toString(),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),

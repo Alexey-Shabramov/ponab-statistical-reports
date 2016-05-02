@@ -141,10 +141,10 @@ public class PonabDevicesController implements Initializable {
         /**
          * Popup menu definitions
          */
-        MenuItem view = new MenuItem(Constants.VIEW_INFO);
-        MenuItem edit = new MenuItem(Constants.EDIT_INFO);
+        MenuItem view = new MenuItem(Constants.POPUP_MENU_VIEW_INFO);
+        MenuItem edit = new MenuItem(Constants.POPUP_MENU_EDIT_INFO);
         MenuItem safetySpace = new MenuItem("");
-        MenuItem delete = new MenuItem(Constants.DELETE_INFO);
+        MenuItem delete = new MenuItem(Constants.POPUP_MENU_DELETE_INFO);
         contextMenu.getItems().addAll(view, edit, safetySpace, delete);
 
         edit.setOnAction(new EventHandler<ActionEvent>() {

@@ -40,6 +40,9 @@ public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements P
         if (remarkStatisticsFilter.getVagonLaboratory() != null) {
             criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
+        if (remarkStatisticsFilter.getRepeatable() != null) {
+            criteria.add(Restrictions.eq("remark.repeatable", remarkStatisticsFilter.getRepeatable()));
+        }
         if (remarkStatisticsFilter.getDate() != null) {
             criteria.add(Restrictions.conjunction()
                     .add(Restrictions.ge("inspection.beginDate", remarkStatisticsFilter.getDate()))

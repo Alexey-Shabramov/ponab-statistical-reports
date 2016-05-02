@@ -6,8 +6,9 @@ import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.RemarkRepeat;
 import com.uz.laboratory.statistical.dict.Systems;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
-import com.uz.laboratory.statistical.dto.PonabRemarkDto;
-import com.uz.laboratory.statistical.dto.PonabRemarkEditEntityDto;
+import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
@@ -63,6 +64,8 @@ public class RemarkStatisticsController implements Initializable {
     public ComboBox communicationDistanceComboBox;
     @FXML
     public DatePicker datePicker;
+    @FXML
+    public ComboBox<RemarkRepeat> repeatRemarkStatusComboBox;
 
     @FXML
     public TableView<StatisticsRemarkTableDto> statisticsTableView;
@@ -116,6 +119,8 @@ public class RemarkStatisticsController implements Initializable {
     private PonabRemarkEditEntityDto ponabRemarkEditEntityDto;
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
+    @Autowired
+    private RemarkTableListSaveDto remarkTableListSaveDto;
 
     private List<String> errorList = new ArrayList<>();
 
@@ -202,7 +207,9 @@ public class RemarkStatisticsController implements Initializable {
                 statisticsFilter.setDirectionOfMovement(false);
             }
         }
-
+        if (repeatRemarkStatusComboBox.getSelectionModel().getSelectedItem() != null) {
+            statisticsFilter.setRepeatable(repeatRemarkStatusComboBox.getSelectionModel().getSelectedIndex() == 0);
+        }
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
@@ -229,13 +236,7 @@ public class RemarkStatisticsController implements Initializable {
     }
 
     @FXML
-    public void printAllTableViewData(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    public void cleanDatePicker(ActionEvent actionEvent) {
-        datePicker.setValue(null);
+    public void cleanTableViewButtonListener(ActionEvent actionEvent) {
     }
 
     @FXML
@@ -283,14 +284,19 @@ public class RemarkStatisticsController implements Initializable {
         deviceTypeComboBox.getItems().setAll(Systems.values());
         vagonLaboratoryComboBox.getItems().setAll(vagonLaboratoryService.listAll());
         sectorComboBox.getItems().setAll(sectorService.listAll());
+        repeatRemarkStatusComboBox.getItems().setAll(RemarkRepeat.values());
     }
 
     private void initPopupMenu() {
-        MenuItem view = new MenuItem(Constants.VIEW_INFO);
-        MenuItem edit = new MenuItem(Constants.EDIT_INFO);
-        MenuItem safetySpace = new MenuItem("");
-        MenuItem delete = new MenuItem(Constants.DELETE_INFO);
-        contextMenu.getItems().addAll(view, edit, safetySpace, delete);
+        MenuItem view = new MenuItem(Constants.POPUP_MENU_VIEW_INFO);
+        MenuItem edit = new MenuItem(Constants.POPUP_MENU_EDIT_INFO);
+        MenuItem printTableView = new MenuItem(Constants.POPUP_MENU_PRINT_TABLE_VIEW);
+        MenuItem saveTableView = new MenuItem(Constants.POPUP_MENU_SAVE_TABLE_VIEW);
+        MenuItem delete = new MenuItem(Constants.POPUP_MENU_DELETE_INFO);
+        MenuItem safetySpaceFirst = new MenuItem(Constants.SAFETY_SPACE);
+        MenuItem safetySpaceSecond = new MenuItem(Constants.SAFETY_SPACE);
+
+        contextMenu.getItems().addAll(view, edit, safetySpaceFirst, printTableView, saveTableView, safetySpaceSecond, delete);
         view.setOnAction(event -> {
             if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
 
@@ -312,6 +318,10 @@ public class RemarkStatisticsController implements Initializable {
                 ponabRemarkEditEntityDto.setPonabRemark(null);
                 ponabRemarkEditEntityDto.setTableViewIndex(null);
             }
+        });
+        saveTableView.setOnAction(event -> {
+            remarkTableListSaveDto.setStatisticsRemarkTableDtos(statisticsTableData);
+            modalUtil.createRemarkTableSaveModal();
         });
         delete.setOnAction(event -> {
             modalUtil.createRemarkDeletionConfirmModal();

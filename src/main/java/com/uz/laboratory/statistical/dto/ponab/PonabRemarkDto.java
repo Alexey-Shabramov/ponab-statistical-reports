@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.dto;
+package com.uz.laboratory.statistical.dto.ponab;
 
 
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;

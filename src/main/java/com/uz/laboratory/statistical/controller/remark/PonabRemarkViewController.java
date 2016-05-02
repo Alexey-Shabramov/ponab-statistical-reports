@@ -1,7 +1,7 @@
 package com.uz.laboratory.statistical.controller.remark;
 
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.PonabRemarkDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
