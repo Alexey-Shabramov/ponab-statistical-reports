@@ -7,7 +7,9 @@ import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class AlsRemarkDaoImpl extends GenericDaoImpl<AlsRemark> implements AlsRemarkDao {
@@ -42,8 +44,13 @@ public class AlsRemarkDaoImpl extends GenericDaoImpl<AlsRemark> implements AlsRe
         if (remarkStatisticsFilter.getVagonLaboratory() != null) {
             criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
         }
+        if (remarkStatisticsFilter.getRepeatable() != null) {
+            criteria.add(Restrictions.eq("remark.repeatable", remarkStatisticsFilter.getRepeatable()));
+        }
         if (remarkStatisticsFilter.getDate() != null) {
-            criteria.add(Restrictions.sqlRestriction("remark.beginDate like '2016%'"));
+            criteria.add(Restrictions.conjunction()
+                    .add(Restrictions.ge("inspection.beginDate", remarkStatisticsFilter.getDate()))
+                    .add(Restrictions.lt("inspection.beginDate", new Date(remarkStatisticsFilter.getDate().getTime() + TimeUnit.DAYS.toMillis(1)))));
         }
         return criteria.list();
     }

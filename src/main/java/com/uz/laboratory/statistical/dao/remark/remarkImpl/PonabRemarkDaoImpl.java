@@ -33,7 +33,7 @@ public class PonabRemarkDaoImpl extends GenericDaoImpl<PonabRemark> implements P
             criteria.add(Restrictions.eq("stage.id", remarkStatisticsFilter.getStage().getId()));
         }
         if (remarkStatisticsFilter.getCommunicationDistance() != null) {
-            criteria.add(Restrictions.eq("distances.id", remarkStatisticsFilter.getCommunicationDistance()));
+            criteria.add(Restrictions.eq("distances.id", remarkStatisticsFilter.getCommunicationDistance().getId()));
         }
         if (remarkStatisticsFilter.getVagonLaboratory() != null) {
             criteria.add(Restrictions.eq("vagon.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
