@@ -82,4 +82,15 @@ public class TableDtoConverter {
         statisticsRemarkTableDto.setRepeatColumn(alsRemark.isRepeatable() ? "+" : "-");
         return statisticsRemarkTableDto;
     }
+
+    public static PonabDevicesTableDto convertEditedPonabSystemToTableDto(PonabDevicesTableDto ponabDevicesTableDto, PonabSystem ponabSystem) {
+        ponabDevicesTableDto.setDeviceId(ponabSystem.getId().toString());
+        ponabDevicesTableDto.setOption(ponabSystem.getOption());
+        ponabDevicesTableDto.setStageTitle(ponabSystem.getStage().getName());
+        ponabDevicesTableDto.setSectorTitle(ponabSystem.getSector().getTitle());
+        ponabDevicesTableDto.setDirectionOfMovement(ponabSystem.isEvenDirectionOfMovement() ? Constants.EVEN : Constants.UNEVEN);
+        ponabDevicesTableDto.setSystemTitle(ponabSystem.getTitle());
+        ponabDevicesTableDto.setSpeachInformator(ponabSystem.isSpeachInformer() ? "+" : "-");
+        return ponabDevicesTableDto;
+    }
 }

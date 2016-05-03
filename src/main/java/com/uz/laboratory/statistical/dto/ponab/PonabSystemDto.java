@@ -4,7 +4,7 @@ package com.uz.laboratory.statistical.dto.ponab;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 
-public class PonabDeviceDto {
+public class PonabSystemDto {
     private Long id;
     private Sector sector;
     private Stage stage;
@@ -80,7 +80,7 @@ public class PonabDeviceDto {
 
     @Override
     public String toString() {
-        return "PonabDeviceDto{" +
+        return "PonabSystemDto{" +
                 "id=" + id +
                 ", sector=" + sector +
                 ", stage=" + stage +

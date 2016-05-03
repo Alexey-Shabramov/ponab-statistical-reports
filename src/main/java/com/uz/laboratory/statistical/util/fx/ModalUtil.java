@@ -1,14 +1,13 @@
 package com.uz.laboratory.statistical.util.fx;
 
 
-import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
-import com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -37,7 +36,7 @@ public class ModalUtil {
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
     @Autowired
-    private PonabDeviceDto ponabDeviceDto;
+    private PonabSystemDto ponabSystemDto;
     @Autowired
     private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
 
@@ -63,26 +62,16 @@ public class ModalUtil {
         plannedTripModal.showAndWait();
     }
 
-    public static void createPonabDeviceEditModal() {
+    public void createPonabDeviceEditModal() {
         Stage ponabDeviceModal = new Stage();
         ponabDeviceModal.initModality(Modality.APPLICATION_MODAL);
         try {
-            ponabDeviceModal.setScene(new Scene(FXMLLoader.load(PonabDevicesController.class.getResource(Constants.PONAB_DEVICE_EDIT_MODAL))));
+            ponabDeviceModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.PONAB_DEVICE_EDIT_MODAL)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ponabDeviceModal.setTitle(Constants.PONAB_DEVICE_EDIT_TITLE);
         ponabDeviceModal.showAndWait();
-    }
-
-    public static void createAlsDeviceEditModal() {
-        Stage alsDevicesModal = new Stage();
-        alsDevicesModal.initModality(Modality.APPLICATION_MODAL);
-        try {
-            alsDevicesModal.setScene(new Scene(FXMLLoader.load(PonabDevicesController.class.getResource(Constants.ALS_DEVICE_EDIT_MODAL))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        alsDevicesModal.showAndWait();
     }
 
     public void createPonabRemarkEditModal() {
@@ -218,7 +207,7 @@ public class ModalUtil {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        dozerBeanMapper.map(new PonabDeviceDto(), ponabDeviceDto, Constants.CLEAN_PONAB_DEVICE_DTO);
+                        dozerBeanMapper.map(new PonabSystemDto(), ponabSystemDto, Constants.CLEAN_PONAB_DEVICE_DTO);
                     }
                 });
             }

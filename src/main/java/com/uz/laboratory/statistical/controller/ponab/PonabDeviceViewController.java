@@ -1,7 +1,7 @@
 package com.uz.laboratory.statistical.controller.ponab;
 
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,34 +22,34 @@ public class PonabDeviceViewController implements Initializable {
     public TreeView ponabDeviceTreeView;
 
     @Autowired
-    private PonabDeviceDto ponabDeviceDto;
+    private PonabSystemDto ponabSystemDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        TreeItem<String> treeRootItem = new TreeItem<>(Constants.PONAB_DEVICE_NUMBER + ponabDeviceDto.getId());
+        TreeItem<String> treeRootItem = new TreeItem<>(Constants.PONAB_DEVICE_NUMBER + ponabSystemDto.getId());
 
         TreeItem<String> stageRootItem = new TreeItem<>(Constants.PONAB_DEVICE_STAGE_TITLE);
-        TreeItem<String> stageItem = new TreeItem<>(ponabDeviceDto.getStage().getName());
+        TreeItem<String> stageItem = new TreeItem<>(ponabSystemDto.getStage().getName());
         stageRootItem.getChildren().addAll(stageItem);
 
         TreeItem<String> titleRootItem = new TreeItem<>(Constants.PONAB_DEVICE_TITLE);
-        TreeItem<String> noteItem = new TreeItem<>(ponabDeviceDto.getTitle());
+        TreeItem<String> noteItem = new TreeItem<>(ponabSystemDto.getTitle());
         titleRootItem.getChildren().addAll(noteItem);
 
         TreeItem<String> ponabSystemOptionItem = new TreeItem<>(Constants.PONAB_DEVICE_OPTION);
-        TreeItem<String> ponabSystemTitleItem = new TreeItem<>(ponabDeviceDto.getOption());
+        TreeItem<String> ponabSystemTitleItem = new TreeItem<>(ponabSystemDto.getOption());
         ponabSystemOptionItem.getChildren().addAll(ponabSystemTitleItem);
 
         TreeItem<String> ponabSystemLocationRootItem = new TreeItem<>(Constants.PONAB_DEVICE_LOCATION);
-        TreeItem<String> ponabSystemLocationItemItem = new TreeItem<>(ponabDeviceDto.getLocation());
+        TreeItem<String> ponabSystemLocationItemItem = new TreeItem<>(ponabSystemDto.getLocation());
         ponabSystemLocationRootItem.getChildren().addAll(ponabSystemLocationItemItem);
 
         TreeItem<String> ponabSystemDirectionRootItem = new TreeItem<>(Constants.PONAB_DEVICE_DIRECTION_OF_MOVEMENT);
-        TreeItem<String> ponabSystemDirectionItem = new TreeItem<>(ponabDeviceDto.isEvenDirectionOfMovement() ? Constants.EVEN : Constants.UNEVEN);
+        TreeItem<String> ponabSystemDirectionItem = new TreeItem<>(ponabSystemDto.isEvenDirectionOfMovement() ? Constants.EVEN : Constants.UNEVEN);
         ponabSystemDirectionRootItem.getChildren().addAll(ponabSystemDirectionItem);
 
         TreeItem<String> speachInformerRootItem = new TreeItem<>(Constants.PONAB_DEVICE_SPEACH_INFORMER);
-        TreeItem<String> speachInformerItem = new TreeItem<>(ponabDeviceDto.isSpeachInformer() ? Constants.PONAB_DEVICE_SPEACH_INFORMER_TRUE : Constants.PONAB_DEVICE_SPEACH_INFORMER_FALSE);
+        TreeItem<String> speachInformerItem = new TreeItem<>(ponabSystemDto.isSpeachInformer() ? Constants.PONAB_DEVICE_SPEACH_INFORMER_TRUE : Constants.PONAB_DEVICE_SPEACH_INFORMER_FALSE);
         speachInformerRootItem.getChildren().addAll(speachInformerItem);
 
         treeRootItem.getChildren().addAll(

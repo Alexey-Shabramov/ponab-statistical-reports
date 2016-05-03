@@ -2,13 +2,13 @@ package com.uz.laboratory.statistical.controller.ponab;
 
 
 import com.uz.laboratory.statistical.dict.*;
-import com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
-import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
@@ -80,14 +80,16 @@ public class PonabDevicesController implements Initializable {
     private Long selectectedEntityId;
     @Autowired
     private SectorService sectorService;
-    @Autowired
-    private StageService stageService;
+
     @Autowired
     private PonabSystemService ponabSystemService;
     @Autowired
     private ModalUtil modalUtil;
     @Autowired
-    private PonabDeviceDto ponabDeviceDto;
+    private PonabSystemDto ponabSystemDto;
+    @Autowired
+    private PonabSystemEditEntityDto ponabSystemEditEntityDto;
+
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
@@ -232,7 +234,7 @@ public class PonabDevicesController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
-                    dozerBeanMapper.map(ponabSystemService.get(Long.valueOf(ponabDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId())), ponabDeviceDto, Constants.PONAB_DEVICE_TO_DTO);
+                    dozerBeanMapper.map(ponabSystemService.get(Long.valueOf(ponabDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId())), ponabSystemDto, Constants.PONAB_DEVICE_TO_DTO);
                     modalUtil.createPonabDeviceViewModal();
                 }
             }
@@ -240,7 +242,16 @@ public class PonabDevicesController implements Initializable {
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ModalUtil.createPonabDeviceEditModal();
+                if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
+                    preparePonabSystemDto();
+                    modalUtil.createPonabDeviceEditModal();
+                    if (ponabSystemEditEntityDto.getPonabSystem() != null) {
+                        ponabDevicesTableData.remove(ponabSystemEditEntityDto.getTableViewIndex());
+                        ponabDevicesTableData.set(ponabSystemEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabSystemToTableDto(ponabDevicesTableView.getSelectionModel().getSelectedItem(), ponabSystemEditEntityDto.getPonabSystem()));
+                        ponabSystemEditEntityDto.setPonabSystem(null);
+                        ponabSystemEditEntityDto.setTableViewIndex(null);
+                    }
+                }
             }
         });
         delete.setOnAction(new EventHandler<ActionEvent>() {
@@ -264,4 +275,13 @@ public class PonabDevicesController implements Initializable {
         ponabDevicesTableView.setItems(FXCollections.observableArrayList(ponabDevicesTableData.subList(fromIndex, toIndex)));
         return new BorderPane(ponabDevicesTableView);
     }
+
+    private void preparePonabSystemDto() {
+        ponabSystemEditEntityDto.setTableViewIndex(ponabDevicesTableView.getSelectionModel().getSelectedIndex());
+        ponabSystemEditEntityDto.setEditedEntityId(selectectedEntityId);
+        ponabSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
+        ponabSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+    }
+
+
 }

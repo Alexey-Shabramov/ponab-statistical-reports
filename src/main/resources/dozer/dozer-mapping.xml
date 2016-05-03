@@ -31,11 +31,11 @@
 
     <mapping map-id="ponabDeviceToDto">
         <class-a>com.uz.laboratory.statistical.entity.ponab.PonabSystem</class-a>
-        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-b>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-b>
     </mapping>
 
     <mapping map-id="cleanPonabDeviceDto">
-        <class-a>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-a>
-        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-b>
+        <class-a>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-b>
     </mapping>
 </mappings>

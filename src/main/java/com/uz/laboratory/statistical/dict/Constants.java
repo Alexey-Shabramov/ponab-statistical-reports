@@ -145,6 +145,17 @@ public class Constants {
     public static final String PONAB_DEVICE_SPEACH_INFORMER_TRUE = "Есть";
     public static final String PONAB_DEVICE_SPEACH_INFORMER_FALSE = "Отсутствует";
 
+    /**
+     * FXML - ponabDevicEditModal.fxml
+     */
+    public static final String PONAB_DEVICE_EDIT_TITLE = "Редактирование выбранной системы";
+    public static final String PONAB_DEVICE_STAGE_NULL = "Не выбран перегон.";
+    public static final String PONAB_DEVICE_OPTION_NULL = "Не выбрана настройка для данного устройства.";
+    public static final String PONAB_DEVICE_SYSTEM_TYPE_NULL = "Не выбран тип системы.";
+    public static final String PONAB_DEVICE_DIRECTION_OF_MOVEMENT_NULL = "Не выбрано направление движения.";
+    public static final String PONAB_DEVICE_SPEACH_INFORMER_NULL = "Не выбран РИ (укажите есть или нет).";
+    public static final String PONAB_DEVICE_LOCATION_NULL = "Не указанно местоположение устройства.";
+
 
     /**
      * FXML - saveRemarkTable.fxml
