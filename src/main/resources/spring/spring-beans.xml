@@ -132,4 +132,6 @@
 
     <beans:bean id="remarkTableListSaveDto" class="com.uz.laboratory.statistical.dto.RemarkTableListSaveDto"/>
 
+    <beans:bean id="ponabDeviceDto" class="com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto"/>
+
 </beans:beans>

@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -26,8 +25,6 @@ public class PonabRemarkViewController implements Initializable {
 
     @Autowired
     private PonabRemarkDto ponabRemarkDto;
-    @Autowired
-    private DozerBeanMapper dozerBeanMapper;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,7 +85,6 @@ public class PonabRemarkViewController implements Initializable {
 
     @FXML
     public void closeButtonListener(ActionEvent actionEvent) {
-        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_PONAB_REMARK_DTO);
         ((javafx.stage.Stage) ponabRemarkViewCloseButton.getScene().getWindow()).close();
     }
 }

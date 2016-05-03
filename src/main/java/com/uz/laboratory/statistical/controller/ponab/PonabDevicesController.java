@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.controller.ponab;
 
 
 import com.uz.laboratory.statistical.dict.*;
+import com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
@@ -26,6 +27,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.StringConverter;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -38,7 +40,7 @@ import java.util.ResourceBundle;
 public class PonabDevicesController implements Initializable {
     private final static int rowsPerPage = 9;
     private static FXMLLoader fxmlLoader = new FXMLLoader();
-    final ContextMenu contextMenu = new ContextMenu();
+    private final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public TableView<PonabDevicesTableDto> ponabDevicesTableView;
     @FXML
@@ -82,6 +84,12 @@ public class PonabDevicesController implements Initializable {
     private StageService stageService;
     @Autowired
     private PonabSystemService ponabSystemService;
+    @Autowired
+    private ModalUtil modalUtil;
+    @Autowired
+    private PonabDeviceDto ponabDeviceDto;
+    @Autowired
+    private DozerBeanMapper dozerBeanMapper;
 
     private List<String> errorList = new ArrayList<>();
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
@@ -107,7 +115,7 @@ public class PonabDevicesController implements Initializable {
         }
     };
 
-    public void setTableViewSelectedIndex(int tableViewSelectedIndex) {
+    private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
     }
 
@@ -115,54 +123,9 @@ public class PonabDevicesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initColumnsForTableView();
         ponabDevicesTablePagination.setPageFactory(this::initializePage);
-        stageComboBox.setConverter(stageConverter);
-        sectorComboBox.setConverter(sectorConverter);
-        sectorComboBox.setItems(FXCollections.observableArrayList(sectorService.listAll()));
-
-        directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
-        ponabSystemComboBox.getItems().setAll(PonabSystems.values());
-        optionComboBox.getItems().setAll(PonabOptions.values());
-        speachInformerComboBox.getItems().setAll(SpeachInformer.values());
-
-        ponabDevicesTableView.setEditable(true);
-        ponabDevicesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        ponabDevicesTableView.setContextMenu(contextMenu);
-        ponabDevicesTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null
-                        && mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                    contextMenu.show(ponabDevicesTableView, mouseEvent.getScreenX(), mouseEvent.getScreenY());
-                    setTableViewSelectedIndex(ponabDevicesTableView.getSelectionModel().getSelectedIndex());
-                    selectectedEntityId = Long.valueOf(ponabDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId());
-                }
-            }
-        });
-        /**
-         * Popup menu definitions
-         */
-        MenuItem view = new MenuItem(Constants.POPUP_MENU_VIEW_INFO);
-        MenuItem edit = new MenuItem(Constants.POPUP_MENU_EDIT_INFO);
-        MenuItem safetySpace = new MenuItem("");
-        MenuItem delete = new MenuItem(Constants.POPUP_MENU_DELETE_INFO);
-        contextMenu.getItems().addAll(view, edit, safetySpace, delete);
-
-        edit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ModalUtil.createPonabDeviceEditModal();
-            }
-        });
-
-        delete.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
-                ponabDevicesTableData.remove(tableViewSelectedIndex.get());
-                ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
-                ponabDevicesTableView.getSelectionModel().clearSelection();
-            }
-        });
+        initComboBoxes();
+        initTableView();
+        initPopupMenu();
     }
 
     @FXML
@@ -204,28 +167,6 @@ public class PonabDevicesController implements Initializable {
         stageComboBox.setItems(FXCollections.observableArrayList(sectorComboBox.getSelectionModel().getSelectedItem().getStageList()));
     }
 
-    private void initColumnsForTableView() {
-        sectorColumn.setCellValueFactory(param -> param.getValue().sectorTitleProperty());
-        stageColumn.setCellValueFactory(param -> param.getValue().stageTitleProperty());
-        systemColumn.setCellValueFactory(param -> param.getValue().systemTitleProperty());
-        directionOfMovementColumn.setCellValueFactory(param -> param.getValue().directionOfMovementProperty());
-        optionColumn.setCellValueFactory(param -> param.getValue().optionProperty());
-        speachInformerColumn.setCellValueFactory(param -> param.getValue().speachInformatorProperty());
-        directionOfMovement.setCellValueFactory(param -> param.getValue().directionOfMovementProperty());
-        deviceIdColumn.setCellValueFactory(param -> param.getValue().deviceIdProperty());
-    }
-
-    private Node initializePage(int pageIndex) {
-        return new BorderPane(ponabDevicesTableView);
-    }
-
-    private Node createPage(int pageIndex) {
-        int fromIndex = pageIndex * rowsPerPage;
-        int toIndex = Math.min(fromIndex + rowsPerPage, ponabDevicesTableData.size());
-        ponabDevicesTableView.setItems(FXCollections.observableArrayList(ponabDevicesTableData.subList(fromIndex, toIndex)));
-        return new BorderPane(ponabDevicesTableView);
-    }
-
     @FXML
     public void resetAllComboBoxes(ActionEvent actionEvent) {
         directionOfMovementComboBox.setValue(null);
@@ -240,5 +181,87 @@ public class PonabDevicesController implements Initializable {
 
     @FXML
     public void resetDeletionButtonListener(ActionEvent actionEvent) {
+    }
+
+    private void initColumnsForTableView() {
+        sectorColumn.setCellValueFactory(param -> param.getValue().sectorTitleProperty());
+        stageColumn.setCellValueFactory(param -> param.getValue().stageTitleProperty());
+        systemColumn.setCellValueFactory(param -> param.getValue().systemTitleProperty());
+        directionOfMovementColumn.setCellValueFactory(param -> param.getValue().directionOfMovementProperty());
+        optionColumn.setCellValueFactory(param -> param.getValue().optionProperty());
+        speachInformerColumn.setCellValueFactory(param -> param.getValue().speachInformatorProperty());
+        directionOfMovement.setCellValueFactory(param -> param.getValue().directionOfMovementProperty());
+        deviceIdColumn.setCellValueFactory(param -> param.getValue().deviceIdProperty());
+    }
+
+    private void initComboBoxes() {
+        stageComboBox.setConverter(stageConverter);
+        sectorComboBox.setConverter(sectorConverter);
+        sectorComboBox.setItems(FXCollections.observableArrayList(sectorService.listAll()));
+
+        directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
+        ponabSystemComboBox.getItems().setAll(PonabSystems.values());
+        optionComboBox.getItems().setAll(PonabOptions.values());
+        speachInformerComboBox.getItems().setAll(SpeachInformer.values());
+    }
+
+    private void initTableView() {
+        ponabDevicesTableView.setEditable(true);
+        ponabDevicesTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        ponabDevicesTableView.setContextMenu(contextMenu);
+        ponabDevicesTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null
+                        && mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                    contextMenu.show(ponabDevicesTableView, mouseEvent.getScreenX(), mouseEvent.getScreenY());
+                    setTableViewSelectedIndex(ponabDevicesTableView.getSelectionModel().getSelectedIndex());
+                    selectectedEntityId = Long.valueOf(ponabDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId());
+                }
+            }
+        });
+    }
+
+    private void initPopupMenu() {
+        MenuItem view = new MenuItem(Constants.POPUP_MENU_VIEW_INFO);
+        MenuItem edit = new MenuItem(Constants.POPUP_MENU_EDIT_INFO);
+        MenuItem safetySpace = new MenuItem("");
+        MenuItem delete = new MenuItem(Constants.POPUP_MENU_DELETE_INFO);
+        contextMenu.getItems().addAll(view, edit, safetySpace, delete);
+        view.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
+                    dozerBeanMapper.map(ponabSystemService.get(Long.valueOf(ponabDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId())), ponabDeviceDto, Constants.PONAB_DEVICE_TO_DTO);
+                    modalUtil.createPonabDeviceViewModal();
+                }
+            }
+        });
+        edit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ModalUtil.createPonabDeviceEditModal();
+            }
+        });
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
+                ponabDevicesTableData.remove(tableViewSelectedIndex.get());
+                ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
+                ponabDevicesTableView.getSelectionModel().clearSelection();
+            }
+        });
+    }
+
+    private Node initializePage(int pageIndex) {
+        return new BorderPane(ponabDevicesTableView);
+    }
+
+    private Node createPage(int pageIndex) {
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, ponabDevicesTableData.size());
+        ponabDevicesTableView.setItems(FXCollections.observableArrayList(ponabDevicesTableData.subList(fromIndex, toIndex)));
+        return new BorderPane(ponabDevicesTableView);
     }
 }

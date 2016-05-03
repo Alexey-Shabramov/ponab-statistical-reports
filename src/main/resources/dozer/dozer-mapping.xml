@@ -29,4 +29,13 @@
         <class-b>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-b>
     </mapping>
 
+    <mapping map-id="ponabDeviceToDto">
+        <class-a>com.uz.laboratory.statistical.entity.ponab.PonabSystem</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-b>
+    </mapping>
+
+    <mapping map-id="cleanPonabDeviceDto">
+        <class-a>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto</class-b>
+    </mapping>
 </mappings>

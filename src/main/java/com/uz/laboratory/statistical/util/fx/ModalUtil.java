@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabDeviceDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import javafx.application.Platform;
@@ -35,6 +36,8 @@ public class ModalUtil {
     private AlsRemarkDto alsRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
+    @Autowired
+    private PonabDeviceDto ponabDeviceDto;
     @Autowired
     private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
 
@@ -199,5 +202,28 @@ public class ModalUtil {
             }
         });
         remarkViewModal.showAndWait();
+    }
+
+    public void createPonabDeviceViewModal() {
+        Stage ponabDeviceModal = new Stage();
+        ponabDeviceModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            ponabDeviceModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.PONAB_DEVICE_VIEW_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ponabDeviceModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dozerBeanMapper.map(new PonabDeviceDto(), ponabDeviceDto, Constants.CLEAN_PONAB_DEVICE_DTO);
+                    }
+                });
+            }
+        });
+        ponabDeviceModal.setTitle(Constants.PONAB_DEVICE_VIEW_TITLE);
+        ponabDeviceModal.showAndWait();
     }
 }

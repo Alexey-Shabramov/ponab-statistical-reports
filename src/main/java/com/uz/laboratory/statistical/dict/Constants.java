@@ -6,8 +6,11 @@ public class Constants {
      */
     public static final String PONAB_REMARK_TO_DTO = "ponabRemarkToDto";
     public static final String ALS_REMARK_TO_DTO = "alsRemarkToDto";
+    public static final String PONAB_DEVICE_TO_DTO = "ponabDeviceToDto";
     public static final String CLEAN_PONAB_REMARK_DTO = "cleanPonabRemarkDto";
     public static final String CLEAN_ALS_REMARK_DTO = "cleanAlsRemarkDto";
+    public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";
+
 
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
@@ -20,6 +23,8 @@ public class Constants {
 
     public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/shedule/inspectionTripEditModal.fxml";
     public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponab/ponabDeviceEditModal.fxml";
+    public static final String PONAB_DEVICE_VIEW_MODAL = "/fxml/modal/view/ponab/ponabDeviceViewModal.fxml";
+
     public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
     public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/shedule/plannedTripEditModal.fxml";
 
@@ -44,6 +49,7 @@ public class Constants {
 
     public static final String REMARK_DELETION_MODAL_TITLE = "Удаление замечания";
     public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";
+
     /**
      * Directions of movement (by partly)
      */
@@ -125,6 +131,20 @@ public class Constants {
     public static final String STATIONAL_TRACK_CIRCUIT = "Станционная";
     public static final String STAGE_TRACK_CIRCUIT = "Перегонная";
 
+    /**
+     * FXML - ponabDeviceViewModal.fxml
+     */
+    public static final String PONAB_DEVICE_VIEW_TITLE = "Просмотр выбранного устройства";
+    public static final String PONAB_DEVICE_NUMBER = "Система №";
+    public static final String PONAB_DEVICE_STAGE_TITLE = "Перегон:";
+    public static final String PONAB_DEVICE_TITLE = "Название системы:";
+    public static final String PONAB_DEVICE_OPTION = " Настройка";
+    public static final String PONAB_DEVICE_LOCATION = "Расположение:";
+    public static final String PONAB_DEVICE_DIRECTION_OF_MOVEMENT = "Направление движения:";
+    public static final String PONAB_DEVICE_SPEACH_INFORMER = "Наличие РИ:";
+    public static final String PONAB_DEVICE_SPEACH_INFORMER_TRUE = "Есть";
+    public static final String PONAB_DEVICE_SPEACH_INFORMER_FALSE = "Отсутствует";
+
 
     /**
      * FXML - saveRemarkTable.fxml
@@ -137,4 +157,5 @@ public class Constants {
      */
     public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
     public static final String TEXTFIELD_IS_EMPTY = "Название файла пустое. Повторите ввод.";
+
 }
