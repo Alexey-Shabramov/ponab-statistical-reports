@@ -6,9 +6,11 @@ import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
+import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
+import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
@@ -76,6 +78,9 @@ public class PonabDevicesController implements Initializable {
     public ComboBox<PonabOptions> optionComboBox;
     @FXML
     public ComboBox<SpeachInformer> speachInformerComboBox;
+    @FXML
+    public ComboBox<CommunicationDistance> communicationDistanceComboBox;
+
     private ObservableList<PonabDevicesTableDto> ponabDevicesTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
@@ -94,6 +99,8 @@ public class PonabDevicesController implements Initializable {
     private DeleteEntityDto deleteEntityDto;
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
+    @Autowired
+    private CommunicationDistanceService communicationDistanceService;
 
     private List<String> errorList = new ArrayList<>();
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
@@ -118,6 +125,17 @@ public class PonabDevicesController implements Initializable {
             return null;
         }
     };
+    private StringConverter<CommunicationDistance> communicationDistanceConverter = new StringConverter<CommunicationDistance>() {
+        @Override
+        public String toString(CommunicationDistance object) {
+            return object.getNumber().toString();
+        }
+
+        @Override
+        public CommunicationDistance fromString(String string) {
+            return null;
+        }
+    };
 
     private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
@@ -138,6 +156,7 @@ public class PonabDevicesController implements Initializable {
         PonabDevicesFilter ponabDevicesFilter = new PonabDevicesFilter();
         ponabDevicesFilter.setSector(sectorComboBox.getSelectionModel().getSelectedItem());
         ponabDevicesFilter.setStage(stageComboBox.getSelectionModel().getSelectedItem());
+        ponabDevicesFilter.setCommunicationDistance(communicationDistanceComboBox.getSelectionModel().getSelectedItem());
         if (ponabSystemComboBox.getSelectionModel().getSelectedItem() != null) {
             ponabDevicesFilter.setPonabSystem(ponabSystemComboBox.getSelectionModel().getSelectedItem());
         }
@@ -170,27 +189,34 @@ public class PonabDevicesController implements Initializable {
 
     @FXML
     public void cleanPonabDevicesTableButton(ActionEvent actionEvent) {
+        ponabDevicesTableView.getItems().clear();
     }
 
     @FXML
     public void sectorSelectedListener(ActionEvent actionEvent) {
-        stageComboBox.setItems(FXCollections.observableArrayList(sectorComboBox.getSelectionModel().getSelectedItem().getStageList()));
+        if (sectorComboBox.getSelectionModel().getSelectedItem() != null) {
+            stageComboBox.getItems().setAll(sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
+        }
     }
 
     @FXML
     public void resetAllComboBoxes(ActionEvent actionEvent) {
-        directionOfMovementComboBox.setValue(null);
+        sectorComboBox.setValue(null);
+        communicationDistanceComboBox.setValue(null);
         ponabSystemComboBox.setValue(null);
         optionComboBox.setValue(null);
+        directionOfMovementComboBox.setValue(null);
         speachInformerComboBox.setValue(null);
     }
 
     @FXML
-    public void deleteConfirmButtonListener(ActionEvent actionEvent) {
+    public void stageComboBoxChangeListener(ActionEvent actionEvent) {
+        communicationDistanceComboBox.setValue(null);
     }
 
     @FXML
-    public void resetDeletionButtonListener(ActionEvent actionEvent) {
+    public void communicationComboBoxChangeListener(ActionEvent actionEvent) {
+        stageComboBox.setValue(null);
     }
 
     private void initColumnsForTableView() {
@@ -207,8 +233,9 @@ public class PonabDevicesController implements Initializable {
     private void initComboBoxes() {
         stageComboBox.setConverter(stageConverter);
         sectorComboBox.setConverter(sectorConverter);
-        sectorComboBox.setItems(FXCollections.observableArrayList(sectorService.listAll()));
-
+        sectorComboBox.getItems().setAll(sectorService.listAll());
+        communicationDistanceComboBox.setConverter(communicationDistanceConverter);
+        communicationDistanceComboBox.getItems().setAll(communicationDistanceService.listAll());
         directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         ponabSystemComboBox.getItems().setAll(PonabSystems.values());
         optionComboBox.getItems().setAll(PonabOptions.values());
@@ -284,10 +311,6 @@ public class PonabDevicesController implements Initializable {
         });
     }
 
-    private Node initializePage(int pageIndex) {
-        return new BorderPane(ponabDevicesTableView);
-    }
-
     private Node createPage(int pageIndex) {
         int fromIndex = pageIndex * rowsPerPage;
         int toIndex = Math.min(fromIndex + rowsPerPage, ponabDevicesTableData.size());
@@ -301,6 +324,4 @@ public class PonabDevicesController implements Initializable {
         ponabSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
         ponabSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
     }
-
-
 }

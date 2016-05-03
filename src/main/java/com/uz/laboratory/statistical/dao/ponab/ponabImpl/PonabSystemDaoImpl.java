@@ -30,6 +30,8 @@ public class PonabSystemDaoImpl extends GenericDaoImpl<PonabSystem> implements P
         }
         if (ponabDevicesFilter.getStage() != null) {
             criteria.add(Restrictions.eq("stage.id", ponabDevicesFilter.getStage().getId()));
+        } else if (ponabDevicesFilter.getCommunicationDistance() != null) {
+            criteria.add(Restrictions.eq("distances.id", ponabDevicesFilter.getCommunicationDistance().getId()));
         }
         if (ponabDevicesFilter.getPonabSystem() != null) {
             criteria.add(Restrictions.eq("system.title", ponabDevicesFilter.getPonabSystem().toString()));

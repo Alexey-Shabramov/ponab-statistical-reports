@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.filter;
 
 
 import com.uz.laboratory.statistical.dict.PonabSystems;
+import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 
@@ -12,6 +13,15 @@ public class PonabDevicesFilter {
     private Boolean evenDirectionOfMovement;
     private Boolean speachInformer;
     private String option;
+    private CommunicationDistance communicationDistance;
+
+    public CommunicationDistance getCommunicationDistance() {
+        return communicationDistance;
+    }
+
+    public void setCommunicationDistance(CommunicationDistance communicationDistance) {
+        this.communicationDistance = communicationDistance;
+    }
 
     public Sector getSector() {
         return sector;

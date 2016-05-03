@@ -6,86 +6,100 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
       xmlns="http://javafx.com/javafx/8"
       fx:controller="com.uz.laboratory.statistical.controller.ponab.PonabDevicesController">
-    <Pagination fx:id="ponabDevicesTablePagination" layoutX="2.0" layoutY="188.0" prefHeight="301.0" prefWidth="912.0">
-        <fx:define>
-            <TableView fx:id="ponabDevicesTableView" layoutX="2.0" layoutY="188.0" prefHeight="301.0" prefWidth="912.0">
-                <placeholder>
-                    <Label text="По результатам поиска ничего не найдено."/>
-                </placeholder>
-                <columns>
-                    <TableColumn minWidth="0.0" prefWidth="0.0" text="Оператор"/>
-                    <TableColumn fx:id="sectorColumn" prefWidth="249.0" text="Участок"/>
-                    <TableColumn fx:id="stageColumn" minWidth="0.0" prefWidth="189.0" text="Перегон"/>
-                    <TableColumn fx:id="systemColumn" prefWidth="94.0" text="Система"/>
-                    <TableColumn fx:id="directionOfMovementColumn" prefWidth="97.0" text="Направление"/>
-                    <TableColumn fx:id="optionColumn" prefWidth="73.0" text="Настройка"/>
-                    <TableColumn fx:id="speachInformerColumn" prefWidth="29.0" text="РИ"/>
-                    <TableColumn fx:id="directionOfMovement" prefWidth="108.0" text="Направление"/>
-                    <TableColumn fx:id="deviceIdColumn" prefWidth="32.0" text="Id" visible="false"/>
-                </columns>
-            </TableView>
-        </fx:define>
-    </Pagination>
-    <ComboBox fx:id="sectorComboBox" layoutX="25.0" layoutY="28.0" onAction="#sectorSelectedListener"
-              prefHeight="25.0" prefWidth="363.0"/>
+    <children>
+        <Pagination fx:id="ponabDevicesTablePagination" layoutX="2.0" layoutY="223.0" prefHeight="301.0"
+                    prefWidth="912.0">
+            <fx:define>
+                <TableView fx:id="ponabDevicesTableView" layoutX="2.0" layoutY="223.0" prefHeight="301.0"
+                           prefWidth="912.0">
+                    <placeholder>
+                        <Label text="По результатам поиска ничего не найдено."/>
+                    </placeholder>
+                    <columns>
+                        <TableColumn minWidth="0.0" prefWidth="0.0" text="Оператор"/>
+                        <TableColumn fx:id="sectorColumn" prefWidth="249.0" text="Участок"/>
+                        <TableColumn fx:id="stageColumn" minWidth="0.0" prefWidth="189.0" text="Перегон"/>
+                        <TableColumn fx:id="systemColumn" prefWidth="94.0" text="Система"/>
+                        <TableColumn fx:id="directionOfMovementColumn" prefWidth="97.0" text="Направление"/>
+                        <TableColumn fx:id="optionColumn" prefWidth="73.0" text="Настройка"/>
+                        <TableColumn fx:id="speachInformerColumn" prefWidth="29.0" text="РИ"/>
+                        <TableColumn fx:id="directionOfMovement" prefWidth="108.0" text="Направление"/>
+                        <TableColumn fx:id="deviceIdColumn" prefWidth="32.0" text="Id" visible="false"/>
+                    </columns>
+                </TableView>
+            </fx:define>
+        </Pagination>
+        <ComboBox fx:id="sectorComboBox" layoutX="25.0" layoutY="28.0" onAction="#sectorSelectedListener"
+                  prefHeight="25.0" prefWidth="363.0"/>
 
-    <ComboBox fx:id="stageComboBox" layoutX="419.0" layoutY="28.0" prefHeight="25.0" prefWidth="280.0"/>
-    <ComboBox fx:id="ponabSystemComboBox" layoutX="730.0" layoutY="28.0" prefWidth="150.0"/>
-    <Label layoutX="186.0" layoutY="7.0" text="Участок">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <Label layoutX="534.0" layoutY="7.0" text="Перегон">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <Label layoutX="780.0" layoutY="7.0" text="Система">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <ComboBox fx:id="directionOfMovementComboBox" layoutX="388.0" layoutY="122.0" prefWidth="150.0"/>
-    <Label layoutX="424.0" layoutY="101.0" text="Направление">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <ComboBox fx:id="optionComboBox" layoutX="25.0" layoutY="123.0" prefWidth="150.0"/>
-    <ComboBox fx:id="speachInformerComboBox" layoutX="210.0" layoutY="122.0" prefWidth="150.0"/>
-    <Label layoutX="69.0" layoutY="102.0" text="Настройка">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <Label layoutX="275.0" layoutY="103.0" text="РИ">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-    <Separator layoutY="75.0" prefHeight="0.0" prefWidth="912.0"/>
-    <Separator layoutX="400.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="5.0"/>
-    <Separator layoutX="566.0" layoutY="75.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="6.0"/>
-    <Button layoutX="594.0" layoutY="87.0" mnemonicParsing="false" onAction="#findPonabDeviceButton"
-            prefHeight="25.0" prefWidth="86.0" text="Поиск">
-        <font>
-            <Font name="System Bold" size="14.0"/>
-        </font>
-    </Button>
-    <Button layoutX="621.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanPonabDevicesTableButton"
-            prefHeight="30.0" prefWidth="156.0" text="Очистить таблицу">
-        <font>
-            <Font name="System Bold" size="14.0"/>
-        </font>
-    </Button>
-    <Button fx:id="allComboBoxesResetButton" layoutX="712.0" layoutY="87.0" mnemonicParsing="false"
-            onAction="#resetAllComboBoxes" prefHeight="25.0" prefWidth="136.0" text="Сбросить все">
-        <font>
-            <Font name="System Bold" size="14.0"/>
-        </font>
-    </Button>
-    <Separator layoutX="568.0" layoutY="76.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="6.0"/>
-    <Separator layoutX="372.0" layoutY="76.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="6.0"/>
-    <Separator layoutX="200.0" layoutY="75.0" orientation="VERTICAL" prefHeight="114.0" prefWidth="6.0"/>
+        <ComboBox fx:id="stageComboBox" layoutX="419.0" layoutY="28.0" onAction="#stageComboBoxChangeListener"
+                  prefHeight="25.0" prefWidth="280.0"/>
+        <ComboBox fx:id="ponabSystemComboBox" layoutX="730.0" layoutY="28.0" prefWidth="150.0"/>
+        <Label layoutX="186.0" layoutY="7.0" text="Участок">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="534.0" layoutY="7.0" text="Перегон">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="780.0" layoutY="7.0" text="Система">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="directionOfMovementComboBox" layoutX="419.0" layoutY="104.0" prefHeight="25.0"
+                  prefWidth="280.0"/>
+        <Label layoutX="521.0" layoutY="81.0" text="Направление">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="optionComboBox" layoutX="25.0" layoutY="103.0" prefWidth="150.0"/>
+        <ComboBox fx:id="speachInformerComboBox" layoutX="230.0" layoutY="102.0" prefWidth="150.0"/>
+        <Label layoutX="69.0" layoutY="82.0" text="Настройка">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="295.0" layoutY="83.0" text="РИ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutY="75.0" prefHeight="0.0" prefWidth="912.0"/>
+        <Separator layoutX="400.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="5.0"/>
+        <Button layoutX="736.0" layoutY="140.0" mnemonicParsing="false" onAction="#findPonabDeviceButton"
+                prefHeight="30.0" prefWidth="156.0" text="Поиск устройств ">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="22.0" layoutY="175.0" mnemonicParsing="false" onAction="#cleanPonabDevicesTableButton"
+                prefHeight="30.0" prefWidth="156.0" text="Очистить таблицу">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="allComboBoxesResetButton" layoutX="221.0" layoutY="175.0" mnemonicParsing="false"
+                onAction="#resetAllComboBoxes" prefHeight="30.0" prefWidth="156.0" text="Сбросить выборку">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Separator layoutX="401.0" layoutY="76.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutY="155.0" prefHeight="3.0" prefWidth="712.0"/>
+        <Separator layoutX="711.0" layoutY="75.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutX="208.0" layoutY="75.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutX="711.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="5.0"/>
+        <ComboBox fx:id="communicationDistanceComboBox" layoutX="419.0" layoutY="178.0"
+                  onAction="#communicationComboBoxChangeListener" prefHeight="25.0" prefWidth="280.0"/>
+        <Label layoutX="548.0" layoutY="156.0" text="ШЧ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+    </children>
 </Pane>
