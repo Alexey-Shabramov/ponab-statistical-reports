@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.controller.remark;
+package com.uz.laboratory.statistical.controller.remark.ponab;
 
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import javafx.event.ActionEvent;

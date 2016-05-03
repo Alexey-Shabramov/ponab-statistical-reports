@@ -1,14 +1,14 @@
-package com.uz.laboratory.statistical.controller.remark;
+package com.uz.laboratory.statistical.controller.remark.als;
 
 import com.uz.laboratory.statistical.dict.Constants;
-import com.uz.laboratory.statistical.dto.ponab.PonabRemarkEditEntityDto;
+import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
+import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
-import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
-import com.uz.laboratory.statistical.entity.remark.PonabRemark;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
-import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
-import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
+import com.uz.laboratory.statistical.service.als.TrackCircuitService;
+import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
@@ -31,39 +31,36 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 @Controller
-public class PonabRemarkEditModalController implements Initializable {
-
+public class AlsRemarkEditModalController implements Initializable {
     @FXML
     public ComboBox<Sector> sectorComboBox;
     @FXML
     public ComboBox<Stage> stageComboBox;
     @FXML
-    public ComboBox<PonabSystem> ponabSystemsComboBox;
+    public ComboBox<TrackCircuit> alsSystemsComboBox;
     @FXML
     public ComboBox repeatComboBox;
     @FXML
     public ComboBox<InspectionTrip> inspectionComboBox;
+
     @FXML
     public TextArea noteTextArea;
     @FXML
-    public DatePicker ponabRemarkDatePicker;
+    public DatePicker alsRemarkDatePicker;
 
-    private PonabRemark ponabRemark;
-
-    private List<String> errorList = new ArrayList<>();
+    private AlsRemark alsRemark;
 
     @Autowired
-    private PonabRemarkEditEntityDto ponabRemarkEditEntityDto;
-
+    private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
     @Autowired
-    private PonabRemarkService ponabRemarkService;
+    private AlsRemarkService alsRemarkService;
     @Autowired
-    private PonabSystemService ponabSystemService;
+    private TrackCircuitService alsSystemService;
     @Autowired
     private InspectionTripService inspectionTripService;
 
+    private List<String> errorList = new ArrayList<>();
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
         public String toString(Stage object) {
@@ -97,44 +94,42 @@ public class PonabRemarkEditModalController implements Initializable {
             return null;
         }
     };
-    private StringConverter<PonabSystem> ponabSystemConverter = new StringConverter<PonabSystem>() {
+    private StringConverter<TrackCircuit> alsSystemConverter = new StringConverter<TrackCircuit>() {
         @Override
-        public String toString(PonabSystem object) {
-            return DtoUtil.ponabSystemConverterTitleBuilder(object);
+        public String toString(TrackCircuit object) {
+            return DtoUtil.alsSystemConverterTitleBuilder(object);
         }
 
         @Override
-        public PonabSystem fromString(String string) {
+        public TrackCircuit fromString(String string) {
             return null;
         }
     };
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ponabRemark = (PonabRemark) ponabRemarkService.get(ponabRemarkEditEntityDto.getEditedEntityId());
-
-        ponabRemarkDatePicker.setValue(LocalDateTime.ofInstant(Instant.ofEpochMilli(ponabRemark.getCreationDate().getTime()), ZoneId.systemDefault()).toLocalDate());
+        alsRemark = (AlsRemark) alsRemarkService.get(alsRemarkEditEntityDto.getEditedEntityId());
+        alsRemarkDatePicker.setValue(LocalDateTime.ofInstant(Instant.ofEpochMilli(alsRemark.getCreationDate().getTime()), ZoneId.systemDefault()).toLocalDate());
 
         sectorComboBox.setConverter(sectorConverter);
         stageComboBox.setConverter(stageConverter);
         inspectionComboBox.setConverter(inspectionTripConverter);
-        ponabSystemsComboBox.setConverter(ponabSystemConverter);
-        sectorComboBox.getItems().setAll(ponabRemarkEditEntityDto.getSectorList());
-        sectorComboBox.getSelectionModel().select(ponabRemark.getPonabSystem().getSector());
+        alsSystemsComboBox.setConverter(alsSystemConverter);
+        sectorComboBox.getItems().setAll(alsRemarkEditEntityDto.getSectorList());
+        sectorComboBox.getSelectionModel().select(alsRemark.getInspectionTrip().getTripSector());
 
         stageComboBox.getItems().setAll(sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
-        stageComboBox.getSelectionModel().select(ponabRemark.getPonabSystem().getStage());
+        stageComboBox.getSelectionModel().select(alsRemark.getTrackCircuit().getStage());
 
-        inspectionComboBox.getItems().setAll(inspectionTripService.getInspectionTripsBySector(ponabRemark.getInspectionTrip().getTripSector()));
-        inspectionComboBox.getSelectionModel().select(ponabRemark.getInspectionTrip());
+        inspectionComboBox.getItems().setAll(inspectionTripService.getInspectionTripsBySector(alsRemark.getInspectionTrip().getTripSector()));
+        inspectionComboBox.getSelectionModel().select(alsRemark.getInspectionTrip());
 
-        ponabSystemsComboBox.getItems().setAll(ponabSystemService.getPonabSystemsByStage(ponabRemark.getPonabSystem().getStage()));
-        ponabSystemsComboBox.getSelectionModel().select(ponabRemark.getPonabSystem());
+        alsSystemsComboBox.getItems().setAll(alsSystemService.getAlsSystemsByStage(alsRemark.getTrackCircuit().getStage()));
+        alsSystemsComboBox.getSelectionModel().select(alsRemark.getTrackCircuit());
 
-        noteTextArea.setText(ponabRemarkEditEntityDto.getNote());
+        noteTextArea.setText(alsRemarkEditEntityDto.getNote());
 
-        repeatComboBox.getItems().setAll(ponabRemarkEditEntityDto.getRepeatList());
-        if (ponabRemark.isRepeatable()) {
+        repeatComboBox.getItems().setAll(alsRemarkEditEntityDto.getRepeatList());
+        if (alsRemark.isRepeatable()) {
             repeatComboBox.getSelectionModel().select("+");
         } else {
             repeatComboBox.getSelectionModel().select("-");
@@ -152,9 +147,8 @@ public class PonabRemarkEditModalController implements Initializable {
 
     @FXML
     public void stageSelectionListener(ActionEvent actionEvent) {
-        ponabSystemsComboBox.setValue(null);
-        ponabSystemsComboBox.getItems().setAll(ponabSystemService.getPonabSystemsByStage(ponabRemark.getPonabSystem().getStage()));
-
+        alsSystemsComboBox.setValue(null);
+        alsSystemsComboBox.getItems().setAll(alsSystemService.getAlsSystemsByStage(alsRemark.getTrackCircuit().getStage()));
     }
 
     @FXML
@@ -168,29 +162,29 @@ public class PonabRemarkEditModalController implements Initializable {
         if (repeatComboBox.getSelectionModel().getSelectedItem() == null) {
             errorList.add(Constants.EDIT_REPEAT_NULL);
         }
-        if (ponabSystemsComboBox.getSelectionModel().getSelectedItem() == null) {
+        if (alsSystemsComboBox.getSelectionModel().getSelectedItem() == null) {
             errorList.add(Constants.EDIT_SYSTEM_IS_NOT_SET);
         }
         if (inspectionComboBox.getSelectionModel().getSelectedItem() == null) {
             errorList.add(Constants.EDIT_INSPECTION_NULL);
         }
-        if (ponabRemarkDatePicker.getValue() == null) {
+        if (alsRemarkDatePicker.getValue() == null) {
             errorList.add(Constants.EDIT_REMARK_FORMATION_DATE_NULL);
         }
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
-            ponabRemark.setPonabSystem(ponabSystemsComboBox.getSelectionModel().getSelectedItem());
-            ponabRemark.setCreationDate(Date.from(ponabRemarkDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            ponabRemark.setNote(noteTextArea.getText());
-            ponabRemark.setInspectionTrip(inspectionComboBox.getSelectionModel().getSelectedItem());
+            alsRemark.setTrackCircuit(alsSystemsComboBox.getSelectionModel().getSelectedItem());
+            alsRemark.setCreationDate(Date.from(alsRemarkDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            alsRemark.setNote(noteTextArea.getText());
+            alsRemark.setInspectionTrip(inspectionComboBox.getSelectionModel().getSelectedItem());
             if (repeatComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                ponabRemark.setRepeatable(true);
+                alsRemark.setRepeatable(true);
             } else if (repeatComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                ponabRemark.setRepeatable(false);
+                alsRemark.setRepeatable(false);
             }
-            ponabRemarkService.save(ponabRemark);
-            ponabRemarkEditEntityDto.setPonabRemark(ponabRemark);
+            alsRemarkService.save(alsRemark);
+            alsRemarkEditEntityDto.setAlsRemark(alsRemark);
             cleanDtoSecondaryData();
             ((javafx.stage.Stage) sectorComboBox.getScene().getWindow()).close();
         }
@@ -203,15 +197,15 @@ public class PonabRemarkEditModalController implements Initializable {
     }
 
     private void cleanDtoSecondaryData() {
-        ponabRemarkEditEntityDto.setNote(null);
-        ponabRemarkEditEntityDto.setEditedEntityId(null);
-        ponabRemarkEditEntityDto.setRepeatList(null);
-        ponabRemarkEditEntityDto.setSectorList(null);
+        alsRemarkEditEntityDto.setNote(null);
+        alsRemarkEditEntityDto.setEditedEntityId(null);
+        alsRemarkEditEntityDto.setRepeatList(null);
+        alsRemarkEditEntityDto.setSectorList(null);
     }
 
     private void cleanAllDtoData() {
-        ponabRemarkEditEntityDto.setPonabRemark(null);
-        ponabRemarkEditEntityDto.setTableViewIndex(null);
+        alsRemarkEditEntityDto.setAlsRemark(null);
+        alsRemarkEditEntityDto.setTableViewIndex(null);
         cleanDtoSecondaryData();
     }
 }

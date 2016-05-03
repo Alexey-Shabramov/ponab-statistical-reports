@@ -9,7 +9,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="516.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.uz.laboratory.statistical.controller.remark.AlsRemarkViewController">
+            fx:controller="com.uz.laboratory.statistical.controller.remark.als.AlsRemarkViewController">
     <Button fx:id="alsRemarkViewCloseButton" layoutX="212.0" layoutY="469.0" mnemonicParsing="false"
             onAction="#closeButtonListener" text="Закрыть">
         <font>

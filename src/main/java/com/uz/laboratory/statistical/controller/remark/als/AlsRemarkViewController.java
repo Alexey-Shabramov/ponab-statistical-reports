@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.controller.remark;
+package com.uz.laboratory.statistical.controller.remark.als;
 
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;

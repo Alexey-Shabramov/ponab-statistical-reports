@@ -124,7 +124,8 @@ public class PonabDevicesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initColumnsForTableView();
-        ponabDevicesTablePagination.setPageFactory(this::initializePage);
+        ponabDevicesTablePagination.setPageCount(1);
+        ponabDevicesTablePagination.setPageFactory(this::createPage);
         initComboBoxes();
         initTableView();
         initPopupMenu();
@@ -158,6 +159,11 @@ public class PonabDevicesController implements Initializable {
         ponabDevicesTableData.clear();
         ponabDevicesTableData.setAll(TableDtoConverter.convertPonabDeviceListToDto(ponabSystemService.getRemarkListByFilter(ponabDevicesFilter)));
         ponabDevicesTablePagination.setPageFactory(this::createPage);
+        if (ponabDevicesTableData.size() <= 9) {
+            ponabDevicesTablePagination.setPageCount(1);
+        } else {
+            ponabDevicesTablePagination.setPageCount((int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
+        }
     }
 
     @FXML

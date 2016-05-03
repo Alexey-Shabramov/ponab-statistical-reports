@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="522.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.uz.laboratory.statistical.controller.remark.PonabRemarkEditModalController">
+            fx:controller="com.uz.laboratory.statistical.controller.remark.ponab.PonabRemarkEditModalController">
     <children>
         <ComboBox fx:id="sectorComboBox" layoutX="28.0" layoutY="45.0" onAction="#sectorOnChangeListener"
                   prefHeight="25.0" prefWidth="311.0"/>

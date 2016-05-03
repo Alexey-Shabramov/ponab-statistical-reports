@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -39,8 +38,6 @@ public class SaveRemarkTableController implements Initializable {
     @FXML
     public TextField newTextFileTextfield;
 
-    @Autowired
-    private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
 
