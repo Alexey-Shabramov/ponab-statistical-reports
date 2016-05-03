@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.controller.remark.ponab;
+package com.uz.laboratory.statistical.controller;
 
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class PonabRemarkDeletionController implements Initializable {
+public class EntityDeletionController implements Initializable {
     @FXML
     public Button deleteConfirmButton;
     @FXML

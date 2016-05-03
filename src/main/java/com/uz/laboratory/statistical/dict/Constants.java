@@ -18,6 +18,8 @@ public class Constants {
      * FXML - all fxml path's
      */
     public static final String MAIN_FXML_PATH = "/fxml/mainAnchor.fxml";
+    public static final String VALIDATE_ENTITY_DELETION_MODAL = "/fxml/modal/delete/validateEntityDeletion.fxml";
+
     public static final String PONAB_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/ponabRemarkEditModal.fxml";
     public static final String ALS_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/alsRemarkEditModal.fxml";
 
@@ -32,7 +34,6 @@ public class Constants {
     public static final String VALIDATE_PONAB_DELETION_MODAL = "/fxml/modal/delete/validatePonabDeviceDeletion.fxml";
     public static final String VALIDATE_INSPECTION_TRIP_DELETION_MODAL = "/fxml/modal/delete/validateInspectionTripDeletion.fxml";
     public static final String VALIDATE_PLANNED_TRIP_MODAL = "/fxml/modal/delete/validatePlannedTripDeletion.fxml";
-    public static final String VALIDATE_REMARK_DELETION_MODAL = "/fxml/modal/delete/validateRemarkDeletion.fxml";
 
     public static final String REMARK_TABLE_SAVE_MODAL = "/fxml/modal/save/saveRemarkTable.fxml";
 
@@ -47,7 +48,7 @@ public class Constants {
     public static final String REMARK_PONAB_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
     public static final String REMARK_ALS_EDIT_MODAL_TITLE = "Редактирование замечания АЛС";
 
-    public static final String REMARK_DELETION_MODAL_TITLE = "Удаление замечания";
+    public static final String ENTITY_DELETION_MODAL_TITLE = "Удаление выбранного объекта";
     public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";
 
     /**

@@ -16,7 +16,7 @@ import javax.persistence.*;
         @AttributeOverride(name = "creationDate", column = @Column(name = "creation_date"))
 })
 public class PonabRemark extends AbstractRemark {
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ponab_system")
     private PonabSystem ponabSystem;
 

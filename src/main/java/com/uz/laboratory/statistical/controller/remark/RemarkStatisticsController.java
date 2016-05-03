@@ -347,7 +347,7 @@ public class RemarkStatisticsController implements Initializable {
         });
         delete.setOnAction(event -> {
             if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
-                modalUtil.createRemarkDeletionConfirmModal();
+                modalUtil.createDeletionConfirmModal();
                 if (deleteEntityDto.getDeleteValidationValue()) {
                     deleteConfirm();
                     deleteEntityDto.setDeleteValidationValue(false);
@@ -375,15 +375,19 @@ public class RemarkStatisticsController implements Initializable {
 
     private void deleteConfirm() {
         if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-            alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
-            statisticsTableData.remove(tableViewSelectedIndex.get());
-            statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
-            statisticsTableView.getSelectionModel().clearSelection();
+            if (alsRemarkService.isExists(selectectedEntityId)) {
+                alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+                cleanTableViewFromValue();
+            } else {
+                cleanTableViewFromValue();
+            }
         } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
-            ponabRemarkService.delete(ponabRemarkService.get(selectectedEntityId));
-            statisticsTableData.remove(tableViewSelectedIndex.get());
-            statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
-            statisticsTableView.getSelectionModel().clearSelection();
+            if (ponabRemarkService.isExists(selectectedEntityId)) {
+                ponabRemarkService.delete(ponabRemarkService.get(selectectedEntityId));
+                cleanTableViewFromValue();
+            } else {
+                cleanTableViewFromValue();
+            }
         }
         if (statisticsTableData.size() <= 9) {
             statisticsTableViewPagination.setPageCount(1);
@@ -406,6 +410,12 @@ public class RemarkStatisticsController implements Initializable {
         alsRemarkEditEntityDto.setSectorList(sectorComboBox.getItems());
         alsRemarkEditEntityDto.setNote(statisticsTableView.getSelectionModel().getSelectedItem().getNoteColumn());
         alsRemarkEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+    }
+
+    private void cleanTableViewFromValue() {
+        statisticsTableData.remove(tableViewSelectedIndex.get());
+        statisticsTableView.getItems().remove(tableViewSelectedIndex.get());
+        statisticsTableView.getSelectionModel().clearSelection();
     }
 
     private <T> TableColumn<T, ?> getTableColumnByName(TableView<T> tableView, String name) {

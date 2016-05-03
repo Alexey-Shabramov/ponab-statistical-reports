@@ -3,6 +3,7 @@ package com.uz.laboratory.statistical.util.fx;
 
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
+import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
@@ -39,6 +40,8 @@ public class ModalUtil {
     private PonabSystemDto ponabSystemDto;
     @Autowired
     private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
+    @Autowired
+    private DeleteEntityDto deleteEntityDto;
 
     public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
@@ -108,16 +111,16 @@ public class ModalUtil {
         remarkViewModal.showAndWait();
     }
 
-    public void createRemarkDeletionConfirmModal() {
-        Stage remarkDeletionConfirm = new Stage();
-        remarkDeletionConfirm.initModality(Modality.APPLICATION_MODAL);
+    public void createDeletionConfirmModal() {
+        Stage deletionConfirm = new Stage();
+        deletionConfirm.initModality(Modality.APPLICATION_MODAL);
         try {
-            remarkDeletionConfirm.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.VALIDATE_REMARK_DELETION_MODAL)));
+            deletionConfirm.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.VALIDATE_ENTITY_DELETION_MODAL)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkDeletionConfirm.setTitle(Constants.REMARK_DELETION_MODAL_TITLE);
-        remarkDeletionConfirm.showAndWait();
+        deletionConfirm.setTitle(Constants.ENTITY_DELETION_MODAL_TITLE);
+        deletionConfirm.showAndWait();
     }
 
     public void createRemarkTableSaveModal() {

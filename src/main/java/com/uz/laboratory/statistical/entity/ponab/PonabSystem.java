@@ -3,9 +3,11 @@ package com.uz.laboratory.statistical.entity.ponab;
 import com.uz.laboratory.statistical.entity.Identifier;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ponab_system")
@@ -34,6 +36,17 @@ public class PonabSystem extends Identifier {
 
     @Column(name = "even_direction")
     private boolean evenDirectionOfMovement;
+
+    @OneToMany(mappedBy = "ponabSystem", cascade = CascadeType.REMOVE)
+    private List<PonabRemark> ponabRemarks;
+
+    public List<PonabRemark> getPonabRemarks() {
+        return ponabRemarks;
+    }
+
+    public void setPonabRemarks(List<PonabRemark> ponabRemarks) {
+        this.ponabRemarks = ponabRemarks;
+    }
 
     public boolean isEvenDirectionOfMovement() {
         return evenDirectionOfMovement;

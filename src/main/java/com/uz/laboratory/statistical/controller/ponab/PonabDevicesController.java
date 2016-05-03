@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.controller.ponab;
 
 
 import com.uz.laboratory.statistical.dict.*;
+import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
@@ -89,7 +90,8 @@ public class PonabDevicesController implements Initializable {
     private PonabSystemDto ponabSystemDto;
     @Autowired
     private PonabSystemEditEntityDto ponabSystemEditEntityDto;
-
+    @Autowired
+    private DeleteEntityDto deleteEntityDto;
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
 
@@ -263,10 +265,21 @@ public class PonabDevicesController implements Initializable {
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
-                ponabDevicesTableData.remove(tableViewSelectedIndex.get());
-                ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
-                ponabDevicesTableView.getSelectionModel().clearSelection();
+                if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
+                    modalUtil.createDeletionConfirmModal();
+                    if (deleteEntityDto.getDeleteValidationValue()) {
+                        ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
+                        ponabDevicesTableData.remove(tableViewSelectedIndex.get());
+                        ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
+                        ponabDevicesTableView.getSelectionModel().clearSelection();
+                        deleteEntityDto.setDeleteValidationValue(false);
+                        if (ponabDevicesTableData.size() <= 9) {
+                            ponabDevicesTablePagination.setPageCount(1);
+                        } else {
+                            ponabDevicesTablePagination.setPageCount((int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
+                        }
+                    }
+                }
             }
         });
     }
