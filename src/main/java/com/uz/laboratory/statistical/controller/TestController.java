@@ -113,11 +113,13 @@ public class TestController implements Initializable {
         inspectionTripService.save(inspectionTrip);
 
         TrackCircuit trackCircuit = new TrackCircuit();
+        trackCircuit.setSector(sector);
         trackCircuit.setCommunicationDistance(communicationDistance);
         trackCircuit.setName("Сп.3");
         trackCircuit.setStage(stage);
         trackCircuit.setEven(true);
         trackCircuit.setStationalCircuit(false);
+        trackCircuit.setStation(station);
         trackCircuitService.save(trackCircuit);
 
         AlsRemark alsRemark = new AlsRemark();

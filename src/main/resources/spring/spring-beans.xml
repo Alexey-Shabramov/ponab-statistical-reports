@@ -134,5 +134,10 @@
 
     <beans:bean id="ponabDeviceDto" class="com.uz.laboratory.statistical.dto.ponab.PonabSystemDto"/>
 
+    <beans:bean id="alsSystemDto" class="com.uz.laboratory.statistical.dto.als.AlsSystemDto"/>
+
     <beans:bean id="ponabSystemEditEntityDto" class="com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto"/>
+
+    <beans:bean id="alsSystemEditEntityDto" class="com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto"/>
+
 </beans:beans>

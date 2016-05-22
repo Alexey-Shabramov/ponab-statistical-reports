@@ -1,8 +1,11 @@
 package com.uz.laboratory.statistical.util.fx;
 
 import com.uz.laboratory.statistical.dict.Constants;
+import com.uz.laboratory.statistical.dict.TrackCircuitTypes;
+import com.uz.laboratory.statistical.dto.tableView.AlsDevicesTableDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
@@ -61,6 +64,21 @@ public class TableDtoConverter {
         return data;
     }
 
+    public static List<AlsDevicesTableDto> convertAlsDeviceListToDto(List<TrackCircuit> trackCircuitList) {
+        List<AlsDevicesTableDto> data = new ArrayList<>();
+        for (TrackCircuit system : trackCircuitList) {
+            data.add(new AlsDevicesTableDto(
+                    system.getId().toString(),
+                    system.getName(),
+                    system.getSector().getTitle(),
+                    system.isStationalCircuit() ? system.getStation().getName() : system.getStage().getName(),
+                    system.isEven() ? Constants.EVEN : Constants.UNEVEN,
+                    system.isStationalCircuit() ? TrackCircuitTypes.STATION.toString() : TrackCircuitTypes.STAGE.toString(),
+                    system.getPicket() != null ? system.getPicket().toString() : "-"));
+        }
+        return data;
+    }
+
     public static StatisticsRemarkTableDto convertEditedPonabRemarkToTableDto(StatisticsRemarkTableDto statisticsRemarkTableDto, PonabRemark ponabRemark) {
         statisticsRemarkTableDto.setRemarkId(ponabRemark.getId().toString());
         statisticsRemarkTableDto.setObjectColumn(ponabRemark.getPonabSystem().getTitle());
@@ -92,5 +110,16 @@ public class TableDtoConverter {
         ponabDevicesTableDto.setSystemTitle(ponabSystem.getTitle());
         ponabDevicesTableDto.setSpeachInformator(ponabSystem.isSpeachInformer() ? "+" : "-");
         return ponabDevicesTableDto;
+    }
+
+    public static AlsDevicesTableDto convertEditedAlsSystemToTableDto(AlsDevicesTableDto alsDevicesTableDto, TrackCircuit trackCircuit) {
+        alsDevicesTableDto.setDeviceId(trackCircuit.getId().toString());
+        alsDevicesTableDto.setSectorTitle(trackCircuit.getSector().getTitle());
+        alsDevicesTableDto.setStageOrStationTitle(trackCircuit.isStationalCircuit() ? trackCircuit.getStation().getName() : trackCircuit.getStage().getName());
+        alsDevicesTableDto.setDirectionOfMovement(trackCircuit.isEven() ? Constants.EVEN : Constants.UNEVEN);
+        alsDevicesTableDto.setPicketNumber(trackCircuit.getPicket().toString());
+        alsDevicesTableDto.setTrackCircuitName(trackCircuit.getName());
+        alsDevicesTableDto.setTrackCircuitType(trackCircuit.isStationalCircuit() ? TrackCircuitTypes.STATION.toString() : TrackCircuitTypes.STAGE.toString());
+        return alsDevicesTableDto;
     }
 }

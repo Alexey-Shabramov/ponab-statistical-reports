@@ -7,6 +7,8 @@ public class Constants {
     public static final String PONAB_REMARK_TO_DTO = "ponabRemarkToDto";
     public static final String ALS_REMARK_TO_DTO = "alsRemarkToDto";
     public static final String PONAB_DEVICE_TO_DTO = "ponabDeviceToDto";
+    public static final String ALS_DEVICE_TO_DTO = "alsDeviceToDto";
+
     public static final String CLEAN_PONAB_REMARK_DTO = "cleanPonabRemarkDto";
     public static final String CLEAN_ALS_REMARK_DTO = "cleanAlsRemarkDto";
     public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";

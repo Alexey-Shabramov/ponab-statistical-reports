@@ -34,6 +34,11 @@
         <class-b>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-b>
     </mapping>
 
+    <mapping map-id="alsDeviceToDto">
+        <class-a>com.uz.laboratory.statistical.entity.als.TrackCircuit</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.als.AlsSystemDto</class-b>
+    </mapping>
+
     <mapping map-id="cleanPonabDeviceDto">
         <class-a>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-a>
         <class-b>com.uz.laboratory.statistical.dto.ponab.PonabSystemDto</class-b>

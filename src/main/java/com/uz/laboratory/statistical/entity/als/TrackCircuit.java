@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.entity.als;
 
 import com.uz.laboratory.statistical.entity.Identifier;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
+import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
@@ -17,10 +18,14 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "id"))
 public class TrackCircuit extends Identifier {
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sector")
+    private Sector sector;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stage")
     private Stage stage;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_station")
     private Station station;
 
@@ -42,6 +47,14 @@ public class TrackCircuit extends Identifier {
 
     @OneToMany(mappedBy = "trackCircuit", cascade = CascadeType.REMOVE)
     private List<AlsRemark> alsRemarks;
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
 
     public List<AlsRemark> getAlsRemarks() {
         return alsRemarks;

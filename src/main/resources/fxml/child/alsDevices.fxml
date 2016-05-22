@@ -1,6 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-      prefWidth="200.0" xmlns="http://javafx.com/javafx/8"
-      fx:controller="com.uz.laboratory.statistical.controller.als.AlsDevicesController"/>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+      xmlns="http://javafx.com/javafx/8"
+      fx:controller="com.uz.laboratory.statistical.controller.als.AlsDevicesController">
+    <children>
+        <Pagination fx:id="alsDevicesTablePagination" layoutX="2.0" layoutY="223.0" prefHeight="301.0"
+                    prefWidth="912.0">
+            <fx:define>
+                <TableView fx:id="alsDevicesTableView" layoutX="2.0" layoutY="223.0" prefHeight="301.0"
+                           prefWidth="912.0">
+                    <placeholder>
+                        <Label text="По результатам поиска ничего не найдено."/>
+                    </placeholder>
+                    <columns>
+                        <TableColumn minWidth="0.0" prefWidth="0.0" text="Оператор"/>
+                        <TableColumn fx:id="trackCircuitColumn" prefWidth="116.0" text="Рельсовая цепь"/>
+                        <TableColumn fx:id="sectorColumn" prefWidth="234.0" text="Участок"/>
+                        <TableColumn fx:id="stageOrStationColumn" minWidth="0.0" prefWidth="240.0"
+                                     text="Перегон / Станция"/>
+                        <TableColumn fx:id="directionOfMovementColumn" prefWidth="109.0" text="Направление"/>
+                        <TableColumn fx:id="trackCircuitTypeColumn" prefWidth="102.0" text="Тип РЦ"/>
+                        <TableColumn fx:id="picketColumn" prefWidth="68.0" text="Пикет"/>
+                        <TableColumn fx:id="deviceIdColumn" prefWidth="34.0" text="Id" visible="false"/>
+                    </columns>
+                </TableView>
+            </fx:define>
+        </Pagination>
+        <ComboBox fx:id="sectorComboBox" layoutX="25.0" layoutY="28.0" onAction="#sectorSelectedListener"
+                  prefHeight="25.0" prefWidth="363.0"/>
+
+        <ComboBox fx:id="stageComboBox" layoutX="419.0" layoutY="28.0" onAction="#stageComboBoxChangeListener"
+                  prefHeight="25.0" prefWidth="280.0"/>
+        <Label layoutX="186.0" layoutY="7.0" text="Участок">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="534.0" layoutY="7.0" text="Перегон">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="284.0" layoutY="81.0" text="Пикет">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="directionOfMovementComboBox" layoutX="419.0" layoutY="104.0" prefHeight="25.0"
+                  prefWidth="280.0"/>
+        <Label layoutX="521.0" layoutY="81.0" text="Направление">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="trackCircuitTypeComboBox" layoutX="25.0" layoutY="103.0"
+                  onAction="#trackCircuitTypeComboBoxChangeListener" prefWidth="150.0"/>
+        <ComboBox fx:id="stationComboBox" layoutX="736.0" layoutY="27.0" onAction="#stationComboBoxChangeListener"
+                  prefWidth="150.0"/>
+        <Label layoutX="34.0" layoutY="81.0" text="Тип рельсовой цепи">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="787.0" layoutY="7.0" text="Станция">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutY="75.0" prefHeight="0.0" prefWidth="912.0"/>
+        <Separator layoutX="400.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="5.0"/>
+        <Button layoutX="736.0" layoutY="140.0" mnemonicParsing="false" onAction="#findAlsDevicesButton"
+                prefHeight="30.0" prefWidth="156.0" text="Поиск устройств ">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="22.0" layoutY="175.0" mnemonicParsing="false" onAction="#cleanAlsDevicesTableButton"
+                prefHeight="30.0" prefWidth="156.0" text="Очистить таблицу">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="allComboBoxesResetButton" layoutX="221.0" layoutY="175.0" mnemonicParsing="false"
+                onAction="#resetAllComboBoxes" prefHeight="30.0" prefWidth="156.0" text="Сбросить выборку">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Separator layoutX="401.0" layoutY="76.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutY="155.0" prefHeight="3.0" prefWidth="712.0"/>
+        <Separator layoutX="711.0" layoutY="75.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutX="208.0" layoutY="75.0" orientation="VERTICAL" prefHeight="161.0" prefWidth="6.0"/>
+        <Separator layoutX="711.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="80.0" prefWidth="5.0"/>
+        <Label layoutX="548.0" layoutY="156.0" text="ШЧ">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="communicationDistanceComboBox" layoutX="419.0" layoutY="178.0"
+                  onAction="#communicationDistanceComboBoxListener" prefHeight="25.0" prefWidth="280.0"/>
+        <TextField fx:id="picketTextField" layoutX="225.0" layoutY="104.0" prefHeight="25.0" prefWidth="156.0"/>
+    </children>
+</Pane>

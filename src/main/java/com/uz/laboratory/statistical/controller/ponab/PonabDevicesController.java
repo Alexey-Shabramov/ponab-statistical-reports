@@ -22,7 +22,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -35,14 +34,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 @Controller
 public class PonabDevicesController implements Initializable {
     private final static int rowsPerPage = 9;
-    private static FXMLLoader fxmlLoader = new FXMLLoader();
     private final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public TableView<PonabDevicesTableDto> ponabDevicesTableView;
@@ -102,7 +98,6 @@ public class PonabDevicesController implements Initializable {
     @Autowired
     private CommunicationDistanceService communicationDistanceService;
 
-    private List<String> errorList = new ArrayList<>();
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
         public String toString(Stage object) {
@@ -161,30 +156,19 @@ public class PonabDevicesController implements Initializable {
             ponabDevicesFilter.setPonabSystem(ponabSystemComboBox.getSelectionModel().getSelectedItem());
         }
         if (directionOfMovementComboBox.getSelectionModel().getSelectedItem() != null) {
-            if (directionOfMovementComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                ponabDevicesFilter.setEvenDirectionOfMovement(true);
-            } else if (directionOfMovementComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                ponabDevicesFilter.setEvenDirectionOfMovement(false);
-            }
+            ponabDevicesFilter.setEvenDirectionOfMovement(directionOfMovementComboBox.getSelectionModel().getSelectedIndex() == 0);
         }
         if (speachInformerComboBox.getSelectionModel().getSelectedItem() != null) {
-            if (speachInformerComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                ponabDevicesFilter.setSpeachInformer(true);
-            } else if (speachInformerComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                ponabDevicesFilter.setSpeachInformer(false);
-            }
+            ponabDevicesFilter.setSpeachInformer(speachInformerComboBox.getSelectionModel().getSelectedIndex() == 0);
         }
         if (optionComboBox.getSelectionModel().getSelectedItem() != null) {
             ponabDevicesFilter.setOption(optionComboBox.getSelectionModel().getSelectedItem().toString());
         }
         ponabDevicesTableData.clear();
         ponabDevicesTableData.setAll(TableDtoConverter.convertPonabDeviceListToDto(ponabSystemService.getRemarkListByFilter(ponabDevicesFilter)));
+
         ponabDevicesTablePagination.setPageFactory(this::createPage);
-        if (ponabDevicesTableData.size() <= 9) {
-            ponabDevicesTablePagination.setPageCount(1);
-        } else {
-            ponabDevicesTablePagination.setPageCount((int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
-        }
+        ponabDevicesTablePagination.setPageCount(ponabDevicesTableData.size() <= 9 ? 1 : (int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
     }
 
     @FXML
@@ -300,11 +284,7 @@ public class PonabDevicesController implements Initializable {
                         ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
                         ponabDevicesTableView.getSelectionModel().clearSelection();
                         deleteEntityDto.setDeleteValidationValue(false);
-                        if (ponabDevicesTableData.size() <= 9) {
-                            ponabDevicesTablePagination.setPageCount(1);
-                        } else {
-                            ponabDevicesTablePagination.setPageCount((int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
-                        }
+                        ponabDevicesTablePagination.setPageCount(ponabDevicesTableData.size() <= 9 ? 1 : (int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
                     }
                 }
             }
