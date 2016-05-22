@@ -83,6 +83,7 @@ public class AlsDevicesController implements Initializable {
     public TextField picketTextField;
     @FXML
     public Button allComboBoxesResetButton;
+
     private ObservableList<AlsDevicesTableDto> alsDevicesTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
@@ -223,8 +224,8 @@ public class AlsDevicesController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (alsDevicesTableView.getSelectionModel().getSelectedItem() != null) {
-                    preparePonabSystemDto();
-                    modalUtil.createPonabDeviceEditModal();
+                    prepareAlsSystemDto();
+                    modalUtil.createAlsDeviceEditModal();
                     if (alsSystemEditEntityDto.getTrackCircuit() != null) {
                         alsDevicesTableData.remove(alsSystemEditEntityDto.getTableViewIndex());
                         alsDevicesTableData.set(alsSystemEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedAlsSystemToTableDto(alsDevicesTableView.getSelectionModel().getSelectedItem(), alsSystemEditEntityDto.getTrackCircuit()));
@@ -336,7 +337,7 @@ public class AlsDevicesController implements Initializable {
         return new BorderPane(alsDevicesTableView);
     }
 
-    private void preparePonabSystemDto() {
+    private void prepareAlsSystemDto() {
         alsSystemEditEntityDto.setTableViewIndex(alsDevicesTableView.getSelectionModel().getSelectedIndex());
         alsSystemEditEntityDto.setEditedEntityId(selectectedEntityId);
         alsSystemEditEntityDto.setSectorList(sectorComboBox.getItems());

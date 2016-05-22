@@ -80,6 +80,18 @@ public class ModalUtil {
         ponabDeviceModal.showAndWait();
     }
 
+    public void createAlsDeviceEditModal() {
+        Stage alsDeviceModal = new Stage();
+        alsDeviceModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            alsDeviceModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.ALS_DEVICE_EDIT_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        alsDeviceModal.setTitle(Constants.ALS_DEVICE_EDIT_TITLE);
+        alsDeviceModal.showAndWait();
+    }
+
     public void createPonabRemarkEditModal() {
         Stage remarkEditModal = new Stage();
         remarkEditModal.initModality(Modality.APPLICATION_MODAL);

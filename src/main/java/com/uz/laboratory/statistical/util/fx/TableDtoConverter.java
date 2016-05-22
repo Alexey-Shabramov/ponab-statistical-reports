@@ -117,7 +117,7 @@ public class TableDtoConverter {
         alsDevicesTableDto.setSectorTitle(trackCircuit.getSector().getTitle());
         alsDevicesTableDto.setStageOrStationTitle(trackCircuit.isStationalCircuit() ? trackCircuit.getStation().getName() : trackCircuit.getStage().getName());
         alsDevicesTableDto.setDirectionOfMovement(trackCircuit.isEven() ? Constants.EVEN : Constants.UNEVEN);
-        alsDevicesTableDto.setPicketNumber(trackCircuit.getPicket().toString());
+        alsDevicesTableDto.setPicketNumber(trackCircuit.getPicket() != null ? trackCircuit.getPicket().toString() : null);
         alsDevicesTableDto.setTrackCircuitName(trackCircuit.getName());
         alsDevicesTableDto.setTrackCircuitType(trackCircuit.isStationalCircuit() ? TrackCircuitTypes.STATION.toString() : TrackCircuitTypes.STAGE.toString());
         return alsDevicesTableDto;

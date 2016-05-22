@@ -4,8 +4,6 @@ public class Constants {
     /**
      * Dozer bean mapper mappings names
      */
-    public static final String PONAB_REMARK_TO_DTO = "ponabRemarkToDto";
-    public static final String ALS_REMARK_TO_DTO = "alsRemarkToDto";
     public static final String PONAB_DEVICE_TO_DTO = "ponabDeviceToDto";
     public static final String ALS_DEVICE_TO_DTO = "alsDeviceToDto";
 
@@ -14,7 +12,6 @@ public class Constants {
     public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";
 
     public static final String CLEAN_ALS_DEVICE_DTO = "cleanAlsDeviceDto";
-
 
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
@@ -34,11 +31,6 @@ public class Constants {
     public static final String ALS_DEVICE_VIEW_MODAL = "/fxml/modal/view/als/alsDeviceViewModal.fxml";
     public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
     public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/shedule/plannedTripEditModal.fxml";
-
-    public static final String VALIDATE_ALS_DELETION_MODAL = "/fxml/modal/delete/validateAlsDeviceDeletion.fxml";
-    public static final String VALIDATE_PONAB_DELETION_MODAL = "/fxml/modal/delete/validatePonabDeviceDeletion.fxml";
-    public static final String VALIDATE_INSPECTION_TRIP_DELETION_MODAL = "/fxml/modal/delete/validateInspectionTripDeletion.fxml";
-    public static final String VALIDATE_PLANNED_TRIP_MODAL = "/fxml/modal/delete/validatePlannedTripDeletion.fxml";
 
     public static final String REMARK_TABLE_SAVE_MODAL = "/fxml/modal/save/saveRemarkTable.fxml";
 
@@ -174,6 +166,11 @@ public class Constants {
     public static final String ALS_DEVICE_TYPE = "Тип рельсовой цепи:";
     public static final String ALS_DEVICE_DIRECTION_OF_MOVEMENT = "Направление движения:";
     public static final String ALS_DEVICE_PICKET = "Пикет:";
+    public static final String ALS_DEVICE_STAGE_OR_STATION_NULL = "Не выбран перегон/станция. Проверьте введенные данные.";
+    public static final String ALS_DEVICE_SECTOR = "Не выбран участок.";
+    public static final String ALS_DEVICE_DIRECTION_OF_MOVEMENT_NULL = "Не выбрано направление движения.";
+    public static final String ALS_DEVICE_TYPE_NULL = "Не выбран тип рельсовой цепи.";
+    public static final String ALS_DEVICE_NAME_NULL = "Не указанно имя рельсовой цепи.";
 
 
     /**
@@ -181,6 +178,12 @@ public class Constants {
      */
     public static final String REMARK_TABLE_SAVE_EMPTY_PATH = "Путь к файлу - пуст.";
     public static final String REMARK_TABLE_FOLDER_NOT_EXISTS = "Папки с текущим адресом не существует.";
+
+    /**
+     * FXML -
+     */
+    public static final String ALS_DEVICE_EDIT_TITLE = "Редактирование выбранной рельсовой цепи";
+
 
 
     /**
