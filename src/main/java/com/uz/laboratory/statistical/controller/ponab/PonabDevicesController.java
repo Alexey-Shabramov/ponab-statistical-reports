@@ -278,7 +278,8 @@ public class PonabDevicesController implements Initializable {
             public void handle(ActionEvent event) {
                 if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
                     modalUtil.createDeletionConfirmModal();
-                    if (deleteEntityDto.getDeleteValidationValue()) {
+                    if (deleteEntityDto.getDeleteValidationValue() != null
+                            && deleteEntityDto.getDeleteValidationValue()) {
                         ponabSystemService.delete(ponabSystemService.get(selectectedEntityId));
                         ponabDevicesTableData.remove(tableViewSelectedIndex.get());
                         ponabDevicesTableView.getItems().remove(tableViewSelectedIndex.get());

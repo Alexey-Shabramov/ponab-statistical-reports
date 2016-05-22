@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
+import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
@@ -42,6 +43,8 @@ public class ModalUtil {
     private AlsRemarkEditEntityDto alsRemarkEditEntityDto;
     @Autowired
     private DeleteEntityDto deleteEntityDto;
+    @Autowired
+    private AlsSystemDto alsSystemDto;
 
     public static void createInspectionEditModal() {
         Stage inspectionModal = new Stage();
@@ -120,6 +123,17 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        deletionConfirm.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        deleteEntityDto.setDeleteValidationValue(null);
+                    }
+                });
+            }
+        });
         deletionConfirm.setTitle(Constants.ENTITY_DELETION_MODAL_TITLE);
         deletionConfirm.showAndWait();
     }
@@ -219,5 +233,28 @@ public class ModalUtil {
         });
         ponabDeviceModal.setTitle(Constants.PONAB_DEVICE_VIEW_TITLE);
         ponabDeviceModal.showAndWait();
+    }
+
+    public void createAlsDeviceViewModal() {
+        Stage alsDeviceModal = new Stage();
+        alsDeviceModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            alsDeviceModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.ALS_DEVICE_VIEW_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        alsDeviceModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        dozerBeanMapper.map(new AlsSystemDto(), alsSystemDto, Constants.CLEAN_ALS_DEVICE_DTO);
+                    }
+                });
+            }
+        });
+        alsDeviceModal.setTitle(Constants.ALS_DEVICE_VIEW_TITLE);
+        alsDeviceModal.showAndWait();
     }
 }

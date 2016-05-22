@@ -104,6 +104,8 @@ public class AlsDevicesController implements Initializable {
     @Autowired
     private CommunicationDistanceService communicationDistanceService;
 
+    private List stationList = new ArrayList<>();
+
     private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
         public String toString(Stage object) {
@@ -213,7 +215,7 @@ public class AlsDevicesController implements Initializable {
             public void handle(ActionEvent event) {
                 if (alsDevicesTableView.getSelectionModel().getSelectedItem() != null) {
                     dozerBeanMapper.map(trackCircuitService.get(Long.valueOf(alsDevicesTableView.getSelectionModel().getSelectedItem().getDeviceId())), alsSystemDto, Constants.ALS_DEVICE_TO_DTO);
-                    modalUtil.createPonabDeviceViewModal();
+                    modalUtil.createAlsDeviceViewModal();
                 }
             }
         });
@@ -237,7 +239,8 @@ public class AlsDevicesController implements Initializable {
             public void handle(ActionEvent event) {
                 if (alsDevicesTableView.getSelectionModel().getSelectedItem() != null) {
                     modalUtil.createDeletionConfirmModal();
-                    if (deleteEntityDto.getDeleteValidationValue()) {
+                    if (deleteEntityDto.getDeleteValidationValue() != null
+                            && deleteEntityDto.getDeleteValidationValue()) {
                         trackCircuitService.delete(trackCircuitService.get(selectectedEntityId));
                         alsDevicesTableData.remove(tableViewSelectedIndex.get());
                         alsDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
@@ -260,9 +263,9 @@ public class AlsDevicesController implements Initializable {
 
     @FXML
     public void sectorSelectedListener(ActionEvent actionEvent) {
+        stationList.clear();
         if (sectorComboBox.getSelectionModel().getSelectedItem() != null) {
             stageComboBox.getItems().setAll(sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
-            List stationList = new ArrayList<>();
             for (Stage stage : sectorComboBox.getSelectionModel().getSelectedItem().getStageList()) {
                 stationList.add(stage.getFirstStation());
                 stationList.add(stage.getSecondStation());

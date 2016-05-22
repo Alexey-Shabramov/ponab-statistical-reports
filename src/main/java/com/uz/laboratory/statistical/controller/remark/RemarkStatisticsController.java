@@ -351,7 +351,8 @@ public class RemarkStatisticsController implements Initializable {
         delete.setOnAction(event -> {
             if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
                 modalUtil.createDeletionConfirmModal();
-                if (deleteEntityDto.getDeleteValidationValue()) {
+                if (deleteEntityDto.getDeleteValidationValue() != null
+                        && deleteEntityDto.getDeleteValidationValue()) {
                     deleteConfirm();
                     deleteEntityDto.setDeleteValidationValue(false);
                 }

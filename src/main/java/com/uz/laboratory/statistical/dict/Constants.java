@@ -13,6 +13,8 @@ public class Constants {
     public static final String CLEAN_ALS_REMARK_DTO = "cleanAlsRemarkDto";
     public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";
 
+    public static final String CLEAN_ALS_DEVICE_DTO = "cleanAlsDeviceDto";
+
 
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
@@ -29,6 +31,7 @@ public class Constants {
     public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponab/ponabDeviceEditModal.fxml";
     public static final String PONAB_DEVICE_VIEW_MODAL = "/fxml/modal/view/ponab/ponabDeviceViewModal.fxml";
 
+    public static final String ALS_DEVICE_VIEW_MODAL = "/fxml/modal/view/als/alsDeviceViewModal.fxml";
     public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
     public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/shedule/plannedTripEditModal.fxml";
 
@@ -161,12 +164,24 @@ public class Constants {
     public static final String PONAB_DEVICE_SPEACH_INFORMER_NULL = "Не выбран РИ (укажите есть или нет).";
     public static final String PONAB_DEVICE_LOCATION_NULL = "Не указанно местоположение устройства.";
 
+    /**
+     * FXML - alsDeviceViewModal.fxml
+     */
+    public static final String ALS_DEVICE_VIEW_TITLE = "Просмотр выбранной рельсовой цепи";
+    public static final String ALS_DEVICE_NAME = "Рельсовая цепь - ";
+    public static final String ALS_DEVICE_STAGE_OR_STATION = "Перегон / Станция:";
+    public static final String ALS_DEVICE_TITLE = "Название рельсовой цепи:";
+    public static final String ALS_DEVICE_TYPE = "Тип рельсовой цепи:";
+    public static final String ALS_DEVICE_DIRECTION_OF_MOVEMENT = "Направление движения:";
+    public static final String ALS_DEVICE_PICKET = "Пикет:";
+
 
     /**
      * FXML - saveRemarkTable.fxml
      */
     public static final String REMARK_TABLE_SAVE_EMPTY_PATH = "Путь к файлу - пуст.";
     public static final String REMARK_TABLE_FOLDER_NOT_EXISTS = "Папки с текущим адресом не существует.";
+
 
     /**
      * Apache POI - titles
