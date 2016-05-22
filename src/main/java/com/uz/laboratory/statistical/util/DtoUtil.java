@@ -1,9 +1,13 @@
 package com.uz.laboratory.statistical.util;
 
 
+import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
+import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 
 import java.util.ArrayList;
@@ -66,4 +70,24 @@ public class DtoUtil {
         remarkValuesList.add(statisticsRemarkTableDto.getNoteColumn());
         return remarkValuesList;
     }
+
+    public static void convertPonabRemarkToDto(PonabRemark ponabRemark, PonabRemarkDto ponabRemarkDto) {
+        ponabRemarkDto.setId(ponabRemark.getId());
+        ponabRemarkDto.setCreationDate(ponabRemark.getCreationDate());
+        ponabRemarkDto.setEven(ponabRemark.isEven());
+        ponabRemarkDto.setInspectionTrip(ponabRemark.getInspectionTrip());
+        ponabRemarkDto.setNote(ponabRemark.getNote());
+        ponabRemarkDto.setPonabSystem(ponabRemark.getPonabSystem());
+        ponabRemarkDto.setRepeatable(ponabRemark.isRepeatable());
+    }
+
+    public static void convertAlsRemarkToDto(AlsRemark alsRemark, AlsRemarkDto alsRemarkDto) {
+        alsRemarkDto.setId(alsRemark.getId());
+        alsRemarkDto.setRepeatable(alsRemark.isRepeatable());
+        alsRemarkDto.setNote(alsRemark.getNote());
+        alsRemarkDto.setInspectionTrip(alsRemark.getInspectionTrip());
+        alsRemarkDto.setCreationDate(alsRemark.getCreationDate());
+        alsRemarkDto.setTrackCircuit(alsRemark.getTrackCircuit());
+    }
+
 }

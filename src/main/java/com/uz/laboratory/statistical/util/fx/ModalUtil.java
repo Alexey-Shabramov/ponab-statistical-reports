@@ -108,6 +108,7 @@ public class ModalUtil {
                 });
             }
         });
+        remarkViewModal.setTitle(Constants.REMARK_PONAB_VIEW_MODAL_TITLE);
         remarkViewModal.showAndWait();
     }
 
@@ -193,6 +194,7 @@ public class ModalUtil {
                 });
             }
         });
+        remarkViewModal.setTitle(Constants.REMARK_ALS_VIEW_MODAL_TITLE);
         remarkViewModal.showAndWait();
     }
 

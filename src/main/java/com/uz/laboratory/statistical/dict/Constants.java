@@ -47,6 +47,8 @@ public class Constants {
     public static final String MAIN_TITLE = "Статистическая отчетность по вагон-лаборатории ЮЖД";
     public static final String REMARK_PONAB_EDIT_MODAL_TITLE = "Редактирование замечания ПАВПБ";
     public static final String REMARK_ALS_EDIT_MODAL_TITLE = "Редактирование замечания АЛС";
+    public static final String REMARK_ALS_VIEW_MODAL_TITLE = "Просмотр замечания АЛС";
+    public static final String REMARK_PONAB_VIEW_MODAL_TITLE = "Просмотр замечания ПАВПБ";
 
     public static final String ENTITY_DELETION_MODAL_TITLE = "Удаление выбранного объекта";
     public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";

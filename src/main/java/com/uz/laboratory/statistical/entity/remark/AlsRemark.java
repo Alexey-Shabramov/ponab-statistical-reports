@@ -17,7 +17,7 @@ import javax.persistence.*;
 })
 public class AlsRemark extends AbstractRemark {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_track_circuit")
     private TrackCircuit trackCircuit;
 

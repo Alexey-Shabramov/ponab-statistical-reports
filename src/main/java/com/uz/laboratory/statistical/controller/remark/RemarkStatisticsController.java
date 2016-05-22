@@ -15,6 +15,8 @@ import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
+import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
@@ -22,6 +24,7 @@ import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
+import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
@@ -310,10 +313,10 @@ public class RemarkStatisticsController implements Initializable {
         view.setOnAction(event -> {
             if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
                 if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                    dozerBeanMapper.map(alsRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), alsRemarkDto, Constants.ALS_REMARK_TO_DTO);
+                    DtoUtil.convertAlsRemarkToDto((AlsRemark) alsRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), alsRemarkDto);
                     modalUtil.createAlsRemarkViewModal();
                 } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
-                    dozerBeanMapper.map(ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto, Constants.PONAB_REMARK_TO_DTO);
+                    DtoUtil.convertPonabRemarkToDto((PonabRemark) ponabRemarkService.get(Long.valueOf(statisticsTableView.getSelectionModel().getSelectedItem().getRemarkId())), ponabRemarkDto);
                     modalUtil.createPonabRemarkViewModal();
                 }
             }

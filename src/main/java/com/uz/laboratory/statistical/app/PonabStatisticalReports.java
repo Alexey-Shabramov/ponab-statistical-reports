@@ -20,7 +20,9 @@ public class PonabStatisticalReports extends Application {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring/application-context.xml");
         context.getBeanFactory().registerResolvableDependency(Stage.class, primaryStage);
         primaryStage.setTitle(Constants.MAIN_TITLE);
-        primaryStage.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.MAIN_FXML_PATH), 914, 600));
+        primaryStage.setScene(new Scene((Parent) context
+                .getBean(SpringFXMLLoader.class)
+                .load(Constants.MAIN_FXML_PATH), 914, 600));
         primaryStage.show();
     }
 }

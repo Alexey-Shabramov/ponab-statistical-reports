@@ -4,9 +4,11 @@ import com.uz.laboratory.statistical.entity.Identifier;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
+import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -37,6 +39,17 @@ public class TrackCircuit extends Identifier {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_communication_distance")
     private CommunicationDistance communicationDistance;
+
+    @OneToMany(mappedBy = "trackCircuit", cascade = CascadeType.REMOVE)
+    private List<AlsRemark> alsRemarks;
+
+    public List<AlsRemark> getAlsRemarks() {
+        return alsRemarks;
+    }
+
+    public void setAlsRemarks(List<AlsRemark> alsRemarks) {
+        this.alsRemarks = alsRemarks;
+    }
 
     public boolean isStationalCircuit() {
         return stationalCircuit;
