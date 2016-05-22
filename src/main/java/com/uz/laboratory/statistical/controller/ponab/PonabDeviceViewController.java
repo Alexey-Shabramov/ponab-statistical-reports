@@ -60,6 +60,16 @@ public class PonabDeviceViewController implements Initializable {
                 ponabSystemLocationRootItem,
                 ponabSystemDirectionRootItem,
                 speachInformerRootItem);
+
+        treeRootItem.setExpanded(true);
+        stageRootItem.setExpanded(true);
+        titleRootItem.setExpanded(true);
+        ponabSystemOptionItem.setExpanded(true);
+        stageRootItem.setExpanded(true);
+        ponabSystemLocationRootItem.setExpanded(true);
+        ponabSystemDirectionRootItem.setExpanded(true);
+        speachInformerRootItem.setExpanded(true);
+
         ponabDeviceTreeView.setRoot(treeRootItem);
     }
 

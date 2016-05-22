@@ -77,6 +77,18 @@ public class AlsRemarkViewController implements Initializable {
                 noteRootItem,
                 alsSystemRootItem,
                 directionOfMovementRootItem);
+
+        treeRootItem.setExpanded(true);
+        dateRootItem.setExpanded(true);
+        repeatRootItem.setExpanded(true);
+        sectorRootItem.setExpanded(true);
+        stageRootItem.setExpanded(true);
+        noteRootItem.setExpanded(true);
+        alsSystemRootItem.setExpanded(true);
+        alsSystemTitleRootItem.setExpanded(true);
+        alsSystemTypeRootItem.setExpanded(true);
+        directionOfMovementRootItem.setExpanded(true);
+
         alsRemarkTreeView.setRoot(treeRootItem);
     }
 

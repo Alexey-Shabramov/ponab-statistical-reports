@@ -80,6 +80,19 @@ public class PonabRemarkViewController implements Initializable {
                 noteRootItem,
                 ponabSystemItem,
                 directionOfMovementRootItem);
+
+        treeRootItem.setExpanded(true);
+        dateRootItem.setExpanded(true);
+        repeatRootItem.setExpanded(true);
+        sectorRootItem.setExpanded(true);
+        stageRootItem.setExpanded(true);
+        noteRootItem.setExpanded(true);
+        ponabSystemItem.setExpanded(true);
+        ponabSystemTitleRootItem.setExpanded(true);
+        ponabSystemOptionRootItem.setExpanded(true);
+        ponabSystemSpeachInfoRootItem.setExpanded(true);
+        directionOfMovementRootItem.setExpanded(true);
+
         ponabRemarkTreeView.setRoot(treeRootItem);
     }
 
