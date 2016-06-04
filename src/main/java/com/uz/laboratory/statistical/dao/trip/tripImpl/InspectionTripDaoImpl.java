@@ -4,7 +4,7 @@ import com.uz.laboratory.statistical.dao.daoImpl.GenericDaoImpl;
 import com.uz.laboratory.statistical.dao.trip.InspectionTripDao;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
-import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
+import com.uz.laboratory.statistical.filter.TripFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -18,19 +18,24 @@ public class InspectionTripDaoImpl extends GenericDaoImpl<InspectionTrip> implem
     }
 
     @Override
-    public List getInspectionTripByFilter(RemarkStatisticsFilter remarkStatisticsFilter) {
-        Criteria criteria = getSession().createCriteria(getEntityClass(), "inspection");
-        if (remarkStatisticsFilter.getSector() != null) {
-            criteria.createAlias("inspection.sector", "sector")
-                    .add(Restrictions.eq("sector.id", remarkStatisticsFilter.getSector().getId()));
+    public List getInspectionListByFilter(TripFilter tripFilter) {
+        Criteria criteria = getSession().createCriteria(getEntityClass(), "trip");
+        criteria.createAlias("trip.tripSector", "sector")
+                .createAlias("trip.vagonLaboratory", "vagon");
+        if (tripFilter.getTripSector() != null) {
+            criteria.add(Restrictions.eq("sector.id", tripFilter.getTripSector().getId()));
         }
-        if (remarkStatisticsFilter.getStage() != null) {
-            criteria.createAlias("inspection.stage", "stage")
-                    .add(Restrictions.eq("stage.id", remarkStatisticsFilter.getStage().getId()));
+        if (tripFilter.getVagonLaboratory() != null) {
+            criteria.add(Restrictions.eq("vagon.id", tripFilter.getVagonLaboratory().getId()));
         }
-        if (remarkStatisticsFilter.getStage() != null) {
-            criteria.createAlias("inspection.vagonLaboratory", "vagonLaboratory")
-                    .add(Restrictions.eq("vagonLaboratory.id", remarkStatisticsFilter.getVagonLaboratory().getId()));
+        if (tripFilter.getBeginDate() != null) {
+            criteria.add(Restrictions.ge("trip.beginDate", tripFilter.getBeginDate()));
+        }
+        if (tripFilter.getEndDate() != null) {
+            criteria.add(Restrictions.lt("trip.beginDate", tripFilter.getEndDate()));
+        }
+        if (tripFilter.getPlannedTrip() != null) {
+            criteria.add(Restrictions.eq("trip.plannedTrip", tripFilter.getPlannedTrip()));
         }
         return criteria.list();
     }

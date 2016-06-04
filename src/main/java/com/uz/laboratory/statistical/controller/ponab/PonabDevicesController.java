@@ -173,7 +173,10 @@ public class PonabDevicesController implements Initializable {
 
     @FXML
     public void cleanPonabDevicesTableButton(ActionEvent actionEvent) {
+        ponabDevicesTableData.clear();
         ponabDevicesTableView.getItems().clear();
+        ponabDevicesTablePagination.setPageCount(1);
+        ponabDevicesTablePagination.setPageFactory(this::createPage);
     }
 
     @FXML

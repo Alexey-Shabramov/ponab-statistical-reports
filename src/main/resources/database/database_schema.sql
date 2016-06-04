@@ -91,24 +91,12 @@ CREATE TABLE IF NOT EXISTS `track_circuit` (
   AUTO_INCREMENT = 10
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE IF NOT EXISTS `planned_trip` (
-  `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
-  `id_sector`           BIGINT(21) NOT NULL,
-  `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date`          TIMESTAMP,
-  `end_date`            TIMESTAMP,
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  AUTO_INCREMENT = 10
-  DEFAULT CHARSET = utf8;
-
 CREATE TABLE IF NOT EXISTS `inspection_trip` (
   `id`                  BIGINT(21) NOT NULL AUTO_INCREMENT,
   `id_sector`           BIGINT(21) NOT NULL,
   `id_vagon_laboratory` BIGINT(21) NOT NULL,
-  `begin_date`          TIMESTAMP,
-  `end_date`            TIMESTAMP,
+  `date`         TIMESTAMP,
+  `planned_trip` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_sector`) REFERENCES `sector` (`id`),
   FOREIGN KEY (`id_vagon_laboratory`) REFERENCES `vagon_laboratory` (`id`)

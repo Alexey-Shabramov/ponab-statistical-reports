@@ -162,5 +162,4 @@ public class PonabDeviceEditController implements Initializable {
         ponabSystemEditDto.setTableViewIndex(null);
         cleanDtoSecondaryData();
     }
-
 }

@@ -312,7 +312,10 @@ public class AlsDevicesController implements Initializable {
 
     @FXML
     public void cleanAlsDevicesTableButton(ActionEvent actionEvent) {
+        alsDevicesTableData.clear();
         alsDevicesTableView.getItems().clear();
+        alsDevicesTablePagination.setPageCount(1);
+        alsDevicesTablePagination.setPageFactory(this::createPage);
     }
 
     @FXML

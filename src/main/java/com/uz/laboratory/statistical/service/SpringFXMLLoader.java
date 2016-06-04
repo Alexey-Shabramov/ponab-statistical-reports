@@ -13,13 +13,6 @@ public class SpringFXMLLoader {
     @Autowired
     private ApplicationContext context;
 
-    public SpringFXMLLoader(ApplicationContext appContext) {
-        this.context = appContext;
-    }
-
-    public SpringFXMLLoader() {
-    }
-
     public Object load(final String resource) throws IOException {
         try (InputStream fxmlStream = getClass().getResourceAsStream(resource)) {
             FXMLLoader loader = new FXMLLoader();

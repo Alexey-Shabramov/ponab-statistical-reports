@@ -5,10 +5,12 @@ import com.uz.laboratory.statistical.dict.TrackCircuitTypes;
 import com.uz.laboratory.statistical.dto.tableView.AlsDevicesTableDto;
 import com.uz.laboratory.statistical.dto.tableView.PonabDevicesTableDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.dto.tableView.TripsTableDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
+import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,18 @@ public class TableDtoConverter {
                     remark.getCreationDate().toString(),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
+        }
+        return data;
+    }
+
+    public static List<TripsTableDto> convertInspectionTripsListToDto(List<InspectionTrip> inspectionTrips) {
+        List<TripsTableDto> data = new ArrayList<>();
+        for (InspectionTrip inspectionTrip : inspectionTrips) {
+            data.add(new TripsTableDto(
+                    inspectionTrip.getId().toString(),
+                    inspectionTrip.getTripSector().getTitle(),
+                    inspectionTrip.getVagonLaboratory().getName(),
+                    inspectionTrip.getDate().toString()));
         }
         return data;
     }
@@ -122,4 +136,14 @@ public class TableDtoConverter {
         alsDevicesTableDto.setTrackCircuitType(trackCircuit.isStationalCircuit() ? TrackCircuitTypes.STATION.toString() : TrackCircuitTypes.STAGE.toString());
         return alsDevicesTableDto;
     }
+
+    public static TripsTableDto convertEditedTripsToTableDto(TripsTableDto tripsTableDto, InspectionTrip inspectionTrip) {
+        tripsTableDto.setDeviceId(inspectionTrip.getId().toString());
+        tripsTableDto.setSectorTitle(inspectionTrip.getTripSector().getTitle());
+        tripsTableDto.setDate(inspectionTrip.getDate().toString());
+        tripsTableDto.setVagonLaboratoryTitle(inspectionTrip.getVagonLaboratory().getName());
+        return tripsTableDto;
+    }
+
+
 }

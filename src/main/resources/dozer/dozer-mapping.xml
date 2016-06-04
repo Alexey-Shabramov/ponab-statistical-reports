@@ -24,6 +24,11 @@
         <class-b>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-b>
     </mapping>
 
+    <mapping map-id="alsRemarkToDto">
+        <class-a>com.uz.laboratory.statistical.entity.remark.AlsRemark</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-b>
+    </mapping>
+
     <mapping map-id="cleanAlsRemarkDto">
         <class-a>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-a>
         <class-b>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-b>
@@ -37,6 +42,11 @@
     <mapping map-id="alsDeviceToDto">
         <class-a>com.uz.laboratory.statistical.entity.als.TrackCircuit</class-a>
         <class-b>com.uz.laboratory.statistical.dto.als.AlsSystemDto</class-b>
+    </mapping>
+
+    <mapping map-id="inspectionTripToDto">
+        <class-a>com.uz.laboratory.statistical.entity.trip.InspectionTrip</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.trip.InspectionTripDto</class-b>
     </mapping>
 
     <mapping map-id="cleanPonabDeviceDto">

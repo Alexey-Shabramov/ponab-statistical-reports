@@ -51,10 +51,6 @@
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
 
-    <beans:bean id="plannedTripDao" class="com.uz.laboratory.statistical.dao.trip.tripImpl.PlannedTripDaoImpl">
-        <beans:property name="sessionFactory" ref="sessionFactory"/>
-    </beans:bean>
-
     <beans:bean id="vagonLaboratoryDao" class="com.uz.laboratory.statistical.dao.trip.tripImpl.VagonLaboratoryDaoImpl">
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
@@ -103,11 +99,6 @@
         <beans:property name="dao" ref="inspectionTripDao"/>
     </beans:bean>
 
-    <beans:bean id="plannedTripService"
-                class="com.uz.laboratory.statistical.service.trip.tripImpl.PlannedTripServiceImpl">
-        <beans:property name="dao" ref="plannedTripDao"/>
-    </beans:bean>
-
     <beans:bean id="vagonLaboratoryService"
                 class="com.uz.laboratory.statistical.service.trip.tripImpl.VagonLaboratoryServiceImpl">
         <beans:property name="dao" ref="vagonLaboratoryDao"/>
@@ -139,5 +130,10 @@
     <beans:bean id="ponabSystemEditEntityDto" class="com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto"/>
 
     <beans:bean id="alsSystemEditEntityDto" class="com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto"/>
+
+    <beans:bean id="inspectionTripDto" class="com.uz.laboratory.statistical.dto.trip.InspectionTripDto"/>
+
+    <beans:bean id="inspectionTripEditEntityDto"
+                class="com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto"/>
 
 </beans:beans>

@@ -23,7 +23,7 @@ public class DtoUtil {
                     .append("Вагон: ")
                     .append(inspectionTrip.getVagonLaboratory().getName())
                     .append(" - ")
-                    .append(inspectionTrip.getBeginDate())
+                    .append(inspectionTrip.getDate())
                     .toString();
         } finally {
             stringBuilder.setLength(0);

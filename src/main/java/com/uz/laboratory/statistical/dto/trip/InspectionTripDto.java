@@ -1,29 +1,25 @@
-package com.uz.laboratory.statistical.entity.trip;
+package com.uz.laboratory.statistical.dto.trip;
 
-
-import com.uz.laboratory.statistical.entity.Identifier;
 import com.uz.laboratory.statistical.entity.location.Sector;
+import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@MappedSuperclass
-public abstract class AbstractTrip extends Identifier {
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_sector")
+
+public class InspectionTripDto {
+    private Long id;
     private Sector tripSector;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_vagon_laboratory")
     private VagonLaboratory vagonLaboratory;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "begin_date", nullable = true)
     private Date beginDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "end_date", nullable = true)
     private Date endDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Sector getTripSector() {
         return tripSector;
@@ -56,5 +52,4 @@ public abstract class AbstractTrip extends Identifier {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
 }

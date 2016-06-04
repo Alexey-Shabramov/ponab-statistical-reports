@@ -109,7 +109,8 @@ public class TestController implements Initializable {
         InspectionTrip inspectionTrip = new InspectionTrip();
         inspectionTrip.setVagonLaboratory(vagonLaboratory);
         inspectionTrip.setTripSector(sector);
-        inspectionTrip.setBeginDate(new Date());
+        inspectionTrip.setDate(new Date());
+        inspectionTrip.setPlannedTrip(true);
         inspectionTripService.save(inspectionTrip);
 
         TrackCircuit trackCircuit = new TrackCircuit();

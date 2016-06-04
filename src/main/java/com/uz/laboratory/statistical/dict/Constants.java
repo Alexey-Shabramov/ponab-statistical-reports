@@ -6,13 +6,12 @@ public class Constants {
      */
     public static final String PONAB_DEVICE_TO_DTO = "ponabDeviceToDto";
     public static final String ALS_DEVICE_TO_DTO = "alsDeviceToDto";
+    public static final String INSPECTION_TRIP_TO_DTO = "inspectionTripToDto";
 
     public static final String CLEAN_PONAB_REMARK_DTO = "cleanPonabRemarkDto";
     public static final String CLEAN_ALS_REMARK_DTO = "cleanAlsRemarkDto";
     public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";
-
     public static final String CLEAN_ALS_DEVICE_DTO = "cleanAlsDeviceDto";
-
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
 
     /**
@@ -24,13 +23,13 @@ public class Constants {
     public static final String PONAB_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/ponabRemarkEditModal.fxml";
     public static final String ALS_REMARK_EDIT_MODAL = "/fxml/modal/edit/remark/alsRemarkEditModal.fxml";
 
-    public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/shedule/inspectionTripEditModal.fxml";
+    public static final String INSPECTION_EDIT_MODAL = "/fxml/modal/edit/shedule/tripEditModal.fxml";
     public static final String PONAB_DEVICE_EDIT_MODAL = "/fxml/modal/edit/ponab/ponabDeviceEditModal.fxml";
     public static final String PONAB_DEVICE_VIEW_MODAL = "/fxml/modal/view/ponab/ponabDeviceViewModal.fxml";
 
     public static final String ALS_DEVICE_VIEW_MODAL = "/fxml/modal/view/als/alsDeviceViewModal.fxml";
     public static final String ALS_DEVICE_EDIT_MODAL = "/fxml/modal/edit/als/alsDeviceEditModal.fxml";
-    public static final String PLANNED_TRIP_MODAL = "/fxml/modal/edit/shedule/plannedTripEditModal.fxml";
+    public static final String TRIP_EDIT_MODAL = "/fxml/modal/edit/shedule/tripEditModal.fxml";
 
     public static final String REMARK_TABLE_SAVE_MODAL = "/fxml/modal/save/saveRemarkTable.fxml";
 
@@ -191,5 +190,22 @@ public class Constants {
      */
     public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
     public static final String TEXTFIELD_IS_EMPTY = "Название файла пустое. Повторите ввод.";
+
+    public static final String SHEDULE_ERROR_TYPE_IS_NOT_SET = "Не выбран тип проверок.";
+
+
+    /**
+     * FXML - tripViewModal.fxml
+     */
+    public static final String TRIP_VIEW_TITLE = "Редактирование выбранной поездки";
+
+    /**
+     * FXML - tripEditModal.fxml
+     */
+    public static final String TRIP_EDIT_SECTOR_IS_NULL = "Участок проведения проверки не выбран.";
+    public static final String TRIP_EDIT_DATE_IS_NULL = "Не выбрана примерная дата проведения проверки.";
+    public static final String TRIP_EDIT_VAGON_IS_NULL = "Не выбрана вагон-лаборатория с которого производиться проверка.";
+    public static final String TRIP_EDIT_TYPE_IS_NULL = "Не выбран тип проверки.";
+
 
 }

@@ -1,7 +1,6 @@
 package com.uz.laboratory.statistical.util.fx;
 
 
-import com.uz.laboratory.statistical.controller.shedule.SheduleController;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
@@ -13,7 +12,6 @@ import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -46,25 +44,15 @@ public class ModalUtil {
     @Autowired
     private AlsSystemDto alsSystemDto;
 
-    public static void createInspectionEditModal() {
-        Stage inspectionModal = new Stage();
-        inspectionModal.initModality(Modality.APPLICATION_MODAL);
-        try {
-            inspectionModal.setScene(new Scene(FXMLLoader.load(SheduleController.class.getResource(Constants.INSPECTION_EDIT_MODAL))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        inspectionModal.showAndWait();
-    }
-
-    public static void createPlannedTripEditModal() {
+    public void createTripEditModal() {
         Stage plannedTripModal = new Stage();
         plannedTripModal.initModality(Modality.APPLICATION_MODAL);
         try {
-            plannedTripModal.setScene(new Scene(FXMLLoader.load(SheduleController.class.getResource(Constants.PLANNED_TRIP_MODAL))));
+            plannedTripModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.TRIP_EDIT_MODAL)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        plannedTripModal.setTitle(Constants.TRIP_VIEW_TITLE);
         plannedTripModal.showAndWait();
     }
 

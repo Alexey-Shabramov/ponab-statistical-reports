@@ -5,10 +5,15 @@ import com.uz.laboratory.statistical.dao.GenericDao;
 import com.uz.laboratory.statistical.entity.Identifier;
 import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.Table;
 import java.util.List;
 
 
 public abstract class GenericDaoImpl<T extends Identifier> extends AbstractDao implements GenericDao {
+    private final static StringBuilder stringBuilder = new StringBuilder();
+
+    @Override
+    public abstract Class getEntityClass();
 
     @Override
     public T get(Long id) {
@@ -39,6 +44,23 @@ public abstract class GenericDaoImpl<T extends Identifier> extends AbstractDao i
     @Override
     public void delete(Identifier entity) {
         getSession().delete(entity);
+    }
+
+    @Override
+    public void delete(Long id) {
+        try {
+            getSession()
+                    .createSQLQuery(
+                            stringBuilder.append("delete from ")
+                                    .append(((Table) getEntityClass().getAnnotation(Table.class)).name())
+                                    .append(" where id = ")
+                                    .append(id)
+                                    .toString())
+                    .executeUpdate();
+        } finally {
+            stringBuilder.setLength(0);
+        }
+
     }
 
     @Override

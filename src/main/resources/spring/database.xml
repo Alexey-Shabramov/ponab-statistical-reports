@@ -30,7 +30,6 @@
             <beans:list>
                 <beans:value>com.uz.laboratory.statistical.entity.Identifier</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.remark.AbstractRemark</beans:value>
-                <beans:value>com.uz.laboratory.statistical.entity.trip.AbstractTrip</beans:value>
 
                 <beans:value>com.uz.laboratory.statistical.entity.location.CommunicationDistance</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.location.Sector</beans:value>
@@ -41,7 +40,6 @@
                 <beans:value>com.uz.laboratory.statistical.entity.remark.AlsRemark</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.remark.PonabRemark</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.trip.InspectionTrip</beans:value>
-                <beans:value>com.uz.laboratory.statistical.entity.trip.PlannedTrip</beans:value>
                 <beans:value>com.uz.laboratory.statistical.entity.trip.VagonLaboratory</beans:value>
             </beans:list>
         </beans:property>

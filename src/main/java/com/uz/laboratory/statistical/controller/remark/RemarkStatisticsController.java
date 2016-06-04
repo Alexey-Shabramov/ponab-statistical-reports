@@ -55,6 +55,7 @@ import java.util.ResourceBundle;
 public class RemarkStatisticsController implements Initializable {
     private final static int rowsPerPage = 9;
     private final ContextMenu contextMenu = new ContextMenu();
+
     @FXML
     public ComboBox<Stage> stageComboBox;
     @FXML
@@ -230,11 +231,7 @@ public class RemarkStatisticsController implements Initializable {
                 statisticsTableData.setAll(TableDtoConverter.convertPonabRemarkListToDto(ponabRemarkService.getRemarkListByFilter(statisticsFilter)));
             }
             statisticsTableViewPagination.setPageFactory(this::createPage);
-            if (statisticsTableData.size() <= 9) {
-                statisticsTableViewPagination.setPageCount(1);
-            } else {
-                statisticsTableViewPagination.setPageCount((int) Math.ceil((double) statisticsTableData.size() / rowsPerPage));
-            }
+            statisticsTableViewPagination.setPageCount(statisticsTableData.size() <= rowsPerPage ? 1 : (int) Math.ceil((double) statisticsTableData.size() / rowsPerPage));
         }
     }
 
@@ -249,6 +246,8 @@ public class RemarkStatisticsController implements Initializable {
     public void cleanTableViewButtonListener(ActionEvent actionEvent) {
         statisticsTableData.clear();
         statisticsTableView.getItems().clear();
+        statisticsTableViewPagination.setPageCount(1);
+        statisticsTableViewPagination.setPageFactory(this::createPage);
     }
 
     @FXML
@@ -272,6 +271,7 @@ public class RemarkStatisticsController implements Initializable {
         datePicker.setValue(null);
         repeatRemarkStatusComboBox.setValue(null);
     }
+
     private void initTableView() {
         statisticsTableView.setEditable(true);
         statisticsTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

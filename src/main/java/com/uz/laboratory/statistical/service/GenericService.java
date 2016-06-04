@@ -15,5 +15,7 @@ public interface GenericService<T extends Identifier> {
 
     void delete(T obj);
 
+    void delete(Long id);
+
     List<T> listAll();
 }

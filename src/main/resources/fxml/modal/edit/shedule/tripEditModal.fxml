@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="287.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.uz.laboratory.statistical.controller.shedule.TripEditController">
+    <children>
+        <ComboBox fx:id="sectorComboBox" layoutX="28.0" layoutY="45.0" onAction="#sectorChangeListener"
+                  prefHeight="25.0" prefWidth="251.0"/>
+        <Label layoutX="331.0" layoutY="49.0" text="Участок">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="28.0" layoutY="139.0" prefHeight="25.0" prefWidth="251.0"/>
+        <Label layoutX="296.0" layoutY="142.0" text="Вагон лаборатория">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="308.0" layoutY="95.0" text="Дата проверки">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="10.0" text="Изменение данных о проверке:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Button layoutX="130.0" layoutY="241.0" mnemonicParsing="false" onAction="#saveTripListener" text="Сохранить">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="resetEditButton" layoutX="265.0" layoutY="241.0" mnemonicParsing="false"
+                onAction="#resetEditButtonListener" prefHeight="30.0" prefWidth="93.0" text="Отмена"/>
+        <Separator layoutY="81.0" prefHeight="3.0" prefWidth="452.0"/>
+        <Separator layoutY="128.0" prefHeight="3.0" prefWidth="452.0"/>
+        <Separator layoutY="176.0" prefHeight="3.0" prefWidth="452.0"/>
+        <DatePicker fx:id="tripDatePicker" layoutX="28.0" layoutY="93.0" prefHeight="25.0" prefWidth="251.0"/>
+        <ComboBox fx:id="tripTypeComboBox" layoutX="28.0" layoutY="190.0" prefHeight="25.0" prefWidth="251.0"/>
+        <Label layoutX="317.0" layoutY="193.0" text="Тип поездки">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutY="225.0" prefHeight="3.0" prefWidth="452.0"/>
+    </children>
+</AnchorPane>
