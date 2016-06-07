@@ -49,8 +49,8 @@ public class AlsRemarkDaoImpl extends GenericDaoImpl<AlsRemark> implements AlsRe
         }
         if (remarkStatisticsFilter.getDate() != null) {
             criteria.add(Restrictions.conjunction()
-                    .add(Restrictions.ge("inspection.beginDate", remarkStatisticsFilter.getDate()))
-                    .add(Restrictions.lt("inspection.beginDate", new Date(remarkStatisticsFilter.getDate().getTime() + TimeUnit.DAYS.toMillis(1)))));
+                    .add(Restrictions.ge("inspection.date", remarkStatisticsFilter.getDate()))
+                    .add(Restrictions.lt("inspection.date", new Date(remarkStatisticsFilter.getDate().getTime() + TimeUnit.DAYS.toMillis(1)))));
         }
         return criteria.list();
     }

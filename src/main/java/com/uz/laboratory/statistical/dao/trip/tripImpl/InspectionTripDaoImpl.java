@@ -29,10 +29,10 @@ public class InspectionTripDaoImpl extends GenericDaoImpl<InspectionTrip> implem
             criteria.add(Restrictions.eq("vagon.id", tripFilter.getVagonLaboratory().getId()));
         }
         if (tripFilter.getBeginDate() != null) {
-            criteria.add(Restrictions.ge("trip.beginDate", tripFilter.getBeginDate()));
+            criteria.add(Restrictions.ge("trip.date", tripFilter.getBeginDate()));
         }
         if (tripFilter.getEndDate() != null) {
-            criteria.add(Restrictions.lt("trip.beginDate", tripFilter.getEndDate()));
+            criteria.add(Restrictions.lt("trip.date", tripFilter.getEndDate()));
         }
         if (tripFilter.getPlannedTrip() != null) {
             criteria.add(Restrictions.eq("trip.plannedTrip", tripFilter.getPlannedTrip()));
