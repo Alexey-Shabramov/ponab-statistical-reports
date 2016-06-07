@@ -10,8 +10,8 @@ public class InspectionTripDto {
     private Long id;
     private Sector tripSector;
     private VagonLaboratory vagonLaboratory;
-    private Date beginDate;
-    private Date endDate;
+    private Date date;
+    private Boolean plannedTrip;
 
     public Long getId() {
         return id;
@@ -37,19 +37,19 @@ public class InspectionTripDto {
         this.vagonLaboratory = vagonLaboratory;
     }
 
-    public Date getBeginDate() {
-        return beginDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Boolean getPlannedTrip() {
+        return plannedTrip;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setPlannedTrip(Boolean plannedTrip) {
+        this.plannedTrip = plannedTrip;
     }
 }

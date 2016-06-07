@@ -13,6 +13,7 @@ public class Constants {
     public static final String CLEAN_PONAB_DEVICE_DTO = "cleanPonabDeviceDto";
     public static final String CLEAN_ALS_DEVICE_DTO = "cleanAlsDeviceDto";
     public static final String CLEAN_REMARK_TABLE_SAVE_DTO = "cleanRemarkTableSaveDto";
+    public static final String CLEAN_INSPECTION_TRIP_DTO = "cleanInspectionTripDto";
 
     /**
      * FXML - all fxml path's
@@ -35,6 +36,8 @@ public class Constants {
 
     public static final String PONAB_REMARK_VIEW_MODAL = "/fxml/modal/view/ponab/ponabRemarkViewModal.fxml";
     public static final String ALS_REMARK_VIEW_MODAL = "/fxml/modal/view/als/alsRemarkViewModal.fxml";
+    public static final String INSPECTION_TRIP_VIEW_MODAL = "/fxml/modal/view/shedule/tripViewModal.fxml";
+
 
 
     /**
@@ -207,5 +210,13 @@ public class Constants {
     public static final String TRIP_EDIT_VAGON_IS_NULL = "Не выбрана вагон-лаборатория с которого производиться проверка.";
     public static final String TRIP_EDIT_TYPE_IS_NULL = "Не выбран тип проверки.";
 
-
+    /**
+     * FXML - tripViewModal.fxml
+     */
+    public static final String TRIP_VIEW_MODAL_TITLE = "Просмотр выбранной поездки";
+    public static final String TRIP_VIEW_TRIP_ID = "Поездка №";
+    public static final String TRIP_VIEW_SECTOR_TITLE = "Участок:";
+    public static final String TRIP_VIEW_VAGON_TITLE = "Вагон-лаборатория:";
+    public static final String TRIP_VIEW_DATE = "Дата:";
+    public static final String TRIP_VIEW_TYPE = "Тип поездки:";
 }

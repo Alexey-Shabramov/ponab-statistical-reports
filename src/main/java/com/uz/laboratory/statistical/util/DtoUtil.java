@@ -4,6 +4,7 @@ package com.uz.laboratory.statistical.util;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
+import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
@@ -90,4 +91,19 @@ public class DtoUtil {
         alsRemarkDto.setTrackCircuit(alsRemark.getTrackCircuit());
     }
 
+    public static void convertInspectionTripToDto(InspectionTrip inspectionTrip, InspectionTripDto inspectionTripDto) {
+        inspectionTripDto.setId(inspectionTrip.getId());
+        inspectionTripDto.setDate(inspectionTrip.getDate());
+        inspectionTripDto.setTripSector(inspectionTrip.getTripSector());
+        inspectionTripDto.setVagonLaboratory(inspectionTrip.getVagonLaboratory());
+        inspectionTripDto.setPlannedTrip(inspectionTrip.isPlannedTrip());
+    }
+
+    public static void cleanInspectionDto(InspectionTripDto inspectionTripDto) {
+        inspectionTripDto.setId(null);
+        inspectionTripDto.setDate(null);
+        inspectionTripDto.setTripSector(null);
+        inspectionTripDto.setVagonLaboratory(null);
+        inspectionTripDto.setPlannedTrip(null);
+    }
 }

@@ -19,9 +19,9 @@
         <class-b>com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto</class-b>
     </mapping>
 
-    <mapping map-id="alsRemarkToDto">
-        <class-a>com.uz.laboratory.statistical.entity.remark.AlsRemark</class-a>
-        <class-b>com.uz.laboratory.statistical.dto.als.AlsRemarkDto</class-b>
+    <mapping map-id="cleanInspectionTripDto">
+        <class-a>com.uz.laboratory.statistical.dto.trip.InspectionTripDto</class-a>
+        <class-b>com.uz.laboratory.statistical.dto.trip.InspectionTripDto</class-b>
     </mapping>
 
     <mapping map-id="alsRemarkToDto">

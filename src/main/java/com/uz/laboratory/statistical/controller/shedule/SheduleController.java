@@ -8,11 +8,13 @@ import com.uz.laboratory.statistical.dto.tableView.TripsTableDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
+import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.TripFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
+import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
@@ -232,8 +234,8 @@ public class SheduleController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (sheduleTableView.getSelectionModel().getSelectedItem() != null) {
-                    dozerBeanMapper.map(inspectionTripService.get(Long.valueOf(sheduleTableView.getSelectionModel().getSelectedItem().getDeviceId())), inspectionTripDto, Constants.INSPECTION_TRIP_TO_DTO);
-                    modalUtil.createPonabDeviceViewModal();
+                    DtoUtil.convertInspectionTripToDto((InspectionTrip) inspectionTripService.get(Long.valueOf(sheduleTableView.getSelectionModel().getSelectedItem().getDeviceId())), inspectionTripDto);
+                    modalUtil.createTripViewModal();
                 }
             }
         });

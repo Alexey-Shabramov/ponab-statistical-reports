@@ -9,7 +9,9 @@ import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
+import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
+import com.uz.laboratory.statistical.util.DtoUtil;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -43,6 +45,31 @@ public class ModalUtil {
     private DeleteEntityDto deleteEntityDto;
     @Autowired
     private AlsSystemDto alsSystemDto;
+    @Autowired
+    private InspectionTripDto inspectionTripDto;
+
+    public void createTripViewModal() {
+        Stage tripViewModal = new Stage();
+        tripViewModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            tripViewModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.INSPECTION_TRIP_VIEW_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        tripViewModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        DtoUtil.cleanInspectionDto(inspectionTripDto);
+                    }
+                });
+            }
+        });
+        tripViewModal.setTitle(Constants.TRIP_VIEW_MODAL_TITLE);
+        tripViewModal.showAndWait();
+    }
 
     public void createTripEditModal() {
         Stage plannedTripModal = new Stage();

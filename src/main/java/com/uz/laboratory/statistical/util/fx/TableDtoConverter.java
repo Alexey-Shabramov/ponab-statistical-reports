@@ -12,11 +12,17 @@ import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TableDtoConverter {
+    private static final DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("dd.MM.yyyy").toFormatter();
+
+
     public static List<StatisticsRemarkTableDto> convertAlsRemarkListToDto(List<AlsRemark> abstractRemarks) {
         List<StatisticsRemarkTableDto> data = new ArrayList<>();
         for (AlsRemark remark : abstractRemarks) {
@@ -26,7 +32,7 @@ public class TableDtoConverter {
                     remark.getNote(),
                     remark.getInspectionTrip().getTripSector().getTitle(),
                     remark.getTrackCircuit().getStation() != null ? remark.getTrackCircuit().getStation().getName() : remark.getTrackCircuit().getStage().getName(),
-                    remark.getCreationDate().toString(),
+                    remark.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(dateTimeFormatter),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
         }
@@ -40,7 +46,7 @@ public class TableDtoConverter {
                     inspectionTrip.getId().toString(),
                     inspectionTrip.getTripSector().getTitle(),
                     inspectionTrip.getVagonLaboratory().getName(),
-                    inspectionTrip.getDate().toString()));
+                    inspectionTrip.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(dateTimeFormatter)));
         }
         return data;
     }
@@ -54,7 +60,7 @@ public class TableDtoConverter {
                     remark.getNote(),
                     remark.getInspectionTrip().getTripSector().getTitle(),
                     remark.getPonabSystem().getStage().getName(),
-                    remark.getCreationDate().toString(),
+                    remark.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(dateTimeFormatter),
                     remark.getInspectionTrip().getVagonLaboratory().getName(),
                     remark.isRepeatable() ? Constants.REMARK_REPEATABLE_TRUE : Constants.REMARK_REPEATABLE_FALSE));
         }
@@ -98,7 +104,7 @@ public class TableDtoConverter {
         statisticsRemarkTableDto.setObjectColumn(ponabRemark.getPonabSystem().getTitle());
         statisticsRemarkTableDto.setNoteColumn(ponabRemark.getNote());
         statisticsRemarkTableDto.setStageColumn(ponabRemark.getPonabSystem().getStage().getName());
-        statisticsRemarkTableDto.setDateColumn(ponabRemark.getCreationDate().toString());
+        statisticsRemarkTableDto.setDateColumn(ponabRemark.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(dateTimeFormatter));
         statisticsRemarkTableDto.setVagonColumn(ponabRemark.getInspectionTrip().getVagonLaboratory().getName());
         statisticsRemarkTableDto.setRepeatColumn(ponabRemark.isRepeatable() ? "+" : "-");
         return statisticsRemarkTableDto;
@@ -109,7 +115,7 @@ public class TableDtoConverter {
         statisticsRemarkTableDto.setObjectColumn(alsRemark.getTrackCircuit().getName());
         statisticsRemarkTableDto.setNoteColumn(alsRemark.getNote());
         statisticsRemarkTableDto.setStageColumn(alsRemark.getTrackCircuit().getStage().getName());
-        statisticsRemarkTableDto.setDateColumn(alsRemark.getCreationDate().toString());
+        statisticsRemarkTableDto.setDateColumn(alsRemark.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(dateTimeFormatter));
         statisticsRemarkTableDto.setVagonColumn(alsRemark.getInspectionTrip().getVagonLaboratory().getName());
         statisticsRemarkTableDto.setRepeatColumn(alsRemark.isRepeatable() ? "+" : "-");
         return statisticsRemarkTableDto;
