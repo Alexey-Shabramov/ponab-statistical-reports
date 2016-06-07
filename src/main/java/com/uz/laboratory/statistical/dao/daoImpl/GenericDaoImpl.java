@@ -25,7 +25,7 @@ public abstract class GenericDaoImpl<T extends Identifier> extends AbstractDao i
 
     @Override
     public boolean isExists(Long id) {
-        return false;
+        return get(id) != null;
     }
 
 
