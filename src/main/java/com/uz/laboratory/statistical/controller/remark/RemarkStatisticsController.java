@@ -379,14 +379,14 @@ public class RemarkStatisticsController implements Initializable {
     private void deleteConfirm() {
         if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
             if (alsRemarkService.isExists(selectectedEntityId)) {
-                alsRemarkService.delete(alsRemarkService.get(selectectedEntityId));
+                alsRemarkService.delete(selectectedEntityId);
                 cleanTableViewFromValue();
             } else {
                 cleanTableViewFromValue();
             }
         } else if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
             if (ponabRemarkService.isExists(selectectedEntityId)) {
-                ponabRemarkService.delete(ponabRemarkService.get(selectectedEntityId));
+                ponabRemarkService.delete(selectectedEntityId);
                 cleanTableViewFromValue();
             } else {
                 cleanTableViewFromValue();

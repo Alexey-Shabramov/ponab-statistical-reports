@@ -46,7 +46,6 @@ public abstract class GenericDaoImpl<T extends Identifier> extends AbstractDao i
         getSession().delete(entity);
     }
 
-    @Override
     public void delete(Long id) {
         try {
             getSession()

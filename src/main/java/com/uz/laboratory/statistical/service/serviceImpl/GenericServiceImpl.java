@@ -43,7 +43,7 @@ public class GenericServiceImpl<T extends Identifier, D extends GenericDao> impl
     @Override
     @Transactional
     public void delete(Long id) {
-        dao.delete(id);
+        delete(get(id));
     }
 
     @Override

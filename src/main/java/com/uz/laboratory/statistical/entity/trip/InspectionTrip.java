@@ -32,12 +32,10 @@ public class InspectionTrip extends Identifier {
         @Column(name = "planned_trip")
         private boolean plannedTrip;
 
-        @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-        @JoinColumn(name = "id_als_remark")
+        @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "inspectionTrip")
         private List<AlsRemark> alsRemarkList;
 
-        @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-        @JoinColumn(name = "id_ponab_remark")
+        @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "inspectionTrip")
         private List<PonabRemark> ponabRemarkList;
 
         public boolean isPlannedTrip() {

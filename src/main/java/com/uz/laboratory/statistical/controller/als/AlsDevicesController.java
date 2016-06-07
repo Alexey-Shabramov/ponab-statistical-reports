@@ -242,7 +242,7 @@ public class AlsDevicesController implements Initializable {
                     modalUtil.createDeletionConfirmModal();
                     if (deleteEntityDto.getDeleteValidationValue() != null
                             && deleteEntityDto.getDeleteValidationValue()) {
-                        trackCircuitService.delete(trackCircuitService.get(selectectedEntityId));
+                        trackCircuitService.delete(selectectedEntityId);
                         alsDevicesTableData.remove(tableViewSelectedIndex.get());
                         alsDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
                         alsDevicesTableView.getSelectionModel().clearSelection();
