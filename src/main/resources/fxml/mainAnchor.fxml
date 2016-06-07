@@ -23,6 +23,7 @@
                     <fx:include fx:id="alsDevices" source="/fxml/child/alsDevices.fxml"/>
                 </Tab>
                 <Tab text="Создание замечаний">
+                    <fx:include fx:id="remarkCreation" source="/fxml/child/editDatabase.fxml"/>
                 </Tab>
                 <Tab text="Изменение основной базы">
 

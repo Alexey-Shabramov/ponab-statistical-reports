@@ -25,7 +25,9 @@ import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.DtoUtil;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
 import javafx.beans.property.IntegerProperty;
@@ -39,7 +41,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -131,53 +132,10 @@ public class RemarkStatisticsController implements Initializable {
     private AlsRemarkDto alsRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
+    @Autowired
+    private InitComboBoxesUtil initComboBoxesUtil;
 
     private List<String> errorList = new ArrayList<>();
-
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
-
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<VagonLaboratory> vagonLaboratoryConverter = new StringConverter<VagonLaboratory>() {
-        @Override
-        public String toString(VagonLaboratory object) {
-            return object.getName();
-        }
-
-        @Override
-        public VagonLaboratory fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<CommunicationDistance> communicationDistanceConverter = new StringConverter<CommunicationDistance>() {
-        @Override
-        public String toString(CommunicationDistance object) {
-            return object.getNumber().toString();
-        }
-
-        @Override
-        public CommunicationDistance fromString(String string) {
-            return null;
-        }
-    };
 
     public RemarkStatisticsController() {
     }
@@ -287,16 +245,16 @@ public class RemarkStatisticsController implements Initializable {
     }
 
     private void initComboBoxes() {
-        stageComboBox.setConverter(stageConverter);
-        communicationDistanceComboBox.setConverter(communicationDistanceConverter);
-        sectorComboBox.setConverter(sectorConverter);
-        vagonLaboratoryComboBox.setConverter(vagonLaboratoryConverter);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        communicationDistanceComboBox.setConverter(ComboBoxUtil.communicationDistanceConverter);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
 
-        communicationDistanceComboBox.getItems().setAll(communicationDistanceService.listAll());
+        communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         deviceTypeComboBox.getItems().setAll(Systems.values());
-        vagonLaboratoryComboBox.getItems().setAll(vagonLaboratoryService.listAll());
-        sectorComboBox.getItems().setAll(sectorService.listAll());
+        vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
         repeatRemarkStatusComboBox.getItems().setAll(RemarkRepeat.values());
     }
 

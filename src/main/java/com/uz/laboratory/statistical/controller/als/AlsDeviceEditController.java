@@ -10,13 +10,13 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,46 +54,12 @@ public class AlsDeviceEditController implements Initializable {
 
     private TrackCircuit trackCircuit;
 
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
-
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Station> stationConverter = new StringConverter<Station>() {
-        @Override
-        public String toString(Station object) {
-            return object.getName();
-        }
-
-        @Override
-        public Station fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         trackCircuit = (TrackCircuit) trackCircuitService.get(alsSystemEditEntityDto.getEditedEntityId());
 
-        sectorComboBox.setConverter(sectorConverter);
-        stageOrStationComboBox.setConverter(trackCircuit.isStationalCircuit() ? stationConverter : stageConverter);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        stageOrStationComboBox.setConverter(trackCircuit.isStationalCircuit() ? ComboBoxUtil.stationConverter : ComboBoxUtil.stageConverter);
 
         sectorComboBox.getItems().setAll(alsSystemEditEntityDto.getSectorList());
         sectorComboBox.getSelectionModel().select(trackCircuit.getSector());

@@ -7,13 +7,13 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,34 +53,11 @@ public class PonabDeviceEditController implements Initializable {
 
     private PonabSystem ponabSystem;
 
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
-
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ponabSystem = (PonabSystem) ponabSystemService.get(ponabSystemEditDto.getEditedEntityId());
-        sectorComboBox.setConverter(sectorConverter);
-        stageComboBox.setConverter(stageConverter);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
 
         sectorComboBox.getItems().setAll(ponabSystemEditDto.getSectorList());
         sectorComboBox.getSelectionModel().select(ponabSystem.getSector());

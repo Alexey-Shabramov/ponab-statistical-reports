@@ -10,15 +10,14 @@ import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
-import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
-import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -61,59 +60,16 @@ public class AlsRemarkEditModalController implements Initializable {
     private InspectionTripService inspectionTripService;
 
     private List<String> errorList = new ArrayList<>();
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
 
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<InspectionTrip> inspectionTripConverter = new StringConverter<InspectionTrip>() {
-        @Override
-        public String toString(InspectionTrip object) {
-            return DtoUtil.inspectionTripConverterTitleBuilder(object);
-        }
-
-        @Override
-        public InspectionTrip fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<TrackCircuit> alsSystemConverter = new StringConverter<TrackCircuit>() {
-        @Override
-        public String toString(TrackCircuit object) {
-            return DtoUtil.alsSystemConverterTitleBuilder(object);
-        }
-
-        @Override
-        public TrackCircuit fromString(String string) {
-            return null;
-        }
-    };
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         alsRemark = (AlsRemark) alsRemarkService.get(alsRemarkEditEntityDto.getEditedEntityId());
         alsRemarkDatePicker.setValue(LocalDateTime.ofInstant(Instant.ofEpochMilli(alsRemark.getCreationDate().getTime()), ZoneId.systemDefault()).toLocalDate());
 
-        sectorComboBox.setConverter(sectorConverter);
-        stageComboBox.setConverter(stageConverter);
-        inspectionComboBox.setConverter(inspectionTripConverter);
-        alsSystemsComboBox.setConverter(alsSystemConverter);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        inspectionComboBox.setConverter(ComboBoxUtil.inspectionTripConverter);
+        alsSystemsComboBox.setConverter(ComboBoxUtil.alsSystemConverter);
         sectorComboBox.getItems().setAll(alsRemarkEditEntityDto.getSectorList());
         sectorComboBox.getSelectionModel().select(alsRemark.getInspectionTrip().getTripSector());
 

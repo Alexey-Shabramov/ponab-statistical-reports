@@ -13,6 +13,8 @@ import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
 import javafx.beans.property.IntegerProperty;
@@ -28,7 +30,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,40 +98,8 @@ public class PonabDevicesController implements Initializable {
     private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private CommunicationDistanceService communicationDistanceService;
-
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
-
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<CommunicationDistance> communicationDistanceConverter = new StringConverter<CommunicationDistance>() {
-        @Override
-        public String toString(CommunicationDistance object) {
-            return object.getNumber().toString();
-        }
-
-        @Override
-        public CommunicationDistance fromString(String string) {
-            return null;
-        }
-    };
+    @Autowired
+    private InitComboBoxesUtil initComboBoxesUtil;
 
     private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
@@ -218,11 +187,11 @@ public class PonabDevicesController implements Initializable {
     }
 
     private void initComboBoxes() {
-        stageComboBox.setConverter(stageConverter);
-        sectorComboBox.setConverter(sectorConverter);
-        sectorComboBox.getItems().setAll(sectorService.listAll());
-        communicationDistanceComboBox.setConverter(communicationDistanceConverter);
-        communicationDistanceComboBox.getItems().setAll(communicationDistanceService.listAll());
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        communicationDistanceComboBox.setConverter(ComboBoxUtil.communicationDistanceConverter);
+        communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         ponabSystemComboBox.getItems().setAll(PonabSystems.values());
         optionComboBox.getItems().setAll(PonabOptions.values());

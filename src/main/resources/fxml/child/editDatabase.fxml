@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="549.0" prefWidth="912.0"
+      xmlns="http://javafx.com/javafx/8"
+      fx:controller="com.uz.laboratory.statistical.controller.EditDataBaseController">
+    <children>
+        <Label layoutX="335.0" layoutY="423.0" text="Дата оформления">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <DatePicker fx:id="remarkDatePicker" layoutX="11.0" layoutY="421.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="357.0" layoutY="221.0" text="Проверка">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkInspectionComboBox" layoutX="11.0" layoutY="218.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="365.0" layoutY="378.0" text="Повтор">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkRepeatComboBox" layoutX="11.0" layoutY="374.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="351.0" layoutY="299.0" text="Замечание">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextArea fx:id="remarkNoteTextArea" layoutX="11.0" layoutY="261.0" prefHeight="95.0" prefWidth="311.0"/>
+        <Button layoutX="277.0" layoutY="471.0" mnemonicParsing="false" onAction="#resetEditButton" text="Отмена">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="111.0" layoutY="471.0" mnemonicParsing="false" onAction="#addNewRemarkButton"
+                text="Добавить новое">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Label layoutX="346.0" layoutY="165.0" text="Тип cистемы">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkChosenSystemsComboBox" layoutX="11.0" layoutY="162.0" prefHeight="25.0"
+                  prefWidth="311.0"/>
+        <Label layoutX="359.0" layoutY="120.0" text="Перегон">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkStageComboBox" layoutX="11.0" layoutY="117.0" onAction="#remarkStageSelectionListener"
+                  prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="360.0" layoutY="75.0" text="Участок">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkSectorComboBox" layoutX="11.0" layoutY="73.0" onAction="#remarkSectorOnChangeListener"
+                  prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="84.0" layoutY="4.0" text="Добавить новое замечание ПАВПБ:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkDeviceTypeComboBox" layoutX="11.0" layoutY="29.0"
+                  onAction="#remarkDeviceTypeComboBoxListener" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="334.0" layoutY="32.0" text="Тип замечания">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutX="452.0" orientation="VERTICAL" prefHeight="521.0" prefWidth="0.0"/>
+        <ComboBox fx:id="ponabDeviceComboBox" layoutX="458.0" layoutY="29.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Button fx:id="editPonabDeviceButton" layoutX="673.0" layoutY="30.0" mnemonicParsing="false"
+                text="Редактировать"/>
+        <Button fx:id="addPonabDeviceButton" layoutX="786.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="116.0" text="Добавить новую"/>
+        <Label layoutX="537.0" layoutY="4.0" text="Редактирование/Добавление устройства ПАВПБ:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutX="452.0" layoutY="63.0" prefHeight="1.0" prefWidth="459.0"/>
+        <Label layoutX="537.0" layoutY="65.0" text="Редактирование/Добавление устройства АЛС:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Button fx:id="addAlsDeviceButton" layoutX="786.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="116.0" text="Добавить новую"/>
+        <Button fx:id="editAlsDeviceButton" layoutX="673.0" layoutY="91.0" mnemonicParsing="false"
+                text="Редактировать"/>
+        <ComboBox fx:id="alsDeviceComboBox" layoutX="458.0" layoutY="90.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Separator layoutX="452.0" layoutY="125.0" prefHeight="1.0" prefWidth="459.0"/>
+        <Separator layoutX="452.0" layoutY="192.0" prefHeight="1.0" prefWidth="459.0"/>
+        <ComboBox fx:id="stationComboBox" layoutX="459.0" layoutY="157.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Button fx:id="editStationButton" layoutX="674.0" layoutY="158.0" mnemonicParsing="false" text="Редактировать"/>
+        <Button fx:id="addStationButton" layoutX="787.0" layoutY="158.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="116.0" text="Добавить новый"/>
+        <Label layoutX="555.0" layoutY="132.0" text="Редактирование/Добавление станций:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="555.0" layoutY="200.0" text="Редактирование/Добавление перегонов:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Button fx:id="addStageButton" layoutX="787.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="116.0" text="Добавить новый"/>
+        <Button fx:id="editStageEditButton" layoutX="674.0" layoutY="226.0" mnemonicParsing="false"
+                text="Редактировать"/>
+        <ComboBox fx:id="stageComboBox" layoutX="459.0" layoutY="225.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Separator layoutX="452.0" layoutY="260.0" prefHeight="1.0" prefWidth="459.0"/>
+        <Separator layoutX="452.0" layoutY="328.0" prefHeight="1.0" prefWidth="459.0"/>
+        <ComboBox fx:id="sectorComboBox" layoutX="459.0" layoutY="293.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Button fx:id="editSectorButton" layoutX="674.0" layoutY="294.0" mnemonicParsing="false" text="Редактировать"/>
+        <Button fx:id="addSectorButton" layoutX="787.0" layoutY="294.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="116.0" text="Добавить новый"/>
+        <Label layoutX="552.0" layoutY="265.0" text="Редактирование/Добавление участков:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="491.0" layoutY="399.0" text="Редактирование/Добавление вагон-лабораторий:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Button fx:id="addVagonLaboratoryButton" layoutX="788.0" layoutY="427.0" mnemonicParsing="false"
+                prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
+        <Button fx:id="editVagonLaboratoryButton" layoutX="675.0" layoutY="427.0" mnemonicParsing="false"
+                text="Редактировать"/>
+        <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="460.0" layoutY="426.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Separator layoutX="453.0" layoutY="461.0" prefHeight="1.0" prefWidth="459.0"/>
+        <Separator layoutX="453.0" layoutY="393.0" prefHeight="1.0" prefWidth="459.0"/>
+        <ComboBox fx:id="communicationDistanceComboBox" layoutX="460.0" layoutY="358.0" prefHeight="25.0"
+                  prefWidth="204.0"/>
+        <Button fx:id="editCommunicationDistanceButton" layoutX="675.0" layoutY="359.0" mnemonicParsing="false"
+                text="Редактировать"/>
+        <Button fx:id="addCommunicationButtonButton" layoutX="788.0" layoutY="359.0" mnemonicParsing="false"
+                prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
+        <Label layoutX="556.0" layoutY="333.0" text="Редактирование/Добавление ШЧ:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+    </children>
+</Pane>

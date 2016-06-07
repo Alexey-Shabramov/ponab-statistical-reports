@@ -17,6 +17,8 @@
         </property>
     </beans:bean>
 
+    <beans:bean id="initComboBoxesUtil" class="com.uz.laboratory.statistical.util.InitComboBoxesUtil"/>
+
     <!-- Dao beans definitions -->
     <beans:bean id="communicationDistanceDao"
                 class="com.uz.laboratory.statistical.dao.location.locationImpl.CommunicationDistanceDaoImpl">

@@ -15,7 +15,9 @@ import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.DtoUtil;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
 import javafx.beans.property.IntegerProperty;
@@ -31,7 +33,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,31 +98,10 @@ public class SheduleController implements Initializable {
     private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private InspectionTripEditEntityDto inspectionTripEditEntityDto;
+    @Autowired
+    private InitComboBoxesUtil initComboBoxesUtil;
 
     private List<String> errorList = new ArrayList<>();
-
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<VagonLaboratory> vagonLaboratoryConverter = new StringConverter<VagonLaboratory>() {
-        @Override
-        public String toString(VagonLaboratory object) {
-            return object.getName();
-        }
-
-        @Override
-        public VagonLaboratory fromString(String string) {
-            return null;
-        }
-    };
 
     private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
@@ -200,10 +180,10 @@ public class SheduleController implements Initializable {
     }
 
     private void initComboBoxes() {
-        sectorComboBox.setConverter(sectorConverter);
-        vagonLaboratoryComboBox.setConverter(vagonLaboratoryConverter);
-        sectorComboBox.getItems().setAll(sectorService.listAll());
-        vagonLaboratoryComboBox.getItems().setAll(vagonLaboratoryService.listAll());
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
         tripTypeComboBox.getItems().setAll(SheduleTripsTypes.values());
     }
 

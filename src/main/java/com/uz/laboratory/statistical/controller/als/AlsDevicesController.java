@@ -17,6 +17,8 @@ import com.uz.laboratory.statistical.filter.AlsDevicesFilter;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
+import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
 import javafx.beans.property.IntegerProperty;
@@ -32,7 +34,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,53 +105,10 @@ public class AlsDevicesController implements Initializable {
     private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private CommunicationDistanceService communicationDistanceService;
+    @Autowired
+    private InitComboBoxesUtil initComboBoxesUtil;
 
     private List stationList = new ArrayList<>();
-
-    private StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
-        @Override
-        public String toString(Stage object) {
-            return object.getName();
-        }
-
-        @Override
-        public Stage fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Sector> sectorConverter = new StringConverter<Sector>() {
-        @Override
-        public String toString(Sector object) {
-            return object.getTitle();
-        }
-
-        @Override
-        public Sector fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<CommunicationDistance> communicationDistanceConverter = new StringConverter<CommunicationDistance>() {
-        @Override
-        public String toString(CommunicationDistance object) {
-            return object.getNumber().toString();
-        }
-
-        @Override
-        public CommunicationDistance fromString(String string) {
-            return null;
-        }
-    };
-    private StringConverter<Station> stationConverter = new StringConverter<Station>() {
-        @Override
-        public String toString(Station object) {
-            return object.getName();
-        }
-
-        @Override
-        public Station fromString(String string) {
-            return null;
-        }
-    };
 
     private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
@@ -178,12 +136,12 @@ public class AlsDevicesController implements Initializable {
     }
 
     private void initComboBoxes() {
-        sectorComboBox.setConverter(sectorConverter);
-        stageComboBox.setConverter(stageConverter);
-        communicationDistanceComboBox.setConverter(communicationDistanceConverter);
-        stationComboBox.setConverter(stationConverter);
-        sectorComboBox.getItems().setAll(sectorService.listAll());
-        communicationDistanceComboBox.getItems().setAll(communicationDistanceService.listAll());
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        communicationDistanceComboBox.setConverter(ComboBoxUtil.communicationDistanceConverter);
+        stationComboBox.setConverter(ComboBoxUtil.stationConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         trackCircuitTypeComboBox.getItems().setAll(TrackCircuitTypes.values());
     }
