@@ -303,13 +303,12 @@ public class RemarkStatisticsController implements Initializable {
     private void initPopupMenu() {
         MenuItem view = new MenuItem(Constants.POPUP_MENU_VIEW_INFO);
         MenuItem edit = new MenuItem(Constants.POPUP_MENU_EDIT_INFO);
-        MenuItem printTableView = new MenuItem(Constants.POPUP_MENU_PRINT_TABLE_VIEW);
         MenuItem saveTableView = new MenuItem(Constants.POPUP_MENU_SAVE_TABLE_VIEW);
         MenuItem delete = new MenuItem(Constants.POPUP_MENU_DELETE_INFO);
         MenuItem safetySpaceFirst = new MenuItem(Constants.SAFETY_SPACE);
         MenuItem safetySpaceSecond = new MenuItem(Constants.SAFETY_SPACE);
 
-        contextMenu.getItems().addAll(view, edit, safetySpaceFirst, printTableView, saveTableView, safetySpaceSecond, delete);
+        contextMenu.getItems().addAll(view, edit, safetySpaceFirst, saveTableView, safetySpaceSecond, delete);
         view.setOnAction(event -> {
             if (statisticsTableView.getSelectionModel().getSelectedItem() != null) {
                 if (deviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
