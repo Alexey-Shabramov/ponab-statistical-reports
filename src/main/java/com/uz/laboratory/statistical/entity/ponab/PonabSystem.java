@@ -103,4 +103,19 @@ public class PonabSystem extends Identifier {
     public void setOption(String option) {
         this.option = option;
     }
+
+    @Override
+    public String toString() {
+        return "PonabSystem{" +
+                "id=" + getId() +
+                "sector=" + sector +
+                ", stage=" + stage +
+                ", title='" + title + '\'' +
+                ", option='" + option + '\'' +
+                ", location='" + location + '\'' +
+                ", speachInformer=" + speachInformer +
+                ", evenDirectionOfMovement=" + evenDirectionOfMovement +
+                ", ponabRemarks=" + ponabRemarks +
+                '}';
+    }
 }

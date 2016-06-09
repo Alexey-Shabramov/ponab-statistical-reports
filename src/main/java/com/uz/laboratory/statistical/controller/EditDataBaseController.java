@@ -1,6 +1,8 @@
 package com.uz.laboratory.statistical.controller;
 
 import com.uz.laboratory.statistical.dict.*;
+import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
+import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
@@ -19,6 +21,8 @@ import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
+import com.uz.laboratory.statistical.util.fx.ModalUtil;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -117,13 +121,19 @@ public class EditDataBaseController implements Initializable {
     private PonabRemarkService ponabRemarkService;
     @Autowired
     private AlsRemarkService alsRemarkService;
+    @Autowired
+    private PonabSystemEditEntityDto ponabSystemEditEntityDto;
+    @Autowired
+    private ModalUtil modalUtil;
+    @Autowired
+    private AlsSystemEditEntityDto alsSystemEditEntityDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initRemarkComboBoxes();
+        initMainBaseComboBoxes();
     }
 
-    @FXML
     public void resetEditButton(ActionEvent actionEvent) {
     }
 
@@ -153,9 +163,6 @@ public class EditDataBaseController implements Initializable {
         alsOrPomabDeviceComboBox.setConverter(null);
         if (remarkStageOrStationComboBox.getSelectionModel().getSelectedItem() != null) {
             if (remarkDeviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                /**
-                 * В АЛС
-                 */
                 alsOrPomabDeviceComboBox.setConverter(ComboBoxUtil.alsSystemConverter);
                 if (remarkChosenSystemsComboBox.getSelectionModel().getSelectedIndex() == 0) {
                     alsOrPomabDeviceComboBox.getItems().setAll(trackCircuitService.getAlsSystemsByStage((Stage) remarkStageOrStationComboBox.getSelectionModel().getSelectedItem()));
@@ -163,9 +170,7 @@ public class EditDataBaseController implements Initializable {
                     alsOrPomabDeviceComboBox.getItems().setAll(trackCircuitService.getAlsSystemsByStation((Station) remarkStageOrStationComboBox.getSelectionModel().getSelectedItem()));
                 }
             } else {
-                /**
-                 * В ПАВПБ
-                 */
+
                 alsOrPomabDeviceComboBox.getItems().clear();
                 alsOrPomabDeviceComboBox.setConverter(ComboBoxUtil.ponabSystemConverter);
                 alsOrPomabDeviceComboBox.getItems().setAll(ponabSystemService.getPonabSystemsByStage((Stage) remarkStageOrStationComboBox.getSelectionModel().getSelectedItem()));
@@ -272,6 +277,23 @@ public class EditDataBaseController implements Initializable {
         remarkDatePicker.setDisable(true);
     }
 
+    private void initMainBaseComboBoxes() {
+        ponabDeviceComboBox.setConverter(ComboBoxUtil.ponabSystemConverter);
+        ponabDeviceComboBox.getItems().setAll(InitComboBoxesUtil.ponabSystemList);
+        alsDeviceComboBox.setConverter(ComboBoxUtil.alsSystemConverter);
+        alsDeviceComboBox.getItems().setAll(InitComboBoxesUtil.trackCircuitList);
+        stationComboBox.setConverter(ComboBoxUtil.stationConverter);
+        stationComboBox.getItems().setAll(InitComboBoxesUtil.stationList);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        stageComboBox.getItems().setAll(InitComboBoxesUtil.stageList);
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        communicationDistanceComboBox.setConverter(ComboBoxUtil.communicationDistanceConverter);
+        communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
+        vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
+        vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+    }
+
     private void checkAndCreateNewPonabRemark() {
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
@@ -303,4 +325,61 @@ public class EditDataBaseController implements Initializable {
             AlertGuiUtil.createSuccessAlert(Constants.REMARK_ALS_CREATION_SUCCESS);
         }
     }
+
+    @FXML
+    public void editPonabDeviceButtonListener(ActionEvent actionEvent) {
+        if (ponabDeviceComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.PONAB_DEVICE_EDIT_NOT_SET);
+        } else {
+            preparePonabSystemDto();
+            modalUtil.createPonabDeviceEditOrCreateModal();
+            ponabDeviceComboBox.getItems().setAll(InitComboBoxesUtil.ponabSystemList);
+            ponabDeviceComboBox.getSelectionModel().select(ponabSystemEditEntityDto.getPonabSystem());
+            ponabSystemEditEntityDto.setPonabSystem(null);
+        }
+    }
+
+    @FXML
+    public void editAlsDeviceButtonListener(ActionEvent actionEvent) {
+        if (alsDeviceComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.ALS_DEVICE_EDIT_NOT_SET);
+        } else {
+            prepareAlsSystemDto();
+            modalUtil.createAlsDeviceEditOrCreateModal();
+            alsDeviceComboBox.getItems().setAll(InitComboBoxesUtil.trackCircuitList);
+            alsDeviceComboBox.getSelectionModel().select(alsSystemEditEntityDto.getTrackCircuit());
+            alsSystemEditEntityDto.setTrackCircuit(null);
+        }
+    }
+
+    @FXML
+    public void addPonabDeviceButtonListener(ActionEvent actionEvent) {
+        modalUtil.createPonabDeviceEditOrCreateModal();
+        if (ponabSystemEditEntityDto.getPonabSystem() != null) {
+            ponabDeviceComboBox.getItems().setAll(InitComboBoxesUtil.ponabSystemList);
+        }
+        ponabSystemEditEntityDto.setPonabSystem(null);
+    }
+
+    @FXML
+    public void addAlsDeviceButtonListener(ActionEvent actionEvent) {
+        modalUtil.createAlsDeviceEditOrCreateModal();
+        if (alsSystemEditEntityDto.getTrackCircuit() != null) {
+            alsDeviceComboBox.getItems().setAll(InitComboBoxesUtil.trackCircuitList);
+        }
+        alsSystemEditEntityDto.setTrackCircuit(null);
+    }
+
+    private void preparePonabSystemDto() {
+        ponabSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
+        ponabSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+        ponabSystemEditEntityDto.setPonabSystem(ponabDeviceComboBox.getSelectionModel().getSelectedItem());
+    }
+
+    private void prepareAlsSystemDto() {
+        alsSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
+        alsSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+        alsSystemEditEntityDto.setTrackCircuit(alsDeviceComboBox.getSelectionModel().getSelectedItem());
+    }
+
 }

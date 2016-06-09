@@ -9,6 +9,7 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
@@ -56,37 +57,61 @@ public class AlsDeviceEditController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        trackCircuit = (TrackCircuit) trackCircuitService.get(alsSystemEditEntityDto.getEditedEntityId());
+        initComboBoxes();
+        if (alsSystemEditEntityDto.getEditedEntityId() != null) {
+            trackCircuit = (TrackCircuit) trackCircuitService.get(alsSystemEditEntityDto.getEditedEntityId());
+            prepareAlsDeviceToEdit();
+        } else if (alsSystemEditEntityDto.getTrackCircuit() != null) {
+            trackCircuit = alsSystemEditEntityDto.getTrackCircuit();
+            prepareAlsDeviceToEdit();
+        }
+    }
 
+    private void initComboBoxes() {
         sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
-        stageOrStationComboBox.setConverter(trackCircuit.isStationalCircuit() ? ComboBoxUtil.stationConverter : ComboBoxUtil.stageConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        trackCircuitTypeComboBox.getItems().setAll(TrackCircuitTypes.values());
+        directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
+    }
 
-        sectorComboBox.getItems().setAll(alsSystemEditEntityDto.getSectorList());
+    private void prepareAlsDeviceToEdit() {
         sectorComboBox.getSelectionModel().select(trackCircuit.getSector());
-
+        stageOrStationComboBox.setConverter(trackCircuit.isStationalCircuit() ? ComboBoxUtil.stationConverter : ComboBoxUtil.stageConverter);
+        trackCircuitTypeComboBox.getSelectionModel().select(trackCircuit.isStationalCircuit() ? TrackCircuitTypes.STATION : TrackCircuitTypes.STAGE);
         stageOrStationComboBox.getItems().setAll(trackCircuit.isStationalCircuit()
                 ? convertStationList(sectorComboBox.getSelectionModel().getSelectedItem().getStageList())
                 : sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
         stageOrStationComboBox.getSelectionModel().select(trackCircuit.isStationalCircuit()
                 ? trackCircuit.getStation()
                 : trackCircuit.getStage());
-
-        trackCircuitTypeComboBox.getItems().setAll(TrackCircuitTypes.values());
-        trackCircuitTypeComboBox.getSelectionModel().select(trackCircuit.isStationalCircuit() ? TrackCircuitTypes.STATION : TrackCircuitTypes.STAGE);
-
-        directionOfMovementComboBox.getItems().setAll(DirectionsOfMovement.values());
         directionOfMovementComboBox.getSelectionModel().select(trackCircuit.isEven() ? DirectionsOfMovement.EVEN : DirectionsOfMovement.UNEVEN);
-
         picketTextField.setText(trackCircuit.getPicket() != null ? trackCircuit.getPicket().toString() : null);
         nameOfCircuitTextField.setText(trackCircuit.getName());
     }
 
     @FXML
     public void sectorChangeListener(ActionEvent actionEvent) {
+        trackCircuitTypeComboBox.setValue(null);
+        stageOrStationComboBox.getItems().clear();
+        stageOrStationComboBox.setValue(null);
+        stageOrStationComboBox.setDisable(true);
     }
 
     @FXML
     public void trackCircuitTypeComboBoxListener(ActionEvent actionEvent) {
+        stageOrStationComboBox.setValue(null);
+        stageOrStationComboBox.setConverter(null);
+        if (trackCircuitTypeComboBox.getSelectionModel().getSelectedItem() != null
+                && sectorComboBox.getSelectionModel().getSelectedItem() != null) {
+            if (trackCircuitTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                stageOrStationComboBox.setConverter(ComboBoxUtil.stageConverter);
+                stageOrStationComboBox.getItems().setAll(sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
+            } else {
+                stageOrStationComboBox.setConverter(ComboBoxUtil.stationConverter);
+                stageOrStationComboBox.getItems().setAll(ComboBoxUtil.getStationListBySector(sectorComboBox.getSelectionModel().getSelectedItem()));
+            }
+        }
+        stageOrStationComboBox.setDisable(false);
     }
 
     @FXML
@@ -109,6 +134,10 @@ public class AlsDeviceEditController implements Initializable {
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
+            if (trackCircuit == null || trackCircuit.getId() < 0) {
+                trackCircuit = new TrackCircuit();
+                InitComboBoxesUtil.trackCircuitList.add(trackCircuit);
+            }
             trackCircuit.setSector(sectorComboBox.getSelectionModel().getSelectedItem());
             trackCircuit.setName(nameOfCircuitTextField.getText());
             trackCircuit.setStationalCircuit(trackCircuitTypeComboBox.getSelectionModel().getSelectedIndex() != 0);
@@ -141,6 +170,7 @@ public class AlsDeviceEditController implements Initializable {
     }
 
     private void cleanDtoSecondaryData() {
+        trackCircuit = null;
         alsSystemEditEntityDto.setEditedEntityId(null);
         alsSystemEditEntityDto.setRepeatList(null);
         alsSystemEditEntityDto.setSectorList(null);

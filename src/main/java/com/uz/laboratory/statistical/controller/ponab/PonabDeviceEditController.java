@@ -6,6 +6,7 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
@@ -55,28 +56,35 @@ public class PonabDeviceEditController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ponabSystem = (PonabSystem) ponabSystemService.get(ponabSystemEditDto.getEditedEntityId());
-        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
-        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        initComboBoxes();
+        if (ponabSystemEditDto.getEditedEntityId() != null) {
+            ponabSystem = (PonabSystem) ponabSystemService.get(ponabSystemEditDto.getEditedEntityId());
+            preparePonabDeviceEdit();
+        } else if (ponabSystemEditDto.getPonabSystem() != null) {
+            ponabSystem = ponabSystemEditDto.getPonabSystem();
+            preparePonabDeviceEdit();
+        }
+    }
 
-        sectorComboBox.getItems().setAll(ponabSystemEditDto.getSectorList());
+    private void preparePonabDeviceEdit() {
         sectorComboBox.getSelectionModel().select(ponabSystem.getSector());
-
-        stageComboBox.getItems().setAll(sectorComboBox.getSelectionModel().getSelectedItem().getStageList());
         stageComboBox.getSelectionModel().select(ponabSystem.getStage());
-
-        systemTypeComboBox.getItems().addAll(PonabSystems.values());
         systemTypeComboBox.getSelectionModel().select(ponabSystem.getTitle());
-
-        directionOfMovementComboBox.getItems().addAll(DirectionsOfMovement.values());
         directionOfMovementComboBox.getSelectionModel().select(ponabSystem.isEvenDirectionOfMovement() ? DirectionsOfMovement.EVEN : DirectionsOfMovement.UNEVEN);
-
-        optionComboBox.getItems().addAll(PonabOptions.values());
-        optionComboBox.getSelectionModel().select(ponabSystem.getOption());
-
-        speachInformerComboBox.getItems().addAll(SpeachInformer.values());
         speachInformerComboBox.getSelectionModel().select(ponabSystem.isSpeachInformer() ? SpeachInformer.ENABLED : SpeachInformer.DISABLED);
         locationTextField.setText(ponabSystem.getLocation());
+        optionComboBox.getSelectionModel().select(ponabSystem.getOption());
+
+    }
+
+    private void initComboBoxes() {
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        stageComboBox.setConverter(ComboBoxUtil.stageConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        systemTypeComboBox.getItems().addAll(PonabSystems.values());
+        directionOfMovementComboBox.getItems().addAll(DirectionsOfMovement.values());
+        optionComboBox.getItems().addAll(PonabOptions.values());
+        speachInformerComboBox.getItems().addAll(SpeachInformer.values());
     }
 
     @FXML
@@ -102,6 +110,10 @@ public class PonabDeviceEditController implements Initializable {
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
+            if (ponabSystem == null || ponabSystem.getId() < 0) {
+                ponabSystem = new PonabSystem();
+                InitComboBoxesUtil.ponabSystemList.add(ponabSystem);
+            }
             ponabSystem.setStage(stageComboBox.getSelectionModel().getSelectedItem());
             ponabSystem.setSpeachInformer(speachInformerComboBox.getSelectionModel().getSelectedIndex() == 0);
             ponabSystem.setLocation(locationTextField.getText());
@@ -129,6 +141,7 @@ public class PonabDeviceEditController implements Initializable {
     }
 
     private void cleanDtoSecondaryData() {
+        ponabSystem = null;
         ponabSystemEditDto.setEditedEntityId(null);
         ponabSystemEditDto.setRepeatList(null);
         ponabSystemEditDto.setSectorList(null);

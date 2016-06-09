@@ -78,9 +78,9 @@
         <Separator layoutX="452.0" orientation="VERTICAL" prefHeight="521.0" prefWidth="0.0"/>
         <ComboBox fx:id="ponabDeviceComboBox" layoutX="458.0" layoutY="29.0" prefHeight="25.0" prefWidth="204.0"/>
         <Button fx:id="editPonabDeviceButton" layoutX="673.0" layoutY="30.0" mnemonicParsing="false"
-                text="Редактировать"/>
-        <Button fx:id="addPonabDeviceButton" layoutX="786.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="116.0" text="Добавить новую"/>
+                onAction="#editPonabDeviceButtonListener" text="Редактировать"/>
+        <Button fx:id="addPonabDeviceButton" layoutX="786.0" layoutY="30.0" mnemonicParsing="false"
+                onAction="#addPonabDeviceButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новую"/>
         <Label layoutX="537.0" layoutY="4.0" text="Редактирование/Добавление устройства ПАВПБ:">
             <font>
                 <Font name="System Bold" size="14.0"/>
@@ -92,10 +92,10 @@
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="addAlsDeviceButton" layoutX="786.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="116.0" text="Добавить новую"/>
+        <Button fx:id="addAlsDeviceButton" layoutX="786.0" layoutY="91.0" mnemonicParsing="false"
+                onAction="#addAlsDeviceButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новую"/>
         <Button fx:id="editAlsDeviceButton" layoutX="673.0" layoutY="91.0" mnemonicParsing="false"
-                text="Редактировать"/>
+                onAction="#editAlsDeviceButtonListener" text="Редактировать"/>
         <ComboBox fx:id="alsDeviceComboBox" layoutX="458.0" layoutY="90.0" prefHeight="25.0" prefWidth="204.0"/>
         <Separator layoutX="452.0" layoutY="125.0" prefHeight="1.0" prefWidth="459.0"/>
         <Separator layoutX="452.0" layoutY="192.0" prefHeight="1.0" prefWidth="459.0"/>

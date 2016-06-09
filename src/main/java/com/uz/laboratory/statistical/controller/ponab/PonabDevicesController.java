@@ -235,7 +235,7 @@ public class PonabDevicesController implements Initializable {
             public void handle(ActionEvent event) {
                 if (ponabDevicesTableView.getSelectionModel().getSelectedItem() != null) {
                     preparePonabSystemDto();
-                    modalUtil.createPonabDeviceEditModal();
+                    modalUtil.createPonabDeviceEditOrCreateModal();
                     if (ponabSystemEditEntityDto.getPonabSystem() != null) {
                         ponabDevicesTableData.remove(ponabSystemEditEntityDto.getTableViewIndex());
                         ponabDevicesTableData.set(ponabSystemEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedPonabSystemToTableDto(ponabDevicesTableView.getSelectionModel().getSelectedItem(), ponabSystemEditEntityDto.getPonabSystem()));

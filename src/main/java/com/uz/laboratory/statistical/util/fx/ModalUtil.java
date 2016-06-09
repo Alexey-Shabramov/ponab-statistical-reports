@@ -83,7 +83,7 @@ public class ModalUtil {
         plannedTripModal.showAndWait();
     }
 
-    public void createPonabDeviceEditModal() {
+    public void createPonabDeviceEditOrCreateModal() {
         Stage ponabDeviceModal = new Stage();
         ponabDeviceModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -95,7 +95,7 @@ public class ModalUtil {
         ponabDeviceModal.showAndWait();
     }
 
-    public void createAlsDeviceEditModal() {
+    public void createAlsDeviceEditOrCreateModal() {
         Stage alsDeviceModal = new Stage();
         alsDeviceModal.initModality(Modality.APPLICATION_MODAL);
         try {

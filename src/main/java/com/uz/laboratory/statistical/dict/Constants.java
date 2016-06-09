@@ -234,6 +234,6 @@ public class Constants {
     public static final String OPERATION_SUCCESSFULL_TITLE = "Операция удачно завершена.";
     public static final String OPERATION_SUCCESSFULL_HEADER = "Ваше последнее действие завершено успешно.";
 
-
-
+    public static final String PONAB_DEVICE_EDIT_NOT_SET = "Не выбрана система для редактирования.";
+    public static final String ALS_DEVICE_EDIT_NOT_SET = "Не выбрана рельсовая цепь для редактирования.";
 }

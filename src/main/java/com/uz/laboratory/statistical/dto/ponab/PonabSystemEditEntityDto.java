@@ -50,4 +50,15 @@ public class PonabSystemEditEntityDto {
     public void setRepeatList(ObservableList repeatList) {
         this.repeatList = repeatList;
     }
+
+    @Override
+    public String toString() {
+        return "PonabSystemEditEntityDto{" +
+                "ponabSystem=" + ponabSystem +
+                ", tableViewIndex=" + tableViewIndex +
+                ", editedEntityId=" + editedEntityId +
+                ", sectorList=" + sectorList +
+                ", repeatList=" + repeatList +
+                '}';
+    }
 }

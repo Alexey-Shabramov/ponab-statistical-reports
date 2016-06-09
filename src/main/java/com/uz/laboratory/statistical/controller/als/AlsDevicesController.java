@@ -183,7 +183,7 @@ public class AlsDevicesController implements Initializable {
             public void handle(ActionEvent event) {
                 if (alsDevicesTableView.getSelectionModel().getSelectedItem() != null) {
                     prepareAlsSystemDto();
-                    modalUtil.createAlsDeviceEditModal();
+                    modalUtil.createAlsDeviceEditOrCreateModal();
                     if (alsSystemEditEntityDto.getTrackCircuit() != null) {
                         alsDevicesTableData.remove(alsSystemEditEntityDto.getTableViewIndex());
                         alsDevicesTableData.set(alsSystemEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedAlsSystemToTableDto(alsDevicesTableView.getSelectionModel().getSelectedItem(), alsSystemEditEntityDto.getTrackCircuit()));
