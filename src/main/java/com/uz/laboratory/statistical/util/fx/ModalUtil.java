@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
+import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
@@ -50,6 +51,8 @@ public class ModalUtil {
     private InspectionTripDto inspectionTripDto;
     @Autowired
     private StationEditOrCreateDto stationEditOrCreateDto;
+    @Autowired
+    private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -131,6 +134,29 @@ public class ModalUtil {
         });
         stationModal.setTitle(Constants.STATION_MODAL_TITLE);
         stationModal.showAndWait();
+    }
+
+    public void createCommunicationDistanceEditOrCreateModal() {
+        Stage communicationDistanceModal = new Stage();
+        communicationDistanceModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            communicationDistanceModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.DISTANCE_EDIT_OR_CREATE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        communicationDistanceModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
+                    }
+                });
+            }
+        });
+        communicationDistanceModal.setTitle(Constants.DISTANCE_MODAL_TITLE);
+        communicationDistanceModal.showAndWait();
     }
 
     public void createPonabRemarkEditModal() {

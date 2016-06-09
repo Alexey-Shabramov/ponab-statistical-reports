@@ -145,9 +145,10 @@
         <ComboBox fx:id="communicationDistanceComboBox" layoutX="460.0" layoutY="358.0" prefHeight="25.0"
                   prefWidth="204.0"/>
         <Button fx:id="editCommunicationDistanceButton" layoutX="675.0" layoutY="359.0" mnemonicParsing="false"
-                text="Редактировать"/>
-        <Button fx:id="addCommunicationButtonButton" layoutX="788.0" layoutY="359.0" mnemonicParsing="false"
-                prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
+                onAction="#editCommunicationDistanceButtonListener" text="Редактировать"/>
+        <Button fx:id="addCommunicationDistanceButton" layoutX="788.0" layoutY="359.0" mnemonicParsing="false"
+                onAction="#addCommunicationDistanceButtonListener" prefHeight="25.0" prefWidth="116.0"
+                text="Добавить новый"/>
         <Label layoutX="556.0" layoutY="333.0" text="Редактирование/Добавление ШЧ:">
             <font>
                 <Font name="System Bold" size="14.0"/>

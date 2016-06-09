@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.controller;
 
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
+import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
@@ -130,6 +131,8 @@ public class EditDataBaseController implements Initializable {
     private AlsSystemEditEntityDto alsSystemEditEntityDto;
     @Autowired
     private StationEditOrCreateDto stationEditOrCreateDto;
+    @Autowired
+    private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -405,5 +408,27 @@ public class EditDataBaseController implements Initializable {
             stationComboBox.getItems().setAll(InitComboBoxesUtil.stationList);
         }
         stationEditOrCreateDto.setStation(null);
+    }
+
+    @FXML
+    public void editCommunicationDistanceButtonListener(ActionEvent actionEvent) {
+        if (communicationDistanceComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.COMMUNICATION_DISTANCE_EDIT_NOT_SET);
+        } else {
+            communicationDistanceEditOrCreateDto.setCommunicationDistance(communicationDistanceComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createCommunicationDistanceEditOrCreateModal();
+            communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
+            communicationDistanceComboBox.getSelectionModel().select(communicationDistanceEditOrCreateDto.getCommunicationDistance());
+            communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
+        }
+    }
+
+    @FXML
+    public void addCommunicationDistanceButtonListener(ActionEvent actionEvent) {
+        modalUtil.createCommunicationDistanceEditOrCreateModal();
+        if (communicationDistanceEditOrCreateDto.getCommunicationDistance() != null) {
+            communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
+        }
+        communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
     }
 }
