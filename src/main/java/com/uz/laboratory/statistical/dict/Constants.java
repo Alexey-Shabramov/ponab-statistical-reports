@@ -38,6 +38,8 @@ public class Constants {
     public static final String ALS_REMARK_VIEW_MODAL = "/fxml/modal/view/als/alsRemarkViewModal.fxml";
     public static final String INSPECTION_TRIP_VIEW_MODAL = "/fxml/modal/view/shedule/tripViewModal.fxml";
 
+    public static final String STATION_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/editOrCreateStationModal.fxml";
+
 
 
     /**
@@ -186,8 +188,11 @@ public class Constants {
      */
     public static final String ALS_DEVICE_EDIT_TITLE = "Редактирование выбранной рельсовой цепи";
 
-
-
+    /**
+     * FXML - editOrCreateStationModal.fxml
+     */
+    public static final String STATION_MODAL_TITLE = "Редактирование/Добавление станции";
+    public static final String STATION_MODAL_NAME_NULL = "Название станции пустое. Повторите Ваш ввод.";
     /**
      * Apache POI - titles
      */
@@ -236,4 +241,6 @@ public class Constants {
 
     public static final String PONAB_DEVICE_EDIT_NOT_SET = "Не выбрана система для редактирования.";
     public static final String ALS_DEVICE_EDIT_NOT_SET = "Не выбрана рельсовая цепь для редактирования.";
+    public static final String STATION_EDIT_NOT_SET = "Не выбрана станция для редактирования.";
+
 }

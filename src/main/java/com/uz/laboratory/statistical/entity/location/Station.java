@@ -14,8 +14,6 @@ import javax.persistence.Table;
 @DynamicUpdate(value = true)
 @AttributeOverride(name = "id", column = @Column(name = "id"))
 public class Station extends Identifier {
-
-
     @Column(name = "name")
     private String name;
 

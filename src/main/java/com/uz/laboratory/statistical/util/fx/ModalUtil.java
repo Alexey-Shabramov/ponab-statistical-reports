@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dto.RemarkTableListSaveDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
+import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
@@ -47,6 +48,8 @@ public class ModalUtil {
     private AlsSystemDto alsSystemDto;
     @Autowired
     private InspectionTripDto inspectionTripDto;
+    @Autowired
+    private StationEditOrCreateDto stationEditOrCreateDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -105,6 +108,29 @@ public class ModalUtil {
         }
         alsDeviceModal.setTitle(Constants.ALS_DEVICE_EDIT_TITLE);
         alsDeviceModal.showAndWait();
+    }
+
+    public void createStationEditOrCreateModal() {
+        Stage stationModal = new Stage();
+        stationModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            stationModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.STATION_EDIT_OR_CREATE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stationModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stationEditOrCreateDto.setStation(null);
+                    }
+                });
+            }
+        });
+        stationModal.setTitle(Constants.STATION_MODAL_TITLE);
+        stationModal.showAndWait();
     }
 
     public void createPonabRemarkEditModal() {

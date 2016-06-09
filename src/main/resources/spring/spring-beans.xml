@@ -138,4 +138,7 @@
     <beans:bean id="inspectionTripEditEntityDto"
                 class="com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto"/>
 
+    <beans:bean id="stationEditOrCreateDto"
+                class="com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto"/>
+
 </beans:beans>

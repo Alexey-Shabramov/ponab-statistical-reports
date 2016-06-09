@@ -2,6 +2,7 @@ package com.uz.laboratory.statistical.controller;
 
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
+import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
@@ -127,6 +128,8 @@ public class EditDataBaseController implements Initializable {
     private ModalUtil modalUtil;
     @Autowired
     private AlsSystemEditEntityDto alsSystemEditEntityDto;
+    @Autowired
+    private StationEditOrCreateDto stationEditOrCreateDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -382,4 +385,25 @@ public class EditDataBaseController implements Initializable {
         alsSystemEditEntityDto.setTrackCircuit(alsDeviceComboBox.getSelectionModel().getSelectedItem());
     }
 
+    @FXML
+    public void editStationButtonListener(ActionEvent actionEvent) {
+        if (stationComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.STATION_EDIT_NOT_SET);
+        } else {
+            stationEditOrCreateDto.setStation(stationComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createStationEditOrCreateModal();
+            stationComboBox.getItems().setAll(InitComboBoxesUtil.stationList);
+            stationComboBox.getSelectionModel().select(stationEditOrCreateDto.getStation());
+            stationEditOrCreateDto.setStation(null);
+        }
+    }
+
+    @FXML
+    public void addStationButtonListener(ActionEvent actionEvent) {
+        modalUtil.createStationEditOrCreateModal();
+        if (stationEditOrCreateDto.getStation() != null) {
+            stationComboBox.getItems().setAll(InitComboBoxesUtil.stationList);
+        }
+        stationEditOrCreateDto.setStation(null);
+    }
 }
