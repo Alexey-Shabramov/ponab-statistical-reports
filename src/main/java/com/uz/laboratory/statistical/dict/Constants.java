@@ -38,9 +38,10 @@ public class Constants {
     public static final String ALS_REMARK_VIEW_MODAL = "/fxml/modal/view/als/alsRemarkViewModal.fxml";
     public static final String INSPECTION_TRIP_VIEW_MODAL = "/fxml/modal/view/shedule/tripViewModal.fxml";
 
-    public static final String STATION_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/editOrCreateStationModal.fxml";
-    public static final String DISTANCE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/editOrCreateCommunicationDistanceModal.fxml";
+    public static final String STATION_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/stationEditOrCreateModal.fxml";
+    public static final String DISTANCE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/communicationDistanceeditOrCreateModal.fxml";
 
+    public static final String LABORATORY_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/shedule/vagonLaboratoryEditOrCreateModal.fxml";
 
 
     /**
@@ -190,16 +191,22 @@ public class Constants {
     public static final String ALS_DEVICE_EDIT_TITLE = "Редактирование выбранной рельсовой цепи";
 
     /**
-     * FXML - editOrCreateStationModal.fxml
+     * FXML - stationEditOrCreateModal.fxml
      */
     public static final String STATION_MODAL_TITLE = "Редактирование/Добавление станции";
     public static final String STATION_MODAL_NAME_NULL = "Название станции пустое. Повторите Ваш ввод.";
 
     /**
-     * FXML - editOrCreateCommunicationDistanceModal.fxml
+     * FXML - communicationDistanceeditOrCreateModal.fxml
      */
     public static final String DISTANCE_MODAL_TITLE = "Редактирование/Добавление ШЧ";
     public static final String DISTANCE_MODAL_NAME_NULL = "Номер ШЧ не выбран. Повторите Ваш выбор.";
+
+    /**
+     * FXML - vagonLaboratoryEditOrCreateModal.fxml
+     */
+    public static final String LABORATORY_MODAL_TITLE = "Редактирование/Добавление вагон-лаборатории";
+    public static final String LABORATORY_MODAL_NAME_NULL = "Номер ШЧ не выбран. Повторите Ваш выбор.";
 
     /**
      * Apache POI - titles
@@ -251,6 +258,5 @@ public class Constants {
     public static final String ALS_DEVICE_EDIT_NOT_SET = "Не выбрана рельсовая цепь для редактирования.";
     public static final String STATION_EDIT_NOT_SET = "Не выбрана станция для редактирования.";
     public static final String COMMUNICATION_DISTANCE_EDIT_NOT_SET = "Не выбрано ШЧ для редактирования.";
-
-
+    public static final String VAGON_LABORATORY_EDIT_NAME_NULL = "Не выбран идентификатор/имя для вагон лаборатории.";
 }

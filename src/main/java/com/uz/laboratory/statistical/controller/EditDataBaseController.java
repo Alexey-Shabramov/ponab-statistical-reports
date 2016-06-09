@@ -5,6 +5,7 @@ import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
+import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
@@ -133,6 +134,8 @@ public class EditDataBaseController implements Initializable {
     private StationEditOrCreateDto stationEditOrCreateDto;
     @Autowired
     private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
+    @Autowired
+    private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -430,5 +433,27 @@ public class EditDataBaseController implements Initializable {
             communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         }
         communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
+    }
+
+    @FXML
+    public void addVagonLaboratoryButtonListener(ActionEvent actionEvent) {
+        modalUtil.createVagonLaboratoryEditOrCreateModal();
+        if (vagonLaboratoryEditOrCreateDto.getVagonLaboratory() != null) {
+            vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+        }
+        vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
+    }
+
+    @FXML
+    public void editVagonLaboratoryButtonListener(ActionEvent actionEvent) {
+        if (vagonLaboratoryComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.VAGON_LABORATORY_EDIT_NAME_NULL);
+        } else {
+            vagonLaboratoryEditOrCreateDto.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createVagonLaboratoryEditOrCreateModal();
+            vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+            vagonLaboratoryComboBox.getSelectionModel().select(vagonLaboratoryEditOrCreateDto.getVagonLaboratory());
+            vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
+        }
     }
 }

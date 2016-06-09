@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class CreateOrEditStationController implements Initializable {
+public class StationCreateOrEditController implements Initializable {
     @FXML
     public Button resetEditButton;
     @FXML

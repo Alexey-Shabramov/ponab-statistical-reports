@@ -12,6 +12,7 @@ import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
+import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import javafx.application.Platform;
@@ -53,6 +54,8 @@ public class ModalUtil {
     private StationEditOrCreateDto stationEditOrCreateDto;
     @Autowired
     private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
+    @Autowired
+    private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -157,6 +160,29 @@ public class ModalUtil {
         });
         communicationDistanceModal.setTitle(Constants.DISTANCE_MODAL_TITLE);
         communicationDistanceModal.showAndWait();
+    }
+
+    public void createVagonLaboratoryEditOrCreateModal() {
+        Stage vagonLaboratoryModal = new Stage();
+        vagonLaboratoryModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            vagonLaboratoryModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.LABORATORY_EDIT_OR_CREATE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        vagonLaboratoryModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
+                    }
+                });
+            }
+        });
+        vagonLaboratoryModal.setTitle(Constants.LABORATORY_MODAL_TITLE);
+        vagonLaboratoryModal.showAndWait();
     }
 
     public void createPonabRemarkEditModal() {

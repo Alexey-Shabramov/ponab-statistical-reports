@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-public class CreateOrEditCommunicationDistanceController implements Initializable {
+public class CommunicationDistanceCreateOrEditController implements Initializable {
     @FXML
     public ComboBox communicationDitanceNumberComboBox;
     @FXML

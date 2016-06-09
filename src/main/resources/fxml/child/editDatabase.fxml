@@ -136,9 +136,9 @@
             </font>
         </Label>
         <Button fx:id="addVagonLaboratoryButton" layoutX="788.0" layoutY="427.0" mnemonicParsing="false"
-                prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
+                onAction="#addVagonLaboratoryButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
         <Button fx:id="editVagonLaboratoryButton" layoutX="675.0" layoutY="427.0" mnemonicParsing="false"
-                text="Редактировать"/>
+                onAction="#editVagonLaboratoryButtonListener" text="Редактировать"/>
         <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="460.0" layoutY="426.0" prefHeight="25.0" prefWidth="204.0"/>
         <Separator layoutX="453.0" layoutY="461.0" prefHeight="1.0" prefWidth="459.0"/>
         <Separator layoutX="453.0" layoutY="393.0" prefHeight="1.0" prefWidth="459.0"/>

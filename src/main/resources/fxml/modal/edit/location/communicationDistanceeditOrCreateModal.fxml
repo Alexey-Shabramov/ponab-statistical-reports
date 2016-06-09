@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="149.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="com.uz.laboratory.statistical.controller.location.CreateOrEditCommunicationDistanceController">
+            fx:controller="com.uz.laboratory.statistical.controller.location.CommunicationDistanceCreateOrEditController">
     <children>
         <Label layoutX="327.0" layoutY="48.0" text="Номер ШЧ">
             <font>
