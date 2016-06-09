@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
+import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
@@ -14,6 +15,7 @@ import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.location.StageService;
 import com.uz.laboratory.statistical.service.location.StationService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
+import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,8 @@ public class InitComboBoxesUtil {
     public static List<CommunicationDistance> communicationDistanceList = new ArrayList<>();
     public static List<TrackCircuit> trackCircuitList = new ArrayList<>();
     public static List<PonabSystem> ponabSystemList = new ArrayList<>();
+    public static List<InspectionTrip> inspectionTripList = new ArrayList<>();
+
     @Autowired
     private StationService stationService;
     @Autowired
@@ -45,6 +49,8 @@ public class InitComboBoxesUtil {
     private TrackCircuitService trackCircuitService;
     @Autowired
     private PonabSystemService ponabSystemService;
+    @Autowired
+    private InspectionTripService inspectionTripService;
 
     public InitComboBoxesUtil() {
     }
@@ -58,5 +64,6 @@ public class InitComboBoxesUtil {
         communicationDistanceList.addAll(communicationDistanceService.listAll());
         trackCircuitList.addAll(trackCircuitService.listAll());
         ponabSystemList.addAll(ponabSystemService.listAll());
+        inspectionTripList.addAll(inspectionTripService.listAllEndedInspectionTripList());
     }
 }

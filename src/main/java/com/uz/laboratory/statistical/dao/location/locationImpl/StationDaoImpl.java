@@ -10,4 +10,5 @@ public class StationDaoImpl extends GenericDaoImpl<Station> implements StationDa
     public Class getEntityClass() {
         return Station.class;
     }
+
 }

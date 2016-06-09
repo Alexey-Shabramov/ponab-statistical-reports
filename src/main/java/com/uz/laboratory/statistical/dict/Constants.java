@@ -219,4 +219,21 @@ public class Constants {
     public static final String TRIP_VIEW_VAGON_TITLE = "Вагон-лаборатория:";
     public static final String TRIP_VIEW_DATE = "Дата:";
     public static final String TRIP_VIEW_TYPE = "Тип поездки:";
+
+    /**
+     * New remark creation messages
+     */
+    public static final String REMARK_CREATION_TRIP_NULL = "Не указана проверка для текущего замечания.";
+    public static final String REMARK_CREATION_DATE_NULL = "Не указана дата фиксирования замечания.";
+    public static final String REMARK_CREATION_REPEAT_NULL = "Не указана тип замечания - повторное или нет.";
+    public static final String REMARK_CREATION_SYSTEM_NULL = "Не выбрано устройство, к которому закреплять данное замечание.";
+    public static final String REMARK_CREATION_DIRECTION_OF_MOVEMENT_NULL = "Не выбрано направление движения.";
+    public static final String REMARK_PONAB_CREATION_SUCCESS = "Новое замечание ПАВПБ было добавлено в базу замечаний.";
+    public static final String REMARK_ALS_CREATION_SUCCESS = "Новое замечание АЛС было добавлено в базу замечаний.";
+
+    public static final String OPERATION_SUCCESSFULL_TITLE = "Операция удачно завершена.";
+    public static final String OPERATION_SUCCESSFULL_HEADER = "Ваше последнее действие завершено успешно.";
+
+
+
 }

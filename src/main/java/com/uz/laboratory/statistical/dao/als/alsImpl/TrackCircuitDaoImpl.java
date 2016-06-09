@@ -5,6 +5,7 @@ import com.uz.laboratory.statistical.dao.daoImpl.GenericDaoImpl;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.filter.AlsDevicesFilter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -16,6 +17,14 @@ public class TrackCircuitDaoImpl extends GenericDaoImpl<TrackCircuit> implements
     @Override
     public Class getEntityClass() {
         return TrackCircuit.class;
+    }
+
+    @Override
+    public List<TrackCircuit> getAlsSystemsByStation(Station station) {
+        return getSession().createCriteria(getEntityClass(), "system")
+                .createAlias("system.station", "station")
+                .add(Restrictions.eq("station.id", station.getId()))
+                .list();
     }
 
     @Override

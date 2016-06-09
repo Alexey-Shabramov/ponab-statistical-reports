@@ -15,6 +15,7 @@ public class InspectionTripServiceImpl extends GenericServiceImpl<InspectionTrip
     @Override
     @Transactional
     public List getInspectionTripsBySector(Sector sector) {
+        System.out.println(sector.toString());
         return dao.getInspectionTripsBySector(sector);
     }
 
@@ -23,4 +24,12 @@ public class InspectionTripServiceImpl extends GenericServiceImpl<InspectionTrip
     public List getInspectionListByFilter(TripFilter tripFilter) {
         return dao.getInspectionListByFilter(tripFilter);
     }
+
+    @Override
+    @Transactional
+    public List listAllEndedInspectionTripList() {
+        return dao.listAllEndedInspectionTripList();
+    }
+
+
 }

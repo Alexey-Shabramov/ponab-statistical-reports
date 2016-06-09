@@ -4,6 +4,7 @@ import com.uz.laboratory.statistical.dao.als.alsImpl.TrackCircuitDaoImpl;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
+import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.filter.AlsDevicesFilter;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
 import com.uz.laboratory.statistical.service.serviceImpl.GenericServiceImpl;
@@ -17,6 +18,12 @@ public class TrackCircuitServiceImpl extends GenericServiceImpl<TrackCircuit, Tr
     @Transactional
     public List<TrackCircuit> getAlsSystemsByStage(Stage stage) {
         return dao.getAlsSystemsByStage(stage);
+    }
+
+    @Override
+    @Transactional
+    public List<TrackCircuit> getAlsSystemsByStation(Station station) {
+        return dao.getAlsSystemsByStation(station);
     }
 
     @Override

@@ -22,11 +22,19 @@ public class AlertGuiUtil {
         createAlert(preparedString);
     }
 
-    private static void createAlert(String error) {
+    public static void createAlert(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(Constants.ERROR_TITLE);
         alert.setHeaderText(Constants.ERROR_HEADER);
         alert.setContentText(error);
+        alert.showAndWait();
+    }
+
+    public static void createSuccessAlert(String mainText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Constants.OPERATION_SUCCESSFULL_TITLE);
+        alert.setHeaderText(Constants.OPERATION_SUCCESSFULL_HEADER);
+        alert.setContentText(mainText);
         alert.showAndWait();
     }
 }

@@ -122,20 +122,17 @@ public class SheduleController implements Initializable {
     }
 
     @FXML
-    public void resetDeletionButtonListener(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    public void deleteConfirmButtonListener(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
     public void searchTripsButtonListener(ActionEvent actionEvent) {
         TripFilter tripFilter = new TripFilter();
         tripFilter.setTripSector(sectorComboBox.getSelectionModel().getSelectedItem());
         tripFilter.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
+        tripFilter.setPlannedTrip(tripTypeComboBox.getSelectionModel().getSelectedIndex() == 0);
+        if (fromDatePicker.getValue() != null) {
+            tripFilter.setBeginDate(Date.from(fromDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        }
+        if (toDatePicker.getValue() != null) {
+            tripFilter.setEndDate(Date.from(toDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        }
         if (tripTypeComboBox.getSelectionModel().getSelectedItem() == null) {
             errorList.add(Constants.SHEDULE_ERROR_TYPE_IS_NOT_SET);
         }

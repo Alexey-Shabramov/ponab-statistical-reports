@@ -19,19 +19,19 @@
             </font>
         </Label>
         <ComboBox fx:id="remarkInspectionComboBox" layoutX="11.0" layoutY="218.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="365.0" layoutY="378.0" text="Повтор">
+        <Label layoutX="358.0" layoutY="382.0" text="Повтор">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="remarkRepeatComboBox" layoutX="11.0" layoutY="374.0" prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="351.0" layoutY="299.0" text="Замечание">
+        <ComboBox fx:id="remarkRepeatComboBox" layoutX="11.0" layoutY="379.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="347.0" layoutY="338.0" text="Замечание">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <TextArea fx:id="remarkNoteTextArea" layoutX="11.0" layoutY="261.0" prefHeight="95.0" prefWidth="311.0"/>
-        <Button layoutX="277.0" layoutY="471.0" mnemonicParsing="false" onAction="#resetEditButton" text="Отмена">
+        <TextArea fx:id="remarkNoteTextArea" layoutX="11.0" layoutY="336.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Button layoutX="277.0" layoutY="471.0" mnemonicParsing="false" onAction="#resetEditButton" text="Сбросить всё">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
@@ -42,28 +42,28 @@
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Button>
-        <Label layoutX="346.0" layoutY="165.0" text="Тип cистемы">
+        <Label layoutX="346.0" layoutY="80.0" text="Тип cистемы">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="remarkChosenSystemsComboBox" layoutX="11.0" layoutY="162.0" prefHeight="25.0"
-                  prefWidth="311.0"/>
-        <Label layoutX="359.0" layoutY="120.0" text="Перегон">
+        <ComboBox fx:id="remarkChosenSystemsComboBox" layoutX="11.0" layoutY="77.0"
+                  onAction="#remarkChosenSystemsComboBoxListener" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="332.0" layoutY="172.0" text="Перегон/Станция">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="remarkStageComboBox" layoutX="11.0" layoutY="117.0" onAction="#remarkStageSelectionListener"
+        <ComboBox fx:id="remarkStageOrStationComboBox" layoutX="11.0" layoutY="169.0"
+                  onAction="#remarkStageOrStationComboBoxListener" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="360.0" layoutY="127.0" text="Участок">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkSectorComboBox" layoutX="11.0" layoutY="125.0" onAction="#remarkSectorOnChangeListener"
                   prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="360.0" layoutY="75.0" text="Участок">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox fx:id="remarkSectorComboBox" layoutX="11.0" layoutY="73.0" onAction="#remarkSectorOnChangeListener"
-                  prefHeight="25.0" prefWidth="311.0"/>
-        <Label layoutX="84.0" layoutY="4.0" text="Добавить новое замечание ПАВПБ:">
+        <Label layoutX="98.0" layoutY="4.0" text="Добавить новое замечание:">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
@@ -150,6 +150,18 @@
         <Label layoutX="556.0" layoutY="333.0" text="Редактирование/Добавление ШЧ:">
             <font>
                 <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="alsOrPomabDeviceComboBox" layoutX="11.0" layoutY="262.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="352.0" layoutY="265.0" text="Устройство">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="remarkDirectionOfMovement" layoutX="11.0" layoutY="300.0" prefHeight="25.0" prefWidth="311.0"/>
+        <Label layoutX="342.0" layoutY="303.0" text="Направление">
+            <font>
+                <Font size="14.0"/>
             </font>
         </Label>
     </children>

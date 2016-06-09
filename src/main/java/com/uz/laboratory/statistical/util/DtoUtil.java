@@ -49,9 +49,10 @@ public class DtoUtil {
 
     public static String alsSystemConverterTitleBuilder(TrackCircuit trackCircuit) {
         try {
-            return stringBuilder.append(trackCircuit.getName())
+            return stringBuilder.append("Рельсовая цепь - ")
+                    .append(trackCircuit.getName())
                     .append(" - ")
-                    .append(trackCircuit.getPicket())
+                    .append(trackCircuit.getPicket() == null ? "Пикет не указан." : trackCircuit.getPicket())
                     .toString();
         } finally {
             stringBuilder.setLength(0);

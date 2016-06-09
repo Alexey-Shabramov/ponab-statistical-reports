@@ -110,7 +110,7 @@ public class TestController implements Initializable {
         inspectionTrip.setVagonLaboratory(vagonLaboratory);
         inspectionTrip.setTripSector(sector);
         inspectionTrip.setDate(new Date());
-        inspectionTrip.setPlannedTrip(true);
+        inspectionTrip.setPlannedTrip(false);
         inspectionTripService.save(inspectionTrip);
 
         TrackCircuit trackCircuit = new TrackCircuit();
@@ -119,7 +119,7 @@ public class TestController implements Initializable {
         trackCircuit.setName("Сп.3");
         trackCircuit.setStage(stage);
         trackCircuit.setEven(true);
-        trackCircuit.setStationalCircuit(false);
+        trackCircuit.setStationalCircuit(true);
         trackCircuit.setStation(station);
         trackCircuitService.save(trackCircuit);
 
@@ -131,6 +131,15 @@ public class TestController implements Initializable {
         alsRemark.setCreationDate(new Date());
         alsRemark.setRepeatable(false);
         alsRemarkService.save(alsRemark);
+
+        AlsRemark alsnewRemark = new AlsRemark();
+        alsnewRemark.setEven(true);
+        alsnewRemark.setNote("Штата там не работает!");
+        alsnewRemark.setTrackCircuit(trackCircuit);
+        alsnewRemark.setInspectionTrip(inspectionTrip);
+        alsnewRemark.setCreationDate(new Date());
+        alsnewRemark.setRepeatable(true);
+        alsRemarkService.save(alsnewRemark);
 
         PonabSystem ponabSystem = new PonabSystem();
         ponabSystem.setOption("160");

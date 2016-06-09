@@ -11,4 +11,6 @@ public interface InspectionTripDao extends GenericDao {
     List getInspectionListByFilter(TripFilter tripFilter);
 
     List getInspectionTripsBySector(Sector sector);
+
+    List listAllEndedInspectionTripList();
 }

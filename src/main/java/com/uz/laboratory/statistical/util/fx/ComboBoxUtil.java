@@ -12,6 +12,9 @@ import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import javafx.util.StringConverter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ComboBoxUtil {
     public static final StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
@@ -108,4 +111,34 @@ public class ComboBoxUtil {
             return null;
         }
     };
+
+    public static List<Station> getStationListBySector(Sector sector) {
+        List<Station> stations = new ArrayList<>();
+        for (Stage stage : sector.getStageList()) {
+            stations.add(stage.getFirstStation());
+            stations.add(stage.getSecondStation());
+        }
+        return stations;
+    }
+
+    public static List<Sector> getSectorListByAlsDevice(List<TrackCircuit> trackCircuitList, boolean alsDeviceType) {
+        List<Sector> sectorList = new ArrayList<>();
+        for (TrackCircuit trackCircuit : trackCircuitList) {
+            if (trackCircuit.getSector() != null
+                    && trackCircuit.isStationalCircuit() == alsDeviceType) {
+                sectorList.add(trackCircuit.getSector());
+            }
+        }
+        return sectorList;
+    }
+
+    public static List<Sector> getSectorListByPonabDevice(List<PonabSystem> ponabSystemList, String deviceName) {
+        List<Sector> sectorList = new ArrayList<>();
+        for (PonabSystem ponabSystem : ponabSystemList) {
+            if (ponabSystem.getSector() != null && ponabSystem.getTitle().equals(deviceName)) {
+                sectorList.add(ponabSystem.getSector());
+            }
+        }
+        return sectorList;
+    }
 }

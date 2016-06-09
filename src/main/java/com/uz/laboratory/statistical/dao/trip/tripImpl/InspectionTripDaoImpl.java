@@ -45,6 +45,14 @@ public class InspectionTripDaoImpl extends GenericDaoImpl<InspectionTrip> implem
         return getSession().createCriteria(getEntityClass(), "trip")
                 .createAlias("trip.tripSector", "sector")
                 .add(Restrictions.eq("sector.id", sector.getId()))
+                .add(Restrictions.eq("trip.plannedTrip", false))
+                .list();
+    }
+
+    @Override
+    public List listAllEndedInspectionTripList() {
+        return getSession().createCriteria(getEntityClass(), "trip")
+                .add(Restrictions.eq("trip.plannedTrip", false))
                 .list();
     }
 }

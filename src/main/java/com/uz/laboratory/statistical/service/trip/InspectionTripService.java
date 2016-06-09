@@ -11,4 +11,6 @@ public interface InspectionTripService extends GenericService {
     List getInspectionTripsBySector(Sector sector);
 
     List getInspectionListByFilter(TripFilter tripFilter);
+
+    List listAllEndedInspectionTripList();
 }
