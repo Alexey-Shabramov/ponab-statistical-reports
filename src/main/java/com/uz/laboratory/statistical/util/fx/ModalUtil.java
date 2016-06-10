@@ -8,6 +8,7 @@ import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
+import com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
@@ -56,6 +57,8 @@ public class ModalUtil {
     private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
     @Autowired
     private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
+    @Autowired
+    private StageEditOrCreateDto stageEditOrCreateDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -183,6 +186,29 @@ public class ModalUtil {
         });
         vagonLaboratoryModal.setTitle(Constants.LABORATORY_MODAL_TITLE);
         vagonLaboratoryModal.showAndWait();
+    }
+
+    public void createStageEditOrCreateModal() {
+        Stage stageModal = new Stage();
+        stageModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            stageModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.STAGE_EDIT_OR_CREATE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stageModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stageEditOrCreateDto.setStage(null);
+                    }
+                });
+            }
+        });
+        stageModal.setTitle(Constants.STAGE_MODAL_TITLE);
+        stageModal.showAndWait();
     }
 
     public void createPonabRemarkEditModal() {

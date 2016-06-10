@@ -42,7 +42,7 @@ public class Constants {
     public static final String DISTANCE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/communicationDistanceeditOrCreateModal.fxml";
 
     public static final String LABORATORY_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/shedule/vagonLaboratoryEditOrCreateModal.fxml";
-
+    public static final String STAGE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/stageCreateOrEditModal.fxml";
 
     /**
      * FXML mainAnchor.fxml - Title names
@@ -209,6 +209,11 @@ public class Constants {
     public static final String LABORATORY_MODAL_NAME_NULL = "Номер ШЧ не выбран. Повторите Ваш выбор.";
 
     /**
+     * FXML - stageCreateOrEditModal.fxml
+     */
+    public static final String STAGE_MODAL_TITLE = "Редактирование/Добавление перегона";
+
+    /**
      * Apache POI - titles
      */
     public static final String REMARK_REPORT_SHEET_NAME = "Сравнительная таблица";
@@ -241,6 +246,14 @@ public class Constants {
     public static final String TRIP_VIEW_TYPE = "Тип поездки:";
 
     /**
+     * FXML - stageCreateOrEditModal.fxml
+     */
+    public static final String STAGE_EDIT_FIRST_STATION_NULL = "Первая станция не выбрана.";
+    public static final String STAGE_EDIT_SECOND_STATION_NULL = "Вторая станция не выбрана.";
+    public static final String STAGE_EDIT_COMMUNICATION_DISTANCE_NULL = "Не выбрано ШЧ.";
+
+
+    /**
      * New remark creation messages
      */
     public static final String REMARK_CREATION_TRIP_NULL = "Не указана проверка для текущего замечания.";
@@ -259,4 +272,6 @@ public class Constants {
     public static final String STATION_EDIT_NOT_SET = "Не выбрана станция для редактирования.";
     public static final String COMMUNICATION_DISTANCE_EDIT_NOT_SET = "Не выбрано ШЧ для редактирования.";
     public static final String VAGON_LABORATORY_EDIT_NAME_NULL = "Не выбран идентификатор/имя для вагон лаборатории.";
+    public static final String STAGE_EDIT_NULL = "Не выбран перегон для редактирования.";
+
 }

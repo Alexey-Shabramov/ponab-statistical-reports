@@ -3,6 +3,7 @@ package com.uz.laboratory.statistical.controller;
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
+import com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
@@ -136,6 +137,8 @@ public class EditDataBaseController implements Initializable {
     private CommunicationDistanceEditOrCreateDto communicationDistanceEditOrCreateDto;
     @Autowired
     private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
+    @Autowired
+    private StageEditOrCreateDto stageEditOrCreateDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -454,6 +457,29 @@ public class EditDataBaseController implements Initializable {
             vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
             vagonLaboratoryComboBox.getSelectionModel().select(vagonLaboratoryEditOrCreateDto.getVagonLaboratory());
             vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
+        }
+    }
+
+    @FXML
+    public void addStageButtonListener(ActionEvent actionEvent) {
+        modalUtil.createStageEditOrCreateModal();
+        if (stageEditOrCreateDto.getStage() != null) {
+            stageComboBox.getItems().setAll(InitComboBoxesUtil.stageList);
+        }
+        stageEditOrCreateDto.setStage(null);
+    }
+
+    @FXML
+    public void editStageEditButtonListener(ActionEvent actionEvent) {
+        if (stageComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.STAGE_EDIT_NULL);
+        } else {
+            stageEditOrCreateDto.setStage(stageComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createStageEditOrCreateModal();
+            System.out.println(stageEditOrCreateDto.getStage());
+            stageComboBox.getItems().setAll(InitComboBoxesUtil.stageList);
+            stageComboBox.getSelectionModel().select(stageEditOrCreateDto.getStage());
+            stageEditOrCreateDto.setStage(null);
         }
     }
 }

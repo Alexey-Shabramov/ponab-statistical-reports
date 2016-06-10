@@ -144,7 +144,11 @@
     <beans:bean id="communicationDistanceEditOrCreateDto"
                 class="com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto"/>
 
+    <beans:bean id="stageEditOrCreateDto"
+                class="com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto"/>
+
     <beans:bean id="vagonLaboratoryEditOrCreateDto"
                 class="com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto"/>
+
 
 </beans:beans>

@@ -114,10 +114,10 @@
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="addStageButton" layoutX="787.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="116.0" text="Добавить новый"/>
+        <Button fx:id="addStageButton" layoutX="787.0" layoutY="226.0" mnemonicParsing="false"
+                onAction="#addStageButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
         <Button fx:id="editStageEditButton" layoutX="674.0" layoutY="226.0" mnemonicParsing="false"
-                text="Редактировать"/>
+                onAction="#editStageEditButtonListener" text="Редактировать"/>
         <ComboBox fx:id="stageComboBox" layoutX="459.0" layoutY="225.0" prefHeight="25.0" prefWidth="204.0"/>
         <Separator layoutX="452.0" layoutY="260.0" prefHeight="1.0" prefWidth="459.0"/>
         <Separator layoutX="452.0" layoutY="328.0" prefHeight="1.0" prefWidth="459.0"/>
