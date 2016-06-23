@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.CheckComboBox?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="232.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.uz.laboratory.statistical.controller.location.SectorCreateOrEditController">
+    <children>
+        <Label layoutX="314.0" layoutY="49.0" text="Начальная станция">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="119.0" layoutY="10.0" text="Изменение данных о перегоне:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <Button layoutX="130.0" layoutY="187.0" mnemonicParsing="false" onAction="#saveSectorListener" text="Сохранить">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="resetEditButton" layoutX="265.0" layoutY="187.0" mnemonicParsing="false"
+                onAction="#resetEditButtonListener" prefHeight="30.0" prefWidth="93.0" text="Отмена"/>
+        <Separator layoutY="85.0" prefHeight="3.0" prefWidth="452.0"/>
+        <ComboBox fx:id="firstStationComboBox" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="280.0"/>
+        <ComboBox fx:id="lastStationComboBox" layoutX="14.0" layoutY="97.0" prefHeight="25.0" prefWidth="280.0"/>
+        <Label layoutX="317.0" layoutY="100.0" text="Конечная станция">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <CheckComboBox fx:id="stageCheckComboBox" layoutX="14.0" layoutY="140.0" prefHeight="25.0" prefWidth="280.0"/>
+        <Separator layoutY="131.0" prefHeight="3.0" prefWidth="452.0"/>
+        <Separator layoutY="174.0" prefHeight="3.0" prefWidth="452.0"/>
+        <Label layoutX="316.0" layoutY="143.0" text="Список перегонов">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

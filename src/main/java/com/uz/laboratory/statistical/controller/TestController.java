@@ -95,6 +95,8 @@ public class TestController implements Initializable {
         System.out.println(stage.toString());
 
         Sector sector = new Sector();
+        sector.setFirstStation(station);
+        sector.setLastStation(station1);
         sector.setTitle("Базовая станция 1 - Базовая станция 2");
         List<Stage> stageList = new ArrayList<>();
         stageList.add(stage);

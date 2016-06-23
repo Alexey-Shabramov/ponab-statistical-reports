@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "stage")
 @DynamicUpdate(value = true)
 @AttributeOverride(name = "id", column = @Column(name = "id"))
-public class Stage extends Identifier {
+public class Stage extends Identifier implements Comparable<Stage> {
     @Column(name = "name")
     private String name;
 
@@ -70,5 +70,33 @@ public class Stage extends Identifier {
                 ", second_station=" + secondStation +
                 ", distances_list=" + distanceList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stage stage = (Stage) o;
+
+        if (!name.equals(stage.name)) return false;
+        if (!firstStation.equals(stage.firstStation)) return false;
+        if (!secondStation.equals(stage.secondStation)) return false;
+        return distanceList.equals(stage.distanceList);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + firstStation.hashCode();
+        result = 31 * result + secondStation.hashCode();
+        result = 31 * result + distanceList.hashCode();
+        return result;
+    }
+
+    @Override
+    public int compareTo(Stage o) {
+        return 0;
     }
 }

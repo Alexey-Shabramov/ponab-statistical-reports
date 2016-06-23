@@ -122,9 +122,10 @@
         <Separator layoutX="452.0" layoutY="260.0" prefHeight="1.0" prefWidth="459.0"/>
         <Separator layoutX="452.0" layoutY="328.0" prefHeight="1.0" prefWidth="459.0"/>
         <ComboBox fx:id="sectorComboBox" layoutX="459.0" layoutY="293.0" prefHeight="25.0" prefWidth="204.0"/>
-        <Button fx:id="editSectorButton" layoutX="674.0" layoutY="294.0" mnemonicParsing="false" text="Редактировать"/>
-        <Button fx:id="addSectorButton" layoutX="787.0" layoutY="294.0" mnemonicParsing="false" prefHeight="25.0"
-                prefWidth="116.0" text="Добавить новый"/>
+        <Button fx:id="editSectorButton" layoutX="674.0" layoutY="294.0" mnemonicParsing="false"
+                onAction="#editSectorButtonListener" text="Редактировать"/>
+        <Button fx:id="addSectorButton" layoutX="787.0" layoutY="294.0" mnemonicParsing="false"
+                onAction="#addSectorButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
         <Label layoutX="552.0" layoutY="265.0" text="Редактирование/Добавление участков:">
             <font>
                 <Font name="System Bold" size="14.0"/>

@@ -3,6 +3,7 @@ package com.uz.laboratory.statistical.controller;
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
+import com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
@@ -34,6 +35,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -47,6 +49,8 @@ import java.util.ResourceBundle;
 
 @Controller
 public class EditDataBaseController implements Initializable {
+    final static Logger logger = Logger.getLogger(EditDataBaseController.class);
+
     @FXML
     public ComboBox<Systems> remarkDeviceTypeComboBox;
     @FXML
@@ -139,6 +143,8 @@ public class EditDataBaseController implements Initializable {
     private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
     @Autowired
     private StageEditOrCreateDto stageEditOrCreateDto;
+    @Autowired
+    private SectorEditOrCreateDto sectorEditOrCreateDto;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -182,12 +188,10 @@ public class EditDataBaseController implements Initializable {
                     alsOrPomabDeviceComboBox.getItems().setAll(trackCircuitService.getAlsSystemsByStation((Station) remarkStageOrStationComboBox.getSelectionModel().getSelectedItem()));
                 }
             } else {
-
-                alsOrPomabDeviceComboBox.getItems().clear();
                 alsOrPomabDeviceComboBox.setConverter(ComboBoxUtil.ponabSystemConverter);
                 alsOrPomabDeviceComboBox.getItems().setAll(ponabSystemService.getPonabSystemsByStage((Stage) remarkStageOrStationComboBox.getSelectionModel().getSelectedItem()));
             }
-            alsOrPomabDeviceComboBox.setDisable(alsOrPomabDeviceComboBox.getItems().isEmpty() ? true : false);
+            alsOrPomabDeviceComboBox.setDisable(alsOrPomabDeviceComboBox.getItems().isEmpty());
         }
     }
 
@@ -196,21 +200,24 @@ public class EditDataBaseController implements Initializable {
         remarkStageOrStationComboBox.setValue(null);
         if (remarkSectorComboBox.getSelectionModel().getSelectedItem() != null) {
             remarkStageOrStationComboBox.setDisable(false);
-            if (remarkDeviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
-                if (remarkChosenSystemsComboBox.getSelectionModel().getSelectedIndex() == 0) {
+            if (remarkDeviceTypeComboBox.getSelectionModel().getSelectedItem() != null) {
+                if (remarkDeviceTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                    if (remarkChosenSystemsComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                        remarkStageOrStationComboBox.setConverter(ComboBoxUtil.stageConverter);
+                        remarkStageOrStationComboBox.getItems().setAll(remarkSectorComboBox.getSelectionModel().getSelectedItem().getStageList());
+                    } else {
+                        remarkStageOrStationComboBox.setConverter(ComboBoxUtil.stationConverter);
+                        remarkStageOrStationComboBox.getItems().setAll(ComboBoxUtil.getStationListBySector(remarkSectorComboBox.getSelectionModel().getSelectedItem()));
+                    }
+                } else {
                     remarkStageOrStationComboBox.setConverter(ComboBoxUtil.stageConverter);
                     remarkStageOrStationComboBox.getItems().setAll(remarkSectorComboBox.getSelectionModel().getSelectedItem().getStageList());
-                } else {
-                    remarkStageOrStationComboBox.setConverter(ComboBoxUtil.stationConverter);
-                    remarkStageOrStationComboBox.getItems().setAll(ComboBoxUtil.getStationListBySector(remarkSectorComboBox.getSelectionModel().getSelectedItem()));
                 }
-            } else {
-                remarkStageOrStationComboBox.setConverter(ComboBoxUtil.stageConverter);
-                remarkStageOrStationComboBox.getItems().setAll(remarkSectorComboBox.getSelectionModel().getSelectedItem().getStageList());
             }
+
             remarkInspectionComboBox.setValue(null);
             remarkInspectionComboBox.getItems().setAll(inspectionTripService.getInspectionTripsBySector(remarkSectorComboBox.getSelectionModel().getSelectedItem()));
-            remarkInspectionComboBox.setDisable(remarkInspectionComboBox.getItems().isEmpty() ? true : false);
+            remarkInspectionComboBox.setDisable(remarkInspectionComboBox.getItems().isEmpty());
 
             remarkDirectionOfMovement.setValue(null);
             remarkDirectionOfMovement.getItems().setAll(DirectionsOfMovement.values());
@@ -476,10 +483,31 @@ public class EditDataBaseController implements Initializable {
         } else {
             stageEditOrCreateDto.setStage(stageComboBox.getSelectionModel().getSelectedItem());
             modalUtil.createStageEditOrCreateModal();
-            System.out.println(stageEditOrCreateDto.getStage());
             stageComboBox.getItems().setAll(InitComboBoxesUtil.stageList);
             stageComboBox.getSelectionModel().select(stageEditOrCreateDto.getStage());
             stageEditOrCreateDto.setStage(null);
         }
+    }
+
+    @FXML
+    public void editSectorButtonListener(ActionEvent actionEvent) {
+        if (sectorComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.SECTOR_EDIT_NULL);
+        } else {
+            sectorEditOrCreateDto.setSector(sectorComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createSectorEditOrCreateModal();
+            sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+            sectorComboBox.getSelectionModel().select(sectorEditOrCreateDto.getSector());
+            sectorEditOrCreateDto.setSector(null);
+        }
+    }
+
+    @FXML
+    public void addSectorButtonListener(ActionEvent actionEvent) {
+        modalUtil.createSectorEditOrCreateModal();
+        if (sectorEditOrCreateDto.getSector() != null) {
+            sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        }
+        sectorEditOrCreateDto.setSector(null);
     }
 }

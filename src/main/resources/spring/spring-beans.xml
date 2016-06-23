@@ -150,5 +150,6 @@
     <beans:bean id="vagonLaboratoryEditOrCreateDto"
                 class="com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto"/>
 
-
+    <beans:bean id="sectorEditOrCreateDto"
+                class="com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto"/>
 </beans:beans>

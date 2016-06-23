@@ -6,13 +6,20 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 public class PonabStatisticalReports extends Application {
 
+    final static Logger logger = Logger.getLogger(PonabStatisticalReports.class);
+
     public static void main(String[] args) {
-        launch(args);
+        try {
+            launch(args);
+        } catch (Exception e) {
+            logger.error("failed!", e);
+        }
     }
 
     @Override

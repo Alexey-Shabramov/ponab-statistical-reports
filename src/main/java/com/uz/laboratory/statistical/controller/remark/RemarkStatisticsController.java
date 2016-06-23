@@ -41,6 +41,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,8 @@ import java.util.ResourceBundle;
 
 @Controller
 public class RemarkStatisticsController implements Initializable {
+    final static Logger logger = Logger.getLogger(RemarkStatisticsController.class);
+
     private final static int rowsPerPage = 9;
     private final ContextMenu contextMenu = new ContextMenu();
 

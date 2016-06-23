@@ -13,13 +13,14 @@ import com.uz.laboratory.statistical.util.DtoUtil;
 import javafx.util.StringConverter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ComboBoxUtil {
     public static final StringConverter<Stage> stageConverter = new StringConverter<Stage>() {
         @Override
         public String toString(Stage object) {
-            return object.getName();
+            return object != null ? object.getName() : null;
         }
 
         @Override
@@ -140,5 +141,25 @@ public class ComboBoxUtil {
             }
         }
         return sectorList;
+    }
+
+    public static int[] convertIndexesForStageCheckComboBox(List<Stage> stageList) {
+        int indexes[] = new int[stageList.size()];
+        int counter = 0;
+        for (Stage stage : stageList) {
+            indexes[counter] = Math.toIntExact(stage.getId());
+            ++counter;
+        }
+        return indexes;
+    }
+
+    public static List<Stage> addAllStagesByIdToComboBox(List<Stage> stageList) {
+        List<Stage> stages = Arrays.asList(new Stage[stageList.size() + 1]);
+        if (!stageList.isEmpty()) {
+            for (Stage stage : stageList) {
+                stages.set(Integer.valueOf(stage.getId().toString()), stage);
+            }
+        }
+        return stages;
     }
 }

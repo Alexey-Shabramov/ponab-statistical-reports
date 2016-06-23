@@ -21,6 +21,7 @@
         <commons.dbcp2.version>2.1.1</commons.dbcp2.version>
         <eclipse.collections.version>7.1.0</eclipse.collections.version>
         <apache.poi.version>3.14</apache.poi.version>
+        <controlsfx.version>8.40.10</controlsfx.version>
     </properties>
 
     <dependencies>
@@ -116,10 +117,15 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${apache.poi.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>${controlsfx.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>Temperature-control</finalName>
+        <finalName>Ponab_Statistical_reports</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -128,14 +134,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
                 </configuration>
             </plugin>
             <plugin>
@@ -148,7 +146,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>temperature.control.app.PonabStatisticalReports</mainClass>
+                            <mainClass>com.uz.laboratory.statistical.app.PonabStatisticalReports</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

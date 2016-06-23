@@ -39,7 +39,8 @@ public class Constants {
     public static final String INSPECTION_TRIP_VIEW_MODAL = "/fxml/modal/view/shedule/tripViewModal.fxml";
 
     public static final String STATION_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/stationEditOrCreateModal.fxml";
-    public static final String DISTANCE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/communicationDistanceeditOrCreateModal.fxml";
+    public static final String DISTANCE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/communicationDistanceEditOrCreateModal.fxml";
+    public static final String SECTOR_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/sectorEditOrCreateModal.fxml";
 
     public static final String LABORATORY_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/shedule/vagonLaboratoryEditOrCreateModal.fxml";
     public static final String STAGE_EDIT_OR_CREATE_MODAL = "/fxml/modal/edit/location/stageCreateOrEditModal.fxml";
@@ -197,7 +198,15 @@ public class Constants {
     public static final String STATION_MODAL_NAME_NULL = "Название станции пустое. Повторите Ваш ввод.";
 
     /**
-     * FXML - communicationDistanceeditOrCreateModal.fxml
+     * FXML - sectorEditOrCreateModal.fxml
+     */
+    public static final String SECTOR_MODAL_TITLE = "Редактирование/Добавление участка";
+    public static final String SECTOR_MODAL_NAME_NULL = "Название станции пустое. Повторите Ваш ввод.";
+    public static final String SECTOR_EDIT_FIRST_STATION_NULL = "Первая станция не выбрана.";
+    public static final String SECTOR_EDIT_LAST_STATION_NULL = "Последняя станция не выбрана.";
+    public static final String SECTOR_EDIT_STAGE_LIST_NULL = "Не выбраны перегоны для данного участка.";
+    /**
+     * FXML - communicationDistanceEditOrCreateModal.fxml
      */
     public static final String DISTANCE_MODAL_TITLE = "Редактирование/Добавление ШЧ";
     public static final String DISTANCE_MODAL_NAME_NULL = "Номер ШЧ не выбран. Повторите Ваш выбор.";
@@ -273,5 +282,6 @@ public class Constants {
     public static final String COMMUNICATION_DISTANCE_EDIT_NOT_SET = "Не выбрано ШЧ для редактирования.";
     public static final String VAGON_LABORATORY_EDIT_NAME_NULL = "Не выбран идентификатор/имя для вагон лаборатории.";
     public static final String STAGE_EDIT_NULL = "Не выбран перегон для редактирования.";
+    public static final String SECTOR_EDIT_NULL = "Не выбран участок для редактирования.";
 
 }

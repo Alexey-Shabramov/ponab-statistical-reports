@@ -6,6 +6,7 @@ import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.tableView.StatisticsRemarkTableDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
+import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.entity.remark.AlsRemark;
@@ -65,6 +66,17 @@ public class DtoUtil {
             return stringBuilder.append(stage.getFirstStation().getName())
                     .append(" - ")
                     .append(stage.getSecondStation().getName())
+                    .toString();
+        } finally {
+            stringBuilder.setLength(0);
+        }
+    }
+
+    public static String sectorNameBuilder(Sector sector) {
+        try {
+            return stringBuilder.append(sector.getFirstStation().getName())
+                    .append(" - ")
+                    .append(sector.getLastStation().getName())
                     .toString();
         } finally {
             stringBuilder.setLength(0);

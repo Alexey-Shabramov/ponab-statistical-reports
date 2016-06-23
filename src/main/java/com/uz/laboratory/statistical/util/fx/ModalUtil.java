@@ -8,6 +8,7 @@ import com.uz.laboratory.statistical.dto.als.AlsRemarkDto;
 import com.uz.laboratory.statistical.dto.als.AlsRemarkEditEntityDto;
 import com.uz.laboratory.statistical.dto.als.AlsSystemDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
+import com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
@@ -59,6 +60,8 @@ public class ModalUtil {
     private VagonLaboratoryEditOrCreateDto vagonLaboratoryEditOrCreateDto;
     @Autowired
     private StageEditOrCreateDto stageEditOrCreateDto;
+    @Autowired
+    private SectorEditOrCreateDto sectorEditOrCreateDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -140,6 +143,29 @@ public class ModalUtil {
         });
         stationModal.setTitle(Constants.STATION_MODAL_TITLE);
         stationModal.showAndWait();
+    }
+
+    public void createSectorEditOrCreateModal() {
+        Stage sectorModal = new Stage();
+        sectorModal.initModality(Modality.APPLICATION_MODAL);
+        try {
+            sectorModal.setScene(new Scene((Parent) context.getBean(SpringFXMLLoader.class).load(Constants.SECTOR_EDIT_OR_CREATE_MODAL)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        sectorModal.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        sectorEditOrCreateDto.setSector(null);
+                    }
+                });
+            }
+        });
+        sectorModal.setTitle(Constants.SECTOR_MODAL_TITLE);
+        sectorModal.showAndWait();
     }
 
     public void createCommunicationDistanceEditOrCreateModal() {

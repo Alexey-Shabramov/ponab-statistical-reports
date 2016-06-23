@@ -35,10 +35,14 @@ CREATE TABLE IF NOT EXISTS `stage` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE IF NOT EXISTS `sector` (
-  `id`       BIGINT(21)   NOT NULL AUTO_INCREMENT,
-  `id_stage` BIGINT(21)   NOT NULL,
-  `title`    VARCHAR(200) NOT NULL,
+  `id`               BIGINT(21)   NOT NULL AUTO_INCREMENT,
+  `id_first_station` BIGINT(21)   NOT NULL,
+  `id_last_station`  BIGINT(21)   NOT NULL,
+  `id_stage`         BIGINT(21)   NOT NULL,
+  `title`            VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_first_station`) REFERENCES `station` (`id`),
+  FOREIGN KEY (`id_last_station`) REFERENCES `station` (`id`),
   FOREIGN KEY (`id_stage`) REFERENCES `stage` (`id`)
 )
   ENGINE = InnoDB

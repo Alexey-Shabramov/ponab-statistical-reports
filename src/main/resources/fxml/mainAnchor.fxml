@@ -25,9 +25,7 @@
                 <Tab text="Создание замечаний">
                     <fx:include fx:id="remarkCreation" source="/fxml/child/editDatabase.fxml"/>
                 </Tab>
-                <Tab text="Изменение основной базы">
 
-                </Tab>
             </tabs>
         </TabPane>
         <Label layoutX="127.0" layoutY="9.0" text="Программа статистической отчетности по проверкам вагон-лабораторий"
