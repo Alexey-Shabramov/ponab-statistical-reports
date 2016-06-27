@@ -19,11 +19,8 @@ import com.uz.laboratory.statistical.entity.remark.AlsRemark;
 import com.uz.laboratory.statistical.entity.remark.PonabRemark;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
-import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
-import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
-import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
@@ -42,7 +39,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -100,27 +96,15 @@ public class RemarkStatisticsController implements Initializable {
     public Button search;
     @FXML
     public Button cleanTableView;
-    @FXML
-    public Button printAllTableViewDataFromExcel;
-    @FXML
-    public Button cleanDateComboBoxes;
 
     private ObservableList<StatisticsRemarkTableDto> statisticsTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
 
     @Autowired
-    private DozerBeanMapper dozerBeanMapper;
-    @Autowired
-    private SectorService sectorService;
-    @Autowired
-    private VagonLaboratoryService vagonLaboratoryService;
-    @Autowired
     private PonabRemarkService ponabRemarkService;
     @Autowired
     private AlsRemarkService alsRemarkService;
-    @Autowired
-    private CommunicationDistanceService communicationDistanceService;
     @Autowired
     private DeleteEntityDto deleteEntityDto;
     @Autowired
@@ -135,8 +119,6 @@ public class RemarkStatisticsController implements Initializable {
     private AlsRemarkDto alsRemarkDto;
     @Autowired
     private RemarkTableListSaveDto remarkTableListSaveDto;
-    @Autowired
-    private InitComboBoxesUtil initComboBoxesUtil;
 
     private List<String> errorList = new ArrayList<>();
 
@@ -386,5 +368,14 @@ public class RemarkStatisticsController implements Initializable {
         for (TableColumn<T, ?> col : tableView.getColumns())
             if (col.getText().equals(name)) return col;
         return null;
+    }
+
+    public void updateGui() {
+        initColumnsForTableView();
+        statisticsTableViewPagination.setPageCount(1);
+        statisticsTableViewPagination.setPageFactory(this::createPage);
+        initComboBoxes();
+        initTableView();
+        initPopupMenu();
     }
 }

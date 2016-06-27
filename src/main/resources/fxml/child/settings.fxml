@@ -2,138 +2,36 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="513.0"
-      prefWidth="857.0" xmlns="http://javafx.com/javafx/8"
-      fx:controller="com.uz.laboratory.statistical.controller.SettingsController">
-    <children>
-        <Label layoutX="40.0" layoutY="14.0" text="Добавить новое устройство">
-            <font>
-                <Font name="System Bold" size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox layoutX="100.0" layoutY="54.0" prefWidth="150.0"/>
-        <ComboBox layoutX="100.0" layoutY="99.0" prefWidth="150.0"/>
-        <ComboBox layoutX="100.0" layoutY="144.0" prefWidth="150.0"/>
-        <TextField layoutX="102.0" layoutY="194.0"/>
-        <ComboBox layoutX="100.0" layoutY="241.0" prefWidth="150.0"/>
-        <Label layoutX="26.0" layoutY="58.0" text="Перегон">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="25.0" layoutY="103.0" text="Система">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="6.0" layoutY="148.0" text="Направление">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="24.0" layoutY="198.0" text="Локация">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="40.0" layoutY="245.0" text="РИ">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox layoutX="102.0" layoutY="288.0" prefWidth="150.0"/>
-        <Label layoutX="22.0" layoutY="292.0" text="Оператор">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Button layoutX="19.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="116.0"
-                text="Добавить">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Separator layoutX="267.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="513.0" prefWidth="18.0"/>
-        <Separator layoutX="1.0" layoutY="400.0" prefHeight="0.0" prefWidth="275.0"/>
-        <Separator layoutX="400.0" layoutY="164.0" prefWidth="200.0"/>
-        <Label layoutX="321.0" layoutY="14.0" text="Добавить проверочную поездку">
-            <font>
-                <Font name="System Bold" size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="334.0" layoutY="58.0" text="Перегон">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox layoutX="425.0" layoutY="54.0" prefWidth="150.0"/>
-        <ComboBox layoutX="425.0" layoutY="99.0" prefWidth="150.0"/>
-        <Label layoutX="344.0" layoutY="103.0" text="Дата">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox layoutX="425.0" layoutY="144.0" prefWidth="150.0"/>
-        <Label layoutX="285.0" layoutY="148.0" text="Вагон-лаборатория">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <TextField layoutX="426.0" layoutY="194.0" prefHeight="25.0" prefWidth="149.0"/>
-        <Label layoutX="305.0" layoutY="198.0" text="Замечения (сум.)">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <TextField layoutX="426.0" layoutY="241.0"/>
-        <Label layoutX="311.0" layoutY="244.0" text="Повторы (кол.)">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Button layoutX="312.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="116.0"
-                text="Добавить">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Button layoutX="167.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="71.0" text="Сброс">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Button layoutX="488.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="71.0" text="Сброс">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Separator layoutX="591.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="513.0" prefWidth="18.0"/>
-        <Label layoutX="658.0" layoutY="14.0" text="Добавить поездку в график">
-            <font>
-                <Font name="System Bold" size="14.0"/>
-            </font>
-        </Label>
-        <ComboBox layoutX="687.0" layoutY="56.0" prefHeight="25.0" prefWidth="209.0"/>
-        <Label layoutX="605.0" layoutY="60.0" text="Год"/>
-        <Label layoutX="605.0" layoutY="103.0" text="Месяц"/>
-        <ComboBox layoutX="687.0" layoutY="101.0" prefHeight="25.0" prefWidth="209.0"/>
-        <Label layoutX="606.0" layoutY="156.0" text="Дата"/>
-        <Label layoutX="606.0" layoutY="198.0" text="Участок"/>
-        <TextField layoutX="688.0" layoutY="152.0" prefHeight="25.0" prefWidth="207.0"/>
-        <ComboBox layoutX="726.0" layoutY="241.0" prefHeight="25.0" prefWidth="173.0"/>
-        <Label layoutX="603.0" layoutY="247.0" text="Вагон-лаборатория"/>
-        <TextField layoutX="661.0" layoutY="196.0" prefHeight="25.0" prefWidth="235.0"/>
-        <Button layoutX="629.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="116.0"
-                text="Добавить">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Button layoutX="815.0" layoutY="343.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="71.0" text="Сброс">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-    </children>
+<?import javafx.scene.text.Font?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="857.0"
+      xmlns="http://javafx.com/javafx/8"
+      fx:controller="com.uz.laboratory.statistical.controller.settings.SettingsController">
+   <children>
+      <Label layoutX="26.0" layoutY="20.0" text="Отправить изменения на сервер">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </Label>
+      <Button fx:id="updateDatabaseButton" layoutX="72.0" layoutY="53.0" mnemonicParsing="false"
+              onAction="#updateDatabaseButtonListener" prefHeight="30.0" prefWidth="119.0" text="Отправить">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </Button>
+      <Separator layoutY="97.0" prefHeight="0.0" prefWidth="280.0"/>
+      <Separator layoutX="277.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="99.0" prefWidth="0.0"/>
+      <Separator layoutX="277.0" layoutY="97.0" prefHeight="3.0" prefWidth="199.0"/>
+      <Button fx:id="updateCurrentDatabaseButton" layoutX="330.0" layoutY="53.0" mnemonicParsing="false"
+              onAction="#updateCurrentDatabaseButtonListener" prefHeight="30.0" prefWidth="119.0" text="Обновить">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </Button>
+      <Label layoutX="311.0" layoutY="20.0" text="Скачать базу с сервера">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </Label>
+      <Separator layoutX="472.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="99.0" prefWidth="0.0"/>
+   </children>
 </Pane>

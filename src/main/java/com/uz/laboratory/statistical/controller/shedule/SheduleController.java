@@ -13,7 +13,6 @@ import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.filter.TripFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
-import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
@@ -34,7 +33,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -87,8 +85,6 @@ public class SheduleController implements Initializable {
     private SectorService sectorService;
     @Autowired
     private InspectionTripService inspectionTripService;
-    @Autowired
-    private VagonLaboratoryService vagonLaboratoryService;
 
     @Autowired
     private ModalUtil modalUtil;
@@ -96,13 +92,9 @@ public class SheduleController implements Initializable {
     private InspectionTripDto inspectionTripDto;
     @Autowired
     private DeleteEntityDto deleteEntityDto;
-
-    @Autowired
-    private DozerBeanMapper dozerBeanMapper;
     @Autowired
     private InspectionTripEditEntityDto inspectionTripEditEntityDto;
-    @Autowired
-    private InitComboBoxesUtil initComboBoxesUtil;
+
 
     private List<String> errorList = new ArrayList<>();
 
@@ -265,5 +257,14 @@ public class SheduleController implements Initializable {
         inspectionTripEditEntityDto.setEditedEntityId(selectectedEntityId);
         inspectionTripEditEntityDto.setSectorList(sectorComboBox.getItems());
         inspectionTripEditEntityDto.setVagonLaboratoryList(vagonLaboratoryComboBox.getItems());
+    }
+
+    public void updateGui() {
+        initColumnsForTableView();
+        tripsTablePagination.setPageCount(1);
+        tripsTablePagination.setPageFactory(this::createPage);
+        initComboBoxes();
+        initTableView();
+        initPopupMenu();
     }
 }

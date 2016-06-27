@@ -53,7 +53,6 @@ public class Constants {
     public static final String REMARK_ALS_EDIT_MODAL_TITLE = "Редактирование замечания АЛС";
     public static final String REMARK_ALS_VIEW_MODAL_TITLE = "Просмотр замечания АЛС";
     public static final String REMARK_PONAB_VIEW_MODAL_TITLE = "Просмотр замечания ПАВПБ";
-
     public static final String ENTITY_DELETION_MODAL_TITLE = "Удаление выбранного объекта";
     public static final String REMARK_TABLE_SAVE_MODAL_TITLE = "Сохранение таблицы в EXCEL";
 
@@ -107,7 +106,6 @@ public class Constants {
     public static final String EDIT_REMARK_FORMATION_DATE_NULL = "Не установлена дата оформления замечания.";
     public static final String EDIT_SYSTEM_IS_NOT_SET = "Не выбрана система к данному замечанию.";
     public static final String DEVICES_TYPE_IS_NOT_SET = "Тип устройств не выбран. (Для поиска - обязательно выбрать тип устройств).";
-
 
     /**
      * FXML - ponabRemarkViewModal.fxml GUI text
@@ -179,7 +177,6 @@ public class Constants {
     public static final String ALS_DEVICE_TYPE_NULL = "Не выбран тип рельсовой цепи.";
     public static final String ALS_DEVICE_NAME_NULL = "Не указанно имя рельсовой цепи.";
 
-
     /**
      * FXML - saveRemarkTable.fxml
      */
@@ -205,6 +202,7 @@ public class Constants {
     public static final String SECTOR_EDIT_FIRST_STATION_NULL = "Первая станция не выбрана.";
     public static final String SECTOR_EDIT_LAST_STATION_NULL = "Последняя станция не выбрана.";
     public static final String SECTOR_EDIT_STAGE_LIST_NULL = "Не выбраны перегоны для данного участка.";
+
     /**
      * FXML - communicationDistanceEditOrCreateModal.fxml
      */
@@ -229,7 +227,6 @@ public class Constants {
     public static final String TEXTFIELD_IS_EMPTY = "Название файла пустое. Повторите ввод.";
 
     public static final String SHEDULE_ERROR_TYPE_IS_NOT_SET = "Не выбран тип проверок.";
-
 
     /**
      * FXML - tripViewModal.fxml
@@ -284,4 +281,20 @@ public class Constants {
     public static final String STAGE_EDIT_NULL = "Не выбран перегон для редактирования.";
     public static final String SECTOR_EDIT_NULL = "Не выбран участок для редактирования.";
 
+    /**
+     * FXML - settings.fxml messages
+     */
+    public static final String SETTINGS_SCRIPT_FILE_PATH_EMPTY = "Путь к файлу - пуст.";
+
+    /**
+     * Git - repository configurations and error messages
+     */
+    public static final String GIT_HSQLDB_MAIN_FILE_PATH = "/database/ponab_statistical_reports.script";
+    public static final String GIT_HSQLDB_REMOTE_REPOSTITORY_URL = "https://github.com/Alexey-Shabramov/ponab-statistical-hsqldb-base.git";
+    public static final String GIT_REF_SPEC = "refs/heads/master:refs/heads/x";
+    public static final String GIT_REMOTE_REF_SPEC = "+refs/heads/*:refs/remotes/origin/*";
+
+    public static final String GIT_REMOTE_USER_NAME = "Alexey-Shabramov";
+    public static final String GIT_REMOTE_PASSWORD = "123krsmKRSM123oo";
+    public static final String DATABASE_SCRIPT_DUMP_NULL = "Отсутствует файл обновления для базы данных";
 }

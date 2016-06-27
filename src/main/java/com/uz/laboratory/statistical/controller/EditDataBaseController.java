@@ -37,6 +37,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
@@ -109,16 +110,12 @@ public class EditDataBaseController implements Initializable {
     @FXML
     public Button editCommunicationDistanceButton;
     @FXML
-    public Button addCommunicationButtonButton;
-    @FXML
     public ComboBox alsOrPomabDeviceComboBox;
     @FXML
     public ComboBox<DirectionsOfMovement> remarkDirectionOfMovement;
 
     private List<String> errorList = new ArrayList<>();
 
-    @Autowired
-    private InitComboBoxesUtil initComboBoxesUtil;
     @Autowired
     private InspectionTripService inspectionTripService;
     @Autowired
@@ -145,6 +142,8 @@ public class EditDataBaseController implements Initializable {
     private StageEditOrCreateDto stageEditOrCreateDto;
     @Autowired
     private SectorEditOrCreateDto sectorEditOrCreateDto;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -509,5 +508,10 @@ public class EditDataBaseController implements Initializable {
             sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
         }
         sectorEditOrCreateDto.setSector(null);
+    }
+
+    public void updateGui() {
+        initRemarkComboBoxes();
+        initMainBaseComboBoxes();
     }
 }

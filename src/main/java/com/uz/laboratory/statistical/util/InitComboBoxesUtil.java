@@ -18,13 +18,12 @@ import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class InitComboBoxesUtil {
     public static List<Sector> sectorList = new ArrayList<>();
     public static List<Stage> stageList = new ArrayList<>();

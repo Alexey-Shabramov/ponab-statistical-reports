@@ -13,6 +13,7 @@
     <properties>
         <spring.version>4.2.2.RELEASE</spring.version>
         <hibernate.version>5.0.6.Final</hibernate.version>
+        <jta.version>1.1</jta.version>
         <hsqldb.version>2.3.3</hsqldb.version>
         <dozer.version>5.5.1</dozer.version>
         <cglib.version>3.2.1</cglib.version>
@@ -22,6 +23,7 @@
         <eclipse.collections.version>7.1.0</eclipse.collections.version>
         <apache.poi.version>3.14</apache.poi.version>
         <controlsfx.version>8.40.10</controlsfx.version>
+        <jgit.version>4.4.0.201605250940-rc1</jgit.version>
     </properties>
 
     <dependencies>
@@ -95,7 +97,7 @@
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
-            <version>1.1</version>
+            <version>${jta.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -121,6 +123,11 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>${controlsfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>${jgit.version}</version>
         </dependency>
     </dependencies>
 

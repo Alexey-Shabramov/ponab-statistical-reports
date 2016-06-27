@@ -61,6 +61,10 @@
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
 
+    <beans:bean id="hibernateUtilDao" class="com.uz.laboratory.statistical.dao.util.utilImpl.HibernateUtilDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
     <!-- Service beans definitions -->
     <beans:bean id="communicationDistanceService"
                 class="com.uz.laboratory.statistical.service.location.locationImpl.CommunicationDistanceServiceImpl">
@@ -111,6 +115,11 @@
         <beans:property name="dao" ref="trackCircuitDao"/>
     </beans:bean>
 
+    <beans:bean id="hibernateUtilService"
+                class="com.uz.laboratory.statistical.service.util.utilImpl.HibernateUtilServiceImpl">
+        <beans:property name="dao" ref="hibernateUtilDao"/>
+    </beans:bean>
+
     <beans:bean id="deleteEntityDto" class="com.uz.laboratory.statistical.dto.DeleteEntityDto"/>
 
     <beans:bean id="ponabRemarkDto" class="com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto"/>
@@ -152,4 +161,9 @@
 
     <beans:bean id="sectorEditOrCreateDto"
                 class="com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto"/>
+
+    <beans:bean id="updateGuiUtil" class="com.uz.laboratory.statistical.util.fx.UpdateGuiUtil"/>
+
+    <beans:bean id="gitUtil" class="com.uz.laboratory.statistical.util.GitUtil"/>
+
 </beans:beans>

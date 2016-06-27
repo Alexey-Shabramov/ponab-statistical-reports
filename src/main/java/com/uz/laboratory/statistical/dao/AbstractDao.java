@@ -8,8 +8,7 @@ public abstract class AbstractDao {
     private SessionFactory sessionFactory;
 
     public Session getSession() {
-        Session session = sessionFactory.getCurrentSession();
-        return session;
+        return sessionFactory.getCurrentSession();
     }
 
     public SessionFactory getSessionFactory() {

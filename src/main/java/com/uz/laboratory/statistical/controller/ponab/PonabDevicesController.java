@@ -10,7 +10,6 @@ import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
-import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
@@ -99,10 +98,6 @@ public class PonabDevicesController implements Initializable {
     private DeleteEntityDto deleteEntityDto;
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
-    @Autowired
-    private CommunicationDistanceService communicationDistanceService;
-    @Autowired
-    private InitComboBoxesUtil initComboBoxesUtil;
 
     private void setTableViewSelectedIndex(int tableViewSelectedIndex) {
         this.tableViewSelectedIndex.set(tableViewSelectedIndex);
@@ -279,5 +274,14 @@ public class PonabDevicesController implements Initializable {
         ponabSystemEditEntityDto.setEditedEntityId(selectectedEntityId);
         ponabSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
         ponabSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+    }
+
+    public void updateGui() {
+        initColumnsForTableView();
+        ponabDevicesTablePagination.setPageCount(1);
+        ponabDevicesTablePagination.setPageFactory(this::createPage);
+        initComboBoxes();
+        initTableView();
+        initPopupMenu();
     }
 }

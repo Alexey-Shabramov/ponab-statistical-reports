@@ -15,8 +15,6 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.filter.AlsDevicesFilter;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
-import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
-import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
@@ -91,8 +89,7 @@ public class AlsDevicesController implements Initializable {
     private ObservableList<AlsDevicesTableDto> alsDevicesTableData = FXCollections.observableArrayList();
     private IntegerProperty tableViewSelectedIndex = new SimpleIntegerProperty();
     private Long selectectedEntityId;
-    @Autowired
-    private SectorService sectorService;
+
     @Autowired
     private TrackCircuitService trackCircuitService;
 
@@ -106,10 +103,6 @@ public class AlsDevicesController implements Initializable {
     private DeleteEntityDto deleteEntityDto;
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
-    @Autowired
-    private CommunicationDistanceService communicationDistanceService;
-    @Autowired
-    private InitComboBoxesUtil initComboBoxesUtil;
 
     private List stationList = new ArrayList<>();
 
@@ -306,5 +299,14 @@ public class AlsDevicesController implements Initializable {
         alsSystemEditEntityDto.setEditedEntityId(selectectedEntityId);
         alsSystemEditEntityDto.setSectorList(sectorComboBox.getItems());
         alsSystemEditEntityDto.setRepeatList(FXCollections.observableArrayList(RemarkRepeat.values()));
+    }
+
+    public void updateGui() {
+        initColumnsForTableView();
+        alsDevicesTablePagination.setPageCount(1);
+        alsDevicesTablePagination.setPageFactory(this::createPage);
+        initComboBoxes();
+        initTableView();
+        initPopupMenu();
     }
 }
