@@ -17,11 +17,8 @@ import java.util.List;
 
 public class HibernateUtilDaoImpl extends AbstractDao implements HibernateUtilDao {
 
-    public void shudownDataBase() throws SQLException {
+    public void shutdownDataBase() throws SQLException {
         getSession().createSQLQuery("SHUTDOWN").executeUpdate();
-    }
-
-    public void backupDataBaseFromServer() throws IOException {
     }
 
     public void test() throws IOException {

@@ -16,9 +16,9 @@ public class HibernateUtilServiceImpl implements HibernateUtilService {
 
     @Override
     @Transactional
-    public void shudownDataBase() {
+    public void shutdownDataBase() {
         try {
-            dao.shudownDataBase();
+            dao.shutdownDataBase();
         } catch (SQLException e) {
             e.printStackTrace();
         }

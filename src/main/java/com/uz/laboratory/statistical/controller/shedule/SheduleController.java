@@ -216,7 +216,7 @@ public class SheduleController implements Initializable {
             public void handle(ActionEvent event) {
                 if (sheduleTableView.getSelectionModel().getSelectedItem() != null) {
                     prepareAbstractTripDto();
-                    modalUtil.createTripEditModal();
+                    modalUtil.createTripCreateOrEditModal();
                     if (inspectionTripEditEntityDto.getInspectionTrip() != null) {
                         tripsTableData.remove(inspectionTripEditEntityDto.getTableViewIndex());
                         tripsTableData.set(inspectionTripEditEntityDto.getTableViewIndex(), TableDtoConverter.convertEditedTripsToTableDto(sheduleTableView.getSelectionModel().getSelectedItem(), inspectionTripEditEntityDto.getInspectionTrip()));

@@ -2,5 +2,5 @@ package com.uz.laboratory.statistical.service.util;
 
 
 public interface HibernateUtilService {
-    void shudownDataBase();
+    void shutdownDataBase();
 }

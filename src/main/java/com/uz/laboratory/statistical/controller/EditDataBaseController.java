@@ -7,6 +7,7 @@ import com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StageEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
+import com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto;
 import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
@@ -148,6 +149,8 @@ public class EditDataBaseController implements Initializable {
     private StageEditOrCreateDto stageEditOrCreateDto;
     @Autowired
     private SectorEditOrCreateDto sectorEditOrCreateDto;
+    @Autowired
+    private InspectionTripEditEntityDto inspectionTripEditEntityDto;
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -316,6 +319,7 @@ public class EditDataBaseController implements Initializable {
         communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
         vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+        tripComboBox.setConverter(ComboBoxUtil.inspectionTripConverter);
         tripComboBox.getItems().setAll(InitComboBoxesUtil.inspectionTripList);
     }
 
@@ -524,9 +528,23 @@ public class EditDataBaseController implements Initializable {
 
     @FXML
     public void editTripButtonListener(ActionEvent actionEvent) {
+        if (tripComboBox.getSelectionModel().getSelectedItem() == null) {
+            AlertGuiUtil.createAlert(Constants.TRIP_NULL);
+        } else {
+            inspectionTripEditEntityDto.setInspectionTrip(tripComboBox.getSelectionModel().getSelectedItem());
+            modalUtil.createTripCreateOrEditModal();
+            tripComboBox.getItems().setAll(InitComboBoxesUtil.inspectionTripList);
+            tripComboBox.getSelectionModel().select(inspectionTripEditEntityDto.getInspectionTrip());
+            inspectionTripEditEntityDto.setInspectionTrip(null);
+        }
     }
 
     @FXML
     public void addTripButtonListener(ActionEvent actionEvent) {
+        modalUtil.createTripCreateOrEditModal();
+        if (inspectionTripEditEntityDto.getInspectionTrip() != null) {
+            tripComboBox.getItems().setAll(InitComboBoxesUtil.inspectionTripList);
+        }
+        inspectionTripEditEntityDto.setInspectionTrip(null);
     }
 }

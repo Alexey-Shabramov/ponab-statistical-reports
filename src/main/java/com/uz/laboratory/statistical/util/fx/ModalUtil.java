@@ -14,6 +14,7 @@ import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabRemarkDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripDto;
+import com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto;
 import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import com.uz.laboratory.statistical.util.DtoUtil;
@@ -60,6 +61,8 @@ public class ModalUtil {
     private StageEditOrCreateDto stageEditOrCreateDto;
     @Autowired
     private SectorEditOrCreateDto sectorEditOrCreateDto;
+    @Autowired
+    private InspectionTripEditEntityDto inspectionTripEditEntityDto;
 
     public void createTripViewModal() {
         Stage tripViewModal = new Stage();
@@ -78,7 +81,7 @@ public class ModalUtil {
         tripViewModal.showAndWait();
     }
 
-    public void createTripEditModal() {
+    public void createTripCreateOrEditModal() {
         Stage plannedTripModal = new Stage();
         plannedTripModal.initModality(Modality.APPLICATION_MODAL);
         try {
@@ -86,6 +89,11 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        plannedTripModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                inspectionTripEditEntityDto.setInspectionTrip(null);
+            });
+        });
         plannedTripModal.setTitle(Constants.TRIP_VIEW_TITLE);
         plannedTripModal.showAndWait();
     }

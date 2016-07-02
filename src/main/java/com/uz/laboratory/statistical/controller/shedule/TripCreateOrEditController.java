@@ -8,6 +8,7 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
+import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Controller
-public class TripEditController implements Initializable {
+public class TripCreateOrEditController implements Initializable {
     @FXML
     public ComboBox<Sector> sectorComboBox;
     @FXML
@@ -52,22 +53,14 @@ public class TripEditController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        inspectionTrip = (InspectionTrip) inspectionTripService.get(inspectionTripEditEntityDto.getEditedEntityId());
-        System.out.println(inspectionTrip.toString());
-
-        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
-        vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
-
-        sectorComboBox.getItems().setAll(inspectionTripEditEntityDto.getSectorList());
-        sectorComboBox.getSelectionModel().select(inspectionTrip.getTripSector());
-
-        vagonLaboratoryComboBox.getItems().setAll(inspectionTripEditEntityDto.getVagonLaboratoryList());
-        vagonLaboratoryComboBox.getSelectionModel().select(inspectionTrip.getVagonLaboratory());
-
-        tripTypeComboBox.getItems().setAll(SheduleTripsTypes.values());
-        tripTypeComboBox.getSelectionModel().select(!inspectionTrip.isPlannedTrip() ? SheduleTripsTypes.INSPECTION : SheduleTripsTypes.PLANNED);
-
-        tripDatePicker.setValue(LocalDateTime.ofInstant(Instant.ofEpochMilli(inspectionTrip.getDate().getTime()), ZoneId.systemDefault()).toLocalDate());
+        initComboBoxes();
+        if (inspectionTripEditEntityDto.getEditedEntityId() != null) {
+            inspectionTrip = (InspectionTrip) inspectionTripService.get(inspectionTripEditEntityDto.getEditedEntityId());
+            prepareInspectionTripEdit();
+        } else if (inspectionTripEditEntityDto.getInspectionTrip() != null) {
+            inspectionTrip = inspectionTripEditEntityDto.getInspectionTrip();
+            prepareInspectionTripEdit();
+        }
     }
 
     @FXML
@@ -91,15 +84,34 @@ public class TripEditController implements Initializable {
         if (!errorList.isEmpty()) {
             AlertGuiUtil.prepareAlertMessage(errorList);
         } else {
+            if (inspectionTrip == null || inspectionTrip.getId() < 0) {
+                inspectionTrip = new InspectionTrip();
+                InitComboBoxesUtil.inspectionTripList.add(inspectionTrip);
+            }
             inspectionTrip.setTripSector(sectorComboBox.getSelectionModel().getSelectedItem());
             inspectionTrip.setDate(Date.from(tripDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             inspectionTrip.setVagonLaboratory(vagonLaboratoryComboBox.getSelectionModel().getSelectedItem());
-            inspectionTrip.setPlannedTrip(tripTypeComboBox.getSelectionModel().getSelectedIndex() != 0 ? false : true);
+            inspectionTrip.setPlannedTrip(tripTypeComboBox.getSelectionModel().getSelectedIndex() == 0);
             inspectionTripService.save(inspectionTrip);
             inspectionTripEditEntityDto.setInspectionTrip(inspectionTrip);
             cleanDtoSecondaryData();
             ((javafx.stage.Stage) sectorComboBox.getScene().getWindow()).close();
         }
+    }
+
+    private void initComboBoxes() {
+        sectorComboBox.setConverter(ComboBoxUtil.sectorConverter);
+        vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
+        sectorComboBox.getItems().setAll(InitComboBoxesUtil.sectorList);
+        vagonLaboratoryComboBox.getItems().addAll(InitComboBoxesUtil.vagonLaboratoryList);
+        tripTypeComboBox.getItems().setAll(SheduleTripsTypes.values());
+    }
+
+    private void prepareInspectionTripEdit() {
+        sectorComboBox.getSelectionModel().select(inspectionTrip.getTripSector());
+        vagonLaboratoryComboBox.getSelectionModel().select(inspectionTrip.getVagonLaboratory());
+        tripTypeComboBox.getSelectionModel().select(!inspectionTrip.isPlannedTrip() ? SheduleTripsTypes.INSPECTION : SheduleTripsTypes.PLANNED);
+        tripDatePicker.setValue(LocalDateTime.ofInstant(Instant.ofEpochMilli(inspectionTrip.getDate().getTime()), ZoneId.systemDefault()).toLocalDate());
     }
 
     @FXML

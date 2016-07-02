@@ -231,7 +231,7 @@ public class Constants {
     /**
      * FXML - tripViewModal.fxml
      */
-    public static final String TRIP_VIEW_TITLE = "Редактирование выбранной поездки";
+    public static final String TRIP_VIEW_TITLE = "Редактирование/Создание поездки";
 
     /**
      * FXML - tripEditModal.fxml
@@ -299,4 +299,8 @@ public class Constants {
     public static final String DATABASE_SCRIPT_DUMP_NULL = "Отсутствует файл обновления для базы данных";
 
     public static final String INTERNET_IS_NOT_AVAILABLE = "Отсутствует интернет соединение. Проверьте соединение и повторите попытку.";
+
+    public static final String TRIP_NULL = "Не выбрана поездка.";
+
+
 }

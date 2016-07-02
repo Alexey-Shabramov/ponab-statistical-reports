@@ -48,7 +48,6 @@ public class SettingsController implements Initializable {
                 AlertGuiUtil.createAlert(Constants.INTERNET_IS_NOT_AVAILABLE);
             } else {
                 gitUtil.commitAndPush();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +60,7 @@ public class SettingsController implements Initializable {
             if (java.lang.Runtime.getRuntime().exec("ping www.github.com").waitFor() != 0) {
                 AlertGuiUtil.createAlert(Constants.INTERNET_IS_NOT_AVAILABLE);
             } else {
-                hibernateUtilService.shudownDataBase();
+                hibernateUtilService.shutdownDataBase();
                 ((ConfigurableApplicationContext) applicationContext).close();
                 gitUtil.pullAndMerge();
                 PonabStatisticalReports.restartMainStage();

@@ -14,7 +14,7 @@
     <beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <beans:property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
         <beans:property name="url"
-                        value="jdbc:hsqldb:file:database/ponab_statistical_reports;shutdown=true"/>
+                        value="jdbc:hsqldb:file:database/ponab_statistical_reports;shutdown=true;readonly=false;files_readonly=false;hsqldb.lock_file=false"/>
         <beans:property name="username" value="sa"/>
         <beans:property name="password" value=""/>
     </beans:bean>
