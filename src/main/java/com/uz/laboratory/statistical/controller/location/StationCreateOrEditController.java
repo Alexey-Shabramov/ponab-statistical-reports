@@ -41,7 +41,7 @@ public class StationCreateOrEditController implements Initializable {
 
     @FXML
     public void saveStationListener(ActionEvent actionEvent) {
-        if (!org.apache.commons.lang3.StringUtils.isNoneBlank(stationNameTextField.getText())) {
+        if (!org.apache.commons.lang3.StringUtils.isNotBlank(stationNameTextField.getText())) {
             AlertGuiUtil.createAlert(Constants.STATION_MODAL_NAME_NULL);
         } else {
             if (station == null || station.getId() < 0) {

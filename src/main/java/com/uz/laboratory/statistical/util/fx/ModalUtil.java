@@ -18,12 +18,10 @@ import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.service.SpringFXMLLoader;
 import com.uz.laboratory.statistical.util.DtoUtil;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -71,16 +69,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tripViewModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        DtoUtil.cleanInspectionDto(inspectionTripDto);
-                    }
-                });
-            }
+        tripViewModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                DtoUtil.cleanInspectionDto(inspectionTripDto);
+            });
         });
         tripViewModal.setTitle(Constants.TRIP_VIEW_MODAL_TITLE);
         tripViewModal.showAndWait();
@@ -130,16 +122,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stationModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        stationEditOrCreateDto.setStation(null);
-                    }
-                });
-            }
+        stationModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                stationEditOrCreateDto.setStation(null);
+            });
         });
         stationModal.setTitle(Constants.STATION_MODAL_TITLE);
         stationModal.showAndWait();
@@ -153,16 +139,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sectorModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        sectorEditOrCreateDto.setSector(null);
-                    }
-                });
-            }
+        sectorModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                sectorEditOrCreateDto.setSector(null);
+            });
         });
         sectorModal.setTitle(Constants.SECTOR_MODAL_TITLE);
         sectorModal.showAndWait();
@@ -176,16 +156,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        communicationDistanceModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
-                    }
-                });
-            }
+        communicationDistanceModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                communicationDistanceEditOrCreateDto.setCommunicationDistance(null);
+            });
         });
         communicationDistanceModal.setTitle(Constants.DISTANCE_MODAL_TITLE);
         communicationDistanceModal.showAndWait();
@@ -199,16 +173,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        vagonLaboratoryModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
-                    }
-                });
-            }
+        vagonLaboratoryModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                vagonLaboratoryEditOrCreateDto.setVagonLaboratory(null);
+            });
         });
         vagonLaboratoryModal.setTitle(Constants.LABORATORY_MODAL_TITLE);
         vagonLaboratoryModal.showAndWait();
@@ -222,16 +190,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stageModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        stageEditOrCreateDto.setStage(null);
-                    }
-                });
-            }
+        stageModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                stageEditOrCreateDto.setStage(null);
+            });
         });
         stageModal.setTitle(Constants.STAGE_MODAL_TITLE);
         stageModal.showAndWait();
@@ -257,16 +219,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkViewModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_PONAB_REMARK_DTO);
-                    }
-                });
-            }
+        remarkViewModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                dozerBeanMapper.map(new PonabRemarkDto(), ponabRemarkDto, Constants.CLEAN_PONAB_REMARK_DTO);
+            });
         });
         remarkViewModal.setTitle(Constants.REMARK_PONAB_VIEW_MODAL_TITLE);
         remarkViewModal.showAndWait();
@@ -280,16 +236,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        deletionConfirm.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        deleteEntityDto.setDeleteValidationValue(null);
-                    }
-                });
-            }
+        deletionConfirm.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                deleteEntityDto.setDeleteValidationValue(null);
+            });
         });
         deletionConfirm.setTitle(Constants.ENTITY_DELETION_MODAL_TITLE);
         deletionConfirm.showAndWait();
@@ -303,16 +253,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkTableSave.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        remarkTableListSaveDto.setStatisticsRemarkTableDtos(null);
-                    }
-                });
-            }
+        remarkTableSave.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                remarkTableListSaveDto.setStatisticsRemarkTableDtos(null);
+            });
         });
         remarkTableSave.setTitle(Constants.REMARK_TABLE_SAVE_MODAL_TITLE);
         remarkTableSave.showAndWait();
@@ -326,21 +270,15 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkEditModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        alsRemarkEditEntityDto.setAlsRemark(null);
-                        alsRemarkEditEntityDto.setTableViewIndex(null);
-                        alsRemarkEditEntityDto.setNote(null);
-                        alsRemarkEditEntityDto.setEditedEntityId(null);
-                        alsRemarkEditEntityDto.setRepeatList(null);
-                        alsRemarkEditEntityDto.setSectorList(null);
-                    }
-                });
-            }
+        remarkEditModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                alsRemarkEditEntityDto.setAlsRemark(null);
+                alsRemarkEditEntityDto.setTableViewIndex(null);
+                alsRemarkEditEntityDto.setNote(null);
+                alsRemarkEditEntityDto.setEditedEntityId(null);
+                alsRemarkEditEntityDto.setRepeatList(null);
+                alsRemarkEditEntityDto.setSectorList(null);
+            });
         });
         remarkEditModal.setTitle(Constants.REMARK_ALS_EDIT_MODAL_TITLE);
         remarkEditModal.showAndWait();
@@ -354,16 +292,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        remarkViewModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dozerBeanMapper.map(new AlsRemarkDto(), alsRemarkDto, Constants.CLEAN_ALS_REMARK_DTO);
-                    }
-                });
-            }
+        remarkViewModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                dozerBeanMapper.map(new AlsRemarkDto(), alsRemarkDto, Constants.CLEAN_ALS_REMARK_DTO);
+            });
         });
         remarkViewModal.setTitle(Constants.REMARK_ALS_VIEW_MODAL_TITLE);
         remarkViewModal.showAndWait();
@@ -377,16 +309,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ponabDeviceModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dozerBeanMapper.map(new PonabSystemDto(), ponabSystemDto, Constants.CLEAN_PONAB_DEVICE_DTO);
-                    }
-                });
-            }
+        ponabDeviceModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                dozerBeanMapper.map(new PonabSystemDto(), ponabSystemDto, Constants.CLEAN_PONAB_DEVICE_DTO);
+            });
         });
         ponabDeviceModal.setTitle(Constants.PONAB_DEVICE_VIEW_TITLE);
         ponabDeviceModal.showAndWait();
@@ -400,16 +326,10 @@ public class ModalUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        alsDeviceModal.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        dozerBeanMapper.map(new AlsSystemDto(), alsSystemDto, Constants.CLEAN_ALS_DEVICE_DTO);
-                    }
-                });
-            }
+        alsDeviceModal.setOnHiding(event -> {
+            Platform.runLater(() -> {
+                dozerBeanMapper.map(new AlsSystemDto(), alsSystemDto, Constants.CLEAN_ALS_DEVICE_DTO);
+            });
         });
         alsDeviceModal.setTitle(Constants.ALS_DEVICE_VIEW_TITLE);
         alsDeviceModal.showAndWait();

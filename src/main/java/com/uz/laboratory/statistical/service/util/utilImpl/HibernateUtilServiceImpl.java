@@ -5,7 +5,7 @@ import com.uz.laboratory.statistical.dao.util.HibernateUtilDao;
 import com.uz.laboratory.statistical.service.util.HibernateUtilService;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import java.sql.SQLException;
 
 public class HibernateUtilServiceImpl implements HibernateUtilService {
     private HibernateUtilDao dao;
@@ -16,13 +16,11 @@ public class HibernateUtilServiceImpl implements HibernateUtilService {
 
     @Override
     @Transactional
-    public void dumpDataBase() {
-        dao.dumpDataBase();
-    }
-
-    @Override
-    @Transactional
-    public void backupDataBaseFromServer() throws IOException {
-        dao.backupDataBaseFromServer();
+    public void shudownDataBase() {
+        try {
+            dao.shudownDataBase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

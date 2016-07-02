@@ -41,7 +41,7 @@ public class VagonLaboratoryEditOrCreateController implements Initializable {
 
     @FXML
     public void saveVagonLaboratoryListener(ActionEvent actionEvent) {
-        if (!org.apache.commons.lang3.StringUtils.isNoneBlank(vagonLaboratoryNameTextField.getText())) {
+        if (!org.apache.commons.lang3.StringUtils.isNotBlank(vagonLaboratoryNameTextField.getText())) {
             AlertGuiUtil.createAlert(Constants.VAGON_LABORATORY_EDIT_NAME_NULL);
         } else {
             if (vagonLaboratory == null || vagonLaboratory.getId() < 0) {

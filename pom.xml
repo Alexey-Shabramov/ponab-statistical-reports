@@ -15,6 +15,7 @@
         <hibernate.version>5.0.6.Final</hibernate.version>
         <jta.version>1.1</jta.version>
         <hsqldb.version>2.3.3</hsqldb.version>
+
         <dozer.version>5.5.1</dozer.version>
         <cglib.version>3.2.1</cglib.version>
         <log4j.version>1.2.17</log4j.version>
@@ -24,6 +25,7 @@
         <apache.poi.version>3.14</apache.poi.version>
         <controlsfx.version>8.40.10</controlsfx.version>
         <jgit.version>4.4.0.201605250940-rc1</jgit.version>
+        <commons.lang.verion>3.0</commons.lang.verion>
     </properties>
 
     <dependencies>
@@ -129,6 +131,11 @@
             <artifactId>org.eclipse.jgit</artifactId>
             <version>${jgit.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang.verion}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -158,6 +165,45 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.uz.laboratory.statistical.app.PonabStatisticalReports</mainClass>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
         <resources>
@@ -178,6 +224,8 @@
                     <include>**/*.xml</include>
                     <include>**/*.fxml</include>
                     <include>**/*.xlsx</include>
+                    <include>**/*.css</include>
+
                 </includes>
             </resource>
         </resources>

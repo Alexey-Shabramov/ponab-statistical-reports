@@ -113,6 +113,12 @@ public class EditDataBaseController implements Initializable {
     public ComboBox alsOrPomabDeviceComboBox;
     @FXML
     public ComboBox<DirectionsOfMovement> remarkDirectionOfMovement;
+    @FXML
+    public ComboBox<InspectionTrip> tripComboBox;
+    @FXML
+    public Button editTripButton;
+    @FXML
+    public Button addTripButton;
 
     private List<String> errorList = new ArrayList<>();
 
@@ -310,6 +316,7 @@ public class EditDataBaseController implements Initializable {
         communicationDistanceComboBox.getItems().setAll(InitComboBoxesUtil.communicationDistanceList);
         vagonLaboratoryComboBox.setConverter(ComboBoxUtil.vagonLaboratoryConverter);
         vagonLaboratoryComboBox.getItems().setAll(InitComboBoxesUtil.vagonLaboratoryList);
+        tripComboBox.getItems().setAll(InitComboBoxesUtil.inspectionTripList);
     }
 
     private void checkAndCreateNewPonabRemark() {
@@ -513,5 +520,13 @@ public class EditDataBaseController implements Initializable {
     public void updateGui() {
         initRemarkComboBoxes();
         initMainBaseComboBoxes();
+    }
+
+    @FXML
+    public void editTripButtonListener(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void addTripButtonListener(ActionEvent actionEvent) {
     }
 }

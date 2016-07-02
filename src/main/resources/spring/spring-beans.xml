@@ -3,7 +3,7 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns="http://www.springframework.org/schema/beans"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- FXML's starting-loader bean -->
     <beans:bean id="springFXMLLoader" class="com.uz.laboratory.statistical.service.SpringFXMLLoader"/>

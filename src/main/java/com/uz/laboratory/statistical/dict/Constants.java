@@ -291,10 +291,12 @@ public class Constants {
      */
     public static final String GIT_HSQLDB_MAIN_FILE_PATH = "/database/ponab_statistical_reports.script";
     public static final String GIT_HSQLDB_REMOTE_REPOSTITORY_URL = "https://github.com/Alexey-Shabramov/ponab-statistical-hsqldb-base.git";
-    public static final String GIT_REF_SPEC = "refs/heads/master:refs/heads/x";
+    public static final String GIT_REF_SPEC = "refs/heads/master:refs/heads/master";
     public static final String GIT_REMOTE_REF_SPEC = "+refs/heads/*:refs/remotes/origin/*";
 
     public static final String GIT_REMOTE_USER_NAME = "Alexey-Shabramov";
     public static final String GIT_REMOTE_PASSWORD = "123krsmKRSM123oo";
     public static final String DATABASE_SCRIPT_DUMP_NULL = "Отсутствует файл обновления для базы данных";
+
+    public static final String INTERNET_IS_NOT_AVAILABLE = "Отсутствует интернет соединение. Проверьте соединение и повторите попытку.";
 }

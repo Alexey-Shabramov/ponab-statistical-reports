@@ -1,10 +1,8 @@
 package com.uz.laboratory.statistical.dao.util;
 
 
-import java.io.IOException;
+import java.sql.SQLException;
 
 public interface HibernateUtilDao {
-    void dumpDataBase();
-
-    void backupDataBaseFromServer() throws IOException;
+    void shudownDataBase() throws SQLException;
 }

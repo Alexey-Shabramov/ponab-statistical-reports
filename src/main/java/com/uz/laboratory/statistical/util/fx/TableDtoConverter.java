@@ -22,7 +22,6 @@ import java.util.List;
 public class TableDtoConverter {
     private static final DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("dd.MM.yyyy").toFormatter();
 
-
     public static List<StatisticsRemarkTableDto> convertAlsRemarkListToDto(List<AlsRemark> abstractRemarks) {
         List<StatisticsRemarkTableDto> data = new ArrayList<>();
         for (AlsRemark remark : abstractRemarks) {
@@ -150,6 +149,4 @@ public class TableDtoConverter {
         tripsTableDto.setVagonLaboratoryTitle(inspectionTrip.getVagonLaboratory().getName());
         return tripsTableDto;
     }
-
-
 }

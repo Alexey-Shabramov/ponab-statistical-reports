@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="592.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8"
             fx:controller="com.uz.laboratory.statistical.controller.TestController">
+    <stylesheets>
+        <URL value="@/css/mainAnchor.css"/>
+    </stylesheets>
     <children>
         <TabPane layoutX="3.0" layoutY="50.0" prefHeight="542.0" prefWidth="914.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -25,7 +28,7 @@
                 <Tab text="Изменение базы">
                     <fx:include fx:id="editDatabase" source="/fxml/child/editDatabase.fxml"/>
                 </Tab>
-                <Tab text="Настройки">
+                <Tab text="Импорт | Экспорт">
                     <fx:include fx:id="settings" source="/fxml/child/settings.fxml"/>
                 </Tab>
             </tabs>

@@ -141,7 +141,6 @@
         <Button fx:id="editVagonLaboratoryButton" layoutX="675.0" layoutY="427.0" mnemonicParsing="false"
                 onAction="#editVagonLaboratoryButtonListener" text="Редактировать"/>
         <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="460.0" layoutY="426.0" prefHeight="25.0" prefWidth="204.0"/>
-        <Separator layoutX="453.0" layoutY="461.0" prefHeight="1.0" prefWidth="459.0"/>
         <Separator layoutX="453.0" layoutY="393.0" prefHeight="1.0" prefWidth="459.0"/>
         <ComboBox fx:id="communicationDistanceComboBox" layoutX="460.0" layoutY="358.0" prefHeight="25.0"
                   prefWidth="204.0"/>
@@ -165,6 +164,17 @@
         <Label layoutX="342.0" layoutY="303.0" text="Направление">
             <font>
                 <Font size="14.0"/>
+            </font>
+        </Label>
+        <Separator layoutX="453.0" layoutY="457.0" prefHeight="1.0" prefWidth="459.0"/>
+        <ComboBox fx:id="tripComboBox" layoutX="460.0" layoutY="482.0" prefHeight="25.0" prefWidth="204.0"/>
+        <Button fx:id="editTripButton" layoutX="675.0" layoutY="483.0" mnemonicParsing="false"
+                onAction="#editTripButtonListener" text="Редактировать"/>
+        <Button fx:id="addTripButton" layoutX="788.0" layoutY="483.0" mnemonicParsing="false"
+                onAction="#addTripButtonListener" prefHeight="25.0" prefWidth="116.0" text="Добавить новый"/>
+        <Label layoutX="573.0" layoutY="461.0" text="Редактирование/Добавление поездки:">
+            <font>
+                <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
     </children>
