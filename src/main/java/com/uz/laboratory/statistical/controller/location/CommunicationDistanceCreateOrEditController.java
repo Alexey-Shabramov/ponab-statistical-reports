@@ -1,11 +1,11 @@
 package com.uz.laboratory.statistical.controller.location;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.location.CommunicationDistance;
 import com.uz.laboratory.statistical.service.location.CommunicationDistanceService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

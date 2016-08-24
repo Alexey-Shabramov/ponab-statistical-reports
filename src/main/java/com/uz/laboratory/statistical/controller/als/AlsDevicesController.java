@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.controller.als;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.RemarkRepeat;
@@ -15,7 +16,6 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.filter.AlsDevicesFilter;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
@@ -47,7 +47,7 @@ import java.util.ResourceBundle;
 public class AlsDevicesController implements Initializable {
     final static Logger logger = Logger.getLogger(AlsDevicesController.class);
 
-    private final static int rowsPerPage = 9;
+    private final static int rowsPerPage = 15;
     private final ContextMenu contextMenu = new ContextMenu();
 
     @FXML
@@ -201,7 +201,7 @@ public class AlsDevicesController implements Initializable {
                         alsDevicesTableView.getItems().remove(tableViewSelectedIndex.get());
                         alsDevicesTableView.getSelectionModel().clearSelection();
                         deleteEntityDto.setDeleteValidationValue(false);
-                        alsDevicesTablePagination.setPageCount(alsDevicesTableData.size() <= 9 ? 1 : (int) Math.ceil((double) alsDevicesTableData.size() / rowsPerPage));
+                        alsDevicesTablePagination.setPageCount(alsDevicesTableData.size() <= rowsPerPage ? 1 : (int) Math.ceil((double) alsDevicesTableData.size() / rowsPerPage));
                     }
                 }
             }

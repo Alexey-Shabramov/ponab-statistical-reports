@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.uz.laboratory.statistical.util.fx.NumericTextField?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" layoutX="7.0" layoutY="449.0" prefHeight="102.0" prefWidth="932.0"
+      xmlns="http://javafx.com/javafx/2.2" fx:controller="com.uz.laboratory.statistical.controller.temperature.TemperatureController">
+  <children>
+    <Label layoutX="81.0" layoutY="7.0" prefWidth="200.0" text="Установить температуру:">
+      <font>
+        <Font size="17.0" fx:id="x1" />
+      </font>
+    </Label>
+    <ComboBox fx:id="systemOptionList" layoutX="395.0" layoutY="42.0" prefHeight="34.6015625" prefWidth="125.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Label font="$x1" layoutX="414.0" layoutY="7.0" text="Настройка:" />
+    <Label font="$x1" layoutX="4.0" layoutY="47.0" text="Слева:" />
+    <Label font="$x1" layoutX="181.0" layoutY="49.0" prefWidth="66.9998779296875" text="Справа:" />
+    <RadioButton fx:id="evenDirectionOfMovement" font="$x1" layoutX="589.0" layoutY="59.0" mnemonicParsing="false" onAction="#evenRadioAction" text="Четное" />
+    <RadioButton fx:id="unevenDirectionOfMovement" font="$x1" layoutX="589.0" layoutY="28.0" mnemonicParsing="false" onAction="#unevenRadioAction" text="Нечетное" />
+    <Label font="$x1" layoutX="590.0" layoutY="4.0" text="Направление:" />
+    <Button fx:id="startWarming" layoutX="721.0" layoutY="13.0" mnemonicParsing="false" onAction="#beginWarming" prefWidth="199.99990000000253" text="Запустить нагрев">
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Button>
+    <Label font="$x1" layoutX="717.0" layoutY="60.0" text="Нагрев:" />
+    <NumericTextField fx:id="setLeftIronTemperature" layoutX="61.0" layoutY="40.0" prefHeight="40.0" prefWidth="96.0"
+                      style="-fx-font-size: 20;&#10;-fx-text-inner-color: green;"/>
+    <NumericTextField fx:id="setRightIronTemperature" layoutX="248.0" layoutY="40.0" prefHeight="40.0" prefWidth="96.0"
+                      style="-fx-font-size: 20;&#10;-fx-text-inner-color: green;"/>
+    <NumericTextField fx:id="warmingValuesStatus" layoutX="788.0" layoutY="62.0" prefWidth="96.0" />
+  </children>
+</Pane>

@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.controller.shedule;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.SheduleTripsTypes;
 import com.uz.laboratory.statistical.dto.trip.InspectionTripEditEntityDto;
@@ -8,7 +9,6 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.trip.InspectionTrip;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;

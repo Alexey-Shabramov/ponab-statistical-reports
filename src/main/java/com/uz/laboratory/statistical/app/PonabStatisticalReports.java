@@ -36,7 +36,7 @@ public class PonabStatisticalReports extends Application {
         stage.setTitle(Constants.MAIN_TITLE);
         stage.setScene(new Scene((Parent) context
                 .getBean(SpringFXMLLoader.class)
-                .load(Constants.MAIN_FXML_PATH), 914, 600));
+                .load(Constants.MAIN_FXML_PATH), 945, 750));
         stage.setOnHidden(event -> {
             Platform.exit();
         });
@@ -51,7 +51,7 @@ public class PonabStatisticalReports extends Application {
         primaryStage.setTitle(Constants.MAIN_TITLE);
         primaryStage.setScene(new Scene((Parent) context
                 .getBean(SpringFXMLLoader.class)
-                .load(Constants.MAIN_FXML_PATH), 914, 600));
+                .load(Constants.MAIN_FXML_PATH), 945, 750));
         primaryStage.setOnHidden(new EventHandler<WindowEvent>() {
                                      @Override
                                      public void handle(WindowEvent event) {

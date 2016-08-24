@@ -1,37 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="857.0"
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="1042.0"
       xmlns="http://javafx.com/javafx/8"
       fx:controller="com.uz.laboratory.statistical.controller.settings.SettingsController">
    <children>
-      <Label layoutX="26.0" layoutY="20.0" text="Отправить изменения на сервер">
+      <Label layoutX="14.0" layoutY="12.0" text="Отправить изменения на сервер">
          <font>
-            <Font name="System Bold" size="14.0"/>
+            <Font name="System Bold" size="17.0"/>
          </font>
       </Label>
-      <Button fx:id="updateDatabaseButton" layoutX="72.0" layoutY="53.0" mnemonicParsing="false"
+      <Button fx:id="updateDatabaseButton" layoutX="93.0" layoutY="49.0" mnemonicParsing="false"
               onAction="#updateDatabaseButtonListener" prefHeight="30.0" prefWidth="119.0" text="Отправить">
          <font>
             <Font name="System Bold" size="14.0"/>
          </font>
       </Button>
-      <Separator layoutY="97.0" prefHeight="0.0" prefWidth="280.0"/>
-      <Separator layoutX="277.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="99.0" prefWidth="0.0"/>
-      <Separator layoutX="277.0" layoutY="97.0" prefHeight="3.0" prefWidth="199.0"/>
-      <Button fx:id="updateCurrentDatabaseButton" layoutX="330.0" layoutY="53.0" mnemonicParsing="false"
+      <Separator layoutY="95.0" prefHeight="5.0" prefWidth="298.0"/>
+      <Separator layoutX="296.0" layoutY="3.0" orientation="VERTICAL" prefHeight="177.0" prefWidth="0.0"/>
+      <Button fx:id="updateCurrentDatabaseButton" layoutX="93.0" layoutY="140.0" mnemonicParsing="false"
               onAction="#updateCurrentDatabaseButtonListener" prefHeight="30.0" prefWidth="119.0" text="Обновить">
          <font>
             <Font name="System Bold" size="14.0"/>
          </font>
       </Button>
-      <Label layoutX="311.0" layoutY="20.0" text="Скачать базу с сервера">
+      <Label layoutX="59.0" layoutY="104.0" text="Скачать базу с сервера">
          <font>
-            <Font name="System Bold" size="14.0"/>
+            <Font name="System Bold" size="17.0"/>
          </font>
       </Label>
-      <Separator layoutX="472.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="99.0" prefWidth="0.0"/>
+      <Label layoutX="47.0" layoutY="226.0" text="Текущий адаптер:">
+         <font>
+            <Font size="17.0" fx:id="x1"/>
+         </font>
+      </Label>
+      <Label font="$x1" layoutX="65.0" layoutY="268.0" text="Порт адаптера:"/>
+      <ComboBox fx:id="adapterList" layoutX="210.0" layoutY="224.0" prefHeight="21.000099999997474" prefWidth="96.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="serialPortList" fx:id="adapterPortList" layoutX="212.0" layoutY="269.0" prefHeight="21.0"
+                prefWidth="93.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <Label layoutX="60.0" layoutY="184.0" text="Выбор базового адаптера:" wrapText="false">
+         <font>
+            <Font name="System Bold" size="17.0" fx:id="x2"/>
+         </font>
+      </Label>
+      <Label font="$x1" layoutX="401.0" layoutY="238.0" text="Л"/>
+      <Label font="$x1" layoutX="400.0" layoutY="271.0" text="П"/>
+      <Separator layoutY="176.0" prefHeight="3.0" prefWidth="931.0"/>
+      <Label font="$x2" layoutX="395.0" layoutY="177.0" text="Установка датчиков температуры(в утюгах) по направленям:"
+             wrapText="false"/>
+      <Label font="$x1" layoutX="450.0" layoutY="213.0" text="Четное:"/>
+      <Label font="$x1" layoutX="714.0" layoutY="213.0" text="Нечётное:"/>
+      <Label font="$x1" layoutX="671.0" layoutY="238.0" text="Л"/>
+      <Label font="$x1" layoutX="671.0" layoutY="272.0" text="П"/>
+      <Label font="$x2" layoutX="15.0" layoutY="362.0" text="Установка датчиков температуры внешней среды:"
+             wrapText="false"/>
+      <Label font="$x1" layoutX="36.0" layoutY="399.0" text="Левый датчик:"/>
+      <Label font="$x1" layoutX="26.0" layoutY="435.0" text="Правый датчик:"/>
+      <Button fx:id="saveSensorsIdByMovement" layoutX="515.0" layoutY="314.0" mnemonicParsing="false"
+              onAction="#saveSensorsIdByMovement" prefWidth="113.00003896484122" text="Сохранить">
+         <font>
+            <Font name="System Bold" size="16.0" fx:id="x3"/>
+         </font>
+      </Button>
+      <Button font="$x3" layoutX="680.0" layoutY="314.0" mnemonicParsing="false" prefWidth="113.00003896484122"
+              text="Очистить"/>
+      <Button fx:id="saveAdapterAndPort" font="$x3" layoutX="125.0" layoutY="307.0" mnemonicParsing="false"
+              onAction="#saveAdapterAndPort" prefWidth="113.00003896484122" text="Сохранить"/>
+      <Label font="$x2" layoutX="491.0" layoutY="12.0" text="Проверка состояния датчиков:" wrapText="false"/>
+      <Label font="$x1" layoutX="372.0" layoutY="50.0" text="Выберите датчик:"/>
+      <ComboBox id="sensorList" fx:id="checkSensorIdList" layoutX="521.0" layoutY="51.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <Label font="$x1" layoutX="356.0" layoutY="90.0" text="Введите ID датчика:"/>
+      <TextField fx:id="sensorId" layoutX="521.0" layoutY="92.0" prefWidth="237.0"/>
+      <ComboBox id="adapterList" fx:id="evenLeftSensorIdList" layoutX="420.0" layoutY="240.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="unevenLeftSensorIdList" layoutX="692.0" layoutY="240.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="evenRightSensorIdList" layoutX="420.0" layoutY="275.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="unevenRightSensorIdList" layoutX="692.0" layoutY="275.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="temperatureLeftSensorIdList" layoutX="168.0" layoutY="400.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="temperatureRightSensorIdList" layoutX="168.0" layoutY="437.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <Separator layoutY="358.0" prefWidth="936.0"/>
+      <Separator layoutX="485.0" layoutY="358.0" orientation="VERTICAL" prefHeight="163.0"/>
+      <TextArea fx:id="loggerInformation" layoutX="243.0" layoutY="554.0" prefHeight="100.0"
+                prefWidth="637.9999389648438" style="-fx-font-size: 16;&#10;" wrapText="true"/>
+      <Label font="$x2" layoutX="439.0" layoutY="524.0" text="Информация"/>
+      <TextArea fx:id="checkedSensorStatus" layoutX="521.0" layoutY="130.0" prefHeight="33.28125"
+                prefWidth="359.99993896484375" wrapText="true"/>
+      <Button fx:id="checkSensorByIdFromListButton" font="$x3" layoutX="775.0" layoutY="49.0" mnemonicParsing="false"
+              onAction="#checkSensorStatus" prefWidth="113.00003896484122" text="Проверить"/>
+      <Label font="$x1" layoutX="357.0" layoutY="131.0" text="Состояние датчика:"/>
+      <Button fx:id="checkSensorByIdButton" font="$x3" layoutX="775.0" layoutY="90.0" mnemonicParsing="false"
+              onAction="#checkSensorByIdTextfieldButton" prefWidth="113.00003896484122" text="Проверить"/>
+      <Separator layoutY="519.0" prefWidth="936.0"/>
+      <Label font="$x2" layoutX="535.0" layoutY="362.0" text="Установка управляющих COM-портов:" wrapText="false"/>
+      <Label font="$x1" layoutX="551.0" layoutY="395.0" text="Четное:"/>
+      <Label font="$x1" layoutX="533.0" layoutY="436.0" text="Нечётное:"/>
+      <ComboBox id="adapterList" fx:id="evenPortList" layoutX="630.0" layoutY="396.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <ComboBox id="adapterList" fx:id="unevenPortList" layoutX="629.0" layoutY="438.0" prefHeight="21.0"
+                prefWidth="237.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList"/>
+         </items>
+      </ComboBox>
+      <Button fx:id="saveSensorIdByOuterTemperature" font="$x3" layoutX="175.0" layoutY="471.0" mnemonicParsing="false"
+              onAction="#saveSensorIdByOuterTemperature" prefWidth="113.00003896484122" text="Сохранить"/>
+      <Button id="savePortNumbersForControl" fx:id="saveControlPortsNumbers" font="$x3" layoutX="677.0" layoutY="471.0"
+              mnemonicParsing="false" onAction="#saveControlPortsNumbers" prefWidth="113.00003896484122"
+              text="Сохранить"/>
+      <Button fx:id="updateAllButton" font="$x3" layoutX="71.0" layoutY="554.0" mnemonicParsing="false"
+              onAction="#updateAll" prefWidth="153.00003896484122" text="Обновить всё"/>
+      <Button id="updateAll" font="$x3" layoutX="71.0" layoutY="604.0" mnemonicParsing="false" onAction="#сleanLogger"
+              prefWidth="153.00003896484122" text="Очистить"/>
+      <Separator layoutX="351.0" layoutY="176.0" orientation="VERTICAL" prefHeight="183.0" prefWidth="9.0"/>
    </children>
 </Pane>

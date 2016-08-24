@@ -1,12 +1,12 @@
 package com.uz.laboratory.statistical.controller.ponab;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemEditEntityDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.ponab.PonabSystem;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;

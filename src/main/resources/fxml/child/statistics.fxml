@@ -3,14 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="549.0" prefWidth="912.0"
+<Pane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="933.0"
       xmlns="http://javafx.com/javafx/8"
       fx:controller="com.uz.laboratory.statistical.controller.remark.RemarkStatisticsController">
     <children>
-        <Pagination fx:id="statisticsTableViewPagination" layoutX="1.0" layoutY="246.0" prefHeight="280.0"
-                    prefWidth="912.0">
+        <Pagination fx:id="statisticsTableViewPagination" layoutX="1.0" layoutY="246.0" prefHeight="423.0"
+                    prefWidth="935.0">
         <fx:define>
-            <TableView fx:id="statisticsTableView" layoutX="1.0" layoutY="237.0" prefHeight="310.0" prefWidth="912.0">
+            <TableView fx:id="statisticsTableView" layoutX="1.0" layoutY="237.0" prefHeight="423.0" prefWidth="935.0">
                 <placeholder>
                     <Label text="По результатам поиска ничего не найдено."/>
                 </placeholder>
@@ -28,7 +28,7 @@
         </Pagination>
         <ComboBox fx:id="stageComboBox" layoutX="307.0" layoutY="32.0" onAction="#stageSelectionListener"
                   prefHeight="25.0" prefWidth="255.0"/>
-        <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="744.0" layoutY="32.0" prefHeight="25.0" prefWidth="154.0"/>
+        <ComboBox fx:id="vagonLaboratoryComboBox" layoutX="744.0" layoutY="32.0" prefHeight="25.0" prefWidth="178.0"/>
         <Label layoutX="407.0" layoutY="7.0" text="Перегон">
             <font>
                 <Font size="14.0"/>
@@ -39,7 +39,7 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="767.0" layoutY="7.0" text="Вагон-лаборатория">
+        <Label layoutX="772.0" layoutY="7.0" text="Вагон-лаборатория">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -77,7 +77,7 @@
                 <Font size="14.0"/>
             </font>
         </Button>
-        <Separator layoutY="68.0" prefHeight="0.0" prefWidth="912.0"/>
+        <Separator layoutY="68.0" prefHeight="3.0" prefWidth="942.0"/>
         <Separator layoutX="290.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="19.0"/>
         <Separator layoutX="562.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="19.0"/>
         <Separator layoutX="726.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="170.0" prefWidth="19.0"/>
@@ -91,7 +91,7 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Separator layoutX="1.0" layoutY="167.0" prefHeight="3.0" prefWidth="912.0"/>
+        <Separator layoutX="1.0" layoutY="167.0" prefHeight="3.0" prefWidth="942.0"/>
         <Button fx:id="cleanTableViewButton" layoutX="75.0" layoutY="187.0" mnemonicParsing="false"
                 onAction="#cleanTableViewButtonListener" prefHeight="30.0" prefWidth="150.0" text="Очистить таблицу"
                 textAlignment="CENTER">
@@ -99,11 +99,12 @@
                 <Font size="14.0"/>
             </font>
         </Button>
-        <Label layoutX="797.0" layoutY="77.0" text="Повтор">
+        <Label layoutX="820.0" layoutY="77.0" text="Повтор">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <ComboBox fx:id="repeatRemarkStatusComboBox" layoutX="746.0" layoutY="120.0" prefWidth="150.0"/>
+        <ComboBox fx:id="repeatRemarkStatusComboBox" layoutX="746.0" layoutY="120.0" prefHeight="25.0"
+                  prefWidth="178.0"/>
     </children>
 </Pane>

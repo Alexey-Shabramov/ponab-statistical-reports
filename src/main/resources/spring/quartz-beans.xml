@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans:bean name="complexLeftIronSensorJobDetail"
+                class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <beans:property name="jobClass" value="com.uz.laboratory.statistical.util.quartz.ThermalLeftSensorShedulerJob"/>
+        <beans:property name="jobDataAsMap">
+            <beans:map>
+                <beans:entry key="sensorController" value-ref="sensorController"/>
+            </beans:map>
+        </beans:property>
+        <beans:property name="durability" value="true"/>
+    </beans:bean>
+
+    <beans:bean name="complexRightIronSensorJobDetail"
+                class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <beans:property name="jobClass"
+                        value="com.uz.laboratory.statistical.util.quartz.ThermalRightSensorShedulerJob"/>
+        <beans:property name="jobDataAsMap">
+            <beans:map>
+                <beans:entry key="sensorController" value-ref="sensorController"/>
+            </beans:map>
+        </beans:property>
+        <beans:property name="durability" value="true"/>
+    </beans:bean>
+
+    <beans:bean name="complexOuterRightSensorJobDetail"
+                class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <beans:property name="jobClass"
+                        value="com.uz.laboratory.statistical.util.quartz.ThermalOuterTemperatureLeftSensorShedulerJob"/>
+        <beans:property name="jobDataAsMap">
+            <beans:map>
+                <beans:entry key="sensorController" value-ref="sensorController"/>
+            </beans:map>
+        </beans:property>
+        <beans:property name="durability" value="true"/>
+    </beans:bean>
+
+    <beans:bean id="leftIronSensorCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="complexLeftIronSensorJobDetail"/>
+        <beans:property name="cronExpression" value="0/1 * * * * ?"/>
+    </beans:bean>
+
+    <beans:bean id="rightIronSensorCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="complexRightIronSensorJobDetail"/>
+        <beans:property name="cronExpression" value="0/1 * * * * ?"/>
+    </beans:bean>
+
+    <beans:bean id="leftOuterSensorCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="complexOuterRightSensorJobDetail"/>
+        <beans:property name="cronExpression" value="0/1 * * * * ?"/>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <beans:property name="jobDetails">
+            <beans:list>
+                <beans:ref bean="complexLeftIronSensorJobDetail"/>
+                <beans:ref bean="complexRightIronSensorJobDetail"/>
+                <beans:ref bean="complexOuterRightSensorJobDetail"/>
+            </beans:list>
+        </beans:property>
+        <beans:property name="triggers">
+            <beans:list>
+                <beans:ref bean="leftIronSensorCronTrigger"/>
+                <beans:ref bean="rightIronSensorCronTrigger"/>
+                <beans:ref bean="leftOuterSensorCronTrigger"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+</beans:beans>

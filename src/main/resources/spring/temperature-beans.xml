@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <beans:bean id="thermalSettingsDao"
+                class="com.uz.laboratory.statistical.dao.thermal.thermalImpl.ThermalSettingsDaoImpl">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="thermalSettingsService"
+                class="com.uz.laboratory.statistical.service.thermal.thermalImpl.ThermalSettingsServiceImpl">
+        <beans:property name="dao" ref="thermalSettingsDao"/>
+    </beans:bean>
+
+
+    <beans:bean id="genericAdapter" class="com.uz.laboratory.statistical.bean.adapter.GenericAdapter"/>
+
+    <beans:bean id="adapterList" class="com.uz.laboratory.statistical.bean.adapter.AdapterList"/>
+
+    <beans:bean id="defaultPortList" class="com.uz.laboratory.statistical.bean.adapter.DefaultPortList"/>
+
+    <beans:bean id="temperatureOption" class="com.uz.laboratory.statistical.bean.option.TemperatureOption"/>
+
+    <beans:bean id="evenMovement" class="com.uz.laboratory.statistical.bean.movement.EvenMovement"/>
+
+    <beans:bean id="unevenMovement" class="com.uz.laboratory.statistical.bean.movement.UnevenMovement"/>
+
+    <beans:bean id="globalSensorMap" class="com.uz.laboratory.statistical.bean.sensor.GlobalSensorMap"/>
+
+    <beans:bean id="globalSensorList" class="com.uz.laboratory.statistical.bean.sensor.GlobalSensorList"/>
+
+    <beans:bean id="outsideTemperatureSensors"
+                class="com.uz.laboratory.statistical.bean.sensor.OutsideTemperatureSensors"/>
+
+    <beans:bean id="initTemperatureDeviceAndOptions"
+                class="com.uz.laboratory.statistical.bean.init.InitTemperatureDeviceSettingsUtil"/>
+
+</beans:beans>

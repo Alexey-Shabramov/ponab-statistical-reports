@@ -1,11 +1,11 @@
 package com.uz.laboratory.statistical.controller.shedule;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.trip.VagonLaboratoryEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.trip.VagonLaboratory;
 import com.uz.laboratory.statistical.service.trip.VagonLaboratoryService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

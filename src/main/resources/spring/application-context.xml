@@ -15,4 +15,6 @@
 
     <import resource="database.xml"/>
     <import resource="spring-beans.xml"/>
+    <import resource="temperature-beans.xml"/>
+    <import resource="quartz-beans.xml"/>
 </beans:beans>

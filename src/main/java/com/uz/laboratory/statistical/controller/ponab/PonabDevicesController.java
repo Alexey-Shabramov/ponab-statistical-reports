@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.controller.ponab;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
 import com.uz.laboratory.statistical.dto.ponab.PonabSystemDto;
@@ -12,7 +13,6 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.filter.PonabDevicesFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
 import com.uz.laboratory.statistical.util.fx.TableDtoConverter;
@@ -41,7 +41,7 @@ import java.util.ResourceBundle;
 public class PonabDevicesController implements Initializable {
     final static Logger logger = Logger.getLogger(PonabDevicesController.class);
 
-    private final static int rowsPerPage = 9;
+    private final static int rowsPerPage = 15;
     private final ContextMenu contextMenu = new ContextMenu();
     @FXML
     public TableView<PonabDevicesTableDto> ponabDevicesTableView;
@@ -135,7 +135,7 @@ public class PonabDevicesController implements Initializable {
         ponabDevicesTableData.setAll(TableDtoConverter.convertPonabDeviceListToDto(ponabSystemService.getRemarkListByFilter(ponabDevicesFilter)));
 
         ponabDevicesTablePagination.setPageFactory(this::createPage);
-        ponabDevicesTablePagination.setPageCount(ponabDevicesTableData.size() <= 9 ? 1 : (int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
+        ponabDevicesTablePagination.setPageCount(ponabDevicesTableData.size() <= rowsPerPage ? 1 : (int) Math.ceil((double) ponabDevicesTableData.size() / rowsPerPage));
     }
 
     @FXML

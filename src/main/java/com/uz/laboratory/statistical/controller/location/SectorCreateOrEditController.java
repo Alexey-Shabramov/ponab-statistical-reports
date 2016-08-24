@@ -1,5 +1,6 @@
 package com.uz.laboratory.statistical.controller.location;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.location.SectorEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.location.Sector;
@@ -7,7 +8,6 @@ import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.util.DtoUtil;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;

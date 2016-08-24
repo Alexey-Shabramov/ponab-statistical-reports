@@ -1,4 +1,4 @@
-package com.uz.laboratory.statistical.util;
+package com.uz.laboratory.statistical.bean.init;
 
 
 import com.uz.laboratory.statistical.entity.als.TrackCircuit;

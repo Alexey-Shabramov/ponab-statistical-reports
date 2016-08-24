@@ -1,10 +1,10 @@
 package com.uz.laboratory.statistical.controller.location;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dto.location.StationEditOrCreateDto;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.service.location.StationService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,11 +1,11 @@
 package com.uz.laboratory.statistical.util.fx;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.controller.EditDataBaseController;
 import com.uz.laboratory.statistical.controller.als.AlsDevicesController;
 import com.uz.laboratory.statistical.controller.ponab.PonabDevicesController;
 import com.uz.laboratory.statistical.controller.remark.RemarkStatisticsController;
 import com.uz.laboratory.statistical.controller.shedule.SheduleController;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UpdateGuiUtil {

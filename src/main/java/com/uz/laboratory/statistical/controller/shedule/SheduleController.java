@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.controller.shedule;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.SheduleTripsTypes;
 import com.uz.laboratory.statistical.dto.DeleteEntityDto;
@@ -14,7 +15,6 @@ import com.uz.laboratory.statistical.filter.TripFilter;
 import com.uz.laboratory.statistical.service.location.SectorService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
 import com.uz.laboratory.statistical.util.DtoUtil;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;

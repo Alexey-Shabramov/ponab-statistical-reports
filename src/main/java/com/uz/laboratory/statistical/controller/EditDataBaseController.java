@@ -1,5 +1,6 @@
 package com.uz.laboratory.statistical.controller;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.*;
 import com.uz.laboratory.statistical.dto.als.AlsSystemEditEntityDto;
 import com.uz.laboratory.statistical.dto.location.CommunicationDistanceEditOrCreateDto;
@@ -24,7 +25,6 @@ import com.uz.laboratory.statistical.service.ponab.PonabSystemService;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.service.trip.InspectionTripService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;

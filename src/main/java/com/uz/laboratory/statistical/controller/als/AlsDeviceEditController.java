@@ -1,5 +1,6 @@
 package com.uz.laboratory.statistical.controller.als;
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.TrackCircuitTypes;
@@ -9,7 +10,6 @@ import com.uz.laboratory.statistical.entity.location.Sector;
 import com.uz.laboratory.statistical.entity.location.Stage;
 import com.uz.laboratory.statistical.entity.location.Station;
 import com.uz.laboratory.statistical.service.als.TrackCircuitService;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import javafx.event.ActionEvent;

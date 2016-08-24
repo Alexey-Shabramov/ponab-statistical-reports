@@ -1,6 +1,7 @@
 package com.uz.laboratory.statistical.controller.remark;
 
 
+import com.uz.laboratory.statistical.bean.init.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.dict.Constants;
 import com.uz.laboratory.statistical.dict.DirectionsOfMovement;
 import com.uz.laboratory.statistical.dict.RemarkRepeat;
@@ -22,7 +23,6 @@ import com.uz.laboratory.statistical.filter.RemarkStatisticsFilter;
 import com.uz.laboratory.statistical.service.remark.AlsRemarkService;
 import com.uz.laboratory.statistical.service.remark.PonabRemarkService;
 import com.uz.laboratory.statistical.util.DtoUtil;
-import com.uz.laboratory.statistical.util.InitComboBoxesUtil;
 import com.uz.laboratory.statistical.util.fx.AlertGuiUtil;
 import com.uz.laboratory.statistical.util.fx.ComboBoxUtil;
 import com.uz.laboratory.statistical.util.fx.ModalUtil;
@@ -53,7 +53,7 @@ import java.util.ResourceBundle;
 public class RemarkStatisticsController implements Initializable {
     final static Logger logger = Logger.getLogger(RemarkStatisticsController.class);
 
-    private final static int rowsPerPage = 9;
+    private final static int rowsPerPage = 14;
     private final ContextMenu contextMenu = new ContextMenu();
 
     @FXML
